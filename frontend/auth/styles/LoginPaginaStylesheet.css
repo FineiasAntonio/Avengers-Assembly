@@ -175,7 +175,10 @@ body {
     text-decoration: none;
     color: hsl(347, 12%, 20%);
     &:hover {
-            color: hsl(347, 12%, 27%);
+        color: hsl(347, 12%, 27%);
+    }
+    &:active {
+        color: hsl(347, 12%, 30%);
     }
 }
 
