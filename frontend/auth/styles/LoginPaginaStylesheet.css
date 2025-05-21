@@ -1,0 +1,274 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(0deg, hsl(0, 29%, 95%), hsl(350, 83%, 82%));
+}
+
+.telaLogin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 80%;
+    width: 70%;
+    box-shadow: 6px 6px 6px hsl(0, 0%, 57%);
+    border-radius: 5px;
+}
+
+.apresentacao {
+    background-color: white;
+    height: 100%;
+    width: 30%;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    padding: 2rem;
+    padding-top: 4rem;
+    position: relative;
+    overflow: auto;
+}
+
+.iconeTitulo {
+    font-family: "inria serif", "times new roman";
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+}
+
+#sobreVidas {
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+
+#descricao {
+    font-family: "Gowun batang", "times new roman";
+    font-size: 1.2rem;
+}
+
+.login {
+    background-color: hsl(352, 16%, 82%);
+    height: 100%;
+    width: 70%;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 1rem;
+    font-family: "Hina Mincho", "times new roman";
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+}
+
+.titulo {
+    text-align: center;
+}
+
+#coracao {
+    font-size: 4rem;
+}
+
+#tituloLogin {
+    font-size: 3rem;
+}
+
+#insiraDados {
+    font-size: 1.2rem;
+}
+
+.dados {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height:2rem;
+    gap: 1.3rem;
+}
+
+.usuario {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+#iconeUsuario {
+    font-size: 1.3rem;
+}
+
+#entradaUsuario {
+    width: 100%;
+    height: 2rem;
+    border-radius: 15px;
+    box-shadow: 4px 4px 4px gray;
+    border: none;
+    padding: 1rem;
+    &:focus {
+        outline: none;
+    }
+}
+
+.senha {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+#iconeSenha {
+    font-size: 1.3rem;
+}
+
+#entradaSenha {
+    width: 100%;
+    height: 2rem;
+    border-radius: 15px;
+    box-shadow: 4px 4px 4px gray;
+    border: none;
+    padding: 1rem;
+    &:focus {
+        outline: none;
+    }
+}
+
+.opcoes {
+    display: flex;
+    flex-direction: column;
+    height: 5rem;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.6rem;
+}
+
+#entrar {
+    height: 2.5rem;
+    width: 50%;
+    border-radius: 15px;
+    box-shadow: 4px 4px 4px gray;
+    border: none;
+    background-color: hsl(347, 12%, 23%);
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    &:hover {
+        cursor: pointer;
+        background-color: hsl(347, 12%, 27%);
+    }
+    &:active {
+        background-color: hsl(347, 12%, 30%);
+    }
+}
+
+#esqueceuSenha {
+    text-decoration: none;
+    color: hsl(347, 12%, 20%);
+    &:hover {
+            color: hsl(347, 12%, 27%);
+    }
+}
+
+@media (max-height: 540px) {
+    #tituloLogin {
+        font-size: 2rem;
+    }
+
+    #descricao {
+        font-size: 1.1rem;
+    }
+
+    #entradaSenha,
+    #entradaUsuario {
+        font-size: 0.9rem;
+    }
+
+    #entrar {
+        font-size: 1rem;
+        height: 2.8rem;
+    }
+}
+
+@media (max-width: 728px) {
+    body {
+        background-repeat: no-repeat;
+    }
+
+    .telaLogin {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+    }
+
+    .apresentacao {
+        width: 100%;
+        border-radius: 5px 5px 0 0;
+        padding: 2rem 1rem 1rem 1rem;
+        height: auto;
+        text-align: center;
+    }
+
+    .iconeTitulo {
+        margin-bottom: 1rem;
+    }
+
+    .login {
+        width: 100%;
+        border-radius: 0 0 5px 5px;
+        padding: 1rem;
+        gap: 2rem;
+        height: auto;
+    }
+
+    #entradaSenha,
+    #entradaUsuario {
+        height: 2.5rem;
+        padding: 0 1rem;
+        font-size: 1rem;
+    }
+
+    .opcoes {
+        margin-top: 4rem;
+    }
+
+    #entrar {
+        width: 100%;
+        height: 3rem;
+        font-size: 1.1rem;
+    }
+
+    .usuario,
+    .senha {
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    #tituloLogin {
+        font-size: 2rem;
+    }
+
+    #descricao {
+        font-size: 1.1rem;
+    }
+
+    #entradaSenha,
+    #entradaUsuario {
+        font-size: 0.9rem;
+    }
+
+    #entrar {
+        font-size: 1rem;
+        height: 2.8rem;
+    }
+}
