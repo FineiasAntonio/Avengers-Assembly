@@ -4,9 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/LoginPaginaStylesheet.css">
-    <title>Nome do Projeto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&family=Hina+Mincho&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles/LoginPaginaStylesheet.css">
+    <link rel="icon" type="img/jpeg" href="./images/favicon.jpeg">
 </head>
 <body>
-    
+    <main class="telaLogin">
+        <div class="apresentacao">
+            <div class="iconeTitulo">
+                <img src="" alt="LOGO SOBRE VIDAS">
+                <!-- Logo do Sobre Vidas na img-->
+                <h3 id="sobreVidas">Sobre Vidas - CCTS</h3>
+            </div>
+            <p id="descricao">
+                Sistema de rastreamento e análise a grupos
+                de risco ao câncer de colo de útero
+            </p>
+        </div>
+        <div class="login">
+            <div class="titulo">
+                <i class="fa-solid fa-heart-pulse" id="coracao"></i>
+                <h1 id="tituloLogin">Login</h1>
+                <p id="insiraDados">Por favor, insira os dados para prosseguir!</p>
+            </div>
+            <div class="dados">
+                <div class="usuario">
+                    <i class="fa-solid fa-user" id="iconeUsuario"></i>
+                    <input type="text" placeholder="Usuário" id="entradaUsuario">
+                </div>
+                <div class="senha">
+                    <i class="fa-solid fa-lock" id="iconeSenha"></i>
+                    <input type="password" placeholder="Senha:" id="entradaSenha">
+                </div>
+            </div>
+            <div class="opcoes">
+                <button id="entrar">Entrar</button>
+                <a href="" id="esqueceuSenha">Esqueceu a senha?</a>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
