@@ -1,12 +1,18 @@
-CREATE TABLE PACIENTE (
+CREATE TABLE Paciente (
     CartaoSUS VARCHAR(15) PRIMARY KEY NOT NULL,
+    Prontuario VARCHAR(10),
     NomeCompleto VARCHAR(100) NOT NULL,
     NomeMae VARCHAR(100) NOT NULL,
     CPF VARCHAR(11),
     DataNascimento DATE NOT NULL,
     Idade INT,
-    Raca VARCHAR(10) CHECK (Raca IN ('Branca', 'Preta', 'Parda', 'Amarela', 'Indígena')),
+    Raca VARCHAR(10),
     Nacionalidade VARCHAR(30),
+    Escolaridade VARCHAR(50)
+);
+
+CREATE TABLE EnderecoPaciente (
+    CartaoSUS VARCHAR(15) PRIMARY KEY,
     Logradouro VARCHAR(100),
     Numero VARCHAR(6),
     Complemento VARCHAR(50),
@@ -15,21 +21,21 @@ CREATE TABLE PACIENTE (
     Bairro VARCHAR(50),
     UF CHAR(2),
     CEP VARCHAR(8),
-	  DDD VARCHAR(2),
+    DDD VARCHAR(2),
     Telefone VARCHAR(9),
     PontoReferencia VARCHAR(100),
-    Escolaridade VARCHAR(50) CHECK (Escolaridade IN ('Analfabeta', 'Ensino Fundamental Incompleto', 'Ensino Fundamental Completo', 'Ensino Médio Completo', 'Ensino Superior Completo'))
+
+    FOREIGN KEY (CartaoSUS) REFERENCES Paciente(CartaoSUS)
 );
 
-CREATE TABLE EXAME (
+CREATE TABLE Exame (
     Protocolo VARCHAR(14) PRIMARY KEY,
     CartaoSUS VARCHAR(15) NOT NULL,
     UF CHAR(2),
     CNES_UnidadeSaude VARCHAR(7),
     UnidadeSaude VARCHAR(100),
     Municipio VARCHAR(50),
-    Prontuario VARCHAR(10),
-    MotivoExame VARCHAR(15) CHECK (Raca IN ('Rastreamento', 'Repetição', 'Seguimento')),
+    MotivoExame VARCHAR(15),
     FezExamePreventivo BOOLEAN NOT NULL,
     AnoUltimoExame VARCHAR(4),
     UsaDIU BOOLEAN NOT NULL,
@@ -40,10 +46,10 @@ CREATE TABLE EXAME (
     DataUltimaMenstruacao DATE,
     SangramentoAposRelacoes BOOLEAN,
     SangramentoAposMenopausa BOOLEAN,
-    InspecaoColo VARCHAR(20) CHECK (InspecaoColo IN ('Normal', 'Ausente', 'Alterado', 'Colo não visualizado')),
+    InspecaoColo VARCHAR(20),
     SinaisDST BOOLEAN,
     DataColeta DATE NOT NULL,
     Responsavel VARCHAR(100) NOT NULL,
     
-    FOREIGN KEY (CartaoSUS) REFERENCES PACIENTE(CartaoSUS)
+    FOREIGN KEY (CartaoSUS) REFERENCES Paciente(CartaoSUS)
 );
