@@ -4,47 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/FormularioPacienteStylesheet.css">
-    <title>Perfil do Usuário</title>
+    <title>Requisição de Exame Citopatológico</title>
 </head>
 <body>
-
-    <header>
-        <div class="logo">ICONE</div>
-        <nav class="navbar">
-            <a href="#">Formulário</a>
-            <a href="#">Monitoramento</a>
-            <a href="#">Notificações</a>
-            <a href="#">Central de Ajuda</a>
-        </nav>
-        <div class="settings-icon">
-            ⚙️ <!--O botao e apenas um esboço-->
+    <div class="form-container">
+        <div class="header">
+            <h2>REQUISIÇÃO DO EXAME CITOPATOLÓGICO</h2>
+            <div>
+                <label>Protocolo Nº</label>
+                <input type="text" placeholder="XXXXXXXXXXXX">  
+                <label>Prontuário</label>
+                <input type="text" placeholder="2025/0000000">
+            </div>
         </div>
-    </header>
 
-    <main class="perfil-container">
-        <selection class="card-perfil">
-            <div class="foto-logout">
-                <img class="avatar" src="" alt="Avatar">
-                <button class="logout">Logout</button>
+        <div class="section">
+            <h3>Local de realização</h3>
+            <div class="row">
+                <div class="col"><label>Unidade de saúde</label><input type="text"></div>
+                <div class="col"><label>CNES</label><input type="text"></div>
+                <div class="col"><label>Responsável pelo exame</label><input type="text"></div>
+                <div class="col"><label>Cargo</label><input type="text"></div>
+                <div class="col"><label>Registro</label><input type="text"></div>
             </div>
-            <h2 class="nome-usuario">Alguém da Silva Junior</h2>
+            <div class="row">
+                <div class="col"><label>Endereço</label><input type="text"></div>
+                <div class="col"><label>Município</label><input type="text"></div>
+                <div class="col"><label>UF</label><input type="text"></div>
+            </div>
+        </div>
 
-            <div class="bloco-info">
-                <h3>Informações Pessoais</h3>
-                <div class="info-box"></div>
+        <div class="section">
+            <h3>Dados do paciente</h3>
+            <div class="row">
+                <div class="col"><label>Nome</label><input type="text"></div>
+                <div class="col"><label>Idade</label><input type="text"></div>
+                <div class="col"><label>Data de nascimento</label><input type="text"></div>
+                <div class="col"><label>Cpf</label><input type="text"></div>
+                <div class="col"><label>Cartão do SUS</label><input type="text"></div>
             </div>
+            <div class="row">
+                <div class="col"><label>Nome da mãe</label><input type="text"></div>
+                <div class="col"><label>Endereço</label><input type="text"></div>
+            </div>
+            <div class="row">
+                <div class="col"><label>Município</label><input type="text"></div>
+                <div class="col"><label>UF</label><input type="text"></div>
+                <div class="col"><label>Contato</label><input type="text"></div>
+                <div class="col"><label>Nacionalidade</label><input type="text"></div>
+                <div class="col"><label>Raça/Cor</label><input type="text"></div>
+                <div class="col"><label>Escolaridade</label><input type="text"></div>
+            </div>
+        </div>
 
-            <div class="bloco-info">
-                <h3>Informações Profissionais</h3>
-                <div class="info-box"></div>
+        <div class="section">
+            <h3>Dados da anamnese</h3>
+            <div class="row">
+                <div class="col"><label>Motivo do exame</label><input type="text"></div>
+                <div class="col"><label>Fez o exame preventivo</label><input type="text"></div>
+                <div class="col"><label>Usa diu</label><input type="text"></div>
+                <div class="col"><label>Está grávida</label><input type="text"></div>
+                <div class="col"><label>Usa pílula anticoncepcional</label><input type="text"></div>
             </div>
+            <div class="row">
+                <div class="col"><label>Usa hormônio/remédio para menopausa</label><input type="text"></div>
+                <div class="col"><label>Já fez tratamento por radioterapia</label><input type="text"></div>
+                <div class="col"><label>Data da última menstruação / regra</label><input type="text"></div>
+                <div class="col"><label>Teve sangramento após relações</label><input type="text"></div>
+                <div class="col"><label>Teve sangramento após menopausa</label><input type="text"></div>
+            </div>
+        </div>
 
-            <div class="acoes">
-                <button class="btn=editar"> Alterar informações</button> <!--Add os iconoes dos botoes-->
-                <button class="btn-senha"> Mudar senha</button> <!--Add os iconoes dos botoes-->
+        <div class="section">
+            <h3>Exame Clínico</h3>
+            <div class="row">
+                <div class="col"><label>Inspeção do colo</label><input type="text"></div>
+                <div class="col"><label>Sinais sugestivos de doenças sexualmente transmissíveis</label><input type="text"></div>
+                <div class="col"><label>Data da Coleta</label><input type="text"></div>
+                <div class="col"><label>Responsável</label><input type="text"></div>
             </div>
-        </selection>
-    </main>
-    
+        </div>
+        
+    </div>
 </body>
 </html>
