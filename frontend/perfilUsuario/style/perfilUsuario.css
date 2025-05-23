@@ -1,0 +1,232 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}   
+
+header {
+    z-index: 1000;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    top: 0;
+    gap: 14%;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(90deg, hsl(0, 12%, 16%), hsl(0, 13%, 26%), hsl(0, 16%, 19%));
+    color: white;
+    width: 100%;
+    height: 3rem;
+    font-family: "Inria Serif", "times new roman";
+}
+
+.icone {
+    font-size: 1.5rem;
+}
+
+#navegacao {
+    display: flex;
+    flex-direction: row;
+    gap: 4rem;
+    font-size: 1.1rem;
+}
+
+a {
+    color: hsl(0, 0%, 100%);
+    text-decoration: none;
+    &:hover {
+        cursor: pointer;
+        color: hsl(0, 0%, 93%);
+    }
+    &:active {
+        color: hsl(0, 0%, 88%);
+    }
+}
+
+.opcoes {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}
+
+.menuQueDesce {
+    position: relative;
+    display: inline-block;
+}
+
+.desce {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    border-radius: 5px;
+    min-width: 150px;
+    z-index: 1000;
+}
+
+.desce a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+}
+
+.desce a:hover {
+    background-color: pink;
+}
+
+.menuQueDesce:hover .desce {
+    display: block;
+}
+
+button {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50px;
+    background-color: hsl(0, 0%, 100%);
+    box-shadow: 2px 2px 2px hsl(0, 0%, 18%);
+    outline: none;
+    border: none;
+    &:hover {
+        cursor: pointer;
+        background-color: hsl(0, 0%, 93%);
+    }
+    &:active {
+        background-color: hsl(0, 0%, 88%);
+    }
+}
+
+main {
+    padding-top: 3rem;
+    background: linear-gradient(180deg, hsl(0, 8%, 87%, 100%), hsl(0, 6%, 72%, 100%));
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.divExterno {
+    background-color: hsl(0, 86%, 93%, 100%);
+    width: 70%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    box-shadow: 
+    -6px 0 5px -5px hsla(0, 0%, 0%, 0.3),
+     6px 0 5px -5px hsla(0, 0%, 0%, 0.3);
+}
+
+.divInterno {
+    background-color: hsl(0, 15%, 78%, 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem;
+    margin: 0.5rem;
+    margin-bottom: 1rem;
+    width: 80%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 
+    -6px 0 5px -5px hsla(0, 0%, 0%, 0.4),
+     6px 0 5px -5px hsla(0, 0%, 0%, 0.4),
+     0px 6px 5px -5px hsla(0, 0%, 0%, 0.4);
+}
+
+.usuario {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.fotoNome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+}
+
+#usuarioFoto {
+    width: 8rem;
+    border-radius: 50%;
+    box-shadow: 0px 3px 3px gray;
+    margin-bottom: 1rem;
+}
+
+#nome {
+    font-family: "JetBrains Mono", "times new roman";
+    margin: 0.5rem;
+}
+
+.logout {
+    position: absolute;
+    right: 0px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.informacoesPessoais {
+    background-color: hsl(0, 100%, 96%, 100%);
+    box-shadow: 0px 3px 3px gray;
+    border-radius: 15px;
+    padding: 1rem;
+    margin: 0.5rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 15rem;
+}
+
+.informacoesProfissionais {
+    background-color: hsl(0, 100%, 96%, 100%);
+    box-shadow: 0px 3px 3px gray;
+    border-radius: 15px;
+    padding: 1rem;
+    margin: 0.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 15rem;
+}
+
+.alterar {
+    display: flex;
+    align-items: center;
+    gap: 8rem;
+}
+
+.ms {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.ai {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+label {
+    &:hover {
+        cursor: pointer;
+        color: hsl(0, 0%, 5%);
+    }
+}
