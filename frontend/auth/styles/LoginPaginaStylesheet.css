@@ -18,7 +18,7 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    height: 80%;
+    height: 80vh;
     width: 70%;
     box-shadow: 6px 6px 6px hsl(0, 0%, 57%);
     border-radius: 5px;
@@ -182,27 +182,70 @@ body {
     }
 }
 
-@media (max-height: 540px) {
-    #tituloLogin {
-        font-size: 2rem;
+@media (max-height: 560px) {
+    body {
+        background-repeat: no-repeat;
+    }
+    .telaLogin {
+        flex-direction: column;
+        width: 100%;    
+        height: auto;
     }
 
-    #descricao {
-        font-size: 1.1rem;
+    .login {
+        box-shadow: 
+        -6px 0 5px -5px hsla(0, 0%, 0%, 0.4),
+        6px 0 5px -5px hsla(0, 0%, 0%, 0.4);
+    }
+
+    .apresentacao {
+        text-align: center;
+        width: 70%;
+        box-shadow: 
+        -6px 0 5px -5px hsla(0, 0%, 0%, 0.4),
+        6px 0 5px -5px hsla(0, 0%, 0%, 0.4);
+    }
+
+    #tituloLogin {
+        font-size: 1.8rem;
+    }
+
+    #coracao {
+        font-size: 2.5rem;
+    }
+
+    .dados {
+        width: 80%;
+        gap: 1rem;
     }
 
     #entradaSenha,
     #entradaUsuario {
-        font-size: 0.9rem;
-    }
-
-    #entrar {
-        font-size: 1rem;
-        height: 2.8rem;
+        padding: 0.5rem;
+        font-size: 0.8rem;
     }
 }
 
-@media (max-width: 728px) {
+@media (min-height: 1000px) {
+    .apresentacao, .login {
+        padding-top: 5vh;
+        padding-bottom: 5vh;
+    }
+
+    #tituloLogin {
+        font-size: 3.5rem;
+    }
+
+    #coracao {
+        font-size: 4.5rem;
+    }
+
+    #descricao {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
     body {
         background-repeat: no-repeat;
     }
@@ -227,6 +270,7 @@ body {
 
     .login {
         width: 100%;
+        height: 100%;
         border-radius: 0 0 5px 5px;
         padding: 1rem;
         gap: 2rem;
@@ -273,5 +317,54 @@ body {
     #entrar {
         font-size: 1rem;
         height: 2.8rem;
+    }
+}
+
+
+@media (min-width: 1440px) {
+    .apresentacao, .login {
+        font-size: 1.5rem;
+    }
+
+    .login {
+        gap: 6rem;
+    }
+    #tituloLogin {
+        font-size: 4rem;
+    }
+
+    #coracao {
+        font-size: 5rem;
+    }
+
+    #descricao {
+        font-size: 2rem;
+    }
+
+    #insiraDados,
+    #sobreVidas {
+        font-size: 1.5rem;
+    }
+    .dados {
+        height: 3rem;
+        gap: 1.5rem;
+    }
+
+    #entradaSenha,
+    #entradaUsuario {
+        height: 2.9rem;
+        font-size: 1.2rem;
+    }
+
+    #iconeSenha,
+    #iconeUsuario {
+        font-size: 2rem;
+    }
+
+    .opcoes {
+        height: 7rem;
+    }
+    #entrar {
+        height: 3rem;
     }
 }

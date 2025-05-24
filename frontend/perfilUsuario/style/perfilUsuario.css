@@ -230,3 +230,60 @@ label {
         color: hsl(0, 0%, 5%);
     }
 }
+
+@media (min-width: 1366px) {
+    header {
+        height: 4rem;
+    }
+    a {
+        font-size: 1.5rem;
+    }
+    button {
+        width: 2rem;
+        height: 2rem;
+        font-size: 1.3rem;
+    }
+
+    main {
+        padding-top: 4rem;
+    }
+}
+
+@media (max-width: 900px) {
+    header {
+        gap: 8%;
+        font-size: 1.1rem;
+    }
+
+    .divExterno {
+        width: 100%;
+    }
+
+    .divInterno {
+        width: 90%;
+    }
+}
+
+@media (max-width: 700px) {
+    header {
+        font-size: 1rem;
+        gap: 5%;
+        position:relative;
+        flex-direction: column;
+        height: 7rem;
+    }
+
+    main {
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 560px) {
+    .divInterno {
+        width: 100%;
+    }
+
+    .alterar {
+        gap: 2rem;
+    }
+}
