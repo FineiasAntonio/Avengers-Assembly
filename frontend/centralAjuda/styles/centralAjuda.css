@@ -145,9 +145,9 @@ main {
 }
 
 .divPR {
-    width: 80%;
-    transition: height 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 90%;
     height: 4rem;
+    transition: height 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     background-color: pink;
     margin: 2rem;
     border-radius: 15px;
@@ -171,7 +171,7 @@ main {
 }
 
 .divPR:hover {
-    height: 6.5rem;
+    height: 7.3rem;
     & .resposta {
         max-height: 6rem;
         opacity: 1;
@@ -191,12 +191,32 @@ main {
         height: 2rem;
         font-size: 1.3rem;
     }
+
+    .divPR {
+        font-size: 1.3rem;
+    }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
     header {
         gap: 8%;
         font-size: 1.1rem;
+    }
+
+    main {
+        padding-top: 0;
+    }
+
+    .divExterno {
+        margin-top: 2rem;
+        width: 100%;
+    }
+
+    .divPR {
+        height: auto;
+        &:hover {
+            height: auto;
+        }
     }
 }
 
@@ -207,5 +227,8 @@ main {
         position:relative;
         flex-direction: column;
         height: 7rem;
+    }
+    .divExterno {
+        margin-top: 0;
     }
 }
