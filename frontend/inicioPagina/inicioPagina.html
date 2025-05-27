@@ -1,36 +1,30 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/InicioPagina.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Início</title>
+    <title>Document</title>
+    <script src="../shared/navbar.js" defer type="module"></script>
+    <script src="./scripts/timer.js" defer type="module"></script>
+    <script src="./scripts/gerenciador-items.js" defer type="module"></script>
+    <link rel="stylesheet" href="./styles/inicioPagina.css">
 </head>
 <body>
-    <header>
-        <div class="icone">
-            <a href=""><img src="" alt="ICONE"></a>
-        </div>
-        <nav id="navegacao">
-            <a href="./inicioPagina.html">Início</a>
-            <a href="../formularioPaciente/FormularioPaciente.html">Formulário</a>
-            <a href="">Pacientes</a>
-        </nav>
-        <div class="opcoes">
-            <a href="../centralAjuda/centralAjuda.html">Central de Ajuda</a>
-            <div class="menuQueDesce">
-                <button id="config"><i class="fa-solid fa-gear"></i></button>
-                <div class="desce">
-                    <a href="../perfilUsuario/perfilUsuario.html">Perfil</a>
-                    <a>Sair</a>
-                    <a href="../auth/cadastroPagina/cadastroPagina.html">Cadastrar</a>
-                </div>
+    <custom-navbar></custom-navbar>
+    <main>
+        <div class="cabecalho">
+            <div class="saudacao-container">
+                <h1 id="saudacao">XX</h1>
+            </div>
+            <div class="info-data-hora">
+                <h1 id="relogio">00:00:00</h1>
+                <h2 id="data">00/00/0000</h2>
             </div>
         </div>
-    </header>
+        <hr>
+        <div class="content">
+
+        </div>
+    </main>
 </body>
 </html>
