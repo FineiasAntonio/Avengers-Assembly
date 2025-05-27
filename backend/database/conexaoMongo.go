@@ -1,6 +1,7 @@
-package config
+package database
 
 import (
+	"backend/config"
 	"context"
 	"fmt"
 	"log"
@@ -15,7 +16,7 @@ type MongoClient struct {
 	Database *mongo.Database
 }
 
-func ConectarMongo(cfg MongoConfig) (*MongoClient, error) {
+func ConectarMongo(cfg config.MongoConfig) (*MongoClient, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), cfg.Timeout)
 	defer cancel()
 
