@@ -1,18 +1,29 @@
-package config
+package database
 
 import (
+	"backend/config"
 	"context"
 	"fmt"
-	"github.com/jackc/pgx/v5/pgxpool"
 	"log"
 	"time"
+
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 type PostgresClient struct {
 	Pool *pgxpool.Pool
 }
 
-func ConectarPostgres(cfg PostgresConfig) (*PostgresClient, error) {
+
+type PostgresConfig struct {
+	User     string
+	Password string
+	Host     string
+	Port     string
+	DBName   string
+}
+
+func ConectarPostgres(cfg config.PostgresConfig) (*PostgresClient, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
