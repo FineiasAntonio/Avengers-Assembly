@@ -35,6 +35,7 @@ main {
     min-height: 100vh;
     display: flex;
     justify-content: center;
+    padding-left: 4rem;
 }
 
 .divExterno {

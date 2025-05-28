@@ -30,6 +30,7 @@ button {
 }
 
 main {
+    padding-left: 4rem;
     background: linear-gradient(180deg, hsl(0, 8%, 87%, 100%), hsl(0, 6%, 72%, 100%));
     width: 100%;
     min-height: 100vh;
