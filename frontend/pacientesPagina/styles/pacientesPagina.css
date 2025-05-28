@@ -12,6 +12,7 @@ main {
     background: linear-gradient(180deg, hsl(0, 55%, 91%), hsl(0, 55%, 94%));
     min-height: 100vh;
     display: flex;
+    padding-left: 4rem;
     flex-direction: column;
     align-items: center;
 }
