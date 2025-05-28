@@ -3,24 +3,16 @@ package database
 import (
 	"backend/config"
 	"context"
+	"database/sql"
 	"fmt"
 	"log"
 	"time"
 
-	"github.com/jackc/pgx/v5/pgxpool"
+	_ "github.com/lib/pq" // Driver PostgreSQL
 )
 
 type PostgresClient struct {
-	Pool *pgxpool.Pool
-}
-
-
-type PostgresConfig struct {
-	User     string
-	Password string
-	Host     string
-	Port     string
-	DBName   string
+	DB *sql.DB
 }
 
 func ConectarPostgres(cfg config.PostgresConfig) (*PostgresClient, error) {
@@ -28,7 +20,7 @@ func ConectarPostgres(cfg config.PostgresConfig) (*PostgresClient, error) {
 	defer cancel()
 
 	stringConexao := fmt.Sprintf(
-		"postgres://%s:%s@%s:%s/%s",
+		"postgres://%s:%s@%s:%s/%s?sslmode=disable",
 		cfg.User,
 		cfg.Password,
 		cfg.Host,
@@ -36,30 +28,27 @@ func ConectarPostgres(cfg config.PostgresConfig) (*PostgresClient, error) {
 		cfg.DBName,
 	)
 
-	poolConfig, err := pgxpool.ParseConfig(stringConexao)
+	db, err := sql.Open("postgres", stringConexao)
 	if err != nil {
 		return nil, fmt.Errorf("Erro ao tentar conectar com o PostgreSQL: %w", err)
 	}
 
-	poolConfig.MaxConns = 10
-	poolConfig.MinConns = 2
-	poolConfig.HealthCheckPeriod = 1 * time.Minute
+	// Configurações da pool de conexões
+	db.SetMaxOpenConns(10)
+	db.SetMaxIdleConns(2)
+	db.SetConnMaxLifetime(time.Minute * 5)
 
-	pool, err := pgxpool.NewWithConfig(ctx, poolConfig)
-	if err != nil {
-		return nil, fmt.Errorf("Erro ao criar a pool do PostgreSQL: %w", err)
-	}
-
-	if err := pool.Ping(ctx); err != nil {
-		return nil, fmt.Errorf("Erro ao tentar se comuncar com o PostgreSQL: %w", err)
+	// Verifica a conexão
+	if err := db.PingContext(ctx); err != nil {
+		return nil, fmt.Errorf("Erro ao tentar se comunicar com o PostgreSQL: %w", err)
 	}
 
 	log.Println("Conexão com o PostgreSQL estabelecida com sucesso")
-	return &PostgresClient{Pool: pool}, nil
+	return &PostgresClient{DB: db}, nil
 }
 
 func (c *PostgresClient) FecharConexaoPostgres() {
-	if c.Pool != nil {
-		c.Pool.Close()
+	if c.DB != nil {
+		c.DB.Close()
 	}
 }
