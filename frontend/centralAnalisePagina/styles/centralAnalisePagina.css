@@ -1,0 +1,145 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(180deg, hsl(0, 8%, 87%, 100%), hsl(0, 6%, 72%, 100%));
+    width: 100%;
+    height: auto;
+    padding-left: 4rem;
+    padding-bottom: 2rem;
+}
+
+.titulo {
+    font-family: "Inria Serif", "Times New Roman";
+    text-align: center;
+    & h1 {
+        margin: 1rem;
+    }
+}
+
+hr {
+    height: 1px;
+    margin: 1rem;
+    width: 80%;
+}
+
+.dashboards {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    height: auto;
+    background-color: hsl(351, 17%, 23%);
+    border-radius: 15px;
+}
+
+.graficos {
+    background-color: hsl(350, 100%, 88%);
+    width: 90%;
+    height: 20rem;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgb(51, 51, 51);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.graficoPizza {
+    width: 80%;
+    height: 80%;
+}
+
+.tituloGrafico {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30%;
+}
+
+.filtrarGrafico {
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0px 3px 3px gray;
+    padding: 1px;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.divFiltrar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.graficoBarra {
+    width: 80%;
+    height: 80%;
+}
+
+.dadosMapa {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 1rem;
+}
+
+.dadosPrioridade {
+    width: 50%;
+    height: 15rem;
+    background-color: pink;
+    border-radius: 15px;
+}
+
+.mapa {
+    width: 50%;
+    height: 15rem;
+    background-color: pink;
+    border-radius: 15px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tituloMapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+#visualizarMapa {
+    background-color: hsl(350, 13%, 48%);
+    border-radius: 15px;
+    border: none;
+    width: 6rem;
+    height: 4rem;
+    transition: all 0.3s ease;
+    &:hover {
+        background-color: hsl(350, 13%, 28%);
+        cursor: pointer;
+        width: 7rem;
+        height: 5rem;
+    }
+}
