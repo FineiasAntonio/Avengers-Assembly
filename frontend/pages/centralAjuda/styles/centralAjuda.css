@@ -1,16 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}   
+@import "../../../shared/estilos-globais.css";
 
 button {
     width: 1.5rem;
@@ -29,27 +17,14 @@ button {
     }
 }
 
-main {
-    padding-left: 4rem;
-    background: linear-gradient(180deg, hsl(0, 8%, 87%, 100%), hsl(0, 6%, 72%, 100%));
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-}
-
 .divExterno {
     padding-top: 3rem;
-    background-color: hsl(0, 86%, 93%, 100%);
-    width: 70%;
+    width: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 
-    -6px 0 5px -5px hsla(0, 0%, 0%, 0.3),
-     6px 0 5px -5px hsla(0, 0%, 0%, 0.3);
 }
 
 .central {

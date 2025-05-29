@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+:root {
+    --cor-primaria: #d04b82;
+    --cor-secundaria: #F778A1;
+    --cor-fundo: #F8F9FA;
+    /* --cor-fundo: hsl(0, 86%, 93%, 100%); */
+    --cor-texto: #4A4A4A;
+    --verde-sucesso: #98FB98;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+main {
+    width: calc(100% - 6rem);
+    min-height: 100vh;
+    height: 100%;
+    margin-left: 6rem;
+    background-color: var(--cor-fundo);
+}
+
+.botao1 {
+    background-color: #FFB6C1;
+    border: none;
+    border-radius: 1rem;
+    color: #97365F;
+    cursor: pointer;
+    transition: ease 0.3s;
+
+    &:hover {
+        background-color: #97365F;
+        color: white;
+    }
+}

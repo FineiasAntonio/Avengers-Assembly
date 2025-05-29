@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../../shared/navbar.js" defer type="module"></script>
+    <link rel="stylesheet" href="./styles/centralAnalisePagina.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Dashboards</title>
+</head>
+
+<body>
+    <custom-navbar></custom-navbar>
+    <main>
+        <div class="titulo">
+            <h1>Central de Análise</h1>
+            <p>Aba para análise de dados de informações estratégicas</p>
+        </div>
+        <hr>
+        <div class="content">
+            <div class="dashboards">
+                <div class="graficos">
+                    <div class="graficoPizza">
+                        <div class="tituloGrafico">
+                            <h2>Gráfico</h2>
+                            <div class="divFiltrar">
+                                <label for="filtrarGrafico">Filtrar</label>
+                                <button class="filtrarGrafico"><i class="fa-solid fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <canvas id="graficoP"></canvas>
+                    </div>
+                    <div class="graficoBarra">
+                        <div class="tituloGrafico">
+                            <h2>Gráfico</h2>
+                            <div class="divFiltrar">
+                                <label for="filtrarGrafico">Filtrar</label>
+                                <button class="filtrarGrafico"><i class="fa-solid fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <canvas id="graficoB"></canvas>
+                    </div>
+                </div>
+                <div class="dadosMapa">
+                    <div class="dadosPrioridade">
+                    </div>
+                    <div class="mapa">
+                        <div class="tituloMapa">
+                            <h1>Mapa</h1>
+                            <p>Visualize o mapa de Rastreamento às pacientes
+                                cadastradas ao sistema
+                            </p>
+                        </div>
+                        <button id="visualizarMapa">Visualizar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./script/chart.js" type="module"></script>
+</body>
+
+</html>
