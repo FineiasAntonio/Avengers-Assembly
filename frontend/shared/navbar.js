@@ -113,9 +113,9 @@ const template = `
             <img src="" alt="ICONE">
         </div>
         <div class="navegacao">
-            <a href="../inicioPagina/inicioPagina.html">Início</a>
-            <a href="../formularioPaciente/FormularioPaciente.html">Configurações</a>
-            <a href="../centralAjuda/centralAjuda.html">Ajuda</a>
+            <a href="">Início</a>
+            <a href="">Configurações</a>
+            <a href="">Ajuda</a>
             <a href="">Sair</a>
         </div>        
     </nav>

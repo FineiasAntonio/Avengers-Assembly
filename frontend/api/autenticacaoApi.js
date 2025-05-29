@@ -16,7 +16,6 @@ export async function loginRequisicao(credencial, senha) {
 
     const token = await response.json()
 
-    console.log("Autenticado com sucesso, token: " + token)
-
     localStorage.setItem("token", token)
+    window.location.replace("/pages/inicioPagina/InicioPagina.html")
 }

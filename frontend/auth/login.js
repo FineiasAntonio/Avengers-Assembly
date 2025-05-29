@@ -1,4 +1,4 @@
-import {loginRequisicao} from "../../api/autenticacaoApi.js"
+import {loginRequisicao} from "../api/autenticacaoApi.js"
 
 document.addEventListener('DOMContentLoaded', function() {
     
