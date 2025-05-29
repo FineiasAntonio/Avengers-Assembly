@@ -10,7 +10,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./config/container_data/postgres:/var/lib/postgresql/data
     networks:
       - ccts_network
 
@@ -20,13 +20,16 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - mongodb_data:/data/db
+      - ./config/container_data/mongodb:/data/db
     networks:
       - ccts_network
 
-volumes:
-  postgres_data:
-  mongodb_data:
+  apache:
+    image: httpd:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/usr/local/apache2/htdocs/
 
 networks:
     ccts_network:
