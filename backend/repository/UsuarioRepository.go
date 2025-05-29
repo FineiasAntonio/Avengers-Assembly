@@ -19,11 +19,11 @@ func (r *UsuarioRepository) GetUsuarioByCPF(cpf string) (*model.Usuario, error) 
 	query := `SELECT * FROM usuarios WHERE cpf = $1`
 	var usuario model.Usuario
 	err := r.db.DB.QueryRow(query, cpf).Scan(
+		&usuario.Registro,
 		&usuario.Nome,
 		&usuario.CPF,
 		&usuario.Email,
 		&usuario.Telefone,
-		&usuario.Registro,
 		&usuario.Senha,
 		&usuario.UnidadeSaudeCNES,
 		&usuario.LaboratorioCNES,

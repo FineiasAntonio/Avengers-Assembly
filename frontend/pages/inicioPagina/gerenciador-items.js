@@ -1,4 +1,4 @@
-import {pegarPermissaoUsuario, Permissao} from '../../../shared/gerenciador-permissoes.js';
+import {pegarPermissaoUsuario, Permissao} from '../../shared/gerenciador-permissoes.js';
 
 export const items = [
   {
