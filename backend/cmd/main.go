@@ -46,12 +46,14 @@ func main() {
 	autenticacaoMiddleware := middleware.NewAutenticacaoMiddleware(autenticacaoServico)
 	autenticacaoHandler := auth.NewAutenticacaoHandler(autenticacaoServico)
 
+	corsMiddleware := middleware.NewCORSMiddleware()
+
 	rotas := api.NewRotas(
 		autenticacaoMiddleware,
 		autenticacaoHandler,
 		usuarioHandler,
 	)
-	handerRotas := rotas.SetupRotas()
+	handerRotas := corsMiddleware.LiberarCORS(rotas.SetupRotas())
 
 	porta := os.Getenv("PORT")
 	if porta == "" {
