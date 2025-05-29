@@ -1,2 +1,5 @@
 .idea
 .vscode
+
+config/container_data/mongodb/*
+config/container_data/postgres/*
