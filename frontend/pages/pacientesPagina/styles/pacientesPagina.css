@@ -1,30 +1,12 @@
-* {
-    box-sizing: 0;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    width: 100%;
-}
-
-main {
-    background: linear-gradient(180deg, hsl(0, 55%, 91%), hsl(0, 55%, 94%));
-    min-height: 100vh;
-    display: flex;
-    padding-left: 4rem;
-    flex-direction: column;
-    align-items: center;
-}
+@import "../../../shared/estilos-globais.css";
 
 .topo {
     margin: 2rem;
     font-size: 1.5rem;
-    font-family: "Inria Serif", "Times new Roman";
 }
 
 hr {
-    width: 80%;
+    width: 100%;
 }
 
 .pesquisa {
@@ -79,6 +61,11 @@ button {
     }
 }
 
+.content {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
 .dados {
     display: flex;
     flex-direction: column;

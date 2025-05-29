@@ -1,6 +1,8 @@
 
 const template = `
         <style>
+        @import "./estilos-globais.css";
+
         .navbar {
             position: fixed;
             z-index: 100;
@@ -8,9 +10,9 @@ const template = `
             left: 0;
             width: 4rem;
             height: 100%;
-            background: linear-gradient(90deg, hsl(0, 12%, 16%), hsl(0, 13%, 26%), hsl(0, 16%, 19%));
+            background: var(--cor-primaria);
             transition: ease 0.3s;
-            font-family; "Inria Serif", "Times New Roman";
+            font-family: "Inria Serif", "Times New Roman";
 
             &:hover {
                 width: 10rem;
@@ -62,7 +64,7 @@ const template = `
 
             &:hover {
                 cursor: pointer;
-                background-color: hsl(0, 11%, 39%);
+                background-color: var(--cor-secundaria);
             }
         }
         
