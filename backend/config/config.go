@@ -24,13 +24,13 @@ type MongoConfig struct {
 	Timeout  time.Duration
 }
 
-func carregarConfiguracoesDatabase() DBConfig {
+func CarregarConfiguracoesDatabase() DBConfig {
 	return DBConfig{
 		Postgres: PostgresConfig{
 			Host:     pegarVariavelAmbiente("POSTGRES_HOST", "localhost"),
 			Port:     pegarVariavelAmbiente("POSTGRES_PORT", "5432"),
 			User:     pegarVariavelAmbiente("POSTGRES_USER", "postgres"),
-			Password: pegarVariavelAmbiente("POSTGRES_PASSWORD", ""),
+			Password: pegarVariavelAmbiente("POSTGRES_PASSWORD", "postgres"),
 			DBName:   pegarVariavelAmbiente("POSTGRES_DB", "ccts_database"),
 		},
 		Mongo: MongoConfig{
