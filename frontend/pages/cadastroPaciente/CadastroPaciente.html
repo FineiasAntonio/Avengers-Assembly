@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CadastroPaciente.css">
+    <script src="../../shared/navbar.js"></script>
+    <script src="CadastroPacienteScripts.js"></script>
+    <title>Cadastro Paciente</title>
+</head>
+
+<body>
+    <custom-navbar></custom-navbar>
+    <main class="root">
+        <div class="cabecalho">
+            <h1>Cadastro do paciente</h1>
+        </div>
+        <hr>
+        <div class="section">
+            <h3>Dados do paciente</h3>
+            <label style="margin-top: 2rem;">Dados Pessoais</label>
+            <hr>
+            <div class="row">
+                <div class="col"><label>Nome</label><input type="text"></div>
+                <div class="col"><label>Apelido</label><input type="text"></div>
+            </div>
+            <div class="row">
+                <div class="col"><label>Data de nascimento</label><input type="text" id="dataNascimento"></div>
+                <div class="col"><label>Idade</label><input type="number"></div>
+                <div class="col"><label>CPF</label><input type="text" id="cpf"></div>
+                <div class="col"><label>Cartão do SUS</label><input type="number"></div>
+                <div class="col"><label>Telefone</label><input type="text" id="telefone"></div>
+            </div>
+            <label style="margin-top: 2rem;">Endereço</label>
+            <hr>
+            <div class="row" >
+                    <div class="col"><label for="cepEndereco">CEP</label><input type="text" id="cepEndereco" maxlength="9"></div>
+                    <div class="col"><label for="logradouro">Logradouro</label><input type="text" id="logradouro"></div>
+                    <div class="col"><label for="numero">Número</label><input type="text" id="numero"></div>
+                    <div class="col"><label for="bairro">Bairro</label><input type="text" id="bairro"></div>
+                    <div class="col"><label for="complemento">Complemento</label><input type="text" id="complemento"></div>
+                    <div class="col"><label for="municipio">Município</label><input type="text" id="municipio"></div>
+                    <div class="col"><label for="uf">UF</label><input type="text" id="uf"></div>
+                </div>
+            <label style="margin-top: 2rem;">Outros</label>
+            <hr>
+            <div class="row">
+                <div class="col"><label>Nome da Mãe</label><input type="text"></div>
+                <div class="col"><label>Nacionalidade</label><input type="text"></div>
+                <div class="col">
+                    <label for="raca_cor">Raça/Cor</label>
+                    <select name="raca_cor" id="raca_cor">
+                        <option value="" hidden>Selecione</option>
+                        <option value="branca">Branca</option>
+                        <option value="preta">Preta</option>
+                        <option value="parda">Parda</option>
+                        <option value="amarela">Amarela</option>
+                        <option value="indigena">Indígena</option>
+                        <option value="nao_declarada">Não declarada</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="escolaridade">Escolaridade</label>
+                    <select name="escolaridade" id="escolaridade">
+                        <option value="" hidden>Selecione</option>
+                        <option value="analfabeto">Analfabeto(a)</option>
+                        <option value="fundamental_completo">Ensino Fundamental Completo</option>
+                        <option value="medio_completo">Ensino Médio Completo</option>
+                        <option value="superior_completo">Ensino Superior Completo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="acoes">
+                <button class="botao1">Cadastar Paciente</button>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
