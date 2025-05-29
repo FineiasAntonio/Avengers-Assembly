@@ -6,7 +6,7 @@ type Usuario struct {
 	Email            string  `json:"email" db:"email"`
 	Telefone         string  `json:"telefone" db:"telefone"`
 	Registro         string  `json:"registro" db:"registro"`
-	Senha            *string `json:"-" db:"senha"`
+	Senha            string  `json:"-" db:"senha"`
 	UnidadeSaudeCNES *string `json:"-" db:"unidadesaude"`
 	LaboratorioCNES  *string `json:"-" db:"laboratorio"`
 	Permissao        string  `json:"permissao" db:"permissao"`

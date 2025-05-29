@@ -22,9 +22,14 @@ func NewUsuarioService(repo *repository.UsuarioRepository) *UsuarioService {
 func (s *UsuarioService) CadastrarUsuario(requisicao *model.Usuario) error {
 	usuarioRequisicao := *requisicao
 
+	senha, err := bcrypt.GenerateFromPassword([]byte("000"), bcrypt.DefaultCost)
+	if err != nil {
+		return err
+	}
+	usuarioRequisicao.Senha = string(senha)
 	usuarioRequisicao.PrimeiroAcesso = true
 
-	err := s.repository.CadastrarUsuario(&usuarioRequisicao)
+	err = s.repository.CadastrarUsuario(&usuarioRequisicao)
 	if err != nil {
 		return errors.New("erro ao cadastrar usuário: " + err.Error())
 	}

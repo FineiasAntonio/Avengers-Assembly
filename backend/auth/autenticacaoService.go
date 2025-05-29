@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"backend/exceptions"
 	"backend/model"
 	"backend/repository"
 	"errors"
@@ -22,11 +23,20 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
+func NewAutenticacaoService(repositorioUsuario *repository.UsuarioRepository, jwtKey []byte) *ServicoAutenticacao {
+	return &ServicoAutenticacao{
+		repositorioUsuario: repositorioUsuario,
+		jwtKey:             jwtKey,
+	}
+}
+
 func (s *ServicoAutenticacao) GerarToken(usuario *model.Usuario) (string, error) {
 	expirationTime := time.Now().Add(24 * time.Hour)
 
 	claims := &Claims{
-		Nome: usuario.Nome,
+		Nome:      usuario.Nome,
+		CPF:       usuario.CPF,
+		Permissao: usuario.Permissao,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 		},
@@ -76,13 +86,12 @@ func (s *ServicoAutenticacao) AutenticarUsuario(credenciais model.CredenciaisUsu
 		usuario, err = s.repositorioUsuario.GetUsuarioByCPF(credencialFormatada)
 	}
 	if err != nil {
-		return "", errors.New("credenciais inválidas")
+		return "", exceptions.ErroCredenciaisInvalidas
 	}
-
 	err = bcrypt.CompareHashAndPassword([]byte(usuario.Senha), []byte(credenciais.Senha))
 	if err != nil {
 		if errors.Is(err, bcrypt.ErrMismatchedHashAndPassword) {
-			return "", errors.New("credenciais inválidas")
+			return "", exceptions.ErroCredenciaisInvalidas
 		}
 		return "", errors.New("erro ao validar credenciais")
 	}

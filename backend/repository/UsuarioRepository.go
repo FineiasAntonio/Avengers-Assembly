@@ -18,7 +18,18 @@ func NewUsuarioRepository(db *database.PostgresClient) *UsuarioRepository {
 func (r *UsuarioRepository) GetUsuarioByCPF(cpf string) (*model.Usuario, error) {
 	query := `SELECT * FROM usuarios WHERE cpf = $1`
 	var usuario model.Usuario
-	err := r.db.DB.QueryRow(query, cpf).Scan(&usuario.CPF, &usuario.Nome, &usuario.Email, &usuario.Telefone)
+	err := r.db.DB.QueryRow(query, cpf).Scan(
+		&usuario.Nome,
+		&usuario.CPF,
+		&usuario.Email,
+		&usuario.Telefone,
+		&usuario.Registro,
+		&usuario.Senha,
+		&usuario.UnidadeSaudeCNES,
+		&usuario.LaboratorioCNES,
+		&usuario.Permissao,
+		&usuario.PrimeiroAcesso,
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -26,9 +37,20 @@ func (r *UsuarioRepository) GetUsuarioByCPF(cpf string) (*model.Usuario, error) 
 }
 
 func (r *UsuarioRepository) GetUsuarioByRegistro(registro string) (*model.Usuario, error) {
-	query := `SELECT * FROM usuarios WHERE registro = $1`
+	query := `SELECT * FROM usuarios WHERE registro = '$1'`
 	var usuario model.Usuario
-	err := r.db.DB.QueryRow(query, registro).Scan(&usuario.CPF, &usuario.Nome, &usuario.Email, &usuario.Telefone)
+	err := r.db.DB.QueryRow(query, registro).Scan(
+		&usuario.Nome,
+		&usuario.CPF,
+		&usuario.Email,
+		&usuario.Telefone,
+		&usuario.Registro,
+		&usuario.Senha,
+		&usuario.UnidadeSaudeCNES,
+		&usuario.LaboratorioCNES,
+		&usuario.Permissao,
+		&usuario.PrimeiroAcesso,
+	)
 	if err != nil {
 		return nil, err
 	}
