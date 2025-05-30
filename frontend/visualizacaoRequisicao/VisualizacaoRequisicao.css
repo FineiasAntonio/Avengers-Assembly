@@ -21,6 +21,10 @@ h2 {
 }
 
 .header-info {
+  border: 2px solid #6b4a58;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #f4eaed;
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
@@ -43,6 +47,7 @@ legend {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  
   gap: 10px;
 }
 
@@ -96,7 +101,12 @@ button:hover {
   transition: scale 0.3s ease-in-out;
 }
 
-.cancel {
+.cancelar {
+  background-color: #3A1C1C;
+  color: white;
+}
+
+.voltar {
   background-color: #3A1C1C;
   color: white;
 }
@@ -110,4 +120,10 @@ input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #6b4a58;
 }
