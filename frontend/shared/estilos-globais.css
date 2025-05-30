@@ -19,10 +19,10 @@
 }
 
 main {
-    width: calc(100% - 6rem);
+    width: 100%;
     min-height: 100vh;
     height: 100%;
-    margin-left: 6rem;
+    padding-left: 6rem;
     background-color: var(--cor-fundo);
 }
 
@@ -37,5 +37,29 @@ main {
     &:hover {
         background-color: #97365F;
         color: white;
+    }
+}
+
+@media (min-width: 1366px) {
+    main {
+        padding-left: 6rem;
+    }
+}
+
+@media (min-width: 1000px) {
+    main {
+        padding-left: 4rem;
+    }
+}
+
+@media (max-width: 1000px) {
+    main {
+        padding-left: 2rem;
+    }
+}
+
+@media (max-width: 560px) {
+    main {
+        padding-left: 1.5rem;
     }
 }
