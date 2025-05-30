@@ -89,11 +89,16 @@ hr {
     gap: 1rem;
 }
 
-.dadosPrioridade {
+.dados {
     width: 50%;
     height: 15rem;
     background-color: pink;
     border-radius: 15px;
+}
+
+#graficoC {
+    width: 80%;
+    height: 60%;
 }
 
 .mapa {
