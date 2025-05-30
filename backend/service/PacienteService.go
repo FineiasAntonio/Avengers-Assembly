@@ -23,3 +23,10 @@ func (s *PacienteService) GetPacienteByCartaoSUS(ctx context.Context, cartaoSUS 
 	}
 	return paciente, nil
 }
+
+func (s *PacienteService) CadastrarPaciente(ctx context.Context, paciente *model.Paciente) error {
+	if err := s.repository.CadastrarPaciente(ctx, paciente); err != nil {
+		return err
+	}
+	return nil
+}
