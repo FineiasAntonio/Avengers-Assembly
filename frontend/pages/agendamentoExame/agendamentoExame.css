@@ -1,0 +1,72 @@
+@import "../../shared/estilos-globais.css";
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #fddede, #ffecec);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #e7d4d4;
+    padding: 30px;
+    border-radius: 10px;
+    width: 500px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.row > div {
+    flex: 1;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn-cancelar {
+    background-color: #8b0000;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-agendar {
+    background-color: #4b2e2e;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}

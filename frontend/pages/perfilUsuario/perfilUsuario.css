@@ -1,5 +1,9 @@
 @import "../../shared/estilos-globais.css";
 
+body {
+    width: 100%;
+}
+
 button {
     width: 1.5rem;
     height: 1.5rem;
@@ -18,9 +22,11 @@ button {
 }
 
 .divExterno {
-    width: 70%;
+    width: 100%;
+    min-height: 100vh;
     height: auto;
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
@@ -87,7 +93,7 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 70%;
     height: 15rem;
 }
 
@@ -101,7 +107,7 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 70%;
     height: 15rem;
 }
 
@@ -143,12 +149,18 @@ label {
         width: 100%;
     }
 
-    .divInterno {
+    .informacoesPessoais {
+        width: 100%;
+    }
+    .informacoesProfissionais {
         width: 100%;
     }
 }
 
 @media (max-width: 700px) {
+    .divInterno {
+        width: 100%;
+    }
 
 }
 

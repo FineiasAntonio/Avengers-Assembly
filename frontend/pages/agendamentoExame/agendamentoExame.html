@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="agendamentoExame.css">
+    <title>Agendamento Exame</title>
+</head>
+
+<body>
+     <div class="container">
+        <h2>AGENDAMENTO DE EXAMES</h2>
+        
+        <label for="cartaoSUS">Seu Cartão SUS</label>
+        <input type="text" id="cartaoSUS" placeholder="UBS Tal tal tal">
+
+        <label>Local, data e horário de realização do exame</label>
+
+        <div class="row">
+            <div>
+                <label for="ubs">Unidade de saúde</label>
+                <input type="text" id="ubs" placeholder="UBS Tal tal tal">
+            </div>
+            <div>
+                <label for="municipio">Município</label>
+                <input type="text" id="municipio" placeholder="Goiânia">
+            </div>
+            <div>
+                <label for="uf">UF</label>
+                <input type="text" id="uf" placeholder="GO" maxlength="2">
+            </div>
+        </div>
+
+        <label for="data">Selecione a data</label>
+        <input type="date" id="data">
+
+        <label for="hora">Selecione o horário</label>
+        <input type="time" id="hora">
+
+        <div class="actions">
+            <button class="btn-cancelar">Cancelar</button>
+            <button class="btn-agendar">Agendar</button>
+        </div>
+    </div>
+</body>
+</html>
