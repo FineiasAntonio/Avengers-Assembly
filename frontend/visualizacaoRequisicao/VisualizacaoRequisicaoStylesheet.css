@@ -1,0 +1,113 @@
+@import "../shared/estilos-globais.css";
+
+body {
+  font-family: "JetBrains Mono", "times new roman";
+  background: linear-gradient(to bottom, #f0c8c8, #ffffff);
+  margin: 0;
+  padding: 2rem;
+}
+
+.container {
+  background: #fdfdfd;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+h2 {
+  margin-bottom: 0.5rem;
+}
+
+.header-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+fieldset {
+  border: 2px solid #6b4a58;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f4eaed;
+}
+
+legend {
+  padding: 0 10px;
+  font-weight: bold;
+  color: #2b1a1a;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+input {
+  padding: 6px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  margin-top: 2px;
+}
+
+select {
+  background-color: white;
+  border: 1px solid #bbb;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+select:focus {
+  border-color: #f4eaed;
+}
+
+option {
+  background: white;
+  color: #333;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  scale: 1.07;
+  background-color: #271313;
+  transition: scale 0.3s ease-in-out;
+}
+
+.cancel {
+  background-color: #3A1C1C;
+  color: white;
+}
+
+.proximo {
+  background-color: #3A1C1C;
+  color: white;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
