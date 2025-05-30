@@ -1,5 +1,6 @@
 const graficoPizza = document.getElementById("graficoP");
 const graficoBarra = document.getElementById("graficoB");
+const graficoC = document.getElementById("graficoC");
 
 new Chart(graficoPizza, {
     type: "doughnut",
@@ -34,6 +35,26 @@ new Chart(graficoBarra, {
         responsive: true,
         plugins: {
             legend: {display: false}
+        }
+    }
+});
+
+new Chart(graficoC, {
+    type: "line",
+    data: {
+        labels: ["Jan", "Fev", "Mar"],
+        datasets: [{
+            label: "Pacientes",
+            data: [0, 5, 6],
+            backgroundColor: ["#9b59b6"]
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+            position: 'left'
+            }
         }
     }
 });
