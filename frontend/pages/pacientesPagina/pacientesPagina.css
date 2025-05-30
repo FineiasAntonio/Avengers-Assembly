@@ -1,0 +1,196 @@
+@import "../../shared/estilos-globais.css";
+
+.topo {
+    text-align: center;
+    margin: 2rem;
+    font-size: 1.5rem;
+}
+
+hr {
+    width: 100%;
+}
+
+.pesquisa {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.barraPesquisa {
+    margin: 1rem;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.busca {
+    width: 100%;
+    height: 2rem;
+    border-radius: 15px;
+    padding: 0.2rem;
+    padding-left: 1rem;;
+    border: none;
+    box-shadow: 0px 2px 3px gray;
+    font-size: 1rem;
+    &:focus {
+        outline: none;
+    }
+}
+
+.buscar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0px 2px 3px gray;
+}
+
+button {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0px 2px 3px gray;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.content {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.dados {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(122, 102, 102);
+    margin: 1rem;
+    padding-bottom: 1rem;
+    height: auto;
+    border-radius: 15px;
+    width: 80%;
+    box-shadow: 0px 3px 3px rgb(73, 73, 73);
+    color: white;
+}
+
+.campos {
+    display: flex;
+    justify-content: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    flex-direction: row;
+    gap: 15%;
+    background-color: rgb(66, 46, 46);
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.resultados {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.resultado {
+    width: 90%;
+    background-color: rgb(37, 28, 30);
+    border-radius: 15px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 12%;
+    margin: 1rem;
+    box-shadow: 0px 2px 3px rgb(22, 20, 20);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);;
+    &:hover {
+        width: 93%;
+    }
+}
+
+.inspecionar {
+    width: 2rem;
+    height: 2rem;
+}
+
+@media (min-width: 1466px) {
+    .busca {
+        height: 4rem;
+        font-size: 1.4rem;
+    }
+
+    button {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.4rem;
+    }
+
+    .buscar {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.4rem;
+    }
+
+    main {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 1000px) {
+    main {
+        font-size: 1rem;
+    }
+
+    .campos {
+        gap: 10%;
+    }
+
+    .resultado {
+        gap: 7%;
+    }
+}
+
+@media (max-width: 768px) {
+    .barraPesquisa {
+        width: 80%;
+    }
+
+    .dados {
+        width: 95%;
+    }
+    main {
+        font-size: 0.8rem;
+    }
+
+    .busca {
+        font-size: 0.8rem;
+    }
+
+    .campos {
+        gap: 8%;
+    }
+
+    .resultado {
+        gap: 5%;
+    }
+}
+
+@media (max-width: 500px) {
+    main {
+        font-size: 0.6rem;
+    }
+}

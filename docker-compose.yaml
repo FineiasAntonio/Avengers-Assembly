@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DATABASE: ${POSTGRES_DATABASE}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./config/container_data/postgres:/var/lib/postgresql/data
+    networks:
+      - ccts_network
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./config/container_data/mongodb:/data/db
+    networks:
+      - ccts_network
+
+  apache:
+    image: httpd:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/usr/local/apache2/htdocs/
+
+networks:
+    ccts_network:
+        driver: bridge

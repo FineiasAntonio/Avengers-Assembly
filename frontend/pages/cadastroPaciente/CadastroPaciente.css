@@ -1,0 +1,71 @@
+@import "../../shared/estilos-globais.css";
+
+.cabecalho {
+    padding: 4rem;
+}
+
+.section{
+    padding: 2rem;
+    width: 100%;
+}
+
+.section h3 {
+    background: var(--cor-primaria);
+    padding: 5px 10px;
+    border-radius:5px;
+    margin:-15px -15px 15px -15px;
+    font-size:16px;
+    color:#fff;
+}
+ 
+label {
+    display:block;
+    margin-top:10px;
+    font-weight: bold;
+    font-size:14px;
+}
+
+input, textarea, select {
+    width:100%;
+    padding:5px;
+    margin-top:3px;
+    box-sizing: border-box;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:14px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.row {
+    display:flex;
+    gap:2.5rem;
+    flex-wrap:wrap;
+}
+
+.col {
+    flex:1;
+    min-width: 200px;
+    
+}
+
+.acoes {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    align-items: center;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+.acoes button {
+    width: 15rem;
+    height: 4rem;
+    font-size: large;
+}
