@@ -16,7 +16,7 @@ func NewPacienteService(repo *repository.PacienteRepository) *PacienteService {
 	}
 }
 
-func (s *PacienteService) GetPacienteByCartaoSUS(ctx context.Context, cartaoSUS string) (*model.Paciente, error) {
+func (s *PacienteService) GetPacienteByCartaoSUS(ctx *context.Context, cartaoSUS string) (*model.Paciente, error) {
 	paciente, err := s.repository.GetPacienteByCartaoSUS(ctx, cartaoSUS)
 	if err != nil {
 		return nil, err
@@ -24,7 +24,7 @@ func (s *PacienteService) GetPacienteByCartaoSUS(ctx context.Context, cartaoSUS 
 	return paciente, nil
 }
 
-func (s *PacienteService) CadastrarPaciente(ctx context.Context, paciente *model.Paciente) error {
+func (s *PacienteService) CadastrarPaciente(ctx *context.Context, paciente *model.Paciente) error {
 	if err := s.repository.CadastrarPaciente(ctx, paciente); err != nil {
 		return err
 	}

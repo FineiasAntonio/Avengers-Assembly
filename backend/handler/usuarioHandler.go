@@ -23,7 +23,9 @@ func (handler *UsuarioHandler) CadastrarNovoUsuario(w http.ResponseWriter, r *ht
 		return
 	}
 
-	err := handler.usuarioServico.CadastrarUsuario(&requisicaoCadastro)
+	ctx := r.Context()
+
+	err := handler.usuarioServico.CadastrarUsuario(&ctx, &requisicaoCadastro)
 	if err != nil {
 		http.Error(w, "Erro ao cadastrar usuário: "+err.Error(), http.StatusInternalServerError)
 	}
