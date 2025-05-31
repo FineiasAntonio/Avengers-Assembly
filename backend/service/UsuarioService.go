@@ -2,6 +2,7 @@ package service
 
 import (
 	"backend/auth"
+	"backend/dto"
 	"backend/model"
 	"backend/repository"
 	"context"
@@ -37,9 +38,9 @@ func (s *UsuarioService) CadastrarUsuario(ctx *context.Context, requisicao *mode
 	return nil
 }
 
-func (s *UsuarioService) AlterarSenha(ctx *context.Context, novaSenha string) error {
+func (s *UsuarioService) AlterarSenha(ctx *context.Context, requisicaoNovaSenha dto.RequisicaoNovaSenha) error {
 	usuario := (*ctx).Value("usuarioAutenticado").(*auth.Claims)
-	senhaHash, err := bcrypt.GenerateFromPassword([]byte(novaSenha), bcrypt.DefaultCost)
+	senhaHash, err := bcrypt.GenerateFromPassword([]byte(requisicaoNovaSenha.NovaSenha), bcrypt.DefaultCost)
 	if err != nil {
 		return errors.New("erro ao gerar hash da senha: " + err.Error())
 	}

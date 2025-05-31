@@ -31,12 +31,15 @@ func NewRotas(
 func (r *Router) SetupRotas() http.Handler {
 	rotasComuns := http.NewServeMux()
 	rotasComuns.HandleFunc("POST /api/auth/login", r.autenticacaoHandler.Login)
-	rotasComuns.HandleFunc("POST /api/usuario/cadastro", r.usuarioHandler.CadastrarNovoUsuario)
-	rotasComuns.HandleFunc("POST /api/paciente/cadastro", r.pacienteHandler.CadastrarPaciente)
 
 	rotasProtegidas := http.NewServeMux()
 
 	handlersProtegidos := r.autenticacaoMiddleware.MiddlewareAutenticacao(rotasProtegidas)
+	rotasProtegidas.HandleFunc("POST /api/usuario", r.usuarioHandler.CadastrarUsuario)
+	rotasProtegidas.HandleFunc("PATCH /api/usuario", r.usuarioHandler.AlterarSenhaUsuario)
+
+	rotasProtegidas.HandleFunc("POST /api/paciente", r.pacienteHandler.CadastrarPaciente)
+
 	rotasComuns.Handle("/api/", handlersProtegidos)
 
 	return rotasComuns

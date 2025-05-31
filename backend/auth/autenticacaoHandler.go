@@ -24,7 +24,9 @@ func (handler *AutenticacaoHandler) Login(w http.ResponseWriter, r *http.Request
 	}
 	defer r.Body.Close()
 
-	token, err := handler.servicoAutenticacao.AutenticarUsuario(credenciais)
+	ctx := r.Context()
+
+	token, err := handler.servicoAutenticacao.AutenticarUsuario(&ctx, credenciais)
 	if err != nil {
 		if errors.Is(err, exceptions.ErroCredenciaisInvalidas) {
 			http.Error(w, err.Error(), http.StatusUnauthorized)
