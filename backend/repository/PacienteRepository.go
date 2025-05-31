@@ -16,8 +16,40 @@ func NewPacienteRepository(db *database.PostgresClient) *PacienteRepository {
 	return &PacienteRepository{db: db}
 }
 
-func (p *PacienteRepository) GetPacienteByCartaoSUS(ctx context.Context, cartaoSUS string) (*model.Paciente, error) {
-	row := p.db.DB.QueryRowContext(ctx, "SELECT * FROM paciente WHERE cartao_sus = $1", cartaoSUS)
+func (p *PacienteRepository) GetPacienteByCartaoSUS(ctx *context.Context, cartaoSUS string) (*model.Paciente, error) {
+	row := p.db.DB.QueryRowContext(*ctx, "SELECT * FROM paciente WHERE cartao_sus = $1", cartaoSUS)
+
+	var paciente model.Paciente
+
+	err := row.Scan(
+		&paciente.CartaoSUS,
+		&paciente.Prontuario,
+		&paciente.Nome,
+		&paciente.NomeMae,
+		&paciente.CPF,
+		&paciente.DataNascimento,
+		&paciente.Idade,
+		&paciente.Raca,
+		&paciente.Nacionalidade,
+		&paciente.Escolaridade,
+		&paciente.DDD,
+		&paciente.Telefone,
+		&paciente.Endereco,
+		&paciente.Senha,
+		&paciente.PrimeiroAcesso,
+	)
+
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, fmt.Errorf("Paciente não encontrado")
+		}
+		return nil, fmt.Errorf("Erro ao buscar paciente: %v", err)
+	}
+
+	return &paciente, nil
+}
+func (p *PacienteRepository) GetPacienteByCartaoCPF(ctx *context.Context, cpf string) (*model.Paciente, error) {
+	row := p.db.DB.QueryRowContext(*ctx, "SELECT * FROM paciente WHERE cpf = $1", cpf)
 
 	var paciente model.Paciente
 
@@ -49,8 +81,8 @@ func (p *PacienteRepository) GetPacienteByCartaoSUS(ctx context.Context, cartaoS
 	return &paciente, nil
 }
 
-func (p *PacienteRepository) CadastrarPaciente(ctx context.Context, paciente *model.Paciente) error {
-	_, err := p.db.DB.ExecContext(ctx, `
+func (p *PacienteRepository) CadastrarPaciente(ctx *context.Context, paciente *model.Paciente) error {
+	_, err := p.db.DB.ExecContext(*ctx, `
 		INSERT INTO paciente (
 			cartao_sus, prontuario, nome, nome_mae, cpf,
 			data_nascimento, idade, raca, nacionalidade,
