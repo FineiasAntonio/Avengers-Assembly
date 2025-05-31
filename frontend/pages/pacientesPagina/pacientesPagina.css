@@ -2,7 +2,8 @@
 
 .topo {
     text-align: center;
-    margin: 2rem;
+    margin-bottom: 2rem;
+    padding-top: 1rem;
     font-size: 1.5rem;
 }
 
@@ -71,7 +72,7 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(122, 102, 102);
+    background-color: var(--cor-quinenaria);
     margin: 1rem;
     padding-bottom: 1rem;
     height: auto;
@@ -88,7 +89,8 @@ button {
     border-top-right-radius: 15px;
     flex-direction: row;
     gap: 15%;
-    background-color: rgb(66, 46, 46);
+    color: white;
+    background-color: var(--cor-quaternaria);
     width: 100%;
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -107,7 +109,7 @@ button {
 
 .resultado {
     width: 90%;
-    background-color: rgb(37, 28, 30);
+    background-color: var(--cor-quaternaria);
     border-radius: 15px;
     padding: 1rem;
     display: flex;
