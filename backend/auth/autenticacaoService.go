@@ -4,6 +4,7 @@ import (
 	"backend/exceptions"
 	"backend/model"
 	"backend/repository"
+	"context"
 	"errors"
 	"github.com/golang-jwt/jwt"
 	"golang.org/x/crypto/bcrypt"
@@ -70,7 +71,7 @@ func (s *ServicoAutenticacao) ValidarToken(tokenString string) (*Claims, error) 
 	return claims, nil
 }
 
-func (s *ServicoAutenticacao) AutenticarUsuario(credenciais model.CredenciaisUsuario) (string, error) {
+func (s *ServicoAutenticacao) AutenticarUsuario(ctx *context.Context, credenciais model.CredenciaisUsuario) (string, error) {
 	var (
 		usuario *model.Usuario
 		err     error
@@ -81,9 +82,9 @@ func (s *ServicoAutenticacao) AutenticarUsuario(credenciais model.CredenciaisUsu
 	credencialFormatada = strings.ReplaceAll(credencialFormatada, " ", "")
 
 	if len(credenciais.Credencial) != 11 {
-		usuario, err = s.repositorioUsuario.GetUsuarioByRegistro(credencialFormatada)
+		usuario, err = s.repositorioUsuario.GetUsuarioByRegistro(ctx, credencialFormatada)
 	} else {
-		usuario, err = s.repositorioUsuario.GetUsuarioByCPF(credencialFormatada)
+		usuario, err = s.repositorioUsuario.GetUsuarioByCPF(ctx, credencialFormatada)
 	}
 	if err != nil {
 		return "", exceptions.ErroCredenciaisInvalidas
