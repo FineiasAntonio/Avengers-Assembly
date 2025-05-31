@@ -3,7 +3,10 @@
 :root {
     --cor-primaria: #d04b82;
     --cor-secundaria: #F778A1;
-    --cor-fundo: #F8F9FA;
+    --cor-terciaria: #fdfdfd;
+    --cor-quaternaria: #3A1C1C;
+    --cor-quinenaria: #f4eaed;
+    --cor-fundo: linear-gradient(to bottom, #f0c8c8, #ffffff);
     /* --cor-fundo: hsl(0, 86%, 93%, 100%); */
     --cor-texto: #4A4A4A;
     --verde-sucesso: #98FB98;
@@ -23,7 +26,7 @@ main {
     min-height: 100vh;
     height: 100%;
     padding-left: 6rem;
-    background-color: var(--cor-fundo);
+    background: var(--cor-fundo);
 }
 
 .botao1 {
