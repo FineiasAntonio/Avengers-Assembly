@@ -46,6 +46,10 @@ func main() {
 	pacienteServico := service.NewPacienteService(pacienteRepositorio)
 	pacienteHandler := handler.NewPacienteHandler(pacienteServico)
 
+	requisicaoExameRepositorio := repository.NewRequisicaoExameRepository(conexaoPostgres)
+	requisicaoExameServico := service.NewRequisicaoExameService(requisicaoExameRepositorio)
+	requisicaoExameHandler := handler.NewRequisicaoExameHandler(requisicaoExameServico)
+
 	autenticacaoServico := auth.NewAutenticacaoService(usuarioRepositorio, []byte(chaveJwt))
 	autenticacaoMiddleware := middleware.NewAutenticacaoMiddleware(autenticacaoServico)
 	autenticacaoHandler := auth.NewAutenticacaoHandler(autenticacaoServico)
@@ -57,6 +61,7 @@ func main() {
 		autenticacaoHandler,
 		usuarioHandler,
 		pacienteHandler,
+		requisicaoExameHandler,
 	)
 	handerRotas := corsMiddleware.LiberarCORS(rotas.SetupRotas())
 
