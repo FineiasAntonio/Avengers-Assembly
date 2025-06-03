@@ -62,7 +62,3 @@ func (r *RequisicaoExameRepository) CadastrarRequisicaoExame(
 	}
 	return nil
 }
-
-func (r *RequisicaoExameRepository) AlterarRequisicaoExame() {
-
-}
