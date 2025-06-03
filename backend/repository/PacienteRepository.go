@@ -32,7 +32,6 @@ func (p *PacienteRepository) GetPacienteByCartaoSUS(ctx *context.Context, cartao
 		&paciente.Raca,
 		&paciente.Nacionalidade,
 		&paciente.Escolaridade,
-		&paciente.DDD,
 		&paciente.Telefone,
 		&paciente.Endereco,
 		&paciente.Senha,
@@ -64,7 +63,6 @@ func (p *PacienteRepository) GetPacienteByCartaoCPF(ctx *context.Context, cpf st
 		&paciente.Raca,
 		&paciente.Nacionalidade,
 		&paciente.Escolaridade,
-		&paciente.DDD,
 		&paciente.Telefone,
 		&paciente.Endereco,
 		&paciente.Senha,
@@ -90,12 +88,11 @@ func (p *PacienteRepository) CadastrarPaciente(ctx *context.Context, paciente *m
 			primeiro_acesso
 		) VALUES ($1, $2, $3, $4, $5,
 			$6, $7, $8, $9,
-			$10, $11, $12, $13, $14,
-			$15)
+			$10, $11, $12, $13, $14)
 	`, paciente.CartaoSUS, paciente.Prontuario, paciente.Nome,
 		paciente.NomeMae, paciente.CPF, paciente.DataNascimento,
 		paciente.Idade, paciente.Raca, paciente.Nacionalidade,
-		paciente.Escolaridade, paciente.DDD, paciente.Telefone,
+		paciente.Escolaridade, paciente.Telefone,
 		paciente.Endereco, paciente.Senha, paciente.PrimeiroAcesso)
 
 	if err != nil {
@@ -103,4 +100,9 @@ func (p *PacienteRepository) CadastrarPaciente(ctx *context.Context, paciente *m
 	}
 
 	return nil
+}
+func (p *PacienteRepository) AlterarSenha(ctx *context.Context, cpf string, novaSenha string) error {
+	query := `UPDATE paciente SET senha = $1, primeiroacesso = false WHERE cpf = $2`
+	_, err := p.db.DB.ExecContext(*ctx, query, novaSenha, cpf)
+	return err
 }
