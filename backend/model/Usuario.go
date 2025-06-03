@@ -4,7 +4,7 @@ type Usuario struct {
 	Registro         string  `json:"registro" db:"registro"`
 	Nome             string  `json:"nome" db:"nome"`
 	CPF              string  `json:"cpf" db:"cpf"`
-	Email            string  `json:"email" db:"email"`
+	Email            *string `json:"email" db:"email"`
 	Telefone         string  `json:"telefone" db:"telefone"`
 	Senha            string  `json:"-" db:"senha"`
 	UnidadeSaudeCNES *string `json:"-" db:"unidadesaude"`
@@ -25,8 +25,3 @@ const (
 	GESTAO             Permissao = "GESTAO"
 	ADMINISTRADOR      Permissao = "ADMINISTRADOR"
 )
-
-type CredenciaisUsuario struct {
-	Credencial string `json:"credencial"`
-	Senha      string `json:"senha"`
-}
