@@ -19,6 +19,18 @@ export function pegarPermissaoUsuario() {
   return claims ? claims.permissao : null;
 }
 
+export function pegarNomeUsuario() {
+  const token = localStorage.getItem('token');
+  
+  if (!token) {
+    return null;
+  }
+
+  const claims = parseJwt(token);
+
+  return claims ? claims.nome : null;
+}
+
 function parseJwt(token) {
   try {
     const base64Url = token.split('.')[1];

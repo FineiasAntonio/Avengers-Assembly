@@ -1,3 +1,5 @@
+import { pegarNomeUsuario } from "../../shared/gerenciador-permissoes.js";
+
 document.addEventListener("DOMContentLoaded", () => {
     const relogio = document.getElementById("relogio");
     const data = document.getElementById("data");
@@ -31,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
             saudacao.textContent = "Boa noite,";
         }
 
-        const usuario = localStorage.getItem("usuario");
+        const usuario = pegarNomeUsuario();
         saudacao.textContent += ` ${usuario ? usuario : "Fulano"}!`;
     }
 

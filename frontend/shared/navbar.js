@@ -108,6 +108,7 @@ const template = `
         }
 
     </style>
+    
     <nav class="navbar">
         <div class="icone">
             <img src="../../assets/barIcon.png" alt="ICONE">
