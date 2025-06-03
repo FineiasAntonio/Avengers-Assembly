@@ -13,7 +13,6 @@ type Paciente struct {
 	Raca           *string             `json:"raca" db:"raca"`
 	Nacionalidade  string              `json:"nacionalidade" db:"nacionalidade"`
 	Escolaridade   *string             `json:"escolaridade" db:"escolaridade"`
-	DDD            string              `json:"ddd" db:"ddd"`
 	Telefone       string              `json:"telefone" db:"telefone"`
 	Endereco       Endereco            `json:"endereco" db:"endereco"`
 	Agenda         *[]AgendamentoExame `json:"agenda" db:"agenda"`
