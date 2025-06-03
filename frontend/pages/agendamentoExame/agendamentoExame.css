@@ -1,8 +1,8 @@
 @import "../../shared/estilos-globais.css";
 
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #fddede, #ffecec);
+    font-family: "JetBrains Mono", "times new roman";
+    background: var(--cor-fundo);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,12 +10,22 @@ body {
     margin: 0;
 }
 
+
+
 .container {
-    background-color: #e7d4d4;
+    background-color: var(--cor-terciaria);
     padding: 30px;
     border-radius: 10px;
     width: 500px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+fieldset {
+  border: 2px solid var(--cor-quinaria);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f4eaed;
 }
 
 h2 {
@@ -24,9 +34,10 @@ h2 {
 }
 
 label {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+     font-size: 0.9rem;
+     color: var(--cor-texto);
 }
 
 input, select, button {
@@ -50,23 +61,6 @@ input, select, button {
 .actions {
     display: flex;
     justify-content: space-between;
+    gap: 1rem;
     margin-top: 20px;
-}
-
-.btn-cancelar {
-    background-color: #8b0000;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.btn-agendar {
-    background-color: #4b2e2e;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    opacity: 0.9;
 }
