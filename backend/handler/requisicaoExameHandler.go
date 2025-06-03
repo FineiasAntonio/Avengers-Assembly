@@ -36,8 +36,3 @@ func (handler *RequisicaoExameHandler) CadastrarRequisicaoExame(w http.ResponseW
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 }
-
-func (handler RequisicaoExameHandler) AlterarRequisicaoExame(w http.ResponseWriter,
-	r *http.Request) {
-
-}

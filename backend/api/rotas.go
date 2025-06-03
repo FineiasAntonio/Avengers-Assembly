@@ -44,7 +44,6 @@ func (r *Router) SetupRotas() http.Handler {
 	rotasProtegidas.HandleFunc("POST /api/paciente", r.pacienteHandler.CadastrarPaciente)
 
 	rotasProtegidas.HandleFunc("POST /api/requisicaoExame", r.requisicaoExameHandler.CadastrarRequisicaoExame)
-	rotasProtegidas.HandleFunc("", r.requisicaoExameHandler.AlterarRequisicaoExame)
 
 	rotasComuns.Handle("/api/", handlersProtegidos)
 
