@@ -6,6 +6,7 @@
     --cor-terciaria: #D8CACC;
     --cor-quaternaria: #CCBCBC;
     --cor-quinaria: #634949;
+    --cor-sextiaria: #f4eaed;
     --cor-fundo: linear-gradient(to bottom, #FFB4B4, #F5F0F0);
     /* --cor-fundo: hsl(0, 86%, 93%, 100%); */
     --cor-texto: #4A4A4A;
@@ -16,7 +17,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Lexend", sans-serif;
+    /*font-family: "Lexend", sans-serif;*/
+    font-family: 'JetBrains Mono', monospace;
     font-optical-sizing: auto;
     font-style: normal;
 }
