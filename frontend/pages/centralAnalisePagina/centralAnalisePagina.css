@@ -1,5 +1,12 @@
 @import "../../shared/estilos-globais.css";
 
+body {
+    width: 100%;
+    background: linear-gradient(to bottom, #FFB4B4, #F5F0F0);
+    margin: 0;
+    padding: 2rem;
+}
+
 .titulo {
     text-align: center;
     & h1 {
@@ -33,9 +40,10 @@ hr {
 }
 
 .graficos {
-    background-color: var(--cor-quinenaria);
+    background-color: var(--cor-sextiaria);
     width: 90%;
     height: 20rem;
+    border: 2px solid var(--cor-quinaria);
     border-radius: 15px;
     box-shadow:  0px 3px 3px gray;
     display: flex;
@@ -94,7 +102,8 @@ hr {
 .dados {
     width: 50%;
     height: auto;
-    background-color: var(--cor-quinenaria);
+    background-color: var(--cor-sextiaria);
+    border: 2px solid var(--cor-quinaria);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -110,7 +119,8 @@ hr {
 .mapa {
     width: 50%;
     height: 15rem;
-    background-color: var(--cor-quinenaria);
+    background-color: var(--cor-sextiaria);
+    border: 2px solid var(--cor-quinaria);
     box-shadow: 3px 3px 10px gray;
     border-radius: 15px;
     padding: 1rem;
@@ -125,21 +135,6 @@ hr {
     align-items: center;
     text-align: center;
     margin-bottom: 1rem;
-}
-
-.visualizarMapa {
-    background-color: hsl(350, 13%, 48%);
-    border-radius: 15px;
-    border: none;
-    width: 6rem;
-    height: 4rem;
-    transition: all 0.3s ease;
-    &:hover {
-        background-color: var(--cor-quaternaria);
-        cursor: pointer;
-        width: 7rem;
-        height: 5rem;
-    }
 }
 
 .overlay {

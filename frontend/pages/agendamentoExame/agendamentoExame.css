@@ -1,7 +1,6 @@
 @import "../../shared/estilos-globais.css";
 
 body {
-    font-family: "JetBrains Mono", "times new roman";
     background: var(--cor-fundo);
     display: flex;
     justify-content: center;
@@ -25,7 +24,7 @@ fieldset {
   border-radius: 8px;
   margin-bottom: 1.5rem;
   padding: 1rem;
-  background-color: #f4eaed;
+  background-color: var(--cor-sextiaria);
 }
 
 h2 {

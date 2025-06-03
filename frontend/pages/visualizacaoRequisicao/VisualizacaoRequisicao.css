@@ -1,8 +1,7 @@
 @import "../../shared/estilos-globais.css";
 
 body {
-  font-family: "JetBrains Mono", "times new roman";
-  background: linear-gradient(to bottom, #FFB4B4, #F5F0F0);
+  background: var(--cor-fundo);
   margin: 0;
   padding: 2rem;
 }
@@ -35,7 +34,7 @@ fieldset {
   border-radius: 8px;
   margin-bottom: 1.5rem;
   padding: 1rem;
-  background-color: #f4eaed;
+  background-color: var(--cor-sextiaria);
 }
 
 legend {
