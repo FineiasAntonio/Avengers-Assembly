@@ -50,6 +50,14 @@ legend {
   gap: 10px;
 }
 
+.subgrid {
+  color: var(--cor-texto);
+  border: 2px solid var(--cor-primaria);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+}
+
 label {
   display: flex;
   flex-direction: column;
