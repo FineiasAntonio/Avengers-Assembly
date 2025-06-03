@@ -1,8 +1,8 @@
 package auth
 
 import (
+	"backend/dto"
 	"backend/exceptions"
-	"backend/model"
 	"encoding/json"
 	"errors"
 	"net/http"
@@ -17,7 +17,7 @@ func NewAutenticacaoHandler(servicoAutenticacao *ServicoAutenticacao) *Autentica
 }
 
 func (handler *AutenticacaoHandler) Login(w http.ResponseWriter, r *http.Request) {
-	var credenciais model.CredenciaisUsuario
+	var credenciais dto.CredenciaisUsuario
 	if err := json.NewDecoder(r.Body).Decode(&credenciais); err != nil {
 		http.Error(w, exceptions.ErroRequisicaoInvalida.Error(), http.StatusBadRequest)
 		return

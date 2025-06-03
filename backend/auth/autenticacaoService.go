@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"backend/dto"
 	"backend/exceptions"
 	"backend/model"
 	"backend/repository"
@@ -71,7 +72,7 @@ func (s *ServicoAutenticacao) ValidarToken(tokenString string) (*Claims, error) 
 	return claims, nil
 }
 
-func (s *ServicoAutenticacao) AutenticarUsuario(ctx *context.Context, credenciais model.CredenciaisUsuario) (string, error) {
+func (s *ServicoAutenticacao) AutenticarUsuario(ctx *context.Context, credenciais dto.CredenciaisUsuario) (string, error) {
 	var (
 		usuario *model.Usuario
 		err     error
@@ -86,6 +87,7 @@ func (s *ServicoAutenticacao) AutenticarUsuario(ctx *context.Context, credenciai
 	} else {
 		usuario, err = s.repositorioUsuario.GetUsuarioByCPF(ctx, credencialFormatada)
 	}
+
 	if err != nil {
 		return "", exceptions.ErroCredenciaisInvalidas
 	}

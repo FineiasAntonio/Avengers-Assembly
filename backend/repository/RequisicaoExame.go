@@ -43,7 +43,6 @@ func (r *RequisicaoExameRepository) CadastrarRequisicaoExame(
 	ctx *context.Context, re *model.RequisicaoExame) error {
 
 	_, err := r.db.DB.ExecContext(*ctx,
-		/* Qual o nome da tabela? */
 		`INSERT INTO requisicao_exame (
 		protocolo, paciente, motivo_exame, fez_exame_preventido, ano_ultimo_exame, usa_diu,
 		esta_gravida, usa_anticoncepcional, usa_hormonio_monopausa, fez_radioterapia,
