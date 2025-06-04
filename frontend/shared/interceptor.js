@@ -3,7 +3,6 @@ import { pegarTokenUsuario } from "./gerenciador-permissoes.js"
 const originalFetch = window.fetch;
 
 window.fetch = async function (input, init = {}) {
-    console.log('Interceptando requisição')
 
     const headers = new Headers(init.headers || {})
 

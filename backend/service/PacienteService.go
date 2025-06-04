@@ -11,17 +11,19 @@ import (
 )
 
 type PacienteService struct {
-	repository *repository.PacienteRepository
+	pacienteRepository *repository.PacienteRepository
+	enderecoRepository *repository.EnderecoRepository
 }
 
-func NewPacienteService(repo *repository.PacienteRepository) *PacienteService {
+func NewPacienteService(pacienteRepository *repository.PacienteRepository, enderecoRepository *repository.EnderecoRepository) *PacienteService {
 	return &PacienteService{
-		repository: repo,
+		pacienteRepository: pacienteRepository,
+		enderecoRepository: enderecoRepository,
 	}
 }
 
 func (s *PacienteService) GetPacienteByCartaoSUS(ctx *context.Context, cartaoSUS string) (*model.Paciente, error) {
-	paciente, err := s.repository.GetPacienteByCartaoSUS(ctx, cartaoSUS)
+	paciente, err := s.pacienteRepository.GetPacienteByCartaoSUS(ctx, cartaoSUS)
 	if err != nil {
 		return nil, errors.New("erro ao buscar paciente: " + err.Error())
 	}
@@ -38,9 +40,17 @@ func (s *PacienteService) CadastrarPaciente(ctx *context.Context, paciente *mode
 	paciente.PrimeiroAcesso = true
 	paciente.Senha = string(senhaHash)
 
-	if err = s.repository.CadastrarPaciente(ctx, paciente); err != nil {
-		return errors.New("erro ao cadastrar paciente: " + err.Error())
+	var enderecoId string
+	enderecoId, err = s.enderecoRepository.CadastrarEndereco(ctx, paciente.Endereco)
+
+	if err != nil {
+		return err
 	}
+	paciente.EnderecoID = enderecoId
+	if err = s.pacienteRepository.CadastrarPaciente(ctx, paciente); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -51,7 +61,7 @@ func (s *PacienteService) AlterarSenha(ctx *context.Context, requisicaoNovaSenha
 		return errors.New("erro ao gerar hash da senha: " + err.Error())
 	}
 
-	err = s.repository.AlterarSenha(ctx, pacienteLogado.CPF, string(senhaHash))
+	err = s.pacienteRepository.AlterarSenha(ctx, pacienteLogado.CPF, string(senhaHash))
 
 	if err != nil {
 		return errors.New("erro ao alterar senha: " + err.Error())
