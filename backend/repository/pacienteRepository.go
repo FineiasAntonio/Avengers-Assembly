@@ -82,18 +82,17 @@ func (p *PacienteRepository) GetPacienteByCartaoCPF(ctx *context.Context, cpf st
 func (p *PacienteRepository) CadastrarPaciente(ctx *context.Context, paciente *model.Paciente) error {
 	_, err := p.db.DB.ExecContext(*ctx, `
 		INSERT INTO paciente (
-			cartao_sus, prontuario, nome, nome_mae, cpf,
-			data_nascimento, idade, raca, nacionalidade,
-			escolaridade, ddd, telefone, endereco, senha,
-			primeiro_acesso
+			cartaosus, prontuario, nome, nomemae, cpf,
+			datanascimento, idade, raca, nacionalidade,
+			escolaridade, telefone, endereco, senha,
+			primeiroacesso
 		) VALUES ($1, $2, $3, $4, $5,
 			$6, $7, $8, $9,
 			$10, $11, $12, $13, $14)
 	`, paciente.CartaoSUS, paciente.Prontuario, paciente.Nome,
 		paciente.NomeMae, paciente.CPF, paciente.DataNascimento,
 		paciente.Idade, paciente.Raca, paciente.Nacionalidade,
-		paciente.Escolaridade, paciente.Telefone,
-		paciente.Endereco, paciente.Senha, paciente.PrimeiroAcesso)
+		paciente.Escolaridade, paciente.Telefone, paciente.EnderecoID, paciente.Senha, paciente.PrimeiroAcesso)
 
 	if err != nil {
 		return fmt.Errorf("Erro ao cadastrar paciente: %v", err)

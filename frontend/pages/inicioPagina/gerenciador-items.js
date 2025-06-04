@@ -1,4 +1,5 @@
 import { pegarPermissaoUsuario, Permissao } from '../../shared/gerenciador-permissoes.js';
+import '../../shared/interceptor.js'
 
 export const items = [
   {
@@ -82,6 +83,7 @@ export const items = [
 ];
 
 function renderMenu() {
+  
   const content = document.querySelector('.content');
   content.innerHTML = '';
 

@@ -36,12 +36,14 @@ func main() {
 		log.Println("Chave JWT não encontrada, usando chave padrão")
 	}
 
+	enderecoRepositorio := repository.NewEnderecoRepository(conexaoPostgres)
+
 	usuarioRepositorio := repository.NewUsuarioRepository(conexaoPostgres)
 	usuarioServico := service.NewUsuarioService(usuarioRepositorio)
 	usuarioHandler := handler.NewUsuarioHandler(usuarioServico)
 
 	pacienteRepositorio := repository.NewPacienteRepository(conexaoPostgres)
-	pacienteServico := service.NewPacienteService(pacienteRepositorio)
+	pacienteServico := service.NewPacienteService(pacienteRepositorio, enderecoRepositorio)
 	pacienteHandler := handler.NewPacienteHandler(pacienteServico)
 
 	requisicaoExameRepositorio := repository.NewRequisicaoExameRepository(conexaoPostgres)

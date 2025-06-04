@@ -64,8 +64,8 @@ func ConectarPostgres(cfg config.PostgresConfig) (*PostgresClient, error) {
 		query := `
 		INSERT INTO usuario (
 			registro, nome, cpf, email, telefone, senha, 
-			unidadesaude, laboratorio, permissao, primeiroacesso
-		) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+			permissao, primeiroacesso
+		) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
 	`
 		senhaHash, err := bcrypt.GenerateFromPassword([]byte("000"), bcrypt.DefaultCost)
 		if err != nil {
@@ -80,8 +80,6 @@ func ConectarPostgres(cfg config.PostgresConfig) (*PostgresClient, error) {
 			"admin@admin.br",
 			"5500000000000",
 			string(senhaHash),
-			"",
-			"",
 			model.ADMINISTRADOR,
 			false,
 		)
