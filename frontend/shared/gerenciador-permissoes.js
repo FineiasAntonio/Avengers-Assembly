@@ -7,8 +7,12 @@ export const Permissao = {
   TODOS: "TODOS"
 };
 
+export function pegarTokenUsuario() {
+  return localStorage.getItem('token')
+}
+
 export function pegarPermissaoUsuario() {
-  const token = localStorage.getItem('token');
+  const token = pegarTokenUsuario()
   
   if (!token) {
     return null;
@@ -20,7 +24,7 @@ export function pegarPermissaoUsuario() {
 }
 
 export function pegarNomeUsuario() {
-  const token = localStorage.getItem('token');
+  const token = pegarTokenUsuario()
   
   if (!token) {
     return null;
