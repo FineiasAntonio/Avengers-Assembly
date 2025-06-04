@@ -1,10 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 
 :root {
-    --cor-primaria: #d04b82;
-    --cor-secundaria: #F778A1;
-    --cor-fundo: #F8F9FA;
-    /* --cor-fundo: hsl(0, 86%, 93%, 100%); */
+    --cor-primaria: #9F8282;
+    --cor-secundaria: #FBF4F4;
+    --cor-terciaria: #D8CACC;
+    --cor-quaternaria: #CCBCBC;
+    --cor-quinaria: #634949;
+    --cor-sextiaria: #f4eaed;
+    --cor-fundo: linear-gradient(to bottom, #FFB4B4, #F5F0F0);
     --cor-texto: #4A4A4A;
     --verde-sucesso: #98FB98;
 }
@@ -13,7 +16,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Lexend", sans-serif;
+    font-family: 'JetBrains Mono', monospace;
     font-optical-sizing: auto;
     font-style: normal;
 }
@@ -23,20 +26,22 @@ main {
     min-height: 100vh;
     height: 100%;
     padding-left: 6rem;
-    background-color: var(--cor-fundo);
+    background: var(--cor-fundo);
 }
 
 .botao1 {
-    background-color: #FFB6C1;
+    background-color: var(--cor-quinaria);
+    color: white;
+    padding: 8px 16px;
     border: none;
-    border-radius: 1rem;
-    color: #97365F;
+    border-radius: 6px;
+    font-weight: bold;
     cursor: pointer;
     transition: ease 0.3s;
 
     &:hover {
-        background-color: #97365F;
-        color: white;
+        scale: 1.07;
+        background-color: #271313;
     }
 }
 
@@ -62,4 +67,47 @@ main {
     main {
         padding-left: 1.5rem;
     }
+}
+
+.icone img {
+    width: 1.8rem;
+    height: 1.8rem;
+    filter: sepia(60%) saturate(300%) hue-rotate(290deg);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  color: var(--cor-texto);
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--cor-quinaria);
+}
+
+input[type="date"] {
+  color: var(--cor-texto);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(40%) sepia(60%) saturate(300%) hue-rotate(290deg);
+    width: 20px;
+}
+
+input[type="text"]{
+    color: var(--cor-texto);
+}
+
+select{
+    color: var(--cor-texto);
+}
+
+input[type="time"]{
+    color: var(--cor-texto);
 }

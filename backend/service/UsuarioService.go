@@ -2,6 +2,7 @@ package service
 
 import (
 	"backend/auth"
+	"backend/dto"
 	"backend/model"
 	"backend/repository"
 	"context"
@@ -19,7 +20,7 @@ func NewUsuarioService(repo *repository.UsuarioRepository) *UsuarioService {
 	}
 }
 
-func (s *UsuarioService) CadastrarUsuario(requisicao *model.Usuario) error {
+func (s *UsuarioService) CadastrarUsuario(ctx *context.Context, requisicao *model.Usuario) error {
 	usuarioRequisicao := *requisicao
 
 	senha, err := bcrypt.GenerateFromPassword([]byte("000"), bcrypt.DefaultCost)
@@ -29,7 +30,7 @@ func (s *UsuarioService) CadastrarUsuario(requisicao *model.Usuario) error {
 	usuarioRequisicao.Senha = string(senha)
 	usuarioRequisicao.PrimeiroAcesso = true
 
-	err = s.repository.CadastrarUsuario(&usuarioRequisicao)
+	err = s.repository.CadastrarUsuario(ctx, &usuarioRequisicao)
 	if err != nil {
 		return errors.New("erro ao cadastrar usuário: " + err.Error())
 	}
@@ -37,14 +38,14 @@ func (s *UsuarioService) CadastrarUsuario(requisicao *model.Usuario) error {
 	return nil
 }
 
-func (s *UsuarioService) AlterarSenha(ctx *context.Context, novaSenha string) error {
+func (s *UsuarioService) AlterarSenha(ctx *context.Context, requisicaoNovaSenha dto.RequisicaoNovaSenha) error {
 	usuario := (*ctx).Value("usuarioAutenticado").(*auth.Claims)
-	senhaHash, err := bcrypt.GenerateFromPassword([]byte(novaSenha), bcrypt.DefaultCost)
+	senhaHash, err := bcrypt.GenerateFromPassword([]byte(requisicaoNovaSenha.NovaSenha), bcrypt.DefaultCost)
 	if err != nil {
 		return errors.New("erro ao gerar hash da senha: " + err.Error())
 	}
 
-	err = s.repository.AlterarSenha(usuario.CPF, string(senhaHash))
+	err = s.repository.AlterarSenha(ctx, usuario.CPF, string(senhaHash))
 	if err != nil {
 		return errors.New("erro ao alterar senha: " + err.Error())
 	}

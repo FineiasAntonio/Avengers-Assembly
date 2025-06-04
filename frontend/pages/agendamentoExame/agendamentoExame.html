@@ -3,31 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../../shared/navbar.js" defer type="module"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="agendamentoExame.css">
+    <script src="../../shared/navbar.js"></script>
     <title>Agendamento Exame</title>
 </head>
 
 <body>
+    <custom-navbar></custom-navbar>
      <div class="container">
         <h2>AGENDAMENTO DE EXAMES</h2>
         
-        <label for="cartaoSUS">Seu Cartão SUS</label>
-        <input type="text" id="cartaoSUS" placeholder="UBS Tal tal tal">
-
+        <fieldset>
+            <label for="cartaoSUS">Seu Cartão SUS</label>
+        <input type="text" id="cartaoSUS" placeholder="">
+        
+        <br><br>
         <label>Local, data e horário de realização do exame</label>
-
         <div class="row">
             <div>
                 <label for="ubs">Unidade de saúde</label>
-                <input type="text" id="ubs" placeholder="UBS Tal tal tal">
+                <input type="text" id="ubs" placeholder="">
             </div>
             <div>
                 <label for="municipio">Município</label>
-                <input type="text" id="municipio" placeholder="Goiânia">
+                <input type="text" id="municipio" placeholder="">
             </div>
             <div>
                 <label for="uf">UF</label>
-                <input type="text" id="uf" placeholder="GO" maxlength="2">
+                <input type="text" id="uf" placeholder="" maxlength="2">
             </div>
         </div>
 
@@ -36,10 +43,11 @@
 
         <label for="hora">Selecione o horário</label>
         <input type="time" id="hora">
+        </fieldset>
 
         <div class="actions">
-            <button class="btn-cancelar">Cancelar</button>
-            <button class="btn-agendar">Agendar</button>
+            <button class="botao1" onclick="history.back()">Cancelar</button>
+            <button class="botao1">Agendar</button>
         </div>
     </div>
 </body>

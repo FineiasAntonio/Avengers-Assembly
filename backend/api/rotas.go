@@ -12,6 +12,7 @@ type Router struct {
 	autenticacaoHandler    *auth.AutenticacaoHandler
 	usuarioHandler         *handler.UsuarioHandler
 	pacienteHandler        *handler.PacienteHandler
+	requisicaoExameHandler *handler.RequisicaoExameHandler
 }
 
 func NewRotas(
@@ -19,24 +20,31 @@ func NewRotas(
 	autenticacaoHandler *auth.AutenticacaoHandler,
 	usuarioHandler *handler.UsuarioHandler,
 	pacienteHandler *handler.PacienteHandler,
+	requisicaoExameHandler *handler.RequisicaoExameHandler,
 ) *Router {
 	return &Router{
 		autenticacaoMiddleware: autenticacaoMiddleware,
 		autenticacaoHandler:    autenticacaoHandler,
 		usuarioHandler:         usuarioHandler,
 		pacienteHandler:        pacienteHandler,
+		requisicaoExameHandler: requisicaoExameHandler,
 	}
 }
 
 func (r *Router) SetupRotas() http.Handler {
 	rotasComuns := http.NewServeMux()
 	rotasComuns.HandleFunc("POST /api/auth/login", r.autenticacaoHandler.Login)
-	rotasComuns.HandleFunc("POST /api/usuario/cadastro", r.usuarioHandler.CadastrarNovoUsuario)
-	rotasComuns.HandleFunc("POST /api/paciente/cadastro", r.pacienteHandler.CadastrarPaciente)
 
 	rotasProtegidas := http.NewServeMux()
 
 	handlersProtegidos := r.autenticacaoMiddleware.MiddlewareAutenticacao(rotasProtegidas)
+	rotasProtegidas.HandleFunc("POST /api/usuario", r.usuarioHandler.CadastrarUsuario)
+	rotasProtegidas.HandleFunc("PATCH /api/usuario", r.usuarioHandler.AlterarSenhaUsuario)
+
+	rotasProtegidas.HandleFunc("POST /api/paciente", r.pacienteHandler.CadastrarPaciente)
+
+	rotasProtegidas.HandleFunc("POST /api/requisicaoExame", r.requisicaoExameHandler.CadastrarRequisicaoExame)
+
 	rotasComuns.Handle("/api/", handlersProtegidos)
 
 	return rotasComuns

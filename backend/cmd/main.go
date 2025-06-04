@@ -9,10 +9,8 @@ import (
 	"backend/middleware"
 	"backend/repository"
 	"backend/service"
-	_ "fmt"
 	"log"
 	"net/http"
-	_ "net/http"
 	"os"
 )
 
@@ -38,13 +36,19 @@ func main() {
 		log.Println("Chave JWT não encontrada, usando chave padrão")
 	}
 
+	enderecoRepositorio := repository.NewEnderecoRepository(conexaoPostgres)
+
 	usuarioRepositorio := repository.NewUsuarioRepository(conexaoPostgres)
 	usuarioServico := service.NewUsuarioService(usuarioRepositorio)
 	usuarioHandler := handler.NewUsuarioHandler(usuarioServico)
 
 	pacienteRepositorio := repository.NewPacienteRepository(conexaoPostgres)
-	pacienteServico := service.NewPacienteService(pacienteRepositorio)
+	pacienteServico := service.NewPacienteService(pacienteRepositorio, enderecoRepositorio)
 	pacienteHandler := handler.NewPacienteHandler(pacienteServico)
+
+	requisicaoExameRepositorio := repository.NewRequisicaoExameRepository(conexaoPostgres)
+	requisicaoExameServico := service.NewRequisicaoExameService(requisicaoExameRepositorio)
+	requisicaoExameHandler := handler.NewRequisicaoExameHandler(requisicaoExameServico)
 
 	autenticacaoServico := auth.NewAutenticacaoService(usuarioRepositorio, []byte(chaveJwt))
 	autenticacaoMiddleware := middleware.NewAutenticacaoMiddleware(autenticacaoServico)
@@ -57,6 +61,7 @@ func main() {
 		autenticacaoHandler,
 		usuarioHandler,
 		pacienteHandler,
+		requisicaoExameHandler,
 	)
 	handerRotas := corsMiddleware.LiberarCORS(rotas.SetupRotas())
 

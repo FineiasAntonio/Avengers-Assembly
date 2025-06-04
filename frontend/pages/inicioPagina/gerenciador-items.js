@@ -1,4 +1,5 @@
-import {pegarPermissaoUsuario, Permissao} from '../../shared/gerenciador-permissoes.js';
+import { pegarPermissaoUsuario, Permissao } from '../../shared/gerenciador-permissoes.js';
+import '../../shared/interceptor.js'
 
 export const items = [
   {
@@ -8,7 +9,7 @@ export const items = [
     permissoesRequeridas: [Permissao.TODOS]
   },
   {
-    href: "",
+    href: "/pages/cadastroPaciente/CadastroPaciente.html",
     title: "Cadastrar Paciente",
     icon: "",
     permissoesRequeridas: [Permissao.ACESSO_ATENDIMENTO, Permissao.GESTAO]
@@ -82,22 +83,26 @@ export const items = [
 ];
 
 function renderMenu() {
-    const content = document.querySelector('.content');
-    content.innerHTML = '';
+  
+  const content = document.querySelector('.content');
+  content.innerHTML = '';
 
-    const permissao = pegarPermissaoUsuario();
+  const permissao = pegarPermissaoUsuario();
 
-    items.forEach(item => {
-        if (item.permissoesRequeridas.includes(permissao) || item.permissoesRequeridas.includes(Permissao.TODOS) || permissao === Permissao.ADMINISTRADOR) {
-            const itemElement = document.createElement('div');
-            itemElement.className = 'item';
-            itemElement.innerHTML = `
+  items.forEach(item => {
+    if (item.permissoesRequeridas.includes(permissao) || item.permissoesRequeridas.includes(Permissao.TODOS) || permissao === Permissao.ADMINISTRADOR) {
+      const itemElement = document.createElement('div');
+      itemElement.addEventListener('click', () => {
+        window.location.replace(item.href);
+      });
+      itemElement.className = 'item';
+      itemElement.innerHTML = `
                 <img src="./assets/icons/${item.icon}" alt="${item.title}">
                 <h2>${item.title}</h2>
             `;
-            content.appendChild(itemElement);
-        }
-    });
+      content.appendChild(itemElement);
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', renderMenu);

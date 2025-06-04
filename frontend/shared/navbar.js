@@ -34,9 +34,9 @@ const template = `
             }
         }
 
-        .icone {
-            width: 3rem;
-            height: 3rem;
+        .icone{
+            width: 2rem;
+            height: 2rem;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
             transition: ease 0.3s;
@@ -64,7 +64,7 @@ const template = `
 
             &:hover {
                 cursor: pointer;
-                background-color: var(--cor-secundaria);
+                background-color: var(--cor-quinaria);
             }
         }
         
@@ -108,14 +108,15 @@ const template = `
         }
 
     </style>
+    
     <nav class="navbar">
         <div class="icone">
-            <img src="" alt="ICONE">
+            <img src="../../assets/barIcon.png" alt="ICONE">
         </div>
         <div class="navegacao">
-            <a href="">Início</a>
+            <a href="../inicioPagina/inicioPagina.html">Início</a>
             <a href="">Configurações</a>
-            <a href="">Ajuda</a>
+            <a href="../centralAjuda/centralAjuda.html">Ajuda</a>
             <a href="">Sair</a>
         </div>        
     </nav>
