@@ -5,75 +5,127 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CadastroPaciente.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
     <script src="../../shared/navbar.js"></script>
-    <script src="CadastroPacienteScripts.js"></script>
+    <script src="CadastroPacienteScripts.js" type="module"></script>
     <title>Cadastro Paciente</title>
 </head>
 
 <body>
     <custom-navbar></custom-navbar>
-    <main class="root">
+    <main class="container">
         <div class="cabecalho">
-            <h1>Cadastro do paciente</h1>
+            <h1>CADASTRO DO PACIENTE</h1>
         </div>
-        <hr>
         <div class="section">
-            <h3>Dados do paciente</h3>
-            <label style="margin-top: 2rem;">Dados Pessoais</label>
-            <hr>
-            <div class="row">
-                <div class="col"><label>Nome</label><input type="text"></div>
-                <div class="col"><label>Apelido</label><input type="text"></div>
-            </div>
-            <div class="row">
-                <div class="col"><label>Data de nascimento</label><input type="text" id="dataNascimento"></div>
-                <div class="col"><label>Idade</label><input type="number"></div>
-                <div class="col"><label>CPF</label><input type="text" id="cpf"></div>
-                <div class="col"><label>Cartão do SUS</label><input type="number"></div>
-                <div class="col"><label>Telefone</label><input type="text" id="telefone"></div>
-            </div>
-            <label style="margin-top: 2rem;">Endereço</label>
-            <hr>
-            <div class="row" >
-                    <div class="col"><label for="cepEndereco">CEP</label><input type="text" id="cepEndereco" maxlength="9"></div>
-                    <div class="col"><label for="logradouro">Logradouro</label><input type="text" id="logradouro"></div>
-                    <div class="col"><label for="numero">Número</label><input type="text" id="numero"></div>
-                    <div class="col"><label for="bairro">Bairro</label><input type="text" id="bairro"></div>
-                    <div class="col"><label for="complemento">Complemento</label><input type="text" id="complemento"></div>
-                    <div class="col"><label for="municipio">Município</label><input type="text" id="municipio"></div>
-                    <div class="col"><label for="uf">UF</label><input type="text" id="uf"></div>
+            <form id="cadastroPaciente">
+                <h3>Dados do paciente</h3>
+                <fieldset>
+                    <legend style="margin-top: 2rem;">Dados Pessoais</legend>
+                    <div class="row">
+                        <div class="col"><label>Nome</label><input name="nome" type="text"></div>
+                        <div class="col"><label>Apelido</label><input nome="apelido" type="text"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><label>Data de nascimento</label><input name="data_nascimento" type="text" id="dataNascimento"></div>
+                        <div class="col"><label>Idade</label><input name="idade" type="number" id="idade"></div>
+                        <div class="col"><label>CPF</label><input name="cpf" type="text" id="cpf"></div>
+                        <div class="col"><label>Cartão do SUS</label><input name="cartao_sus" type="number"></div>
+                        <div class="col"><label>Telefone</label><input name="telefone" type="text" id="telefone"></div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend style="margin-top: 2rem;">Endereço</legend>
+                    <div class="row">
+                        <div class="col"><label for="cepEndereco">CEP</label><input name="cep" type="text" id="cepEndereco"
+                                maxlength="9"></div>
+                        <div class="col"><label for="logradouro">Logradouro</label><input name="logradouro" type="text" id="logradouro">
+                        </div>
+                        <div class="col"><label for="numero">Número</label><input name="numero" type="text" id="numero"></div>
+                        <div class="col"><label for="bairro">Bairro</label><input name="bairro" type="text" id="bairro"></div>
+                        <div class="col"><label for="complemento">Complemento</label><input name="complemento" type="text"
+                                id="complemento"></div>
+                        <div class="col"><label for="municipio">Município</label><input name="municipio" type="text" id="municipio">
+                        </div>
+                        <div class="col"><label>UF
+                                <select name="uf" id="uf">
+                                    <option value="">Selecione</option>
+                                    <option value="AC">AC</option>
+                                    <option value="AL">AL</option>
+                                    <option value="AP">AP</option>
+                                    <option value="AM">AM</option>
+                                    <option value="BA">BA</option>
+                                    <option value="CE">CE</option>
+                                    <option value="DF">DF</option>
+                                    <option value="ES">ES</option>
+                                    <option value="GO">GO</option>
+                                    <option value="MA">MA</option>
+                                    <option value="MT">MT</option>
+                                    <option value="MS">MS</option>
+                                    <option value="MG">MG</option>
+                                    <option value="PA">PA</option>
+                                    <option value="PB">PB</option>
+                                    <option value="PR">PR</option>
+                                    <option value="PE">PE</option>
+                                    <option value="PI">PI</option>
+                                    <option value="RJ">RJ</option>
+                                    <option value="RN">RN</option>
+                                    <option value="RS">RS</option>
+                                    <option value="RO">RO</option>
+                                    <option value="RR">RR</option>
+                                    <option value="SC">SC</option>
+                                    <option value="SP">SP</option>
+                                    <option value="SE">SE</option>
+                                    <option value="TO">TO</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+
+
+                <fieldset>
+                    <legend style="margin-top: 2rem;">Outros</legend>
+                    <div class="row">
+                        <div class="col"><label>Nome da Mãe</label><input name="nome_mae" type="text"></div>
+                        <div class="col"><label>Nacionalidade</label><input name="nacionalidade" type="text"></div>
+                        <div class="col">
+                            <label for="raca_cor">Raça/Cor</label>
+                            <select name="raca" id="raca_cor">
+                                <option value="" hidden>Selecione</option>
+                                <option value="Branca">Branca</option>
+                                <option value="Preta">Preta</option>
+                                <option value="Parda">Parda</option>
+                                <option value="Amarela">Amarela</option>
+                                <option value="Indigena">Indígena</option>
+                                <option value="Nao Declarada">Não declarada</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="escolaridade">Escolaridade</label>
+                            <select name="escolaridade" id="escolaridade">
+                                <option value="" hidden>Selecione</option>
+                                <option value="Analfabeta">Analfabeta</option>
+                                <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
+                                <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
+                                <option value="Ensino Médio Completo">Ensino Médio Completo</option>
+                                <option value="Superior Completo">Superior Completo</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="acoes">
+                    <button class="botao1">Cadastar Paciente</button>
                 </div>
-            <label style="margin-top: 2rem;">Outros</label>
-            <hr>
-            <div class="row">
-                <div class="col"><label>Nome da Mãe</label><input type="text"></div>
-                <div class="col"><label>Nacionalidade</label><input type="text"></div>
-                <div class="col">
-                    <label for="raca_cor">Raça/Cor</label>
-                    <select name="raca_cor" id="raca_cor">
-                        <option value="" hidden>Selecione</option>
-                        <option value="branca">Branca</option>
-                        <option value="preta">Preta</option>
-                        <option value="parda">Parda</option>
-                        <option value="amarela">Amarela</option>
-                        <option value="indigena">Indígena</option>
-                        <option value="nao_declarada">Não declarada</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <label for="escolaridade">Escolaridade</label>
-                    <select name="escolaridade" id="escolaridade">
-                        <option value="" hidden>Selecione</option>
-                        <option value="analfabeto">Analfabeto(a)</option>
-                        <option value="fundamental_completo">Ensino Fundamental Completo</option>
-                        <option value="medio_completo">Ensino Médio Completo</option>
-                        <option value="superior_completo">Ensino Superior Completo</option>
-                    </select>
-                </div>
-            </div>
-            <div class="acoes">
-                <button class="botao1">Cadastar Paciente</button>
-            </div>
+            </form>
         </div>
     </main>
 </body>

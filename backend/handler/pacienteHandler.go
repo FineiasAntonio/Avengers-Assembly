@@ -24,7 +24,9 @@ func (handler *PacienteHandler) CadastrarPaciente(w http.ResponseWriter, r *http
 		return
 	}
 
-	if err := handler.pacienteServico.CadastrarPaciente(r.Context(), &paciente); err != nil {
+	ctx := r.Context()
+
+	if err := handler.pacienteServico.CadastrarPaciente(&ctx, &paciente); err != nil {
 		http.Error(w, "Erro ao Cadastrar Paciente"+err.Error(), http.StatusInternalServerError)
 		return
 	}

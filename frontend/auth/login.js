@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const botaoLogar = document.getElementById("submit")
 
     botaoLogar.addEventListener("click", realizarLogin)
-
 })
 
 function realizarLogin() {

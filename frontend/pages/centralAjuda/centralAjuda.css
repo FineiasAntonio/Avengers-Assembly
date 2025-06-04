@@ -1,20 +1,13 @@
 @import "../../shared/estilos-globais.css";
 
-button {
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 50px;
-    background-color: hsl(0, 0%, 100%);
-    box-shadow: 2px 2px 2px hsl(0, 0%, 18%);
-    outline: none;
-    border: none;
-    &:hover {
-        cursor: pointer;
-        background-color: hsl(0, 0%, 93%);
-    }
-    &:active {
-        background-color: hsl(0, 0%, 88%);
-    }
+.container {
+    background-color: var(--cor-terciaria);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    max-width: 1080px;
+    height: 890px;
+    margin: 0 auto;
 }
 
 .divExterno {
@@ -30,10 +23,16 @@ button {
 .central {
     font-size: 1.5rem;
     margin-bottom: 2.5rem;
-    font-family: "Inria Serif", "Times new Roman";
+    justify-items: center;
 }
 
 .perguntas {
+    background-color: var(--cor-primaria);
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--cor-quinaria);
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     height: 100%;
     display: flex;
@@ -45,18 +44,16 @@ button {
     width: 90%;
     height: 4rem;
     transition: height 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    background-color: pink;
+    background-color: var(--cor-sextiaria);
     margin: 2rem;
     border-radius: 15px;
     box-shadow: 3px 3px 3px gray;
     padding: 1rem;
     text-align: center;
-    font-family: "JetBrains Mono", "Inria Serif", "Times New Roman";
 }
 
 .resposta {
     overflow: hidden;
-    font-family: "Inria Serif", "Times New Roman";
     opacity: 0;
     transform: translateY(10px);
     max-height: 0;
@@ -68,7 +65,7 @@ button {
 }
 
 .divPR:hover {
-    height: 7.3rem;
+    height: 10rem;
     & .resposta {
         max-height: 6rem;
         opacity: 1;
