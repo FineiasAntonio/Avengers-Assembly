@@ -9,10 +9,8 @@ import (
 	"backend/middleware"
 	"backend/repository"
 	"backend/service"
-	_ "fmt"
 	"log"
 	"net/http"
-	_ "net/http"
 	"os"
 )
 
