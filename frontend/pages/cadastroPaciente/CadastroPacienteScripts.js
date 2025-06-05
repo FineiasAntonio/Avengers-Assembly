@@ -1,5 +1,5 @@
-import { API_ENDERECO } from "../../environment/environment.js"
-import "../../shared/interceptor.js"
+import "../../api/cadastroApi.js"
+import { CadastroRequisição } from "../../api/cadastroApi.js"
 
 document.addEventListener('DOMContentLoaded', function () {
     const cpfInput = document.getElementById('cpf')
@@ -94,17 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
             cep: valores.cep,
         }
         
-
-        const response = await fetch(API_ENDERECO + "paciente", {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(valores)
-        })
-
-        if (!response.ok) {
-            const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status}` }));
-            throw new Error(errorData.message);
-        }
+        CadastroRequisição(valores, "paciente")
     })
 })
 
