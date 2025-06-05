@@ -1,1 +1,1 @@
-export const API_ENDERECO = "http://localhost:8080/api/"
+export const API_ENDERECO = "http://45.176.19.27:9090/api/"

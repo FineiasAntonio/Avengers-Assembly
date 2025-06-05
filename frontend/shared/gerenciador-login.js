@@ -7,3 +7,8 @@ function verificarAutenticacaoValida() {
 }
 
 verificarAutenticacaoValida()
+
+export function deslogar() {
+    localStorage.removeItem('token')
+    verificarAutenticacaoValida()    
+}
