@@ -12,6 +12,7 @@ type Router struct {
 	autenticacaoHandler    *auth.AutenticacaoHandler
 	usuarioHandler         *handler.UsuarioHandler
 	pacienteHandler        *handler.PacienteHandler
+	agendamentoHandler     *handler.AgendamentoHandler
 	requisicaoExameHandler *handler.RequisicaoExameHandler
 }
 
@@ -20,6 +21,7 @@ func NewRotas(
 	autenticacaoHandler *auth.AutenticacaoHandler,
 	usuarioHandler *handler.UsuarioHandler,
 	pacienteHandler *handler.PacienteHandler,
+	agendamentoHandler *handler.AgendamentoHandler,
 	requisicaoExameHandler *handler.RequisicaoExameHandler,
 ) *Router {
 	return &Router{
@@ -27,6 +29,7 @@ func NewRotas(
 		autenticacaoHandler:    autenticacaoHandler,
 		usuarioHandler:         usuarioHandler,
 		pacienteHandler:        pacienteHandler,
+		agendamentoHandler:     agendamentoHandler,
 		requisicaoExameHandler: requisicaoExameHandler,
 	}
 }
@@ -42,6 +45,9 @@ func (r *Router) SetupRotas() http.Handler {
 	rotasProtegidas.HandleFunc("PATCH /api/usuario", r.usuarioHandler.AlterarSenhaUsuario)
 
 	rotasProtegidas.HandleFunc("POST /api/paciente", r.pacienteHandler.CadastrarPaciente)
+
+	rotasProtegidas.HandleFunc("POST /api/agendamento", r.agendamentoHandler.AgendarExame)
+	rotasProtegidas.HandleFunc("GET /api/agendamento", r.agendamentoHandler.ConsultarHorariosOcupados)
 
 	rotasProtegidas.HandleFunc("POST /api/requisicaoExame", r.requisicaoExameHandler.CadastrarRequisicaoExame)
 

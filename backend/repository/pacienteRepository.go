@@ -17,7 +17,7 @@ func NewPacienteRepository(db *database.PostgresClient) *PacienteRepository {
 }
 
 func (p *PacienteRepository) GetPacienteByCartaoSUS(ctx *context.Context, cartaoSUS string) (*model.Paciente, error) {
-	row := p.db.DB.QueryRowContext(*ctx, "SELECT * FROM paciente WHERE cartao_sus = $1", cartaoSUS)
+	row := p.db.DB.QueryRowContext(*ctx, "SELECT * FROM paciente WHERE cartaosus = $1", cartaoSUS)
 
 	var paciente model.Paciente
 
