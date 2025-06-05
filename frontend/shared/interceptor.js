@@ -16,7 +16,7 @@ window.fetch = async function (input, init = {}) {
     return originalFetch.call(this, input, init)
     .then(response => {
       if (response.status === 401) {
-        console.log('nao autorizado kk')
+        console.error(response.body)
       }
       return response;
     })

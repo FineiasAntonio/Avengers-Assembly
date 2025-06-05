@@ -15,8 +15,8 @@ export const items = [
     permissoesRequeridas: [Permissao.ACESSO_ATENDIMENTO, Permissao.GESTAO]
   },
   {
-    href: "",
-    title: "Ver Agenda Paciente",
+    href: "/pages/agendamentoExame/agendamentoExame.html",
+    title: "Agendar Exame",
     icon: "",
     permissoesRequeridas: [Permissao.ACESSO_ATENDIMENTO, Permissao.ACESSO_EXAMES, Permissao.GESTAO]
   },

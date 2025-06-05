@@ -1,7 +1,8 @@
+import { deslogar } from "../../shared/gerenciador-login.js";
 
 const template = `
         <style>
-        @import "./estilos-globais.css";
+        @import "../../shared/estilos-globais.css";
 
         .navbar {
             position: fixed;
@@ -117,13 +118,18 @@ const template = `
             <a href="../inicioPagina/inicioPagina.html">Início</a>
             <a href="">Configurações</a>
             <a href="../centralAjuda/centralAjuda.html">Ajuda</a>
-            <a href="">Sair</a>
+            <a id="deslogar-opcao">Sair</a>
         </div>        
     </nav>
     `
 class Navbar extends HTMLElement {
-  connectedCallback() {
+  async connectedCallback() {
     this.innerHTML = template;
+
+    document.getElementById("deslogar-opcao").addEventListener('click', (e) => {
+        e.preventDefault()
+        deslogar()
+    })
   }
 }
 

@@ -1,9 +1,10 @@
 import "../environment/environment.js"
+import { API_ENDERECO } from "../environment/environment.js";
 
 export async function loginRequisicao(credencial, senha) {
     const credenciais = { credencial, senha }
 
-    const response = await fetch(window.API_ENDERECO + "auth/login", {
+    const response = await fetch(API_ENDERECO + "auth/login", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credenciais)
