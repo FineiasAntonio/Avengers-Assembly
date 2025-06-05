@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS endereco (
 );
 
 CREATE TABLE IF NOT EXISTS unidade_saude (
-    cnes VARCHAR(20) PRIMARY KEY,
+    cnes VARCHAR(15) PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     cnpj VARCHAR(14) UNIQUE NOT NULL,
     endereco VARCHAR(10) UNIQUE NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS unidade_saude (
 );
 
 CREATE TABLE IF NOT EXISTS laboratorio (
-    cnes VARCHAR(20) PRIMARY KEY,
+    cnes VARCHAR(15) PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     cnpj VARCHAR(14) UNIQUE NOT NULL,
     endereco VARCHAR(10) UNIQUE NOT NULL,
@@ -67,11 +67,13 @@ CREATE TABLE IF NOT EXISTS paciente (
 );
 
 CREATE TABLE IF NOT EXISTS agendamento_exame (
-    protocolo VARCHAR(15) PRIMARY KEY,
+    protocolo VARCHAR(10) PRIMARY KEY,
+    unidade VARCHAR(15) NOT NULL,
     paciente VARCHAR(10) NOT NULL,
     profissional VARCHAR(10) NOT NULL,
     data TIMESTAMP NOT NULL,
 
+    FOREIGN KEY (unidade) REFERENCES unidade_saude(cnes),
     FOREIGN KEY (paciente) REFERENCES paciente(cartaosus),
     FOREIGN KEY (profissional) REFERENCES usuario(registro)
 )
