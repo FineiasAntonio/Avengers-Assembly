@@ -29,11 +29,11 @@ func (r *AgendamentoRepository) AgendarExame(ctx *context.Context, agendamento *
 	return nil
 }
 
-func (r *AgendamentoRepository) ConsultarHorariosOcupados(ctx *context.Context, data string) (*[]dto.HorariosOcupados, error) {
+func (r *AgendamentoRepository) ConsultarHorariosOcupados(ctx *context.Context, data string, cnes string) (*[]dto.HorariosOcupados, error) {
 	resultado, err := r.db.DB.QueryContext(
 		*ctx,
-		"SELECT profissional, data FROM agendamento_exame  WHERE CAST(data AS DATE) = $1",
-		data,
+		"SELECT profissional.nome, agendamento.data FROM agendamento_exame agendamento JOIN usuario profissional ON agendamento.profissional = profissional.registro WHERE CAST(agendamento.data AS DATE) = $1 AND agendamento.unidade = $2 AND profissional.permissao = 'ACESSO_EXAMES'",
+		data, cnes,
 	)
 	defer resultado.Close()
 

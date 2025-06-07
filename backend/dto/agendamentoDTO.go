@@ -3,6 +3,6 @@ package dto
 import "time"
 
 type HorariosOcupados struct {
-	Profissional string
-	Data         time.Time
+	Profissional string    `json:"profissional"`
+	Data         time.Time `json:"data"`
 }
