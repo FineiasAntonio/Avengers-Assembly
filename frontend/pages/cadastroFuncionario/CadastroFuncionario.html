@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CadastroFuncionario.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+    <script src="../../components/navbar/navbar.js" type="module"></script>
+    <title>Cadastro Funcionário</title>
+</head>
+
+<body>
+    <custom-navbar></custom-navbar>
+    <main class="container">
+        <div class="cabecalho">
+            <h1>CADASTRO DO FUNCIONÁRIO</h1>
+        </div>
+        <div class="section">
+            <form id="cadastroFuncionario">
+                <h3>Dados do Funcionário</h3>
+                <fieldset>
+                    <legend style="margin-top: 2rem;">Dados Pessoais</legend>
+                    <div class="row">
+                        <div class="col"><label>Nome</label><input name="nome" type="text"></div>
+                        <div class="col"><label>CPF</label><input name="cpf" type="text" id="cpf"></div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend style="margin-top: 2rem;">Dados Profissionais</legend>
+                    <div class="row">
+                        <div class="col"><label for="Registro">Registro</label><input type="text" id="registro"></div>
+                        <div class="col"><label>Cargo
+                                <select name="cargo" id="cargo">
+                                    <option value="">Selecione</option>
+                                    <option value="Medico">Médico(a)</option>
+                                    <option value="Enfermeiro">Enfermeiro(a)</option>
+                                    <option value="Agente de Saúde">Agente de Saúde</option>
+                                    <option value="Administrador">Administrador(a)</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="acoes">
+                    <button class="botao1">Cadastar Funcionário</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>
