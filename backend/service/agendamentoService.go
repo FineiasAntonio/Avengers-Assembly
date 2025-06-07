@@ -6,7 +6,6 @@ import (
 	"backend/repository"
 	"backend/util"
 	"context"
-	"time"
 )
 
 type AgendamentoService struct {
@@ -28,10 +27,8 @@ func (s *AgendamentoService) AgendarExame(ctx *context.Context, agendamento *mod
 	return nil
 }
 
-func (s *AgendamentoService) ConsultarHorariosOcupados(ctx *context.Context, data time.Time) (*[]dto.HorariosOcupados, error) {
-	dataFormatada := data.Format("2006-01-02")
-
-	horariosOcupados, err := s.agendamentoRepository.ConsultarHorariosOcupados(ctx, dataFormatada)
+func (s *AgendamentoService) ConsultarHorariosOcupados(ctx *context.Context, data string, cnes string) (*[]dto.HorariosOcupados, error) {
+	horariosOcupados, err := s.agendamentoRepository.ConsultarHorariosOcupados(ctx, data, cnes)
 	if err != nil {
 		return nil, err
 	}

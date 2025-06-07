@@ -6,7 +6,6 @@ import (
 	"backend/service"
 	"encoding/json"
 	"net/http"
-	"time"
 )
 
 type AgendamentoHandler struct {
@@ -39,16 +38,17 @@ func (h *AgendamentoHandler) AgendarExame(w http.ResponseWriter, r *http.Request
 }
 
 func (h *AgendamentoHandler) ConsultarHorariosOcupados(w http.ResponseWriter, r *http.Request) {
-	var dataConsultada time.Time
+	var dataConsultada string
+	var cnes string
 
-	if err := json.NewDecoder(r.Body).Decode(&dataConsultada); err != nil {
-		http.Error(w, exceptions.ErroRequisicaoInvalida.Error(), http.StatusBadRequest)
-		return
-	}
+	params := r.URL.Query()
+
+	cnes = params.Get("cnes")
+	dataConsultada = params.Get("data")
 
 	ctx := r.Context()
 
-	horariosOcupados, err := h.agendamentoService.ConsultarHorariosOcupados(&ctx, dataConsultada)
+	horariosOcupados, err := h.agendamentoService.ConsultarHorariosOcupados(&ctx, dataConsultada, cnes)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

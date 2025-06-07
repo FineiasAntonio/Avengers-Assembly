@@ -5,6 +5,7 @@ import (
 	"backend/model"
 	"backend/service"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -20,6 +21,7 @@ func (handler *PacienteHandler) CadastrarPaciente(w http.ResponseWriter, r *http
 	var paciente model.Paciente
 
 	if err := json.NewDecoder(r.Body).Decode(&paciente); err != nil {
+		fmt.Println(err.Error())
 		http.Error(w, exceptions.ErroRequisicaoInvalida.Error(), http.StatusBadRequest)
 		return
 	}
