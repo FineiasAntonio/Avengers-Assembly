@@ -36,3 +36,31 @@ func (handler *RequisicaoExameHandler) CadastrarRequisicaoExame(w http.ResponseW
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 }
+
+func (handler *RequisicaoExameHandler) GetRequisicaoExameByProtocolo(w http.ResponseWriter,
+	r *http.Request) {
+	if r.Method != "GET" {
+		http.Error(w, "Método não permitido", http.StatusBadRequest)
+		return
+	}
+
+	var protocolo string
+	if err := json.NewDecoder(r.Body).Decode(&protocolo); err != nil {
+		http.Error(w, exceptions.ErroRequisicaoInvalida.Error(), http.StatusBadRequest)
+		return
+	}
+	var requisicaoExame *model.RequisicaoExame
+
+	ctx := r.Context()
+
+	requisicaoExame, err := handler.RequisicaoExameServico.GetRequisicaoExameByProtocolo(&ctx, protocolo)
+
+	if err != nil {
+		http.Error(w, exceptions.ErroInterno.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusAccepted)
+	json.NewEncoder(w).Encode(requisicaoExame)
+}

@@ -50,6 +50,7 @@ func (r *Router) SetupRotas() http.Handler {
 	rotasProtegidas.HandleFunc("GET /api/agendamento", r.agendamentoHandler.ConsultarHorariosOcupados)
 
 	rotasProtegidas.HandleFunc("POST /api/requisicaoExame", r.requisicaoExameHandler.CadastrarRequisicaoExame)
+	rotasProtegidas.HandleFunc("GET /api/getRequisicaoExame", r.requisicaoExameHandler.GetRequisicaoExameByProtocolo)
 
 	rotasComuns.Handle("/api/", handlersProtegidos)
 

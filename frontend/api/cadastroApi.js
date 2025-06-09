@@ -9,8 +9,6 @@ export async function CadastroRequisição(objeto, endPoint) {
             body: JSON.stringify(objeto)
         });
 
-        /* Daria pra retornar a message do response pra controlar melhor o erro
-        de cada pagina que utiliza da função?*/
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status}` }));
             throw new Error(errorData.message);
@@ -21,3 +19,24 @@ export async function CadastroRequisição(objeto, endPoint) {
         console.log(error);
     }
 };
+
+export async function GetDadosCadastrados(parametro, endPoint) {
+    try {
+        const response = await fetch(API_ENDERECO + endPoint, {
+            method: "GET",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(parametro)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json.catch(() => ({message: `Erro HTTP: ${response.status}`}));
+            throw new Error(errorData.message);
+        }
+        return response.json();
+    }
+
+    catch (error) {
+        window.alert("Algo deu errado!");
+        console.log(error);
+    }
+}
