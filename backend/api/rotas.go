@@ -45,6 +45,7 @@ func (r *Router) SetupRotas() http.Handler {
 	rotasProtegidas.HandleFunc("PATCH /api/usuario", r.usuarioHandler.AlterarSenhaUsuario)
 
 	rotasProtegidas.HandleFunc("POST /api/paciente", r.pacienteHandler.CadastrarPaciente)
+	rotasProtegidas.HandleFunc("GET /api/getPaciente", r.pacienteHandler.GetPaciente)
 
 	rotasProtegidas.HandleFunc("POST /api/agendamento", r.agendamentoHandler.AgendarExame)
 	rotasProtegidas.HandleFunc("GET /api/agendamento", r.agendamentoHandler.ConsultarHorariosOcupados)

@@ -7,6 +7,7 @@ import (
 	"backend/repository"
 	"context"
 	"errors"
+
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -24,6 +25,14 @@ func NewPacienteService(pacienteRepository *repository.PacienteRepository, ender
 
 func (s *PacienteService) GetPacienteByCartaoSUS(ctx *context.Context, cartaoSUS string) (*model.Paciente, error) {
 	paciente, err := s.pacienteRepository.GetPacienteByCartaoSUS(ctx, cartaoSUS)
+	if err != nil {
+		return nil, errors.New("erro ao buscar paciente: " + err.Error())
+	}
+	return paciente, nil
+}
+
+func (s *PacienteService) GetPacienteByCPF(ctx *context.Context, cpf string) (*model.Paciente, error) {
+	paciente, err := s.pacienteRepository.GetPacienteByCartaoCPF(ctx, cpf)
 	if err != nil {
 		return nil, errors.New("erro ao buscar paciente: " + err.Error())
 	}
@@ -68,4 +77,22 @@ func (s *PacienteService) AlterarSenha(ctx *context.Context, requisicaoNovaSenha
 	}
 
 	return nil
+}
+
+func (s *PacienteService) PacienteToDTO(p *model.Paciente) *dto.PacienteDTO {
+	return &dto.PacienteDTO{
+		CartaoSUS:      p.CartaoSUS,
+		Prontuario:     p.Prontuario,
+		Nome:           p.Nome,
+		NomeMae:        p.NomeMae,
+		CPF:            p.CPF,
+		DataNascimento: p.DataNascimento,
+		Idade:          p.Idade,
+		Raca:           p.Raca,
+		Nacionalidade:  p.Nacionalidade,
+		Escolaridade:   p.Escolaridade,
+		Telefone:       p.Telefone,
+		Endereco:       p.Endereco,
+		Agenda:         p.Agenda,
+	}
 }

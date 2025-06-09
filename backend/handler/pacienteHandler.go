@@ -36,3 +36,43 @@ func (handler *PacienteHandler) CadastrarPaciente(w http.ResponseWriter, r *http
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 }
+
+func (handler *PacienteHandler) GetPaciente(w http.ResponseWriter,
+	r *http.Request) {
+	if r.Method != "GET" {
+		http.Error(w, "Método não permitido", http.StatusBadRequest)
+		return
+	}
+
+	parametro := r.URL.Query().Get("parametro")
+	if parametro == "" {
+		http.Error(w, "Cartão do SUS não fornecido", http.StatusBadRequest)
+		return
+	}
+
+	var paciente *model.Paciente
+	ctx := r.Context()
+	var err error
+
+	if len(parametro) == 11 {
+		var cpf string
+		cpf = parametro
+		paciente, err = handler.pacienteServico.GetPacienteByCartaoSUS(&ctx, cpf)
+
+	} else {
+		var cartaoSUS string
+		cartaoSUS = parametro
+		paciente, err = handler.pacienteServico.GetPacienteByCartaoSUS(&ctx, cartaoSUS)
+	}
+
+	if err != nil {
+		http.Error(w, exceptions.ErroInterno.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	pacienteDTO := handler.pacienteServico.PacienteToDTO(paciente)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(pacienteDTO)
+}
