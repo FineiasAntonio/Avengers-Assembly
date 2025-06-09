@@ -44,11 +44,12 @@ func (handler *RequisicaoExameHandler) GetRequisicaoExameByProtocolo(w http.Resp
 		return
 	}
 
-	var protocolo string
-	if err := json.NewDecoder(r.Body).Decode(&protocolo); err != nil {
-		http.Error(w, exceptions.ErroRequisicaoInvalida.Error(), http.StatusBadRequest)
+	protocolo := r.URL.Query().Get("parametro")
+	if protocolo == "" {
+		http.Error(w, "Protocolo não fornecido", http.StatusBadRequest)
 		return
 	}
+
 	var requisicaoExame *model.RequisicaoExame
 
 	ctx := r.Context()
@@ -61,6 +62,6 @@ func (handler *RequisicaoExameHandler) GetRequisicaoExameByProtocolo(w http.Resp
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusAccepted)
+	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(requisicaoExame)
 }
