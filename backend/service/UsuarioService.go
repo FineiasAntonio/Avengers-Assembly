@@ -7,6 +7,7 @@ import (
 	"backend/repository"
 	"context"
 	"errors"
+
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -51,4 +52,32 @@ func (s *UsuarioService) AlterarSenha(ctx *context.Context, requisicaoNovaSenha 
 	}
 
 	return nil
+}
+
+func (s *UsuarioService) GetUsuarioByCPF(ctx *context.Context, cpf string) (*model.Usuario, error) {
+	usuario, err := s.repository.GetUsuarioByCPF(ctx, cpf)
+	if err != nil {
+		return nil, errors.New("erro ao buscar usuario: " + err.Error())
+	}
+	return usuario, nil
+}
+
+func (s *UsuarioService) GetUsuarioByRegistro(ctx *context.Context, registro string) (*model.Usuario, error) {
+	usuario, err := s.repository.GetUsuarioByRegistro(ctx, registro)
+	if err != nil {
+		return nil, errors.New("erro ao buscar usuario: " + err.Error())
+	}
+	return usuario, nil
+}
+
+func (s *UsuarioService) UsuarioToDTO(user *model.Usuario) *dto.UsuarioDTO {
+	return &dto.UsuarioDTO{
+		Registro:         user.Registro,
+		Nome:             user.Nome,
+		CPF:              user.CPF,
+		Email:            user.Email,
+		Telefone:         user.Telefone,
+		UnidadeSaudeCNES: user.UnidadeSaudeCNES,
+		LaboratorioCNES:  user.LaboratorioCNES,
+	}
 }

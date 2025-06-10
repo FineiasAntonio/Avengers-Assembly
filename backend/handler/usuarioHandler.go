@@ -52,3 +52,42 @@ func (handler *UsuarioHandler) AlterarSenhaUsuario(w http.ResponseWriter, r *htt
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusNoContent)
 }
+
+func (handler *UsuarioHandler) GetUsuario(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "GET" {
+		http.Error(w, "Método não permitido", http.StatusBadRequest)
+		return
+	}
+
+	parametro := r.URL.Query().Get("parametro")
+	if parametro == "" {
+		http.Error(w, "Parametro não fornecido", http.StatusBadRequest)
+		return
+	}
+
+	var usuario *model.Usuario
+	ctx := r.Context()
+	var err error
+
+	if len(parametro) == 11 {
+		var cpf string
+		cpf = parametro
+		usuario, err = handler.usuarioServico.GetUsuarioByCPF(&ctx, cpf)
+
+	} else {
+		var registro string
+		registro = parametro
+		usuario, err = handler.usuarioServico.GetUsuarioByRegistro(&ctx, registro)
+	}
+
+	if err != nil {
+		http.Error(w, exceptions.ErroInterno.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	usuarioDTO := handler.usuarioServico.UsuarioToDTO(usuario)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(usuarioDTO)
+}

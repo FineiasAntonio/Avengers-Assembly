@@ -46,7 +46,7 @@ func (handler *PacienteHandler) GetPaciente(w http.ResponseWriter,
 
 	parametro := r.URL.Query().Get("parametro")
 	if parametro == "" {
-		http.Error(w, "Cartão do SUS não fornecido", http.StatusBadRequest)
+		http.Error(w, "Parametro não fornecido", http.StatusBadRequest)
 		return
 	}
 
@@ -57,7 +57,7 @@ func (handler *PacienteHandler) GetPaciente(w http.ResponseWriter,
 	if len(parametro) == 11 {
 		var cpf string
 		cpf = parametro
-		paciente, err = handler.pacienteServico.GetPacienteByCartaoSUS(&ctx, cpf)
+		paciente, err = handler.pacienteServico.GetPacienteByCPF(&ctx, cpf)
 
 	} else {
 		var cartaoSUS string
