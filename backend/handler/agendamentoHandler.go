@@ -5,6 +5,7 @@ import (
 	"backend/model"
 	"backend/service"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -45,6 +46,8 @@ func (h *AgendamentoHandler) ConsultarHorariosOcupados(w http.ResponseWriter, r 
 
 	cnes = params.Get("cnes")
 	dataConsultada = params.Get("data")
+	fmt.Println(dataConsultada)
+	fmt.Println(cnes)
 
 	ctx := r.Context()
 
@@ -53,6 +56,8 @@ func (h *AgendamentoHandler) ConsultarHorariosOcupados(w http.ResponseWriter, r 
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
+	fmt.Println(horariosOcupados)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)

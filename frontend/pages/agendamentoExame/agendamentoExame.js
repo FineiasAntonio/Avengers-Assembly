@@ -1,19 +1,30 @@
 import { consultarHorarioOcupado } from "../../api/agendamentoApi.js"
 import { pegarUnidadeUsuario } from "../../shared/gerenciador-permissoes.js"
+import { listarUnidade } from "../../api/unidadeApi.js"
 
 document.addEventListener("DOMContentLoaded", () => {
     const inputCartaoSus = document.getElementById("cartaoSUS")
     const dataInput = document.getElementById("data")
+    const cnesUnidadeUsuario = pegarUnidadeUsuario()
+
+    listarUnidade(cnesUnidadeUsuario).then(resultado => {
+        document.getElementById('ubsPaciente').textContent = resultado.nome
+        document.getElementById('municipioPaciente').textContent = `${resultado.endereco.logradouro}, ${resultado.endereco.numero}, ${resultado.endereco.complemento}, ${resultado.endereco.municipio}/${resultado.endereco.uf}`
+    })
+
 
     inputCartaoSus.addEventListener('blur', () => {
 
     })
 
-    dataInput.addEventListener('change', async (e) => {
+    dataInput.addEventListener('change', (e) => {
         const data = e.target.value
 
-        const response = await consultarHorarioOcupado("0000000", data)
-        renderizarHorariosDisponiveis(response)
+        consultarHorarioOcupado(cnesUnidadeUsuario, data).then(response => {
+            if (response) {
+                renderizarHorariosDisponiveis(response)
+            }
+        })
 
     })
 })
@@ -64,10 +75,10 @@ function renderizarHorariosDisponiveis(horariosOcupados) {
             botaoHorario.textContent = horario
             if (!estaOcupado) {
                 botaoHorario.addEventListener('click', () => {
-                selecionarHorario(profissional, horario)
-            })
+                    selecionarHorario(profissional, horario)
+                })
             } else {
-                botaoHorario.className +=" horario-ocupado"
+                botaoHorario.className += " horario-ocupado"
             }
             listaHorarios.appendChild(botaoHorario)
 

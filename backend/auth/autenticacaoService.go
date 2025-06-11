@@ -40,6 +40,7 @@ func (s *ServicoAutenticacao) GerarToken(usuario *model.Usuario) (string, error)
 		Nome:      usuario.Nome,
 		CPF:       usuario.CPF,
 		Permissao: usuario.Permissao,
+		CNES:      *usuario.UnidadeSaudeCNES,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 		},

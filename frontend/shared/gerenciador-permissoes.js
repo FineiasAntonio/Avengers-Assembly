@@ -44,7 +44,7 @@ export function pegarUnidadeUsuario() {
 
   const claims = parseJwt(token);
 
-  return claims ? claims.unidade : null;
+  return claims ? claims.cnes : null;
 }
 
 function parseJwt(token) {
