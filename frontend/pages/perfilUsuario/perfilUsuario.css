@@ -4,6 +4,12 @@ body {
     width: 100%;
 }
 
+label {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 button {
     width: 1.5rem;
     height: 1.5rem;
@@ -95,7 +101,26 @@ button {
     flex-direction: column;
     align-items: center;
     width: 70%;
-    height: 15rem;
+    height: auto;
+}
+
+.informacoesPes {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+.duplaInformacoes {
+    gap: 5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .informacoesProfissionais {
@@ -110,7 +135,23 @@ button {
     flex-direction: column;
     align-items: center;
     width: 70%;
-    height: 15rem;
+    height: auto;
+}
+
+.informacoesPro {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+.pLabel {
+    display: flex;
+    flex-direction: row;
 }
 
 .alterar {
@@ -140,19 +181,31 @@ button {
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
     .divInterno {
         width: 100%;
     }
 
+    .duplaInformacoes {
+        gap: 2rem;
+    }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 580px) {
     .divInterno {
         width: 100%;
     }
 
     .alterar {
         gap: 2rem;
+    }
+
+    .duplaInformacoes {
+        gap: 1rem;
+        flex-direction: column;
+    }
+
+    .informacoesPessoais {
+        height: auto;
     }
 }
