@@ -1,0 +1,64 @@
+package repository
+
+import (
+	"backend/database"
+	"backend/model"
+	"backend/util"
+	"context"
+)
+
+type UnidadeRepository struct {
+	db *database.PostgresClient
+}
+
+func NewUnidadeRepository(db *database.PostgresClient) *UnidadeRepository {
+	return &UnidadeRepository{db: db}
+}
+
+func (respository *UnidadeRepository) ListarUnidade(ctx *context.Context, cnes string) (*model.UnidadeSaude, error) {
+	query := `SELECT * FROM unidade_saude JOIN endereco ON unidade_saude.endereco = endereco.endereco_id WHERE cnes = $1`
+	row := respository.db.DB.QueryRowContext(
+		*ctx,
+		query,
+		cnes,
+	)
+
+	unidade := &model.UnidadeSaude{}
+	if err := row.Scan(
+		&unidade.CNES,
+		&unidade.Nome,
+		&unidade.CNPJ,
+		&unidade.EnderecoID,
+		&unidade.Telefone,
+		&unidade.Endereco.EnderecoID,
+		&unidade.Endereco.Logradouro,
+		&unidade.Endereco.Numero,
+		&unidade.Endereco.Complemento,
+		&unidade.Endereco.Bairro,
+		&unidade.Endereco.CodMunicipio,
+		&unidade.Endereco.Municipio,
+		&unidade.Endereco.UF,
+		&unidade.Endereco.CEP,
+		&unidade.Endereco.PontoReferencia,
+	); err != nil {
+		return nil, err
+	}
+
+	return unidade, nil
+}
+
+func (repository *UnidadeRepository) CadastrarUnidade(ctx *context.Context, requisicao *model.UnidadeSaude) error {
+	cnes := util.GerarId(10)
+	query := `INSERT INTO unidade_saude (cnes, nome, cnpj, endereco, telefone) VALUES ($1, $2, $3, $4, $5)`
+
+	_, err := repository.db.DB.ExecContext(
+		*ctx,
+		query,
+		cnes, requisicao.Nome, requisicao.CNPJ, requisicao.EnderecoID, requisicao.Telefone,
+	)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

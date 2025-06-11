@@ -22,6 +22,7 @@ type Claims struct {
 	Nome      string `json:"nome"`
 	CPF       string `json:"cpf"`
 	Permissao string `json:"permissao"`
+	CNES      string `json:"cnes"`
 	jwt.StandardClaims
 }
 

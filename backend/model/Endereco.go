@@ -6,7 +6,7 @@ type Endereco struct {
 	Numero          string  `json:"numero" db:"numero"`
 	Complemento     *string `json:"complemento" db:"complemento"`
 	Bairro          string  `json:"bairro" db:"bairro"`
-	CodMunicipio    string  `json:"cod_municipio" db:"codmunicipio"`
+	CodMunicipio    *string `json:"cod_municipio" db:"codmunicipio"`
 	Municipio       string  `json:"municipio" db:"municipio"`
 	UF              string  `json:"uf" db:"uf"`
 	CEP             string  `json:"cep" db:"cep"`
