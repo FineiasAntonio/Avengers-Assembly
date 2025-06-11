@@ -1,1 +1,0 @@
-export const API_ENDERECO = "http://45.176.19.27:9090/api/"
