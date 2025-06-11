@@ -3,3 +3,4 @@
 
 config/container_data/mongodb/*
 config/container_data/postgres/*
+frontend/environment/environment.js
