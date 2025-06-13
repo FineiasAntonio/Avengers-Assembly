@@ -160,6 +160,43 @@ button {
     gap: 8rem;
 }
 
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}
+
+.tela {
+    position: relative;
+    background-color: var(--cor-terciaria);
+    width: 40%;
+    height: 40%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgb(8, 8, 8);
+}
+
+.fecharTela {
+    position: absolute;
+    right: 20px;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0px 2px 3px black;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+
 @media (min-width: 1366px) {
     button {
         width: 2rem;

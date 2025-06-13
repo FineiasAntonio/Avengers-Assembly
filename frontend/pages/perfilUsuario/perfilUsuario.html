@@ -15,18 +15,22 @@
 <body>
     <custom-navbar></custom-navbar>
     <main>
+        <div class="overlay" id="overlay">
+            <div class="tela" id="tela">
+                <button class="fecharTela" id="fecharTela"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </div>
+        <div class="overlay" id="overlay2">
+            <div class="tela" id="tela2">
+                <button class="fecharTela" id="fecharTela2"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </div>
         <div class="divExterno">
             <div class="divInterno">
                 <div class="usuario">
                     <div class="fotoNome">
                         <img src="../../assets/usuario.jpeg" alt="Foto Usuario" id="usuarioFoto">
                         <h3 id="nome">Alguém da Silva Junior</h3>
-                    </div>
-                    <div class="logout">
-                        <div class="botao1">
-                        <button id="botaoLogout"><i class="fa-solid fa-right-from-bracket"></i></button>
-                        <label for="botaoLogout">Sair</label>
-                        </div>
                     </div>
                 </div>
                 <div class="informacoesPessoais">
@@ -35,26 +39,26 @@
                         <div class="duplaInformacoes">
                             <div class="pLabel">
                                 <p class="nome">Nome:</p>
-                                <label for="nome">Heitor M Augusto Vaz</label>
+                                <label for="nome" id="nome">Heitor M Augusto Vaz</label>
                             </div>
                             <div class="pLabel">
                                 <p class="registro">Registro:</p>
-                                <label for="registro">123123123</label>
+                                <label for="registro" id="registro">123123123</label>
                             </div>
                         </div>
                         <div class="duplaInformacoes">
                             <div class="pLabel">
                                 <p class="cpf">CPF:</p>
-                                <label for="cpf">777.777.777-12</label>
+                                <label for="cpf" id="cpf">777.777.777-12</label>
                             </div>
                             <div class="pLabel">
                                 <p class="email">Email:</p>
-                                <label for="email">heitor@gmail.com</label>
+                                <label for="email" id="email">heitor@gmail.com</label>
                             </div>
                         </div>
                         <div class="pLabel">
                             <p class="telefone">Telefone:</p>
-                            <label for="telefone">62 99563-5794</label>
+                            <label for="telefone" id="telefone">62 99563-5794</label>
                         </div>
                     </div>
                 </div>
@@ -63,20 +67,20 @@
                     <div class="informacoesPro">
                         <div class="pLabel">
                             <p class="USCNES">CNES Unidade de Saúde:</p>
-                            <label for="USCNES">1312312312313</label>
+                            <label for="USCNES" id="USCNES">1312312312313</label>
                         </div>
                         <div class="pLabel">
                             <p class="LCNES">CNES Laboratório:</p>
-                            <label for="LCNES">12312312312312</label>                       
+                            <label for="LCNES" id="LCNES">12312312312312</label>                       
                         </div>
                     </div>
                 </div>
                 <div class="alterar">
-                    <div class="botao1">
+                    <div class="botao1" id="botao1">
                         <button id="alterarInformacoes"><i class="fa-solid fa-pencil"></i></button>
                         <label for="alterarInformacoes">Alterar Informações</label>
                     </div>
-                    <div class="botao1">
+                    <div class="botao1" id="botao2">
                         <button id="mudarSenha"><i class="fa-solid fa-pen-to-square"></i></button>
                         <label for="mudarSenha">Mudar Senha</label>
                     </div>
