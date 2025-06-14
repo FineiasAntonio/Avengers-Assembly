@@ -3,16 +3,19 @@ package database
 import (
 	"backend/config"
 	"backend/model"
+	_ "backend/model"
 	"context"
 	"database/sql"
 	"fmt"
-	"golang.org/x/crypto/bcrypt"
 	"log"
 	"os"
 	"strings"
 	"time"
 
-	_ "github.com/lib/pq" // Driver PostgreSQL
+	"golang.org/x/crypto/bcrypt"
+	_ "golang.org/x/crypto/bcrypt"
+
+	_ "github.com/lib/pq"
 )
 
 type PostgresClient struct {
@@ -63,7 +66,7 @@ func ConectarPostgres(cfg config.PostgresConfig) (*PostgresClient, error) {
 	if !adminExiste {
 		query := `
 		INSERT INTO usuario (
-			registro, nome, cpf, email, telefone, senha, 
+			registro, nome, cpf, email, telefone, senha,
 			permissao, primeiroacesso
 		) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
 	`

@@ -1,107 +1,89 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<script src="../../shared/navbar.js" defer type="module"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="VisualizacaoRequisicao.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../shared/navbar.js" defer type="module"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="VisualizacaoRequisicao.css">
+  <script src="./VisualizaçãoRequisicao.js" defer type="module"></script>
   <title>Dados da Anamnese</title>
 </head>
+
 <body>
   <custom-navbar></custom-navbar>
   <div class="container">
     <h2>REQUISIÇÃO DE EXAME CITOPATOLÓGICO</h2>
 
     <fieldset>
-      <legend>Dados da anamnese</legend>
+      <legend>Dados do paciente</legend>
       <div class="grid">
-        <label>Motivo do exame
-            <select>
-                <option value="">Selecione</option>
-                <option value="Rastreamento">Rastreamento</option>
-                <option value="Repetição">Repetição</option>
-                <option value="Seguimento">Seguimento</option>
-            </select>
-        </label>
-        <label>Fez o exame preventivo
-          <select id="fezPreventivo" onchange="mostrarDataPreventivo()">
-            <option value="">Selecione</option>
-            <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
-            <option value="Não sabe">Não sabe</option>
+        <label>CPF <input type="text" id="cpfPaciente"/></label>
+        <label>Cartão do SUS <input type="text" id="cartaoSus"/></label>
+        <label style="grid-column: 1 / -1;">Nome <input type="text" id="nomePaciente" ></label>
+        <label>Idade <input type="number" id="idadePaciente" min="0" max="120" /></label>
+        <label>Data de nascimento <input type="date" id="dataNascimento" /></label>
+        <label>Nome da mãe <input type="text" id="nomeMae" /></label>
+        <label style="grid-column: 1 / -1;">Endereço <input type="text" id="enderecoPaciente" /></label>
+        <label>Município <input type="text" id="municipioPaciente" /></label>
+        <label>UF
+          <select id="ufPaciente">
+            <option value="" hidden>Selecione</option>
+              <option value="AC">AC</option>
+              <option value="AL">AL</option>
+              <option value="AP">AP</option>
+              <option value="AM">AM</option>
+              <option value="BA">BA</option>
+              <option value="CE">CE</option>
+              <option value="DF">DF</option>
+              <option value="ES">ES</option>
+              <option value="GO">GO</option>
+              <option value="MA">MA</option>
+              <option value="MT">MT</option>
+              <option value="MS">MS</option>
+              <option value="MG">MG</option>
+              <option value="PA">PA</option>
+              <option value="PB">PB</option>
+              <option value="PR">PR</option>
+              <option value="PE">PE</option>
+              <option value="PI">PI</option>
+              <option value="RJ">RJ</option>
+              <option value="RN">RN</option>
+              <option value="RS">RS</option>
+              <option value="RO">RO</option>
+              <option value="RR">RR</option>
+              <option value="SC">SC</option>
+              <option value="SP">SP</option>
+              <option value="SE">SE</option>
+              <option value="TO">TO</option>
           </select>
-          <input type="date" id="dataPreventivo" style="display:none; margin-top:8px;" />
         </label>
-        <label>Usa DIU
-            <select>
-                <option value="">Selecione</option>
-                <option value="Sim">Sim</option>
-                <option value="Não">Não</option>
-                <option value="Não sabe">Não sabe</option>
-            </select>
+        <label>Telefone <input type="tel" id="telefonePaciente"/></label>
+        <label>Nacionalidade <input type="text" id="nacionalidadePaciente" /></label>
+        <label>Raça/Cor
+          <select id="racaCorPaciente">
+            <option value="" hidden>Selecione</option>
+            <option value="Branca">Branca</option>
+            <option value="Preta">Preta</option>
+            <option value="Parda">Parda</option>
+            <option value="Amarela">Amarela</option>
+            <option value="Indígena">Indígena</option>
+          </select>
         </label>
-        <label>Está grávida
-            <select>
-                <option value="">Selecione</option>
-                <option value="Sim">Sim</option>
-                <option value="Não">Não</option>
-                <option value="Não sabe">Não sabe</option>
-            </select>
-        </label>
-        <label>Usa pílula anticoncepcional
-            <select>
-                <option value="">Selecione</option>
-                <option value="Sim">Sim</option>
-                <option value="Não">Não</option>
-                <option value="Não sabe">Não sabe</option>
-            </select>
-        </label>
-        <label>Usa hormônio / remédio para menopausa
-            <select>
-                <option value="">Selecione</option>
-                <option value="Sim">Sim</option>
-                <option value="Não">Não</option>
-                <option value="Não sabe">Não sabe</option>
-            </select>
-        </label>
-        <label>Já fez tratamento por radioterapia
-            <select>
-                <option value="">Selecione</option>
-                <option value="Sim">Sim</option>
-                <option value="Não">Não</option>
-                <option value="Não sabe">Não sabe</option>
-            </select>
-        </label>
-        <label>Data da última menstruação
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <input type="date" id="dataMenstruacao" name="dataMenstruacao" />
-            <label style="margin: 0;">
-              <input type="checkbox" id="naoLembraMenstruacao" name="naoLembraMenstruacao" onchange="document.getElementById('dataMenstruacao').disabled = this.checked;">
-              Não se lembra
-            </label>
-          </div>
-        </label>
-        <label>Teve sangramento após relações 
-            <select>
-                <option value="">Selecione</option>
-                <option value="Sim">Sim</option>
-                <option value="Não">Não</option>
-                <option value="Não se lembra">Não se lembra</option>
-                <option value="Não sabe">Não sabe</option>
-            </select>
-        </label>
-        <label>Teve sangramento após menopausa
-            <select>
-                <option value="">Selecione</option>
-                <option value="Sim">Sim</option>
-                <option value="Não">Não</option>
-                <option value="Não se lembra">Não se lembra</option>
-                <option value="Não sabe">Não sabe</option>
-                <option value="Não está na menopausa">Não está na menopausa</option>
-            </select>
+        <label>Escolaridade
+          <select id="escolaridadePaciente">
+            <option value="" hidden>Selecione</option>
+            <option value="Analfabeta">Analfabeta</option>
+            <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
+            <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
+            <option value="Ensino Médio Completo">Ensino Médio Completo</option>
+            <option value="Superior Completo">Superior Completo</option>
+          </select>
         </label>
       </div>
     </fieldset>
@@ -110,13 +92,13 @@
       <legend>Exame Clínico</legend>
       <div class="grid">
         <label>Inspeção do colo
-            <select>
-                <option value="">Selecione</option>
-                <option value="Normal">Normal</option>
-                <option value="Ausente">Ausente</option>
-                <option value="Alterado">Alterado</option>
-                <option value="Colo não vizualizado">Colo não visualizado</option>
-            </select>
+          <select>
+            <option value="" hidden>Selecione</option>
+            <option value="Normal">Normal</option>
+            <option value="Ausente">Ausente</option>
+            <option value="Alterado">Alterado</option>
+            <option value="Colo não vizualizado">Colo não visualizado</option>
+          </select>
         </label>
         <label>Sinais sugestivos de DSTs <input type="checkbox" /></label>
         <label>Data da Coleta <input type="date" /></label>
@@ -125,8 +107,8 @@
     </fieldset>
 
     <div class="buttons">
-        <button class="botao1" onclick="window.location.href='VisualizacaoRequisicao.html'">Voltar</button>
-        <button class="botao1" onclick="window.location.href='VisualizacaoRequisicaopt3.html'">Enviar</button>
+      <button class="botao1" onclick="window.location.href='VisualizacaoRequisicao.html'">Voltar</button>
+      <button class="botao1" onclick="window.location.href='VisualizacaoRequisicaopt3.html'">Enviar</button>
     </div>
   </div>
   <script>
@@ -136,6 +118,7 @@
       inputData.style.display = select.value === 'Sim' ? 'block' : 'none';
     }
   </script>
-  <script src="./VisualizaçãoRequisicao.js"></script>
+  
 </body>
+
 </html>

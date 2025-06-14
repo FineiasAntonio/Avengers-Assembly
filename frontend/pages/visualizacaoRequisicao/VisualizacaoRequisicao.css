@@ -1,6 +1,7 @@
 @import "../../shared/estilos-globais.css";
 
 body {
+  height: 100%;
   background: var(--cor-fundo);
   margin: 0;
   padding: 2rem;
@@ -43,9 +44,19 @@ legend {
   color: #2b1a1a;
 }
 
+.unidade-info {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  
+  gap: 10px;
+}
+.unidade-info label:last-child {
+  grid-column: 1 / -1;
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: 50% 50%;
   
   gap: 10px;
 }

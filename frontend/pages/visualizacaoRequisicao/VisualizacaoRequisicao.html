@@ -1,131 +1,183 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../../shared/navbar.js" defer type="module"></script>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="VisualizacaoRequisicao.css">
-    <title>Informações Exame</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../../shared/navbar.js" defer type="module"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="VisualizacaoRequisicao.css">
+  <script src="../../components/navbar/navbar.js" type="module"></script>
+  <title>Informações Exame</title>
 </head>
+
 <body>
-     <custom-navbar></custom-navbar>
-     <div class="container">
-        <h2>REQUISIÇÃO DE EXAME CITOPATOLÓGICO</h2>
-        <div class="header-info">
-        <label>Protocolo <input type="number" value="" /></label>
-        <label>Prontuário <input type="number" value="" /></label>
+  <custom-navbar></custom-navbar>
+  <div class="container">
+    <h2>REQUISIÇÃO DE EXAME CITOPATOLÓGICO</h2>
+
+    <fieldset>
+      <legend>Local de realização do exame</legend>
+      <div class="unidade-info">
+        <label>CNES <p id="unidadeCnes"></p></label>
+        <label>Unidade de saúde <p id="unidadeNome"></p></label>
+        <label>Endereço <p id="unidadeEndereco"></p></label>
       </div>
+    </fieldset>
 
-      <fieldset>
-        <legend>Local de realização do exame</legend>
-        <div class="grid">
-          <label>Unidade de saúde <input type="text" value="" /></label>
-          <label>CNES <input type="text" value="" /></label>
-          <label>Endereço <input type="text" value="" /></label>
-          <label>Município <input type="text" value="" /></label>
-          <label>UF 
-            <select>
-              <option value="">Selecione</option>
-              <option value="AC">AC</option>
-              <option value="AL">AL</option>
-              <option value="AP">AP</option>
-              <option value="AM">AM</option>
-              <option value="BA">BA</option>
-              <option value="CE">CE</option>
-              <option value="DF">DF</option>
-              <option value="ES">ES</option>
-              <option value="GO">GO</option>
-              <option value="MA">MA</option>
-              <option value="MT">MT</option>
-              <option value="MS">MS</option>
-              <option value="MG">MG</option>
-              <option value="PA">PA</option>
-              <option value="PB">PB</option>
-              <option value="PR">PR</option>
-              <option value="PE">PE</option>
-              <option value="PI">PI</option>
-              <option value="RJ">RJ</option>
-              <option value="RN">RN</option>
-              <option value="RS">RS</option>
-              <option value="RO">RO</option>
-              <option value="RR">RR</option>
-              <option value="SC">SC</option>
-              <option value="SP">SP</option>
-              <option value="SE">SE</option>
-              <option value="TO">TO</option>
-            </select>
-          </label>
-        </div>
-      </fieldset>
+    <fieldset>
+      <legend>Dados do paciente</legend>
+      <div class="grid">
+        <label style="grid-column: 1 / -1;">
+          Buscar por CPF ou Cartão do SUS
+          <input type="text" id="buscaPaciente" placeholder="Digite CPF ou nº do Cartão SUS" />
+        </label>
 
-      <fieldset>
-        <legend>Dados do paciente</legend>
-        <div class="grid">
-          <label>Nome <input type="text" value="" /></label>
-          <label>Idade <input type="number" value="" /></label>
-          <label>Data de nascimento <input type="date" value="" /></label>
-          <label>CPF <input type="number" value="" /></label>
-          <label>Cartão do SUS <input type="number" value="" /></label>
-          <label>Nome da mãe <input type="text" value="" /></label>
-          <label>Endereço <input type="text" value="" /></label>
-          <label>Município <input type="text" value="" /></label>
-          <label>UF 
-            <select>
-              <option value="">Selecione</option>
-              <option value="AC">AC</option>
-              <option value="AL">AL</option>
-              <option value="AP">AP</option>
-              <option value="AM">AM</option>
-              <option value="BA">BA</option>
-              <option value="CE">CE</option>
-              <option value="DF">DF</option>
-              <option value="ES">ES</option>
-              <option value="GO">GO</option>
-              <option value="MA">MA</option>
-              <option value="MT">MT</option>
-              <option value="MS">MS</option>
-              <option value="MG">MG</option>
-              <option value="PA">PA</option>
-              <option value="PB">PB</option>
-              <option value="PR">PR</option>
-              <option value="PE">PE</option>
-              <option value="PI">PI</option>
-              <option value="RJ">RJ</option>
-              <option value="RN">RN</option>
-              <option value="RS">RS</option>
-              <option value="RO">RO</option>
-              <option value="RR">RR</option>
-              <option value="SC">SC</option>
-              <option value="SP">SP</option>
-              <option value="SE">SE</option>
-              <option value="TO">TO</option>
-            </select>
-          </label>
-          <label>Telefone <input type="number" value="" /></label>
-          <label>Nacionalidade <input type="text" value="" /></label>
-          <label>Raça/Cor <input type="text" value="" /></label>
-          <label>Escolaridade
-            <select>
-              <option value="">Selecione</option>
-              <option value="Analfabeta">Analfabeta</option>
-              <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
-              <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
-              <option value="Ensino Médio Completo">Ensino Médio Completo</option>
-              <option value="Superior Completo">Superior Completo</option>
-            <select>
-          </label>
-        </div>
-      </fieldset>
+        <label class="dado-paciente" id="cpfPaciente">CPF: </label>
 
-      <div class="buttons">
-        <button class="botao1" onclick="history.back()">Cancelar</button>
-        <button class="botao1" onclick="window.location.href='VisualizacaoRequisicaopt2.html'">Próximo</button>
+        <label id="cartaoSus">Cartão do SUS: </label>
+        <label style="grid-column: 1 / -1;" id="nomePaciente">Nome: </label>
+        <label id="idadePaciente">Idade: </label>
+        <label id="dataNascimento">Data de nascimento: </label>
+        <label style="grid-column: 1 / -1;" id="nomeMae">Nome da mãe: </label>
+
+        <label style="grid-column: 1 / -1;" id="enderecoPaciente">Endereço: </label>
+
+        <label id="telefonePaciente">Telefone: </label>
+        <label id="nacionalidadePaciente">Nacionalidade: </label>
+        <label id="racaCorPaciente">Raça/Cor: </label>
+        <label id="escolaridadePaciente">Escolaridade: </label>
       </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Dados da Anamnese</legend>
+      <div class="grid">
+        <label>Motivo do exame
+          <select>
+            <option value="" hidden>Selecione</option>
+            <option value="Normal">Rastreamento</option>
+            <option value="Ausente">Repetição (exame alterado ASCUS/Baixo grau)</option>
+            <option value="Alterado">Seguimento (pós diagnóstico colposcópico / tratamento)</option>
+          </select>
+        </label>
+
+        <label style="grid-column: 1 / -1;">Fez o exame preventivo (Papanicolaou) <input type="checkbox"
+            id="fezExame" /></label>
+        <label>Ano do último exame <input type="text" id="anoUltimoExame" disabled /></label>
+        <script>
+          const fezExameCheckbox = document.getElementById('fezExame');
+
+          if (fezExameCheckbox) {
+            fezExameCheckbox.addEventListener('change', function () {
+              const anoUltimoExameInput = document.getElementById('anoUltimoExame');
+              if (this.checked) {
+                anoUltimoExameInput.disabled = false;
+              } else {
+                anoUltimoExameInput.disabled = true;
+                anoUltimoExameInput.value = '';
+              }
+            });
+          }
+        </script>
+
+        <label>Usa DIU?
+          <select id="usaDIU">
+            <option value="" hidden>Selecione</option>
+            <option value="Não">Não</option>
+            <option value="Sim">Sim</option>
+            <option value="Não lembra">Não lembra</option>
+          </select>
+        </label>
+
+        <label>Está grávida?
+          <select id="estaGravida">
+            <option value="" hidden>Selecione</option>
+            <option value="Não">Não</option>
+            <option value="Sim">Sim</option>
+            <option value="Não lembra">Não lembra</option>
+          </select>
+        </label>
+
+        <label>Usa pílula anticoncepcional?
+          <select id="usaAnticoncepcional">
+            <option value="" hidden>Selecione</option>
+            <option value="Não">Não</option>
+            <option value="Sim">Sim</option>
+            <option value="Não lembra">Não lembra</option>
+          </select>
+        </label>
+
+        <label>Usa hormônio/remédio para tratar a menopausa?
+          <select id="usaHormonio">
+            <option value="" hidden>Selecione</option>
+            <option value="Não">Não</option>
+            <option value="Sim">Sim</option>
+            <option value="Não lembra">Não lembra</option>
+          </select>
+        </label>
+
+        <label>Já fez tratamento por radioterapia?
+          <select id="fezRadioterapia">
+            <option value="" hidden>Selecione</option>
+            <option value="Não">Não</option>
+            <option value="Sim">Sim</option>
+            <option value="Não lembra">Não lembra</option>
+          </select>
+        </label>
+
+        <label>Tem ou teve algum sangramento após relações sexuais?
+          <select id="teveSangramentoRelacoes">
+            <option value="" hidden>Selecione</option>
+            <option value="Não">Não</option>
+            <option value="Sim">Sim</option>
+            <option value="Não lembra">Não lembra</option>
+          </select>
+        </label>
+
+        <label>Tem ou teve algum sangramento após a menopausa?
+          <select id="teveSangramentoMenopausa">
+            <option value="" hidden>Selecione</option>
+            <option value="Não">Não</option>
+            <option value="Sim">Sim</option>
+            <option value="Não lembra">Não lembra</option>
+          </select>
+        </label>
+        <label>Data da última menstruação <input type="date" id="ultimaMenstruação" /></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Exame Clínico</legend>
+      <div class="grid">
+        <label>Inspeção do colo
+          <select>
+            <option value="" hidden>Selecione</option>
+            <option value="Normal">Normal</option>
+            <option value="Ausente">Ausente</option>
+            <option value="Alterado">Alterado</option>
+            <option value="Colo não vizualizado">Colo não visualizado</option>
+          </select>
+        </label>
+        <label>Sinais sugestivos de DSTs <input type="checkbox" /></label>
+        <label>Data da Coleta <input type="date" /></label>
+        <label>Registro Responsável <input type="text" /></label>
+      </div>
+    </fieldset>
+
+    <div class="buttons">
+      <button class="botao1" onclick="history.back()">Cancelar</button>
+      <button class="botao1" onclick="window.location.href='VisualizacaoRequisicaopt2.html'">Próximo</button>
+    </div>
   </div>
-  <script src="./VisualizaçãoRequisicao.js"></script>
+  <script src="./VisualizaçãoRequisicao.js" type="module"></script>
 </body>
+
 </html>

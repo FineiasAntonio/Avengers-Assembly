@@ -37,14 +37,13 @@ func (handler *PacienteHandler) CadastrarPaciente(w http.ResponseWriter, r *http
 	w.WriteHeader(http.StatusCreated)
 }
 
-func (handler *PacienteHandler) GetPaciente(w http.ResponseWriter,
-	r *http.Request) {
+func (handler *PacienteHandler) GetPaciente(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
 		http.Error(w, "Método não permitido", http.StatusBadRequest)
 		return
 	}
 
-	parametro := r.URL.Query().Get("parametro")
+	parametro := r.URL.Query().Get("paciente")
 	if parametro == "" {
 		http.Error(w, "Parametro não fornecido", http.StatusBadRequest)
 		return

@@ -21,9 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = e.target.value
 
         consultarHorarioOcupado(cnesUnidadeUsuario, data).then(response => {
-            if (response) {
-                renderizarHorariosDisponiveis(response)
-            }
+            renderizarHorariosDisponiveis(response)
         })
 
     })

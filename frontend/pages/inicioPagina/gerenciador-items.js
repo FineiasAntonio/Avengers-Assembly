@@ -27,7 +27,7 @@ export const items = [
     permissoesRequeridas: [Permissao.TODOS]
   },
   {
-    href: "",
+    href: "/pages/visualizacaoRequisicao/VisualizacaoRequisicao.html",
     title: "Criar Exame",
     icon: "",
     permissoesRequeridas: [Permissao.ACESSO_EXAMES]

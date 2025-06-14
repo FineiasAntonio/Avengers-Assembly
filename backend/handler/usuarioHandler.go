@@ -55,7 +55,7 @@ func (handler *UsuarioHandler) AlterarSenhaUsuario(w http.ResponseWriter, r *htt
 
 func (handler *UsuarioHandler) GetUsuario(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
-		http.Error(w, "Método não permitido", http.StatusBadRequest)
+		http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)
 		return
 	}
 
