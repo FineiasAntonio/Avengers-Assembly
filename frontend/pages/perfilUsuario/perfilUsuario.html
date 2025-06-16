@@ -18,11 +18,16 @@
             <div class="tela" id="tela">
                 <button class="fecharTela" id="fecharTela"><i class="fa-solid fa-xmark"></i></button>
                 <h3>Alterar Informação:</h3>
-                <p>Campo Alterado:</p>
-                <input type="text">
+                <label>Campo:
+                    <select name="select" id="select">
+                        <option value="" hidden></option>
+                        <option value="Email">Email</option>
+                        <option value="Telefone">Telefone</option>
+                    </select>
+                </label>
                 <p>Nova Informação:</p>
-                <input type="password">
-                <button type="submit"><i class="fa-solid fa-share-from-square"></i></button>
+                <input type="text" id="inputT">
+                <button type="submit" id="submitAltInf"><i class="fa-solid fa-share-from-square"></i></button>
             </div>
         </div>
         <div class="overlay" id="overlay2">
@@ -30,8 +35,8 @@
                 <button class="fecharTela" id="fecharTela2"><i class="fa-solid fa-xmark"></i></button>
                 <h3>Alterar Senha:</h3>
                 <p>Nova Senha:</p>
-                <input type="password">
-                <button type="submit"></button><i class="fa-solid fa-share-from-square"></i></button>
+                <input type="password" id="novaSenha">
+                <button type="submit" id="submitAltSen"><i class="fa-solid fa-share-from-square"></i></button>
             </div>
         </div>
         <div class="divExterno">

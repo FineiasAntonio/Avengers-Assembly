@@ -53,6 +53,29 @@ func (handler *UsuarioHandler) AlterarSenhaUsuario(w http.ResponseWriter, r *htt
 	w.WriteHeader(http.StatusNoContent)
 }
 
+func (handler *UsuarioHandler) AlterarInformacao(w http.ResponseWriter, r *http.Request) {
+	var dto dto.UsuarioAlterarInformacaoDTO
+
+	if err := json.NewDecoder((r.Body)).Decode(&dto); err != nil {
+		http.Error(w, exceptions.ErroRequisicaoInvalida.Error(), http.StatusBadRequest)
+		return
+	}
+
+	cpf := r.URL.Query().Get("cpf")
+	if cpf == "" {
+		http.Error(w, "CPF não fornecido", http.StatusBadRequest)
+		return
+	}
+
+	ctx := r.Context()
+	if err := handler.usuarioServico.AlterarInformacao(&ctx, cpf, &dto); err != nil {
+		http.Error(w, exceptions.ErroInterno.Error(), http.StatusInternalServerError)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusNoContent)
+}
+
 func (handler *UsuarioHandler) GetUsuario(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
 		http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)

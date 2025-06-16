@@ -54,7 +54,10 @@ func (s *UsuarioService) AlterarSenha(ctx *context.Context, requisicaoNovaSenha 
 	return nil
 }
 
-func (s *UsuarioService) AlterarInformacao(ctx *context.Context) error {
+func (s *UsuarioService) AlterarInformacao(ctx *context.Context, cpf string, dto *dto.UsuarioAlterarInformacaoDTO) error {
+	if err := s.repository.AlterarInformacao(ctx, cpf, dto.Campo, dto.NovoValor); err != nil {
+		return err
+	}
 	return nil
 }
 

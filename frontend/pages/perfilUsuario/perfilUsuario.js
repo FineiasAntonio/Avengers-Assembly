@@ -1,6 +1,22 @@
 import { GetDadosCadastrados } from "../../api/cadastroApi.js";
 import { pegarCpfUsuario } from "../../shared/gerenciador-permissoes.js";
+import { AlterarInformacaoRequisicao, AlterarSenhaRequisicao } from "../../api/usuarioApi.js";
 
+const alterarInfBtn = document.getElementById("submitAltInf");
+
+alterarInfBtn.onclick = () => {
+    const campo = document.getElementById("select").value;
+    const novoValor = document.getElementById("inputT").value;
+    const cpf = pegarCpfUsuario();
+    AlterarInformacaoRequisicao(cpf, campo, novoValor);
+};
+
+const alterarInfSen = document.getElementById("submitAltSen");
+
+alterarInfSen.onclick = () => {
+    const novaSenha = document.getElementById("novaSenha").value;
+    AlterarSenhaRequisicao(novaSenha);
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     const campoNomeH = document.getElementById("nomeh");
@@ -16,7 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const cpf = pegarCpfUsuario();
     const response = GetDadosCadastrados(cpf, "paciente");
 
-    campoNome.textContent = response.nome;
+    campoNomeI.textContent = response.nome;
+    campoNomeH.textContent = response.nome;
     campoRegistro.textContent = response.registro;
     campoCpf.textContent = formatarCpf(cpf);
     campoEmail.textContent = response.email;

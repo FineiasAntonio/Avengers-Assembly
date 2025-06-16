@@ -46,6 +46,7 @@ func (r *Router) SetupRotas() http.Handler {
 	handlersProtegidos := r.autenticacaoMiddleware.MiddlewareAutenticacao(rotasProtegidas)
 	rotasProtegidas.HandleFunc("POST /api/usuario", r.usuarioHandler.CadastrarUsuario)
 	rotasProtegidas.HandleFunc("PATCH /api/usuario", r.usuarioHandler.AlterarSenhaUsuario)
+	rotasProtegidas.HandleFunc("PATCH /api/usuario/alterarInf", r.usuarioHandler.AlterarInformacao)
 	rotasProtegidas.HandleFunc("GET /api/usuario", r.usuarioHandler.GetUsuario)
 
 	rotasProtegidas.HandleFunc("POST /api/paciente", r.pacienteHandler.CadastrarPaciente)

@@ -9,3 +9,8 @@ type UsuarioDTO struct {
 	UnidadeSaudeCNES *string `json:"-" db:"unidadesaude"`
 	LaboratorioCNES  *string `json:"-" db:"laboratorio"`
 }
+
+type UsuarioAlterarInformacaoDTO struct {
+	Campo     string `json:"campo"`
+	NovoValor string `json:"novo_valor"`
+}
