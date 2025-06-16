@@ -7,10 +7,11 @@ import (
 	"backend/repository"
 	"context"
 	"errors"
-	"github.com/golang-jwt/jwt"
-	"golang.org/x/crypto/bcrypt"
 	"strings"
 	"time"
+
+	"github.com/golang-jwt/jwt"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type ServicoAutenticacao struct {

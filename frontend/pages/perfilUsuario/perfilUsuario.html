@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./perfilUsuario.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" type="image/jpeg" href="../assets/favicon.jpeg">
     <title>Perfil</title>
 </head>
 <body>
@@ -18,11 +17,21 @@
         <div class="overlay" id="overlay">
             <div class="tela" id="tela">
                 <button class="fecharTela" id="fecharTela"><i class="fa-solid fa-xmark"></i></button>
+                <h3>Alterar Informação:</h3>
+                <p>Campo Alterado:</p>
+                <input type="text">
+                <p>Nova Informação:</p>
+                <input type="password">
+                <button type="submit"><i class="fa-solid fa-share-from-square"></i></button>
             </div>
         </div>
         <div class="overlay" id="overlay2">
             <div class="tela" id="tela2">
                 <button class="fecharTela" id="fecharTela2"><i class="fa-solid fa-xmark"></i></button>
+                <h3>Alterar Senha:</h3>
+                <p>Nova Senha:</p>
+                <input type="password">
+                <button type="submit"></button><i class="fa-solid fa-share-from-square"></i></button>
             </div>
         </div>
         <div class="divExterno">
@@ -30,7 +39,7 @@
                 <div class="usuario">
                     <div class="fotoNome">
                         <img src="../../assets/usuario.jpeg" alt="Foto Usuario" id="usuarioFoto">
-                        <h3 id="nome">Alguém da Silva Junior</h3>
+                        <label id="nomeh">Alguém da Silva Jr</label>
                     </div>
                 </div>
                 <div class="informacoesPessoais">
@@ -39,7 +48,7 @@
                         <div class="duplaInformacoes">
                             <div class="pLabel">
                                 <p class="nome">Nome:</p>
-                                <label for="nome" id="nome">Heitor M Augusto Vaz</label>
+                                <label for="nome" id="nomeI">Heitor M Augusto Vaz</label>
                             </div>
                             <div class="pLabel">
                                 <p class="registro">Registro:</p>

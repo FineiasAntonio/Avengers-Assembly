@@ -1,8 +1,10 @@
-import { pegarCpfUsuario } from "../../shared/gerenciador-permissoes"
-import { GetDadosCadastrados } from "../../api/cadastroApi"
+import { GetDadosCadastrados } from "../../api/cadastroApi.js";
+import { pegarCpfUsuario } from "../../shared/gerenciador-permissoes.js";
 
-window.addEventListener("DOMContentLoaded", () => {
-    const campoNome = document.getElementById("nome");
+
+document.addEventListener("DOMContentLoaded", () => {
+    const campoNomeH = document.getElementById("nomeh");
+    const campoNomeI = document.getElementById("nomeI");
     const campoRegistro = document.getElementById("registro");
     const campoCpf = document.getElementById("cpf");
     const campoEmail = document.getElementById("email");
@@ -23,16 +25,16 @@ window.addEventListener("DOMContentLoaded", () => {
     campoUSCNES.textContent = response.unidadesaudecnes;
     campoLCNES.textContent = response.laboratoriocnes;
 
-    const botao1 = document.getElementById("alterarInformacoes");
-    const botao2 = document.getElementById("mudarSenha");
+    const botao1 = document.getElementById("botao1");
+    const botao2 = document.getElementById("botao2");
     const overlay1 = document.getElementById("overlay");
     const overlay2 = document.getElementById("overlay2");
     const fechar1 = document.getElementById("fecharTela");
     const fechar2 = document.getElementById("fecharTela2");
 
-    botao1.addEventListener('click', (e) => {
+    botao1.addEventListener("click", (e) => {
         e.preventDefault();
-        overlay1.style.display = 'flex';
+        overlay1.style.display = "flex";
     });
     botao2.addEventListener('click', (e) => {
         e.preventDefault();
@@ -60,7 +62,7 @@ function formatarTelefone(telefone) {
         return telefone.replace(/(\d{2})(\d{4})(\d{4})/, "($1) $2-$3")
 
     } else if (size === 11) {
-        return telefone.replace(/\(d{2})(\d{5})(\d{4})/, "($1) $2-$3")
+        return telefone.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3")
 
     } else {
         return telefone;

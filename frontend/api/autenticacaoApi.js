@@ -1,4 +1,3 @@
-import "../environment/environment.js"
 import { API_ENDERECO } from "../environment/environment.js";
 
 export async function loginRequisicao(credencial, senha) {

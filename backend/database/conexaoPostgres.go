@@ -8,8 +8,6 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"os"
-	"strings"
 	"time"
 
 	"golang.org/x/crypto/bcrypt"
@@ -105,7 +103,7 @@ func (c *PostgresClient) FecharConexaoPostgres() {
 }
 
 func IniciarTabelas(db *sql.DB) error {
-	caminhoConfiguracaoSQL := os.Getenv("CAMINHO_CONFIGURACAO_SQL")
+	/*caminhoConfiguracaoSQL := os.Getenv("CAMINHO_CONFIGURACAO_SQL")
 	content, err := os.ReadFile(caminhoConfiguracaoSQL)
 	if err != nil {
 		return fmt.Errorf("erro ao ler arquivo SQL: %w", err)
@@ -123,7 +121,7 @@ func IniciarTabelas(db *sql.DB) error {
 		if err != nil {
 			return fmt.Errorf("erro ao executar comando '%s': %w", query, err)
 		}
-	}
+	}*/
 
 	return nil
 }

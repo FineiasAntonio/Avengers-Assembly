@@ -4,6 +4,7 @@ import (
 	"backend/database"
 	"backend/model"
 	"context"
+	"fmt"
 )
 
 type UsuarioRepository struct {
@@ -67,5 +68,11 @@ func (r *UsuarioRepository) CadastrarUsuario(ctx *context.Context, usuario *mode
 func (r *UsuarioRepository) AlterarSenha(ctx *context.Context, cpf string, novaSenha string) error {
 	query := `UPDATE usuario SET senha = $1, primeiroacesso = false WHERE cpf = $2`
 	_, err := r.db.DB.ExecContext(*ctx, query, novaSenha, cpf)
+	return err
+}
+
+func (r *UsuarioRepository) AlterarInformacao(ctx *context.Context, cpf, campo, novoValor string) error {
+	query := fmt.Sprintf(`UPDATE usuario SET %s = $1 WHERE cpf = $2`, campo)
+	_, err := r.db.DB.ExecContext(*ctx, query, novoValor, cpf)
 	return err
 }

@@ -54,6 +54,10 @@ func (s *UsuarioService) AlterarSenha(ctx *context.Context, requisicaoNovaSenha 
 	return nil
 }
 
+func (s *UsuarioService) AlterarInformacao(ctx *context.Context) error {
+	return nil
+}
+
 func (s *UsuarioService) GetUsuarioByCPF(ctx *context.Context, cpf string) (*model.Usuario, error) {
 	usuario, err := s.repository.GetUsuarioByCPF(ctx, cpf)
 	if err != nil {

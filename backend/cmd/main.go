@@ -22,13 +22,13 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	conexaoMongo, err := database.ConectarMongo(cfg.Mongo)
+	/*conexaoMongo, err := database.ConectarMongo(cfg.Mongo)*/
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
 	defer conexaoPostgres.FecharConexaoPostgres()
-	defer conexaoMongo.FecharConexaoMongo()
+	/*defer conexaoMongo.FecharConexaoMongo()*/
 
 	chaveJwt := os.Getenv("SECRET_JWT_KEY")
 	if chaveJwt == "" {
