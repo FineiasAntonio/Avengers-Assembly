@@ -148,16 +148,10 @@ hr {
     z-index: 999;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.3 cubic-bezier(0.4, 0, 0.2, 1);;
-
-    &:hover {
-        .tela {
-            transform: translateY(0);
-        }
-    }
 }
 
 .tela {
+    z-index: 10000;
     position: relative;
     background-color: var(--cor-terciaria);
     width: 80%;
@@ -165,12 +159,11 @@ hr {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 3px 10px rgb(8, 8, 8);
-    transform: translateY(20px);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);;
 }
 
 .fecharMapaTela {
     position: absolute;
+    z-index: 100000;
     right: 20px;
     width: 2rem;
     height: 2rem;
@@ -198,6 +191,9 @@ hr {
         height: 70%;
         width: 60%;
     }
+    .tituloGrafico {
+        flex-direction: column;
+    }
 }
 
 @media (max-width: 800px) {
@@ -212,9 +208,5 @@ hr {
     .graficoBarra { 
         height: 60%;
         width: 50%;
-    }
-
-    .tituloGrafico {
-        flex-direction: column;
     }
 }
