@@ -29,6 +29,7 @@ func (handler *UsuarioHandler) CadastrarUsuario(w http.ResponseWriter, r *http.R
 	err := handler.usuarioServico.CadastrarUsuario(&ctx, &requisicaoCadastro)
 	if err != nil {
 		http.Error(w, "Erro ao cadastrar usuário: "+err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -47,6 +48,7 @@ func (handler *UsuarioHandler) AlterarSenhaUsuario(w http.ResponseWriter, r *htt
 	err := handler.usuarioServico.AlterarSenha(&ctx, novaSenha)
 	if err != nil {
 		http.Error(w, exceptions.ErroInterno.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -70,6 +72,7 @@ func (handler *UsuarioHandler) AlterarInformacao(w http.ResponseWriter, r *http.
 	ctx := r.Context()
 	if err := handler.usuarioServico.AlterarInformacao(&ctx, cpf, &dto); err != nil {
 		http.Error(w, exceptions.ErroInterno.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")

@@ -72,6 +72,9 @@ func (r *UsuarioRepository) AlterarSenha(ctx *context.Context, cpf string, novaS
 }
 
 func (r *UsuarioRepository) AlterarInformacao(ctx *context.Context, cpf, campo, novoValor string) error {
+	if campo != "email" && campo != "telefone" {
+		return fmt.Errorf("Campo não permitido %s", campo)
+	}
 	query := fmt.Sprintf(`UPDATE usuario SET %s = $1 WHERE cpf = $2`, campo)
 	_, err := r.db.DB.ExecContext(*ctx, query, novoValor, cpf)
 	return err
