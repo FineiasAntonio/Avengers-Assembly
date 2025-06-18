@@ -24,12 +24,14 @@ services:
     networks:
       - ccts_network
 
-  apache:
-    image: httpd:alpine
+  nginx:
+    image: nginx:latest
     ports:
       - "80:80"
     volumes:
-      - ./frontend:/usr/local/apache2/htdocs/
+      - ./frontend:/usr/share/nginx/html
+    networks:
+      - ccts_network
 
 networks:
     ccts_network:
