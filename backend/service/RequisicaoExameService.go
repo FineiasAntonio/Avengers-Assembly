@@ -17,15 +17,15 @@ func NewRequisicaoExameService(re *repository.RequisicaoExameRepository) *Requis
 	return &RequisicaoExameService
 }
 
-func (r *RequisicaoExameService) CadastrarRequisicaoExame(ctx *context.Context, requisicaoExame *model.RequisicaoExame) error {
+func (r *RequisicaoExameService) CadastrarRequisicaoExame(ctx *context.Context, requisicaoExame *model.RequisicaoExame) (string, error) {
 
 	requisicaoExame.Status = string(model.AGUARDANDO)
 	requisicaoExame.Protocolo = util.GerarId(10)
 
 	if err := r.repository.CadastrarRequisicaoExame(ctx, requisicaoExame); err != nil {
-		return errors.New("erro ao cadastrar requisicao exame: " + err.Error())
+		return "", errors.New("erro ao cadastrar requisicao exame: " + err.Error())
 	}
-	return nil
+	return requisicaoExame.Protocolo, nil
 }
 
 func (r *RequisicaoExameService) GetRequisicaoExameByProtocolo(ctx *context.Context, protocolo string) (*model.RequisicaoExame, error) {

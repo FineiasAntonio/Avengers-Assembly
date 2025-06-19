@@ -1,5 +1,6 @@
 import { API_ENDERECO } from "../environment/environment.js";
 import "../shared/interceptor.js"
+import { mostarNotificacao } from "../shared/notificacao.js";
 
 export async function CadastroRequisicao(objeto) {
     try {
@@ -13,6 +14,11 @@ export async function CadastroRequisicao(objeto) {
             const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status}` }));
             throw new Error(errorData.message);
         }
+        const protocolo = await response.json();
+        mostarNotificacao("Requisição cadastrada com sucesso!", "success", 3000);
+        setTimeout(() => {
+            window.location.replace("/pages/visualizacaoRequisicao/VisualizacaoRequisicao.html?protocolo=" + protocolo);
+        }, 1500);
     }
     catch (error) {
         window.alert("Algo deu errado!")

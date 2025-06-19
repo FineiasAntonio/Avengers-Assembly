@@ -47,9 +47,10 @@ legend {
 .unidade-info {
   display: grid;
   grid-template-columns: 50% 50%;
-  
+
   gap: 10px;
 }
+
 .unidade-info label:last-child {
   grid-column: 1 / -1;
 }
@@ -57,7 +58,7 @@ legend {
 .grid {
   display: grid;
   grid-template-columns: 50% 50%;
-  
+
   gap: 10px;
 }
 
@@ -104,3 +105,4 @@ option {
   justify-content: flex-end;
   gap: 1rem;
 }
+

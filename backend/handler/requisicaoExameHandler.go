@@ -27,13 +27,16 @@ func (handler *RequisicaoExameHandler) CadastrarRequisicaoExame(w http.ResponseW
 
 	ctx := r.Context()
 
-	if err := handler.RequisicaoExameServico.CadastrarRequisicaoExame(&ctx, &requisicaoExame); err != nil {
+	protocolo, err := handler.RequisicaoExameServico.CadastrarRequisicaoExame(&ctx, &requisicaoExame)
+	if err != nil {
+		fmt.Println(err.Error())
 		http.Error(w, "Erro ao cadastrar requisição exame: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(protocolo)
 }
 
 func (handler *RequisicaoExameHandler) GetRequisicaoExameByProtocolo(w http.ResponseWriter,

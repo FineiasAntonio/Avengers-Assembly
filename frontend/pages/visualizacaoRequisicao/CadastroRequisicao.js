@@ -3,6 +3,7 @@ import { listarUnidade } from "../../api/unidadeApi.js";
 import { listarPaciente } from "../../api/pacienteApi.js";
 import { listarUsuario } from "../../api/usuarioApi.js";
 import { CadastroRequisicao } from "../../api/cadastroApi.js";
+import { mostarNotificacao } from "../../shared/notificacao.js";
 
 window.addEventListener("DOMContentLoaded", () => {
     const unidadeCnes = document.getElementById("unidadeCnes");
@@ -29,6 +30,11 @@ window.addEventListener("DOMContentLoaded", () => {
     const motivoExame = document.getElementById("motivoExame");
     const fezExame = document.getElementById("fezExame");
     const anoUltimoExame = document.getElementById("anoUltimoExame");
+    anoUltimoExame.addEventListener("input", (event) => {
+        if (event.target.value.length > 4) {
+            event.target.value = event.target.value.slice(0, 4);
+        }
+    })
     const usaDIU = document.getElementById("usaDIU");
     const estaGravida = document.getElementById("estaGravida");
     const usaAnticoncepcional = document.getElementById("usaAnticoncepcional");
@@ -86,6 +92,16 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     submitRequisicao.addEventListener("click", () => {
+
+        if (buscaPaciente.value.trim() === "") {
+            mostarNotificacao("Por favor, informe o CPF ou Cartão SUS do paciente.", "warning", 3000);
+            return;
+        }
+        if (registroResponsavel.value.trim() === "") {
+            mostarNotificacao("Por favor, informe o registro do profissional responsável.", "warning", 3000);
+            return;
+        }
+
         const requisicao = {
             paciente_id: cartaoSus.textContent.split(":")[1].trim(),
             motivo_exame: motivoExame.value,
@@ -140,6 +156,5 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 function enviarRequisicaoExame(requisicao) {
-    console.log("Enviando requisição de exame:", requisicao);
     CadastroRequisicao(requisicao);
 }

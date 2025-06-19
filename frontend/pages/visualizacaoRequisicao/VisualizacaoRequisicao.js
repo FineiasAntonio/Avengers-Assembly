@@ -84,8 +84,6 @@ window.addEventListener("DOMContentLoaded", () => {
         nomeResponsavel.textContent = resultado.responsavel.nome;
     });
 
-
-
     listarUnidade(pegarUnidadeUsuario()).then((resultado) => {
         unidadeCnes.textContent = resultado.cnes;
         unidadeNome.textContent = resultado.nome;
