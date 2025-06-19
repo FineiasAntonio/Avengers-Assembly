@@ -37,7 +37,11 @@
                             <h2>Gráfico</h2>
                             <div class="divFiltrar">
                                 <label for="filtrarGrafico">Filtrar</label>
-                                <button class="filtrarGrafico"><i class="fa-solid fa-filter"></i></button>
+                                <select class="filtrarGrafico">
+                                    <option value="raca" hidden>Selecione</option>
+                                    <option value="raca">Raça</option>
+                                    <option value="escolaridade">Escolaridade</option>
+                                </select>
                             </div>
                         </div>
                         <canvas id="graficoP"></canvas>

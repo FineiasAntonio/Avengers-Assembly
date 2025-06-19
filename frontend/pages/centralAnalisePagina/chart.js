@@ -1,13 +1,22 @@
 import { pegarDadosQtdPacientes } from "./mapaApi";
 
+let chartPizza = null;
+let chartBarra = null;
+let chartTotal = null;
+
 document.addEventListener("DOMContentLoaded", () => {
     const graficoPizza = document.getElementById("graficoP");
     const graficoBarra = document.getElementById("graficoB");
     const graficoTotal= document.getElementById("graficoC");
 
-    const funcao = document.getElementById("filtro").value;
+    const funcao = document.getElementById("filtrarGrafico");
 
-    iniciarGraficoPizza(funcao);
+    funcao.addEventListener("change", () => {
+        const novoValor = funcao.value;
+        iniciarGraficoPizza(novoValor);
+    })
+
+    iniciarGraficoPizza(funcao.value);
 
     iniciarGraficoBarra("idade");
     
@@ -16,8 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function iniciarGraficoBarra(funcao) {
     const response = await pegarDadosQtdPacientes(funcao);
-        
-    new Chart(graficoBarra, {
+
+    if (chartBarra) chartBarra.destroy();
+    
+    chartBarra = new Chart(graficoBarra, {
         type: "bar",
         data: {
             labels: ["25 a 30", "30 a 40", "40 a 50", "50 a 60", "60 a 65"],
@@ -38,6 +49,8 @@ async function iniciarGraficoBarra(funcao) {
 
 async function iniciarGraficoPizza(funcao) {
     const response = await pegarDadosQtdPacientes(funcao);
+
+    if (chartPizza) chartPizza.destroy();
     
     let labels = [];
     let data = [];
@@ -74,7 +87,7 @@ async function iniciarGraficoPizza(funcao) {
         ];
     }
 
-    new Chart(graficoPizza, {
+    chartPizza = new Chart(graficoPizza, {
         type: "doughnut",
         data: {
             labels: labels,
@@ -97,7 +110,9 @@ async function iniciarGraficoPizza(funcao) {
 async function iniciarGraficoTotal(funcao) {
     const response = await pegarDadosQtdPacientes(funcao)
 
-    new Chart(graficoTotal, {
+    if (chartTotal) chartTotal.destroy();
+
+    chartTotal = new Chart(graficoTotal, {
         type: "bar",
         data: {
             labels: ["Quantidade de Pacientes"],

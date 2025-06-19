@@ -105,3 +105,39 @@ func (r *CentralAnaliseRepository) PegarQtdPacientesPorEscolaridade(ctx *context
 	}
 	return &qtdPacEsc, nil
 }
+
+func (r *CentralAnaliseRepository) PegarQtdPacientesPorRegiao(ctx *context.Context) (*[]dto.MapaPacientesPorRegiao, error) {
+	var resultados []dto.MapaPacientesPorRegiao
+
+	query := `
+		SELECT e.bairro, COUNT(*)
+		FROM paciente p
+		INNER JOIN endereco e ON p.endereco_id = e.id
+		GROUP BY e.bairro
+	`
+
+	rows, err := r.db.DB.QueryContext(*ctx, query)
+
+	if err != nil {
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	for rows.Next() {
+		var qtdPacReg dto.MapaPacientesPorRegiao
+		err := rows.Scan(&qtdPacReg.Bairro, &qtdPacReg.Quantidade)
+
+		if err != nil {
+			return nil, err
+		}
+
+		resultados = append(resultados, qtdPacReg)
+	}
+
+	if err = rows.Err(); r != nil {
+		return nil, err
+	}
+
+	return &resultados, nil
+}

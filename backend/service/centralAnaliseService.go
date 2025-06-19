@@ -22,7 +22,7 @@ func (s *CentralAnaliseService) PegarQtdPacientes(ctx *context.Context) (*dto.Gr
 	if err != nil {
 		return nil, errors.New("Erro ao pegar quantidade de pacientes: " + err.Error())
 	}
-	return qtdPacientes, err
+	return qtdPacientes, nil
 }
 
 func (s *CentralAnaliseService) PegarQtdPacientesPorIdade(ctx *context.Context) (*dto.GraficoPacientesPorIdadeDTO, error) {
@@ -30,7 +30,7 @@ func (s *CentralAnaliseService) PegarQtdPacientesPorIdade(ctx *context.Context) 
 	if err != nil {
 		return nil, errors.New("Erro ao pegar quantidade de pacientes por idade: " + err.Error())
 	}
-	return qtdPacientesPorIdade, err
+	return qtdPacientesPorIdade, nil
 }
 
 func (s *CentralAnaliseService) PegarQtdPacientesPorRaca(ctx *context.Context) (*dto.GraficoPacientesPorRacaDTO, error) {
@@ -38,7 +38,7 @@ func (s *CentralAnaliseService) PegarQtdPacientesPorRaca(ctx *context.Context) (
 	if err != nil {
 		return nil, errors.New("Erro ao pegar quantidade de pacientes por raça: " + err.Error())
 	}
-	return qtdPacientesPorRaca, err
+	return qtdPacientesPorRaca, nil
 }
 
 func (s *CentralAnaliseService) PegarQtdPacientesPorEscolaridade(ctx *context.Context) (*dto.GraficoPacientesPorEscolaridadeDTO, error) {
@@ -46,5 +46,13 @@ func (s *CentralAnaliseService) PegarQtdPacientesPorEscolaridade(ctx *context.Co
 	if err != nil {
 		return nil, errors.New("Erro ao pegar quantidade de pacientes por escolaridade: " + err.Error())
 	}
-	return qtdPacientesPorEscolaridade, err
+	return qtdPacientesPorEscolaridade, nil
+}
+
+func (s *CentralAnaliseService) PegarQtdPacientesPorRegiao(ctx *context.Context) (*[]dto.MapaPacientesPorRegiao, error) {
+	qtdPacientesPorRegiao, err := s.repository.PegarQtdPacientesPorRegiao(ctx)
+	if err != nil {
+		return nil, errors.New("Erro ao pegar quantidade de pacientes por região? " + err.Error())
+	}
+	return qtdPacientesPorRegiao, nil
 }

@@ -31,7 +31,7 @@ type GraficoPacientesPorEscolaridadeDTO struct {
 	SuperiorCompleto      string `json:"superior_completo"`
 }
 
-type GraficoPacientesPorRegiao struct {
+type MapaPacientesPorRegiao struct {
 	Bairro     string `json:"bairro"`
 	Quantidade int    `json:"quantidade"`
 }

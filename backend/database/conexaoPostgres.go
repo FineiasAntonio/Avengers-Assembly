@@ -104,7 +104,7 @@ func (c *PostgresClient) FecharConexaoPostgres() {
 
 func IniciarTabelas(db *sql.DB) error {
 	//caminhoConfiguracaoSQL := os.Getenv("CAMINHO_CONFIGURACAO_SQL")
-	content, err := os.ReadFile("C:\\Users\\Fineias\\Documents\\GitHub\\Avengers-Assembly\\config\\sql\\iniciar.sql")
+	content, err := os.ReadFile("../../config/sql/iniciar.sql")
 	if err != nil {
 		return fmt.Errorf("erro ao ler arquivo SQL: %w", err)
 	}

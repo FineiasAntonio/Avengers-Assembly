@@ -1,3 +1,5 @@
+import { pegarDadosQuantidadePacientesPorRegiao } from "../../api/centralAnaliseApi";
+
 let mapa = null;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -30,8 +32,8 @@ async function pegarCoordenadas(cidade) {
         const resposta = await response.json();
 
         if (resposta.length > 0) {
-            const latitude = resposta[0].lat;
-            const longitude = resposta[0].lon;
+            const latitude = parseFloat(resposta[0].lat);
+            const longitude = parseFloat(resposta[0].lon);
             return [latitude, longitude];
         }
         else {
@@ -55,12 +57,17 @@ async function iniciarMapa() {
             'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(mapa);
 
-        const dadosRegioes = [
-            { nome: "Setor Sul", coords: [-16.704, -49.263], quantidade: 80 },
-            { nome: "Setor Aeroporto", coords: [-16.723, -49.233], quantidade: 40 },
-            { nome: "Setor Central", coords: [-16.686, -49.256], quantidade: 60 },
-            { nome: "Setor Universitário", coords: [-16.711, -49.292], quantidade: 50 }
-        ];
+        const response = await pegarDadosQuantidadePacientesPorRegiao();
+
+        const dadosRegioes = await Promise.all(
+            response.map(async (item) => {
+                const cordReg = await pegarCoordenadas(item.bairro+", Goiânia");
+                return {
+                    bairro: item.bairro,
+                    coords: cordReg,
+                    quantidade: item.quantidade,
+                }
+        }))
 
         dadosRegioes.forEach(regiao => {
             L.circle(regiao.coords, {
@@ -69,7 +76,7 @@ async function iniciarMapa() {
                 fillOpacity: 0.5,
                 radius: regiao.quantidade * 20
             }).addTo(mapa)
-                .bindPopup(`<strong>${regiao.nome}</strong><br>${regiao.quantidade} pessoas cadastradas`);
+                .bindPopup(`<strong>${regiao.bairro}</strong><br>${regiao.quantidade} pessoas cadastradas`);
         });
         return mapa;
     }

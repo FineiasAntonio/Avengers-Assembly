@@ -34,7 +34,7 @@ func (handler *CentralAnaliseHandler) PegarQuantidadePacientes(w http.ResponseWr
 		qtdPacientesPorIdade, err := handler.CentralAnaliseServico.PegarQtdPacientesPorIdade(&ctx)
 
 		if err != nil {
-			http.Error(w, "Erro ao pegar pacientes por idade", http.StatusInternalServerError)
+			http.Error(w, "Erro ao pegar pacientes por idade"+err.Error(), http.StatusInternalServerError)
 			return
 		}
 
@@ -48,7 +48,7 @@ func (handler *CentralAnaliseHandler) PegarQuantidadePacientes(w http.ResponseWr
 		qtdPacientesPorRaca, err := handler.CentralAnaliseServico.PegarQtdPacientesPorRaca(&ctx)
 
 		if err != nil {
-			http.Error(w, "Erro ao pegar pacientes por raca", http.StatusInternalServerError)
+			http.Error(w, "Erro ao pegar pacientes por raca"+err.Error(), http.StatusInternalServerError)
 			return
 		}
 
@@ -63,7 +63,7 @@ func (handler *CentralAnaliseHandler) PegarQuantidadePacientes(w http.ResponseWr
 		qtdPacientesPorEscolaridade, err := handler.CentralAnaliseServico.PegarQtdPacientesPorEscolaridade(&ctx)
 
 		if err != nil {
-			http.Error(w, "Erro ao pegar pacientes por escolaridade", http.StatusInternalServerError)
+			http.Error(w, "Erro ao pegar pacientes por escolaridade"+err.Error(), http.StatusInternalServerError)
 			return
 		}
 
@@ -78,7 +78,7 @@ func (handler *CentralAnaliseHandler) PegarQuantidadePacientes(w http.ResponseWr
 		qtdPacientes, err := handler.CentralAnaliseServico.PegarQtdPacientes(&ctx)
 
 		if err != nil {
-			http.Error(w, "Erro ao pegar pacientes", http.StatusInternalServerError)
+			http.Error(w, "Erro ao pegar pacientes"+err.Error(), http.StatusInternalServerError)
 			return
 		}
 
@@ -93,4 +93,24 @@ func (handler *CentralAnaliseHandler) PegarQuantidadePacientes(w http.ResponseWr
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(Objeto)
+}
+
+func (handler *CentralAnaliseHandler) PegarQuantidadePacientesPorRegiao(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "GET" {
+		http.Error(w, "Método não permitido", http.StatusBadRequest)
+		return
+	}
+
+	ctx := r.Context()
+
+	pacientesPorRegiao, err := handler.CentralAnaliseServico.PegarQtdPacientesPorRegiao(&ctx)
+
+	if err != nil {
+		http.Error(w, "Erro ao pegar pacientes por região: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(pacientesPorRegiao)
 }
