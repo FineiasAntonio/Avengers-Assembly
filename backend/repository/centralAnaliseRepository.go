@@ -6,18 +6,18 @@ import (
 	"context"
 )
 
-type MapaRepository struct {
+type CentralAnaliseRepository struct {
 	db *database.PostgresClient
 }
 
-func NewMapaRepository(db *database.PostgresClient) *MapaRepository {
-	return &MapaRepository{
+func NewCentralAnaliseRepository(db *database.PostgresClient) *CentralAnaliseRepository {
+	return &CentralAnaliseRepository{
 		db: db,
 	}
 }
 
-func (r *MapaRepository) PegarQtdPacientes(ctx *context.Context) (*dto.MapaPacientesDTO, error) {
-	var qtdPaciente dto.MapaPacientesDTO
+func (r *CentralAnaliseRepository) PegarQtdPacientes(ctx *context.Context) (*dto.GraficoPacientesDTO, error) {
+	var qtdPaciente dto.GraficoPacientesDTO
 	query := `SELECT COUNT(*) FROM pacientes`
 
 	if err := r.db.DB.QueryRowContext(*ctx, query).Scan(
@@ -28,8 +28,8 @@ func (r *MapaRepository) PegarQtdPacientes(ctx *context.Context) (*dto.MapaPacie
 	return &qtdPaciente, nil
 }
 
-func (r *MapaRepository) PegarQtdPacientesPorIdade(ctx *context.Context) (*dto.MapaPacientesPorIdadeDTO, error) {
-	var qtdPacIdade dto.MapaPacientesPorIdadeDTO
+func (r *CentralAnaliseRepository) PegarQtdPacientesPorIdade(ctx *context.Context) (*dto.GraficoPacientesPorIdadeDTO, error) {
+	var qtdPacIdade dto.GraficoPacientesPorIdadeDTO
 	query := `SELECT
 				COUNT(*),
 				SUM(CASE WHEN idade >= 25 AND idade < 30 THEN 1 ELSE 0 END),
@@ -54,8 +54,8 @@ func (r *MapaRepository) PegarQtdPacientesPorIdade(ctx *context.Context) (*dto.M
 	return &qtdPacIdade, nil
 }
 
-func (r *MapaRepository) PegarQtdPacientesPorRaca(ctx *context.Context) (*dto.MapaPacientesPorRacaDTO, error) {
-	var qtdPacRaca dto.MapaPacientesPorRacaDTO
+func (r *CentralAnaliseRepository) PegarQtdPacientesPorRaca(ctx *context.Context) (*dto.GraficoPacientesPorRacaDTO, error) {
+	var qtdPacRaca dto.GraficoPacientesPorRacaDTO
 	query := `SELECT 
 				SUM(CASE WHEN raca = 'branca' THEN 1 ELSE 0 END),
 				SUM(CASE WHEN raca = 'preta' THEN 1 ELSE 0 END),
@@ -78,8 +78,8 @@ func (r *MapaRepository) PegarQtdPacientesPorRaca(ctx *context.Context) (*dto.Ma
 	return &qtdPacRaca, nil
 }
 
-func (r *MapaRepository) PegarQtdPacientesPorEscolaridade(ctx *context.Context) (*dto.MapaPacientesPorEscolaridadeDTO, error) {
-	var qtdPacEsc dto.MapaPacientesPorEscolaridadeDTO
+func (r *CentralAnaliseRepository) PegarQtdPacientesPorEscolaridade(ctx *context.Context) (*dto.GraficoPacientesPorEscolaridadeDTO, error) {
+	var qtdPacEsc dto.GraficoPacientesPorEscolaridadeDTO
 	query := `SELECT
 				SUM(CASE WHEN escolaridade ILIKE '%analfabeto%' THEN 1 ELSE 0 END),
 				SUM(CASE WHEN escolaridade ILIKE '%fundamental%' AND escolaridade ILIKE '%incompleto%' THEN 1 ELSE 0 END),

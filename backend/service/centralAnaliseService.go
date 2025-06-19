@@ -7,17 +7,17 @@ import (
 	"errors"
 )
 
-type MapaService struct {
-	repository *repository.MapaRepository
+type CentralAnaliseService struct {
+	repository *repository.CentralAnaliseRepository
 }
 
-func NewMapaService(repo *repository.MapaRepository) *MapaService {
-	return &MapaService{
+func NewCentralAnaliseService(repo *repository.CentralAnaliseRepository) *CentralAnaliseService {
+	return &CentralAnaliseService{
 		repository: repo,
 	}
 }
 
-func (s *MapaService) PegarQtdPacientes(ctx *context.Context) (*dto.MapaPacientesDTO, error) {
+func (s *CentralAnaliseService) PegarQtdPacientes(ctx *context.Context) (*dto.GraficoPacientesDTO, error) {
 	qtdPacientes, err := s.repository.PegarQtdPacientes(ctx)
 	if err != nil {
 		return nil, errors.New("Erro ao pegar quantidade de pacientes: " + err.Error())
@@ -25,7 +25,7 @@ func (s *MapaService) PegarQtdPacientes(ctx *context.Context) (*dto.MapaPaciente
 	return qtdPacientes, err
 }
 
-func (s *MapaService) PegarQtdPacientesPorIdade(ctx *context.Context) (*dto.MapaPacientesPorIdadeDTO, error) {
+func (s *CentralAnaliseService) PegarQtdPacientesPorIdade(ctx *context.Context) (*dto.GraficoPacientesPorIdadeDTO, error) {
 	qtdPacientesPorIdade, err := s.repository.PegarQtdPacientesPorIdade(ctx)
 	if err != nil {
 		return nil, errors.New("Erro ao pegar quantidade de pacientes por idade: " + err.Error())
@@ -33,7 +33,7 @@ func (s *MapaService) PegarQtdPacientesPorIdade(ctx *context.Context) (*dto.Mapa
 	return qtdPacientesPorIdade, err
 }
 
-func (s *MapaService) PegarQtdPacientesPorRaca(ctx *context.Context) (*dto.MapaPacientesPorRacaDTO, error) {
+func (s *CentralAnaliseService) PegarQtdPacientesPorRaca(ctx *context.Context) (*dto.GraficoPacientesPorRacaDTO, error) {
 	qtdPacientesPorRaca, err := s.repository.PegarQtdPacientesPorRaca(ctx)
 	if err != nil {
 		return nil, errors.New("Erro ao pegar quantidade de pacientes por raça: " + err.Error())
@@ -41,7 +41,7 @@ func (s *MapaService) PegarQtdPacientesPorRaca(ctx *context.Context) (*dto.MapaP
 	return qtdPacientesPorRaca, err
 }
 
-func (s *MapaService) PegarQtdPacientesPorEscolaridade(ctx *context.Context) (*dto.MapaPacientesPorEscolaridadeDTO, error) {
+func (s *CentralAnaliseService) PegarQtdPacientesPorEscolaridade(ctx *context.Context) (*dto.GraficoPacientesPorEscolaridadeDTO, error) {
 	qtdPacientesPorEscolaridade, err := s.repository.PegarQtdPacientesPorEscolaridade(ctx)
 	if err != nil {
 		return nil, errors.New("Erro ao pegar quantidade de pacientes por escolaridade: " + err.Error())
