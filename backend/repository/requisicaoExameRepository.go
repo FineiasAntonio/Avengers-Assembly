@@ -44,17 +44,17 @@ func (r *RequisicaoExameRepository) CadastrarRequisicaoExame(
 
 	_, err := r.db.DB.ExecContext(*ctx,
 		`INSERT INTO requisicao_exame (
-		protocolo, paciente, motivo_exame, fez_exame_preventido, ano_ultimo_exame, usa_diu,
-		esta_gravida, usa_anticoncepcional, usa_hormonio_monopausa, fez_radioterapia,
-		data_ultima_menstruacao, sangramento_apos_relacoes, sangramento_apos_menopausa,
-		inspecao_colo, sinais_dst, data_coleta, responsavel) VALUES (
-		$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)`,
-		re.Protocolo, re.Paciente, re.MotivoExame, re.FezExamePreventivo,
+		protocolo, paciente, motivoexame, fezexamepreventido, anoultimoexame, usadiu,
+		estagravida, usaanticoncepcional, usahormoniomonopausa, fezradioterapia,
+		dataultimamenstruacao, sangramentoaposrelacoes, sangramentoaposmenopausa,
+		inspecaocolo, sinaisdst, datacoleta, responsavel, resultado, status) VALUES (
+		$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)`,
+		re.Protocolo, re.PacienteID, re.MotivoExame, re.FezExamePreventivo,
 		re.AnoUltimoExame, re.UsaDIU, re.EstaGravida,
 		re.UsaAnticoncepcional, re.UsaHormonioMenopausa,
 		re.FezRadioterapia, re.DataUltimaMenstruacao, re.SangramentoAposRelacoes,
 		re.SangramentoAposMenopausa, re.InspecaoColo, re.SinaisDST, re.DataColeta,
-		re.Responsavel)
+		re.ResponsavelRegistro, re.ResultadoID, re.Status)
 
 	if err != nil {
 		return fmt.Errorf("Erro ao Cadastrar Requisição Exame: %v", err)

@@ -76,4 +76,29 @@ CREATE TABLE IF NOT EXISTS agendamento_exame (
     FOREIGN KEY (unidade) REFERENCES unidade_saude(cnes),
     FOREIGN KEY (paciente) REFERENCES paciente(cartaosus),
     FOREIGN KEY (profissional) REFERENCES usuario(registro)
-)
+);
+
+CREATE TABLE IF NOT EXISTS requisicao_exame (
+    protocolo VARCHAR(10) PRIMARY KEY,
+    paciente VARCHAR(10) NOT NULL,
+    motivoexame VARCHAR(255),
+    fezexamepreventivo BOOLEAN,
+    anoultimoexame VARCHAR(4),
+    usadiu VARCHAR(10),
+    estagravida VARCHAR(10),
+    usaanticoncepcional VARCHAR(10),
+    usahormoniomenopausa VARCHAR(10),
+    fezradioterapia VARCHAR(10),
+    dataultimamenstruacao TIMESTAMP,
+    sangramentoaposrelacoes VARCHAR(10),
+    sangramentoaposmenopausa VARCHAR(10),
+    inspecaocolo VARCHAR(10),
+    sinaisdst BOOLEAN,
+    datacoleta TIMESTAMP NOT NULL,
+    responsavel VARCHAR(10) NOT NULL,
+    resultado VARCHAR(10),
+    status VARCHAR(20) NOT NULL,
+
+    FOREIGN KEY (paciente) REFERENCES paciente(cartaosus),
+    FOREIGN KEY (responsavel) REFERENCES usuario(registro)
+);

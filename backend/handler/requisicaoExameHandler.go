@@ -5,6 +5,7 @@ import (
 	"backend/model"
 	"backend/service"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -17,18 +18,19 @@ func NewRequisicaoExameHandler(res *service.RequisicaoExameService) *RequisicaoE
 	return &RequisicaoExameHandler
 }
 
-func (handler *RequisicaoExameHandler) CadastrarRequisicaoExame(w http.ResponseWriter,
-	r *http.Request) {
+func (handler *RequisicaoExameHandler) CadastrarRequisicaoExame(w http.ResponseWriter, r *http.Request) {
 	var requisicaoExame model.RequisicaoExame
 	if err := json.NewDecoder(r.Body).Decode(&requisicaoExame); err != nil {
 		http.Error(w, exceptions.ErroRequisicaoInvalida.Error(), http.StatusBadRequest)
 		return
 	}
 
+	fmt.Println(requisicaoExame)
+
 	ctx := r.Context()
 
-	if err := handler.RequisicaoExameServico.CadastrarRequisicaoExame(&ctx,
-		&requisicaoExame); err != nil {
+	if err := handler.RequisicaoExameServico.CadastrarRequisicaoExame(&ctx, &requisicaoExame); err != nil {
+		fmt.Println(err.Error())
 		http.Error(w, "Erro ao cadastrar requisição exame: "+err.Error(), http.StatusInternalServerError)
 		return
 	}

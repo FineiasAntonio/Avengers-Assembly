@@ -8,6 +8,8 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
+	"strings"
 	"time"
 
 	"golang.org/x/crypto/bcrypt"
@@ -38,12 +40,10 @@ func ConectarPostgres(cfg config.PostgresConfig) (*PostgresClient, error) {
 		return nil, fmt.Errorf("Erro ao tentar conectar com o PostgreSQL: %w", err)
 	}
 
-	// Configurações da pool de conexões
 	db.SetMaxOpenConns(10)
 	db.SetMaxIdleConns(2)
 	db.SetConnMaxLifetime(time.Minute * 5)
 
-	// Verifica a conexão
 	if err := db.PingContext(ctx); err != nil {
 		return nil, fmt.Errorf("Erro ao tentar se comunicar com o PostgreSQL: %w", err)
 	}
@@ -103,8 +103,8 @@ func (c *PostgresClient) FecharConexaoPostgres() {
 }
 
 func IniciarTabelas(db *sql.DB) error {
-	/*caminhoConfiguracaoSQL := os.Getenv("CAMINHO_CONFIGURACAO_SQL")
-	content, err := os.ReadFile(caminhoConfiguracaoSQL)
+	//caminhoConfiguracaoSQL := os.Getenv("CAMINHO_CONFIGURACAO_SQL")
+	content, err := os.ReadFile("C:\\Users\\Fineias\\Documents\\GitHub\\Avengers-Assembly\\config\\sql\\iniciar.sql")
 	if err != nil {
 		return fmt.Errorf("erro ao ler arquivo SQL: %w", err)
 	}
@@ -121,7 +121,7 @@ func IniciarTabelas(db *sql.DB) error {
 		if err != nil {
 			return fmt.Errorf("erro ao executar comando '%s': %w", query, err)
 		}
-	}*/
+	}
 
 	return nil
 }
