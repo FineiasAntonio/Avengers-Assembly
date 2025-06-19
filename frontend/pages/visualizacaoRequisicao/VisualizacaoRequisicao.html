@@ -15,6 +15,7 @@
     rel="stylesheet">
   <link rel="stylesheet" href="VisualizacaoRequisicao.css">
   <script src="../../components/navbar/navbar.js" type="module"></script>
+  <script src="./VisualizaçãoRequisicao.js" type="module"></script>
   <title>Informações Exame</title>
 </head>
 
@@ -61,7 +62,7 @@
       <legend>Dados da Anamnese</legend>
       <div class="grid">
         <label>Motivo do exame
-          <select>
+          <select id="motivoExame">
             <option value="" hidden>Selecione</option>
             <option value="Normal">Rastreamento</option>
             <option value="Ausente">Repetição (exame alterado ASCUS/Baixo grau)</option>
@@ -158,7 +159,7 @@
       <legend>Exame Clínico</legend>
       <div class="grid">
         <label>Inspeção do colo
-          <select>
+          <select id="inspecaoColo">
             <option value="" hidden>Selecione</option>
             <option value="Normal">Normal</option>
             <option value="Ausente">Ausente</option>
@@ -166,18 +167,19 @@
             <option value="Colo não vizualizado">Colo não visualizado</option>
           </select>
         </label>
-        <label>Sinais sugestivos de DSTs <input type="checkbox" /></label>
-        <label>Data da Coleta <input type="date" /></label>
-        <label>Registro Responsável <input type="text" /></label>
+        <label>Sinais sugestivos de DSTs <input type="checkbox" id="sinaisDST" /></label>
+        <label>Data da Coleta <input type="date" id="dataColeta" /></label>
+        <label>Registro Responsável <input type="text" id="registroResponsavel" /></label>
+        <label id="nomeProfissional" style="grid-column: 1 / -1; color: #666; font-style: italic;"></label>
       </div>
     </fieldset>
 
     <div class="buttons">
       <button class="botao1" onclick="history.back()">Cancelar</button>
-      <button class="botao1" onclick="window.location.href='VisualizacaoRequisicaopt2.html'">Próximo</button>
+      <button class="botao1" id="submitRequisicao">Enviar Requisição</button>
     </div>
   </div>
-  <script src="./VisualizaçãoRequisicao.js" type="module"></script>
+  
 </body>
 
 </html>

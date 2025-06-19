@@ -1,36 +1,16 @@
 import { pegarUnidadeUsuario } from "../../shared/gerenciador-permissoes.js";
 import { listarUnidade } from "../../api/unidadeApi.js";
 import { listarPaciente } from "../../api/pacienteApi.js";
+import { listarUsuario } from "../../api/usuarioApi.js";
+import { CadastroRequisicao } from "../../api/cadastroApi.js";
 
-buscaPaciente.addEventListener('blur', (event) => {
-
-    if (!event.target.value) {
-        return;
-    }
-
-    listarPaciente(event.target.value).then(resultado => {
-        cartaoSus.value = resultado.cartao_sus || '';
-        nomePaciente.value = resultado.nome || '';
-        idadePaciente.value = resultado.idade || '';
-        dataNascimento.value = resultado.data_nascimento || '';
-        nomeMae.value = resultado.nome_mae || '';
-        enderecoPaciente.value = `${resultado.endereco.logradouro}, ${resultado.endereco.numero}, ${resultado.endereco.complemento}, ${resultado.endereco.bairro}` || '';
-        telefonePaciente.value = resultado.telefone || '';
-        nacionalidadePaciente.value = resultado.nacionalidade || '';
-        racaCorPaciente.value = resultado.raca || '';
-        escolaridadePaciente.value = resultado.escolaridade || '';
-    }).catch(error => {
-        console.error("Erro ao buscar paciente:", error);
-    });
-});
-
-window.addEventListener('DOMContentLoaded', () => {
-
-    const unidadeCnes = document.getElementById("unidadeCnes")
-    const unidadeNome = document.getElementById("unidadeNome")
-    const unidadeEndereco = document.getElementById("unidadeEndereco")
+window.addEventListener("DOMContentLoaded", () => {
+    const unidadeCnes = document.getElementById("unidadeCnes");
+    const unidadeNome = document.getElementById("unidadeNome");
+    const unidadeEndereco = document.getElementById("unidadeEndereco");
 
     const buscaPaciente = document.getElementById("buscaPaciente");
+    const submitRequisicao = document.getElementById("submitRequisicao");
 
     const cpfPaciente = document.getElementById("cpfPaciente");
     const cartaoSus = document.getElementById("cartaoSus");
@@ -40,35 +20,125 @@ window.addEventListener('DOMContentLoaded', () => {
     const nomeMae = document.getElementById("nomeMae");
     const enderecoPaciente = document.getElementById("enderecoPaciente");
     const telefonePaciente = document.getElementById("telefonePaciente");
-    const nacionalidadePaciente = document.getElementById("nacionalidadePaciente");
+    const nacionalidadePaciente = document.getElementById(
+        "nacionalidadePaciente"
+    );
     const racaCorPaciente = document.getElementById("racaCorPaciente");
     const escolaridadePaciente = document.getElementById("escolaridadePaciente");
 
-    buscaPaciente.addEventListener('blur', (event) => {
+    const motivoExame = document.getElementById("motivoExame");
+    const fezExame = document.getElementById("fezExame");
+    const anoUltimoExame = document.getElementById("anoUltimoExame");
+    const usaDIU = document.getElementById("usaDIU");
+    const estaGravida = document.getElementById("estaGravida");
+    const usaAnticoncepcional = document.getElementById("usaAnticoncepcional");
+    const usaHormonio = document.getElementById("usaHormonio");
+    const fezRadioterapia = document.getElementById("fezRadioterapia");
+    const teveSangramentoRelacoes = document.getElementById(
+        "teveSangramentoRelacoes"
+    );
+    const teveSangramentoMenopausa = document.getElementById(
+        "teveSangramentoMenopausa"
+    );
+    const ultimaMenstruacao = document.getElementById("ultimaMenstruação");
+
+    const inspecaoColo = document.getElementById("inspecaoColo");
+    const sinaisDST = document.getElementById("sinaisDST");
+    const dataColeta = document.getElementById("dataColeta");
+    const registroResponsavel = document.getElementById("registroResponsavel");
+    const nomeProfissional = document.getElementById("nomeProfissional");
+
+    buscaPaciente.addEventListener("blur", (event) => {
         if (!event.target.value) {
             return;
         }
 
-        listarPaciente(event.target.value).then(resultado => {
-            cpfPaciente.textContent += `${resultado.cpf.slice(0, 3)}.${resultado.cpf.slice(3, 6)}.${resultado.cpf.slice(6, 9)}-${resultado.cpf.slice(9, 11)}` || '';
-            cartaoSus.textContent += resultado.cartao_sus || '';
-            nomePaciente.textContent += resultado.nome || '';
-            idadePaciente.textContent += `${resultado.idade} anos` || '';
-            dataNascimento.textContent += new Date(resultado.data_nascimento).toLocaleDateString('pt-BR') || '';
-            nomeMae.textContent += resultado.nome_mae || '';
-            enderecoPaciente.textContent += `${resultado.endereco.logradouro}, ${resultado.endereco.numero}, ${resultado.endereco.complemento}, ${resultado.endereco.bairro}, ${resultado.endereco.municipio} - ${resultado.endereco.uf}, ${resultado.endereco.cep}` || '';
-            telefonePaciente.textContent += `(${resultado.telefone.slice(0, 2)}) ${resultado.telefone.slice(2, 7)}-${resultado.telefone.slice(7, 11)}` || '';
-            nacionalidadePaciente.textContent += resultado.nacionalidade || '';
-            racaCorPaciente.textContent += resultado.raca || '';
-            escolaridadePaciente.textContent += resultado.escolaridade || '';
-        }).catch(error => {
-            console.error("Erro ao buscar paciente:", error);
-        });
+        listarPaciente(event.target.value)
+            .then((resultado) => {
+                cpfPaciente.textContent +=
+                    `${resultado.cpf.slice(0, 3)}.${resultado.cpf.slice(
+                        3,
+                        6
+                    )}.${resultado.cpf.slice(6, 9)}-${resultado.cpf.slice(9, 11)}` || "";
+                cartaoSus.textContent += resultado.cartao_sus || "";
+                nomePaciente.textContent += resultado.nome || "";
+                idadePaciente.textContent += `${resultado.idade} anos` || "";
+                dataNascimento.textContent +=
+                    new Date(resultado.data_nascimento).toLocaleDateString("pt-BR") || "";
+                nomeMae.textContent += resultado.nome_mae || "";
+                enderecoPaciente.textContent +=
+                    `${resultado.endereco.logradouro}, ${resultado.endereco.numero}, ${resultado.endereco.complemento}, ${resultado.endereco.bairro}, ${resultado.endereco.municipio} - ${resultado.endereco.uf}, ${resultado.endereco.cep}` ||
+                    "";
+                telefonePaciente.textContent +=
+                    `(${resultado.telefone.slice(0, 2)}) ${resultado.telefone.slice(
+                        2,
+                        7
+                    )}-${resultado.telefone.slice(7, 11)}` || "";
+                nacionalidadePaciente.textContent += resultado.nacionalidade || "";
+                racaCorPaciente.textContent += resultado.raca || "";
+                escolaridadePaciente.textContent += resultado.escolaridade || "";
+
+                buscaPaciente.disabled = true;
+            })
+            .catch((error) => {
+                console.error("Erro ao buscar paciente:", error);
+            });
     });
 
-    listarUnidade(pegarUnidadeUsuario()).then(resultado => {
-        unidadeCnes.textContent = resultado.cnes
-        unidadeNome.textContent = resultado.nome
-        unidadeEndereco.textContent = `${resultado.endereco.logradouro}, ${resultado.endereco.numero} - ${resultado.endereco.bairro}, ${resultado.endereco.municipio} - ${resultado.endereco.uf}, ${resultado.endereco.cep}`
-    })
+    submitRequisicao.addEventListener("click", () => {
+        const requisicao = {
+            paciente_id: cartaoSus.textContent.split(":")[1].trim(),
+            motivo_exame: motivoExame.value,
+            fez_exame_preventivo: fezExame.checked,
+            ano_ultimo_exame: anoUltimoExame.value,
+            usa_diu: usaDIU.value,
+            esta_gravida: estaGravida.value,
+            usa_anticoncepcional: usaAnticoncepcional.value,
+            usa_hormonio_menopausa: usaHormonio.value,
+            fez_radioterapia: fezRadioterapia.value,
+            data_ultima_menstruacao: new Date(ultimaMenstruacao.value).toISOString(),
+            sangramento_apos_relacoes: teveSangramentoRelacoes.value,
+            sangramento_apos_menopausa: teveSangramentoMenopausa.value,
+            inspecao_colo: inspecaoColo.value,
+            sinais_dst: sinaisDST.checked,
+            data_coleta: new Date(dataColeta.value).toISOString(),
+            responsavel_registro: registroResponsavel.value,
+        };
+
+        enviarRequisicaoExame(requisicao);
+    });
+
+    registroResponsavel.addEventListener("blur", (event) => {
+        const registro = event.target.value.trim();
+
+        if (registro.length > 0) {
+            listarUsuario(registro)
+                .then((profissional) => {
+                    if (profissional) {
+                        nomeProfissional.textContent = `Profissional: ${profissional.nome}`;
+                        nomeProfissional.style.color = "#2c3e50";
+                    } else {
+                        nomeProfissional.textContent = "Profissional não encontrado";
+                        nomeProfissional.style.color = "#e74c3c";
+                    }
+                })
+                .catch((error) => {
+                    console.error("Erro ao buscar profissional:", error);
+                    nomeProfissional.textContent = "Erro ao buscar profissional";
+                    nomeProfissional.style.color = "#e74c3c";
+                });
+        } else {
+            nomeProfissional.textContent = "";
+        }
+    });
+
+    listarUnidade(pegarUnidadeUsuario()).then((resultado) => {
+        unidadeCnes.textContent = resultado.cnes;
+        unidadeNome.textContent = resultado.nome;
+        unidadeEndereco.textContent = `${resultado.endereco.logradouro}, ${resultado.endereco.numero} - ${resultado.endereco.bairro}, ${resultado.endereco.municipio} - ${resultado.endereco.uf}, ${resultado.endereco.cep}`;
+    });
 });
+
+function enviarRequisicaoExame(requisicao) {
+    CadastroRequisicao(requisicao);
+}

@@ -5,7 +5,6 @@ import (
 	"backend/model"
 	"backend/service"
 	"encoding/json"
-	"fmt"
 	"net/http"
 )
 
@@ -25,12 +24,9 @@ func (handler *RequisicaoExameHandler) CadastrarRequisicaoExame(w http.ResponseW
 		return
 	}
 
-	fmt.Println(requisicaoExame)
-
 	ctx := r.Context()
 
 	if err := handler.RequisicaoExameServico.CadastrarRequisicaoExame(&ctx, &requisicaoExame); err != nil {
-		fmt.Println(err.Error())
 		http.Error(w, "Erro ao cadastrar requisição exame: "+err.Error(), http.StatusInternalServerError)
 		return
 	}

@@ -44,8 +44,8 @@ func (r *RequisicaoExameRepository) CadastrarRequisicaoExame(
 
 	_, err := r.db.DB.ExecContext(*ctx,
 		`INSERT INTO requisicao_exame (
-		protocolo, paciente, motivoexame, fezexamepreventido, anoultimoexame, usadiu,
-		estagravida, usaanticoncepcional, usahormoniomonopausa, fezradioterapia,
+		protocolo, paciente, motivoexame, fezexamepreventivo, anoultimoexame, usadiu,
+		estagravida, usaanticoncepcional, usahormoniomenopausa, fezradioterapia,
 		dataultimamenstruacao, sangramentoaposrelacoes, sangramentoaposmenopausa,
 		inspecaocolo, sinaisdst, datacoleta, responsavel, resultado, status) VALUES (
 		$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)`,

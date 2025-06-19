@@ -85,7 +85,7 @@ func main() {
 		porta = "8080"
 	}
 
-	log.Printf("Servidor rodando na porta %s...", porta)
+	log.Printf("Servidor rodando na porta %s", porta)
 	if err := http.ListenAndServe(":"+porta, handerRotas); err != nil {
 		log.Fatalf("Erro ao iniciar o servidor HTTP: %v", err)
 	}
