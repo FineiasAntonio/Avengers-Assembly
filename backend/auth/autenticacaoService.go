@@ -20,10 +20,10 @@ type ServicoAutenticacao struct {
 }
 
 type Claims struct {
-	Nome      string `json:"nome"`
-	CPF       string `json:"cpf"`
-	Permissao string `json:"permissao"`
-	CNES      string `json:"cnes"`
+	Nome      string  `json:"nome"`
+	CPF       string  `json:"cpf"`
+	Permissao string  `json:"permissao"`
+	CNES      *string `json:"cnes"`
 	jwt.StandardClaims
 }
 
@@ -41,7 +41,7 @@ func (s *ServicoAutenticacao) GerarToken(usuario *model.Usuario) (string, error)
 		Nome:      usuario.Nome,
 		CPF:       usuario.CPF,
 		Permissao: usuario.Permissao,
-		CNES:      *usuario.UnidadeSaudeCNES,
+		CNES:      usuario.UnidadeSaudeCNES,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 		},
