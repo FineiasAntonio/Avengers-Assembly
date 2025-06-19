@@ -15,6 +15,7 @@ type Router struct {
 	agendamentoHandler     *handler.AgendamentoHandler
 	requisicaoExameHandler *handler.RequisicaoExameHandler
 	unidadadeHandler       *handler.UnidadeHandler
+	CentralAnaliseHandler  *handler.CentralAnaliseHandler
 }
 
 func NewRotas(
@@ -25,6 +26,7 @@ func NewRotas(
 	agendamentoHandler *handler.AgendamentoHandler,
 	requisicaoExameHandler *handler.RequisicaoExameHandler,
 	unidadeHandler *handler.UnidadeHandler,
+	CentralAnaliseHandler *handler.CentralAnaliseHandler,
 ) *Router {
 	return &Router{
 		autenticacaoMiddleware: autenticacaoMiddleware,
@@ -34,6 +36,7 @@ func NewRotas(
 		agendamentoHandler:     agendamentoHandler,
 		requisicaoExameHandler: requisicaoExameHandler,
 		unidadadeHandler:       unidadeHandler,
+		CentralAnaliseHandler:  CentralAnaliseHandler,
 	}
 }
 
@@ -60,6 +63,8 @@ func (r *Router) SetupRotas() http.Handler {
 
 	rotasProtegidas.HandleFunc("GET /api/unidade", r.unidadadeHandler.ListarUnidade)
 	rotasProtegidas.HandleFunc("POST /api/unidade", r.unidadadeHandler.CadastrarUnidade)
+
+	rotasProtegidas.HandleFunc("GET /api/graficos", r.CentralAnaliseHandler.PegarQuantidadePacientes)
 
 	rotasComuns.Handle("/api/", handlersProtegidos)
 

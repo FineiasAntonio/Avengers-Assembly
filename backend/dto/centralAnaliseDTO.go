@@ -1,10 +1,10 @@
 package dto
 
-type MapaPacientesDTO struct {
+type GraficoPacientesDTO struct {
 	QuantidadePacientes int `json:"quantidade_pacientes"`
 }
 
-type MapaPacientesPorIdadeDTO struct {
+type GraficoPacientesPorIdadeDTO struct {
 	Total    int `json:"total"`
 	Qtd25a30 int `json:"qtd_25_a_30"`
 	Qtd30a40 int `json:"qtd_30_a_40"`
@@ -13,7 +13,7 @@ type MapaPacientesPorIdadeDTO struct {
 	Qtd60a65 int `json:"qtd_60_a_65"`
 }
 
-type MapaPacientesPorRacaDTO struct {
+type GraficoPacientesPorRacaDTO struct {
 	Branca   string `json:"branca"`
 	Preta    string `json:"preta"`
 	Parda    string `json:"parda"`
@@ -21,7 +21,7 @@ type MapaPacientesPorRacaDTO struct {
 	Indigena string `json:"indigena"`
 }
 
-type MapaPacientesPorEscolaridadeDTO struct {
+type GraficoPacientesPorEscolaridadeDTO struct {
 	Analfabeta            string `json:"analfabeta"`
 	FundamentalIncompleto string `json:"fundamental_incompleto"`
 	FundamentalCompleto   string `json:"fundamental_completo"`
@@ -31,7 +31,7 @@ type MapaPacientesPorEscolaridadeDTO struct {
 	SuperiorCompleto      string `json:"superior_completo"`
 }
 
-type MapaPacientesPorRegiao struct {
+type GraficoPacientesPorRegiao struct {
 	Bairro     string `json:"bairro"`
 	Quantidade int    `json:"quantidade"`
 }
