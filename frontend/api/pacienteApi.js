@@ -7,7 +7,6 @@ export async function listarPaciente(pacienteChave) {
     const url = new URL(API_ENDERECO + "paciente")
     url.searchParams.append('paciente', pacienteChave)
 
-
     const response = await fetch(url, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },

@@ -37,3 +37,20 @@ export async function AlterarSenhaRequisicao(novaSenha) {
 
     return await response.json()
 }
+
+export async function listarUsuario(registro) {
+    const url = new URL(API_ENDERECO + "usuario")
+    url.searchParams.append('registro', registro)
+
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+    })
+
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status} - ${response.body}` }))
+        throw new Error(errorData.message)
+    }
+
+    return await response.json()
+}

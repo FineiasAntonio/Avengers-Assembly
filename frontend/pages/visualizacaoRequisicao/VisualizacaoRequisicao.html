@@ -13,9 +13,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="VisualizacaoRequisicao.css">
+  <link rel="stylesheet" href="CadastroRequisicao.css">
   <script src="../../components/navbar/navbar.js" type="module"></script>
-  <script src="./VisualizaçãoRequisicao.js" type="module"></script>
+  <script src="./VisualizacaoRequisicao.js" type="module"></script>
   <title>Informações Exame</title>
 </head>
 
@@ -38,7 +38,7 @@
       <div class="grid">
         <label style="grid-column: 1 / -1;">
           Buscar por CPF ou Cartão do SUS
-          <input type="text" id="buscaPaciente" placeholder="Digite CPF ou nº do Cartão SUS" />
+          <p id="buscaPaciente"></p>
         </label>
 
         <label class="dado-paciente" id="cpfPaciente">CPF: </label>
@@ -62,96 +62,46 @@
       <legend>Dados da Anamnese</legend>
       <div class="grid">
         <label>Motivo do exame
-          <select id="motivoExame">
-            <option value="" hidden>Selecione</option>
-            <option value="Normal">Rastreamento</option>
-            <option value="Ausente">Repetição (exame alterado ASCUS/Baixo grau)</option>
-            <option value="Alterado">Seguimento (pós diagnóstico colposcópico / tratamento)</option>
-          </select>
+          <p id="motivoExame"></p>
         </label>
 
-        <label style="grid-column: 1 / -1;">Fez o exame preventivo (Papanicolaou) <input type="checkbox"
-            id="fezExame" /></label>
-        <label>Ano do último exame <input type="text" id="anoUltimoExame" disabled /></label>
-        <script>
-          const fezExameCheckbox = document.getElementById('fezExame');
-
-          if (fezExameCheckbox) {
-            fezExameCheckbox.addEventListener('change', function () {
-              const anoUltimoExameInput = document.getElementById('anoUltimoExame');
-              if (this.checked) {
-                anoUltimoExameInput.disabled = false;
-              } else {
-                anoUltimoExameInput.disabled = true;
-                anoUltimoExameInput.value = '';
-              }
-            });
-          }
-        </script>
+        <label style="grid-column: 1 / -1;">Fez o exame preventivo (Papanicolaou) 
+          <p id="fezExame"></p>
+        </label>
+        <label>Ano do último exame 
+          <p id="anoUltimoExame"></p>
+        </label>
 
         <label>Usa DIU?
-          <select id="usaDIU">
-            <option value="" hidden>Selecione</option>
-            <option value="Não">Não</option>
-            <option value="Sim">Sim</option>
-            <option value="Não lembra">Não lembra</option>
-          </select>
+          <p id="usaDIU"></p>
         </label>
 
         <label>Está grávida?
-          <select id="estaGravida">
-            <option value="" hidden>Selecione</option>
-            <option value="Não">Não</option>
-            <option value="Sim">Sim</option>
-            <option value="Não lembra">Não lembra</option>
-          </select>
+          <p id="estaGravida"></p>
         </label>
 
         <label>Usa pílula anticoncepcional?
-          <select id="usaAnticoncepcional">
-            <option value="" hidden>Selecione</option>
-            <option value="Não">Não</option>
-            <option value="Sim">Sim</option>
-            <option value="Não lembra">Não lembra</option>
-          </select>
+          <p id="usaAnticoncepcional"></p>
         </label>
 
         <label>Usa hormônio/remédio para tratar a menopausa?
-          <select id="usaHormonio">
-            <option value="" hidden>Selecione</option>
-            <option value="Não">Não</option>
-            <option value="Sim">Sim</option>
-            <option value="Não lembra">Não lembra</option>
-          </select>
+          <p id="usaHormonio"></p>
         </label>
 
         <label>Já fez tratamento por radioterapia?
-          <select id="fezRadioterapia">
-            <option value="" hidden>Selecione</option>
-            <option value="Não">Não</option>
-            <option value="Sim">Sim</option>
-            <option value="Não lembra">Não lembra</option>
-          </select>
+          <p id="fezRadioterapia"></p>
         </label>
 
         <label>Tem ou teve algum sangramento após relações sexuais?
-          <select id="teveSangramentoRelacoes">
-            <option value="" hidden>Selecione</option>
-            <option value="Não">Não</option>
-            <option value="Sim">Sim</option>
-            <option value="Não lembra">Não lembra</option>
-          </select>
+          <p id="teveSangramentoRelacoes"></p>
         </label>
 
         <label>Tem ou teve algum sangramento após a menopausa?
-          <select id="teveSangramentoMenopausa">
-            <option value="" hidden>Selecione</option>
-            <option value="Não">Não</option>
-            <option value="Sim">Sim</option>
-            <option value="Não lembra">Não lembra</option>
-          </select>
+          <p id="teveSangramentoMenopausa"></p>
         </label>
-        <label>Data da última menstruação <input type="date" id="ultimaMenstruação" /></label>
+        <label>Data da última menstruação 
+          <p id="ultimaMenstruação"></p>
+        </label>
       </div>
     </fieldset>
 
@@ -159,25 +109,29 @@
       <legend>Exame Clínico</legend>
       <div class="grid">
         <label>Inspeção do colo
-          <select id="inspecaoColo">
-            <option value="" hidden>Selecione</option>
-            <option value="Normal">Normal</option>
-            <option value="Ausente">Ausente</option>
-            <option value="Alterado">Alterado</option>
-            <option value="Colo não vizualizado">Colo não visualizado</option>
-          </select>
+          <p id="inspecaoColo"></p>
         </label>
-        <label>Sinais sugestivos de DSTs <input type="checkbox" id="sinaisDST" /></label>
-        <label>Data da Coleta <input type="date" id="dataColeta" /></label>
-        <label>Registro Responsável <input type="text" id="registroResponsavel" /></label>
-        <label id="nomeProfissional" style="grid-column: 1 / -1; color: #666; font-style: italic;"></label>
+        <label>Sinais sugestivos de DSTs 
+          <p id="sinaisDST"></p>
+        </label>
+        <label>Data da Coleta 
+          <p id="dataColeta"></p>
+        </label>
       </div>
     </fieldset>
 
-    <div class="buttons">
-      <button class="botao1" onclick="history.back()">Cancelar</button>
-      <button class="botao1" id="submitRequisicao">Enviar Requisição</button>
-    </div>
+    <fieldset>
+      <legend>Profissional Responsável</legend>
+      <div class="grid">
+        <label>Registro Responsável 
+          <p id="registroResponsavel"></p>
+        </label>
+        <label>Nome Responsável 
+          <p id="nomeResponsavel"></p>
+        </label>
+      </div>
+    </fieldset>
+
   </div>
   
 </body>

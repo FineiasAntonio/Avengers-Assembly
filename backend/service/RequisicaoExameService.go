@@ -3,6 +3,7 @@ package service
 import (
 	"backend/model"
 	"backend/repository"
+	"backend/util"
 	"context"
 	"errors"
 )
@@ -16,9 +17,10 @@ func NewRequisicaoExameService(re *repository.RequisicaoExameRepository) *Requis
 	return &RequisicaoExameService
 }
 
-func (r *RequisicaoExameService) CadastrarRequisicaoExame(ctx *context.Context,	requisicaoExame *model.RequisicaoExame) error {
-	
+func (r *RequisicaoExameService) CadastrarRequisicaoExame(ctx *context.Context, requisicaoExame *model.RequisicaoExame) error {
+
 	requisicaoExame.Status = string(model.AGUARDANDO)
+	requisicaoExame.Protocolo = util.GerarId(10)
 
 	if err := r.repository.CadastrarRequisicaoExame(ctx, requisicaoExame); err != nil {
 		return errors.New("erro ao cadastrar requisicao exame: " + err.Error())
@@ -26,8 +28,7 @@ func (r *RequisicaoExameService) CadastrarRequisicaoExame(ctx *context.Context,	
 	return nil
 }
 
-func (r *RequisicaoExameService) GetRequisicaoExameByProtocolo(ctx *context.Context,
-	protocolo string) (*model.RequisicaoExame, error) {
+func (r *RequisicaoExameService) GetRequisicaoExameByProtocolo(ctx *context.Context, protocolo string) (*model.RequisicaoExame, error) {
 	requisicaoExame, err := r.repository.GetRequisicaoExameByProtocolo(ctx, protocolo)
 
 	if err != nil {

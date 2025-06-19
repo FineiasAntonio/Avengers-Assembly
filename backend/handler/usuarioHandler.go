@@ -85,7 +85,7 @@ func (handler *UsuarioHandler) GetUsuario(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	parametro := r.URL.Query().Get("parametro")
+	parametro := r.URL.Query().Get("registro")
 	if parametro == "" {
 		http.Error(w, "Parametro não fornecido", http.StatusBadRequest)
 		return

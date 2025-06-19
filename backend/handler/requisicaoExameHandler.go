@@ -5,6 +5,7 @@ import (
 	"backend/model"
 	"backend/service"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -42,7 +43,7 @@ func (handler *RequisicaoExameHandler) GetRequisicaoExameByProtocolo(w http.Resp
 		return
 	}
 
-	protocolo := r.URL.Query().Get("parametro")
+	protocolo := r.URL.Query().Get("protocolo")
 	if protocolo == "" {
 		http.Error(w, "Protocolo não fornecido", http.StatusBadRequest)
 		return
@@ -55,6 +56,7 @@ func (handler *RequisicaoExameHandler) GetRequisicaoExameByProtocolo(w http.Resp
 	requisicaoExame, err := handler.RequisicaoExameServico.GetRequisicaoExameByProtocolo(&ctx, protocolo)
 
 	if err != nil {
+		fmt.Println(err.Error())
 		http.Error(w, exceptions.ErroInterno.Error(), http.StatusInternalServerError)
 		return
 	}

@@ -140,5 +140,6 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 function enviarRequisicaoExame(requisicao) {
+    console.log("Enviando requisição de exame:", requisicao);
     CadastroRequisicao(requisicao);
 }

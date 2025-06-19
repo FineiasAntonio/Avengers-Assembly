@@ -1,9 +1,9 @@
 import { API_ENDERECO } from "../environment/environment.js";
 import "../shared/interceptor.js"
 
-export async function CadastroRequisição(objeto, endPoint) {
+export async function CadastroRequisicao(objeto) {
     try {
-        const response = await fetch(API_ENDERECO + endPoint, {
+        const response = await fetch(API_ENDERECO + "requisicaoExame", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(objeto)
@@ -20,9 +20,9 @@ export async function CadastroRequisição(objeto, endPoint) {
     }
 };
 
-export async function GetDadosCadastrados(parametro, endPoint) {
-    const url = new URL(API_ENDERECO+endPoint);
-    url.searchParams.append('parametro', parametro);
+export async function ListarRequisicaoExame(protocolo) {
+    const url = new URL(API_ENDERECO + "requisicaoExame");
+    url.searchParams.append('protocolo', protocolo);
 
     try {
         const response = await fetch(url, {
