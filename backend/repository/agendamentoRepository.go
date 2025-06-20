@@ -29,7 +29,7 @@ func (r *AgendamentoRepository) AgendarExame(ctx *context.Context, agendamento *
 	return nil
 }
 
-func (r *AgendamentoRepository) ConsultarHorariosOcupados(ctx *context.Context, data string, cnes string) (*[]dto.HorariosOcupados, error) {
+func (r *AgendamentoRepository) ConsultarHorariosOcupados(ctx *context.Context, data string, cnes string) (*[]string, *[]dto.HorariosOcupados, error) {
 	resultado, err := r.db.DB.QueryContext(
 		*ctx,
 		"SELECT profissional.nome, agendamento.data FROM agendamento_exame agendamento JOIN usuario profissional ON agendamento.profissional = profissional.registro WHERE CAST(agendamento.data AS DATE) = $1 AND agendamento.unidade = $2 AND profissional.permissao = 'ACESSO_EXAMES'",
@@ -38,7 +38,7 @@ func (r *AgendamentoRepository) ConsultarHorariosOcupados(ctx *context.Context, 
 	defer resultado.Close()
 
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	var horariosOcupados []dto.HorariosOcupados
@@ -46,10 +46,31 @@ func (r *AgendamentoRepository) ConsultarHorariosOcupados(ctx *context.Context, 
 	for resultado.Next() {
 		var horarioOcupado dto.HorariosOcupados
 		if err := resultado.Scan(&horarioOcupado.Profissional, &horarioOcupado.Data); err != nil {
-			return nil, err
+			return nil, nil, err
 		}
 		horariosOcupados = append(horariosOcupados, horarioOcupado)
 	}
 
-	return &horariosOcupados, nil
+	resultado, err = r.db.DB.QueryContext(
+		*ctx,
+		"SELECT nome FROM usuario WHERE unidadesaude = $1 AND permissao = 'ACESSO_EXAMES'",
+		cnes,
+	)
+	defer resultado.Close()
+
+	if err != nil {
+		return nil, nil, err
+	}
+
+	var profissionais []string
+
+	for resultado.Next() {
+		var profissional string
+		if err := resultado.Scan(&profissional); err != nil {
+			return nil, nil, err
+		}
+		profissionais = append(profissionais, profissional)
+	}
+
+	return &profissionais, &horariosOcupados, nil
 }

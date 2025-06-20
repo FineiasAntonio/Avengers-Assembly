@@ -1,11 +1,11 @@
 package service
 
 import (
-	"backend/dto"
 	"backend/model"
 	"backend/repository"
 	"backend/util"
 	"context"
+	"time"
 )
 
 type AgendamentoService struct {
@@ -27,11 +27,22 @@ func (s *AgendamentoService) AgendarExame(ctx *context.Context, agendamento *mod
 	return nil
 }
 
-func (s *AgendamentoService) ConsultarHorariosOcupados(ctx *context.Context, data string, cnes string) (*[]dto.HorariosOcupados, error) {
-	horariosOcupados, err := s.agendamentoRepository.ConsultarHorariosOcupados(ctx, data, cnes)
+func (s *AgendamentoService) ConsultarHorariosOcupados(ctx *context.Context, data string, cnes string) (*map[string][]time.Time, error) {
+	profissionais, horariosOcupados, err := s.agendamentoRepository.ConsultarHorariosOcupados(ctx, data, cnes)
 	if err != nil {
 		return nil, err
 	}
 
-	return horariosOcupados, nil
+	horariosPorProfissional := make(map[string][]time.Time)
+	for _, profissional := range *profissionais {
+		horariosPorProfissional[profissional] = []time.Time{}
+	}
+
+	for _, horario := range *horariosOcupados {
+		if _, exists := horariosPorProfissional[horario.Profissional]; exists {
+			horariosPorProfissional[horario.Profissional] = append(horariosPorProfissional[horario.Profissional], horario.Data)
+		}
+	}
+
+	return &horariosPorProfissional, nil
 }

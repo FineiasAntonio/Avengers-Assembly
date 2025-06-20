@@ -27,62 +27,74 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 })
 
-function renderizarHorariosDisponiveis(horariosOcupados) {
-    const container_root = document.getElementById("root")
-    container_root.innerHTML = ""
-    container_root.classList.remove("invisible")
-    container_root.classList.add("visible")
+function renderizarHorariosDisponiveis(horariosPorProfissional) {
+    const containerRoot = document.getElementById("root");
+    containerRoot.innerHTML = "";
+    containerRoot.classList.remove("invisible");
+    containerRoot.classList.add("visible");
 
-    const container = document.createElement("fieldset")
+    const container = document.createElement("fieldset");
+    containerRoot.appendChild(container);
 
-    container_root.appendChild(container)
-
-    const horariosPossiveis = []
-    for (let hora = 8; hora <= 18; hora += 2) {
-        horariosPossiveis.push(`${hora.toString().padStart(2, '0')}:00`)
+    if (!horariosPorProfissional || typeof horariosPorProfissional !== 'object') {
+        const mensagem = document.createElement("p");
+        mensagem.textContent = "Nenhum dado de horários disponível.";
+        container.appendChild(mensagem);
+        return;
     }
 
-    const ocupadosPorProfissional = {}
-    horariosOcupados.forEach(item => {
-        item.data = item.data.split("Z")[0]
-        if (!ocupadosPorProfissional[item.profissional]) {
-            ocupadosPorProfissional[item.profissional] = []
-        }
-        ocupadosPorProfissional[item.profissional].push(item.data)
-    })
+    const horariosPossiveis = [];
+    for (let hora = 8; hora <= 18; hora += 2) {
+        horariosPossiveis.push(`${hora.toString().padStart(2, '0')}:00`);
+    }
 
-    for (const [profissional, horariosOcupados] of Object.entries(ocupadosPorProfissional)) {
-        const profissionalDiv = document.createElement("div")
-        profissionalDiv.className = "profissional-horarios"
+    const profissionais = Object.keys(horariosPorProfissional);
+    if (profissionais.length === 0) {
+        const mensagem = document.createElement("p");
+        mensagem.textContent = "Nenhum profissional disponível para esta data.";
+        container.appendChild(mensagem);
+        return;
+    }
 
-        const titulo = document.createElement("label")
-        titulo.textContent = profissional
-        profissionalDiv.appendChild(titulo)
+    profissionais.forEach(profissional => {
+        const profissionalDiv = document.createElement("div");
+        profissionalDiv.className = "profissional-horarios";
 
-        const listaHorarios = document.createElement("div")
-        listaHorarios.className = "horarios-container"
+        const titulo = document.createElement("h3");
+        titulo.textContent = profissional;
+        profissionalDiv.appendChild(titulo);
+
+        const listaHorarios = document.createElement("div");
+        listaHorarios.className = "horarios-container";
+
+        const horariosOcupados = horariosPorProfissional[profissional] || [];
 
         horariosPossiveis.forEach(horario => {
-            const estaOcupado = horariosOcupados.some(ocupado => {
-                return new Date(ocupado).getHours() === parseInt(horario.split(':')[0])
-            })
+            const hora = parseInt(horario.split(':')[0]);
 
+            const estaOcupado = horariosOcupados.some(horarioOcupado => {
+                const dataHora = new Date(horarioOcupado);
+                const mesmaHora = dataHora.getUTCHours() === hora;
+                return mesmaHora;
+            });
 
-            const botaoHorario = document.createElement("div")
-            botaoHorario.className = "horario"
-            botaoHorario.textContent = horario
-            if (!estaOcupado) {
-                botaoHorario.addEventListener('click', () => {
-                    selecionarHorario(profissional, horario)
-                })
+            const botaoHorario = document.createElement("button");
+            botaoHorario.className = "horario";
+            botaoHorario.textContent = horario;
+
+            if (estaOcupado) {
+                botaoHorario.disabled = true;
+                botaoHorario.classList.add("horario-ocupado");
             } else {
-                botaoHorario.className += " horario-ocupado"
+                botaoHorario.addEventListener('click', () => {
+                    //TODO: Agendar o exame com o horário selecionado
+                });
             }
-            listaHorarios.appendChild(botaoHorario)
 
-        })
+            listaHorarios.appendChild(botaoHorario);
+        });
 
-        profissionalDiv.appendChild(listaHorarios)
-        container.appendChild(profissionalDiv)
-    }
+        profissionalDiv.appendChild(listaHorarios);
+        container.appendChild(profissionalDiv);
+    });
 }
