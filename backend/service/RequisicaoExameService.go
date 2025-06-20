@@ -36,3 +36,16 @@ func (r *RequisicaoExameService) GetRequisicaoExameByProtocolo(ctx *context.Cont
 	}
 	return requisicaoExame, nil
 }
+
+func (r *RequisicaoExameService) ExisteRequisicaoExame(ctx *context.Context, protocolo string) error {
+	existe, err := r.repository.ExisteRequisicaoExame(ctx, protocolo)
+	if err != nil {
+		return err
+	}
+
+	if !existe {
+		return repository.ErroRequisicaoExameNaoEncontrada
+	}
+
+	return nil
+}

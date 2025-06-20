@@ -5,7 +5,12 @@ import (
 	"backend/model"
 	"context"
 	"database/sql"
+	"errors"
 	"fmt"
+)
+
+var (
+	ErroRequisicaoExameNaoEncontrada = errors.New("Exame não encontrado")
 )
 
 type RequisicaoExameRepository struct {
@@ -109,4 +114,16 @@ func (r *RequisicaoExameRepository) CadastrarRequisicaoExame(ctx *context.Contex
 		return fmt.Errorf("Erro ao Cadastrar Requisição Exame: %v", err)
 	}
 	return nil
+}
+
+func (r *RequisicaoExameRepository) ExisteRequisicaoExame(ctx *context.Context, protocolo string) (bool, error) {
+	var existe bool
+	query := "SELECT EXISTS(SELECT 1 FROM requisicao_exame WHERE protocolo = $1)"
+	err := r.db.DB.QueryRowContext(*ctx, query, protocolo).Scan(&existe)
+
+	if err != nil {
+		return false, err
+	}
+
+	return existe, nil
 }

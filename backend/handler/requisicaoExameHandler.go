@@ -3,6 +3,7 @@ package handler
 import (
 	"backend/exceptions"
 	"backend/model"
+	"backend/repository"
 	"backend/service"
 	"encoding/json"
 	"fmt"
@@ -39,8 +40,7 @@ func (handler *RequisicaoExameHandler) CadastrarRequisicaoExame(w http.ResponseW
 	json.NewEncoder(w).Encode(protocolo)
 }
 
-func (handler *RequisicaoExameHandler) GetRequisicaoExameByProtocolo(w http.ResponseWriter,
-	r *http.Request) {
+func (handler *RequisicaoExameHandler) GetRequisicaoExameByProtocolo(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
 		http.Error(w, "Método não permitido", http.StatusBadRequest)
 		return
@@ -59,7 +59,6 @@ func (handler *RequisicaoExameHandler) GetRequisicaoExameByProtocolo(w http.Resp
 	requisicaoExame, err := handler.RequisicaoExameServico.GetRequisicaoExameByProtocolo(&ctx, protocolo)
 
 	if err != nil {
-		fmt.Println(err.Error())
 		http.Error(w, exceptions.ErroInterno.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -67,4 +66,32 @@ func (handler *RequisicaoExameHandler) GetRequisicaoExameByProtocolo(w http.Resp
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(requisicaoExame)
+}
+
+func (handler *RequisicaoExameHandler) ExisteRequisicaoExame(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "HEAD" {
+		http.Error(w, "Método não permitido", http.StatusBadRequest)
+		return
+	}
+
+	protocolo := r.URL.Query().Get("protocolo")
+	if protocolo == "" {
+		http.Error(w, "Protocolo não fornecido", http.StatusBadRequest)
+		return
+	}
+
+	ctx := r.Context()
+
+	err := handler.RequisicaoExameServico.ExisteRequisicaoExame(&ctx, protocolo)
+
+	if err != nil {
+		if err == repository.ErroRequisicaoExameNaoEncontrada {
+			http.Error(w, "Requisição de exame não encontrada", http.StatusNotFound)
+			return
+		}
+		http.Error(w, "Erro ao verificar requisição de exame: "+err.Error(), http.StatusInternalServerError)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <script src="./gerenciador-items.js" defer type="module"></script>
     <link rel="stylesheet" href="./InicioPagina.css">
 </head>
+
 <body>
     <custom-navbar></custom-navbar>
     <main>
@@ -27,5 +29,17 @@
 
         </div>
     </main>
+    <div id="modal-container-exame" class="modal">
+        <div class="modal-conteudo">
+            <h2>Buscar Exame</h2>
+            <div>
+                <label>Digite o protocolo do exame</label>
+                <input type="text" id="protocoloExame" placeholder="Protocolo">
+                <button id="submit" class="botao1">Ir para o exame</button>
+            </div>
+        </div>
+    </div>
+
 </body>
+
 </html>
