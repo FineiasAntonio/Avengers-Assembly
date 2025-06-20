@@ -18,10 +18,10 @@ func NewCentralAnaliseRepository(db *database.PostgresClient) *CentralAnaliseRep
 
 func (r *CentralAnaliseRepository) PegarQtdPacientes(ctx *context.Context) (*dto.GraficoPacientesDTO, error) {
 	var qtdPaciente dto.GraficoPacientesDTO
-	query := `SELECT COUNT(*) FROM pacientes`
+	query := `SELECT COUNT(*) FROM paciente`
 
 	if err := r.db.DB.QueryRowContext(*ctx, query).Scan(
-		&qtdPaciente,
+		&qtdPaciente.QuantidadePacientes,
 	); err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ func (r *CentralAnaliseRepository) PegarQtdPacientesPorIdade(ctx *context.Contex
 				SUM(CASE WHEN idade >= 40 AND idade < 50 THEN 1 ELSE 0 END),
 				SUM(CASE WHEN idade >= 50 AND idade < 60 THEN 1 ELSE 0 END),
 				SUM(CASE WHEN idade >= 60 AND idade < 65 THEN 1 ELSE 0 END)
-				FROM pacientes
+				FROM paciente
 	`
 	err := r.db.DB.QueryRowContext(*ctx, query).Scan(
 		&qtdPacIdade.Total,
@@ -57,16 +57,16 @@ func (r *CentralAnaliseRepository) PegarQtdPacientesPorIdade(ctx *context.Contex
 func (r *CentralAnaliseRepository) PegarQtdPacientesPorRaca(ctx *context.Context) (*dto.GraficoPacientesPorRacaDTO, error) {
 	var qtdPacRaca dto.GraficoPacientesPorRacaDTO
 	query := `SELECT 
-				SUM(CASE WHEN raca = 'branca' THEN 1 ELSE 0 END),
-				SUM(CASE WHEN raca = 'preta' THEN 1 ELSE 0 END),
-				SUM(CASE WHEN raca = 'parda' THEN 1 ELSE 0 END),
-				SUM(CASE WHEN raca = 'amarela' THEN 1 ELSE 0 END),
-				SUM(CASE WHEN raca = 'indigena' THEN 1 ELSE 0 END)
-				FROM pacientes
+				SUM(CASE WHEN raca = 'Branca' THEN 1 ELSE 0 END),
+				SUM(CASE WHEN raca = 'Negra' THEN 1 ELSE 0 END),
+				SUM(CASE WHEN raca = 'Parda' THEN 1 ELSE 0 END),
+				SUM(CASE WHEN raca = 'Amarela' THEN 1 ELSE 0 END),
+				SUM(CASE WHEN raca = 'Indigena' THEN 1 ELSE 0 END)
+				FROM paciente
 	`
 	err := r.db.DB.QueryRowContext(*ctx, query).Scan(
 		&qtdPacRaca.Branca,
-		&qtdPacRaca.Preta,
+		&qtdPacRaca.Negra,
 		&qtdPacRaca.Parda,
 		&qtdPacRaca.Amarela,
 		&qtdPacRaca.Indigena,
@@ -84,11 +84,11 @@ func (r *CentralAnaliseRepository) PegarQtdPacientesPorEscolaridade(ctx *context
 				SUM(CASE WHEN escolaridade ILIKE '%analfabeto%' THEN 1 ELSE 0 END),
 				SUM(CASE WHEN escolaridade ILIKE '%fundamental%' AND escolaridade ILIKE '%incompleto%' THEN 1 ELSE 0 END),
 				SUM(CASE WHEN escolaridade ILIKE '%fundamental%' AND escolaridade ILIKE '%completo%' THEN 1 ELSE 0 END),
-				SUM(CASE WHEN escolaridade ILIKE '%medio%' AND escolaridade ILIKE '%incompleto%' THEN 1 ELSE 0 END),
-				SUM(CASE WHEN escolaridade ILIKE '%medio%' AND escolaridade ILIKE '%completo%' THEN 1 ELSE 0 END),
+				SUM(CASE WHEN escolaridade ILIKE '%médio%' AND escolaridade ILIKE '%incompleto%' THEN 1 ELSE 0 END),
+				SUM(CASE WHEN escolaridade ILIKE '%médio%' AND escolaridade ILIKE '%completo%' THEN 1 ELSE 0 END),
 				SUM(CASE WHEN escolaridade ILIKE '%superior%' AND escolaridade ILIKE '%incompleto%' THEN 1 ELSE 0 END),
 				SUM(CASE WHEN escolaridade ILIKE '%superior%' AND escolaridade ILIKE '%completo%' THEN 1 ELSE 0 END)
-				FROM pacientes
+				FROM paciente
 	`
 	err := r.db.DB.QueryRowContext(*ctx, query).Scan(
 		&qtdPacEsc.Analfabeta,
@@ -112,7 +112,7 @@ func (r *CentralAnaliseRepository) PegarQtdPacientesPorRegiao(ctx *context.Conte
 	query := `
 		SELECT e.bairro, COUNT(*)
 		FROM paciente p
-		INNER JOIN endereco e ON p.endereco_id = e.id
+		INNER JOIN endereco e ON p.endereco = e.endereco_id
 		GROUP BY e.bairro
 	`
 
@@ -135,7 +135,7 @@ func (r *CentralAnaliseRepository) PegarQtdPacientesPorRegiao(ctx *context.Conte
 		resultados = append(resultados, qtdPacReg)
 	}
 
-	if err = rows.Err(); r != nil {
+	if err = rows.Err(); err != nil {
 		return nil, err
 	}
 

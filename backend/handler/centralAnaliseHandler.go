@@ -61,7 +61,6 @@ func (handler *CentralAnaliseHandler) PegarQuantidadePacientes(w http.ResponseWr
 
 	} else if funcao == "escolaridade" {
 		qtdPacientesPorEscolaridade, err := handler.CentralAnaliseServico.PegarQtdPacientesPorEscolaridade(&ctx)
-
 		if err != nil {
 			http.Error(w, "Erro ao pegar pacientes por escolaridade"+err.Error(), http.StatusInternalServerError)
 			return

@@ -1,24 +1,23 @@
-import { GetDadosCadastrados } from "../../api/cadastroApi.js";
 import { pegarCpfUsuario } from "../../shared/gerenciador-permissoes.js";
-import { AlterarInformacaoRequisicao, AlterarSenhaRequisicao } from "../../api/usuarioApi.js";
+import { AlterarInformacaoRequisicao, AlterarSenhaRequisicao, listarUsuario } from "../../api/usuarioApi.js";
 
-const alterarInfBtn = document.getElementById("submitAltInf");
+document.addEventListener("DOMContentLoaded", async () => {
+    const alterarInfBtn = document.getElementById("submitAltInf");
 
-alterarInfBtn.onclick = () => {
-    const campo = document.getElementById("select").value;
-    const novoValor = document.getElementById("inputT").value;
-    const cpf = pegarCpfUsuario();
-    AlterarInformacaoRequisicao(cpf, campo, novoValor);
-};
+    alterarInfBtn.onclick = async () => {
+        const campo = document.getElementById("select").value.toLowerCase();
+        const novoValor = document.getElementById("inputT").value;
+        const cpf = pegarCpfUsuario();
+        await AlterarInformacaoRequisicao(cpf, campo, novoValor);
+    };
 
-const alterarInfSen = document.getElementById("submitAltSen");
+    const alterarInfSen = document.getElementById("submitAltSen");
 
-alterarInfSen.onclick = () => {
-    const novaSenha = document.getElementById("novaSenha").value;
-    AlterarSenhaRequisicao(novaSenha);
-}
+    alterarInfSen.onclick = async () => {
+        const novaSenha = document.getElementById("novaSenha").value;
+        await AlterarSenhaRequisicao(novaSenha);
+    }
 
-document.addEventListener("DOMContentLoaded", () => {
     const campoNomeH = document.getElementById("nomeh");
     const campoNomeI = document.getElementById("nomeI");
     const campoRegistro = document.getElementById("registro");
@@ -30,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const campoLCNES = document.getElementById("LCNES");
 
     const cpf = pegarCpfUsuario();
-    const response = GetDadosCadastrados(cpf, "paciente");
+    const response = await listarUsuario(cpf, "paciente");
 
     campoNomeI.textContent = response.nome;
     campoNomeH.textContent = response.nome;
@@ -66,21 +65,21 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function formatarCpf(cpf) {
+    if (!cpf) return "";
     cpf = cpf.replace(/\D/g, '');
 
     return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
 }
 
 function formatarTelefone(telefone) {
-    let size = telefone.length;
+    if (!telefone) return "";
+
     telefone = telefone.replace(/\D/g, '');
 
-    if (size === 10) {
-        return telefone.replace(/(\d{2})(\d{4})(\d{4})/, "($1) $2-$3")
-
-    } else if (size === 11) {
-        return telefone.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3")
-
+    if (telefone.length === 10) {
+        return telefone.replace(/(\d{2})(\d{4})(\d{4})/, "($1) $2-$3");
+    } else if (telefone.length === 11) {
+        return telefone.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
     } else {
         return telefone;
     }

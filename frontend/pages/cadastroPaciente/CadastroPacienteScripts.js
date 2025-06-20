@@ -1,5 +1,5 @@
 import "../../api/cadastroApi.js"
-import { CadastroRequisição } from "../../api/cadastroApi.js"
+import { CadastroRequisicao } from "../../api/cadastroApi.js"
 
 document.addEventListener('DOMContentLoaded', function () {
     const cpfInput = document.getElementById('cpf')
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
             cep: valores.cep,
         }
         
-        CadastroRequisição(valores, "paciente")
+        CadastroRequisicao(valores, "paciente")
     })
 })
 

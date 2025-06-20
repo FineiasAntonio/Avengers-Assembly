@@ -116,7 +116,7 @@ const template = `
         </div>
         <div class="navegacao">
             <a href="../inicioPagina/inicioPagina.html">Início</a>
-            <a href="">Configurações</a>
+            <a href="../perfilUsuario/perfilUsuario.html">Perfil</a>
             <a href="../centralAjuda/centralAjuda.html">Ajuda</a>
             <a id="deslogar-opcao">Sair</a>
         </div>        

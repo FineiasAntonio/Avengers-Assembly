@@ -17,5 +17,5 @@ export async function loginRequisicao(credencial, senha) {
     const token = await response.json()
 
     localStorage.setItem("token", token)
-    window.location.replace("/pages/inicioPagina/InicioPagina.html")
+    window.location.replace("../pages/inicioPagina/inicioPagina.html")
 }

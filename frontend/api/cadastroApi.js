@@ -4,6 +4,7 @@ import { mostarNotificacao } from "../shared/notificacao.js";
 
 export async function CadastroRequisicao(objeto) {
     try {
+        objeto = { objeto };
         const response = await fetch(API_ENDERECO + "requisicaoExame", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

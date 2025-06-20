@@ -1,14 +1,14 @@
-import { pegarDadosQtdPacientes } from "./mapaApi";
+import { pegarDadosQtdPacientes } from "../../api/centralAnaliseApi.js";
+
+const graficoPizza = document.getElementById("graficoP");
+const graficoBarra = document.getElementById("graficoB");
+const graficoTotal= document.getElementById("graficoC");
 
 let chartPizza = null;
 let chartBarra = null;
 let chartTotal = null;
 
 document.addEventListener("DOMContentLoaded", () => {
-    const graficoPizza = document.getElementById("graficoP");
-    const graficoBarra = document.getElementById("graficoB");
-    const graficoTotal= document.getElementById("graficoC");
-
     const funcao = document.getElementById("filtrarGrafico");
 
     funcao.addEventListener("change", () => {
@@ -56,10 +56,10 @@ async function iniciarGraficoPizza(funcao) {
     let data = [];
 
     if (response.branca !== undefined) {
-        labels = ["Branca", "Preta", "Parda", "Amarela", "Indígena"];
+        labels = ["Branca", "Negra", "Parda", "Amarela", "Indígena"];
         data = [
             response.branca || 0,
-            response.preta || 0,
+            response.negra || 0,
             response.parda || 0,
             response.amarela || 0,
             response.indigena || 0
@@ -87,13 +87,15 @@ async function iniciarGraficoPizza(funcao) {
         ];
     }
 
+
+    console.log(data, labels)
     chartPizza = new Chart(graficoPizza, {
         type: "doughnut",
         data: {
             labels: labels,
             datasets: [{
                 data: data,
-                backgroundColor: ["#e15759", "#f28e2b", "#59a14f"]
+                backgroundColor: ["#e15759", "#f28e2b", "#59a14f", "#4e79a7", "#edc949"]
             }]
         },
         options: {
@@ -123,16 +125,10 @@ async function iniciarGraficoTotal(funcao) {
             }]
         },
         options: {
-            indexAxis: 'y',
             responsive: true,
             plugins: {
                 legend: {
                 position: 'left'
-                }
-            },
-            scales: {
-                x: {
-                    beginAtZero: true
                 }
             }
         }

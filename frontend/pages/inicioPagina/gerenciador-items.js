@@ -9,13 +9,13 @@ export const items = [
     permissoesRequeridas: [Permissao.TODOS]
   },
   {
-    href: "/pages/cadastroPaciente/CadastroPaciente.html",
+    href: "../cadastroPaciente/CadastroPaciente.html",
     title: "Cadastrar Paciente",
     icon: "",
     permissoesRequeridas: [Permissao.ACESSO_ATENDIMENTO, Permissao.GESTAO]
   },
   {
-    href: "/pages/agendamentoExame/agendamentoExame.html",
+    href: "../agendamentoExame/agendamentoExame.html",
     title: "Agendar Exame",
     icon: "",
     permissoesRequeridas: [Permissao.ACESSO_ATENDIMENTO, Permissao.ACESSO_EXAMES, Permissao.GESTAO]
@@ -27,7 +27,7 @@ export const items = [
     permissoesRequeridas: [Permissao.TODOS]
   },
   {
-    href: "/pages/visualizacaoRequisicao/CadastroRequisicao.html",
+    href: "../visualizacaoRequisicao/CadastroRequisicao.html",
     title: "Criar Exame",
     icon: "",
     permissoesRequeridas: [Permissao.ACESSO_EXAMES]
@@ -75,7 +75,7 @@ export const items = [
     permissoesRequeridas: [Permissao.GESTAO]
   },
   {
-    href: "",
+    href: "../centralAnalisePagina/centralAnalisePagina.html",
     title: "Dashboard",
     icon: "",
     permissoesRequeridas: [Permissao.GESTAO]

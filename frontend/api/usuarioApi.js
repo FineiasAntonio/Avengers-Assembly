@@ -1,11 +1,12 @@
 import { API_ENDERECO } from "../environment/environment.js";
 import "../shared/interceptor.js"
+import { mostarNotificacao } from "../shared/notificacao.js";
 
-export async function AlterarInformacaoRequisicao(cpf, campo, novoValor) {
+export async function AlterarInformacaoRequisicao(cpf, campo, novo_valor) {
     const url = new URL(API_ENDERECO + "usuario/alterarInf")
     url.searchParams.append('cpf', cpf)
 
-    const dto = { campo, novoValor }
+    const dto = { campo, novo_valor }
 
     const response = await fetch(url, {
         method: 'PATCH',
@@ -17,25 +18,30 @@ export async function AlterarInformacaoRequisicao(cpf, campo, novoValor) {
         const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status} - ${response.body}` }))
         throw new Error(errorData.message)
     }
-
-    return await response.json()
+    mostarNotificacao(`${campo} alterado com sucesso!`, "sucess", 3000);
+    setTimeout(() => {
+        window.location.replace("../perfilUsuario/perfilUsuario.html?cpf=" + cpf);
+    }, 1500);
 }
 
-export async function AlterarSenhaRequisicao(novaSenha) {
+export async function AlterarSenhaRequisicao(nova_senha) {
     const url = new URL(API_ENDERECO + "usuario")
+    nova_senha = { nova_senha };
 
     const response = await fetch(url, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(novaSenha)
+        body: JSON.stringify(nova_senha)
     })
 
     if (!response.ok) {
         const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status} - ${response.body}` }))
         throw new Error(errorData.message)
     }
-
-    return await response.json()
+    mostarNotificacao(`Senha alterada com sucesso!`, "sucess", 3000);
+    setTimeout(() => {
+        window.location.replace("../perfilUsuario/perfilUsuario.html");
+    }, 1500);
 }
 
 export async function listarUsuario(registro) {

@@ -4,7 +4,7 @@ import "../shared/interceptor.js";
 export async function pegarDadosQtdPacientes(funcao) {
     const url = new URL(API_ENDERECO + 'graficos');
     url.searchParams.append('funcao', funcao);
-
+    
     const response = await fetch(url, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
