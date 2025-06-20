@@ -1,6 +1,8 @@
 import { consultarHorarioOcupado } from "../../api/agendamentoApi.js"
 import { pegarUnidadeUsuario } from "../../shared/gerenciador-permissoes.js"
 import { listarUnidade } from "../../api/unidadeApi.js"
+import { listarPaciente } from "../../api/pacienteApi.js"
+import { formatarCPF } from "../../shared/formatador.js"
 
 document.addEventListener("DOMContentLoaded", () => {
     const inputCartaoSus = document.getElementById("cartaoSUS")
@@ -13,8 +15,18 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
 
-    inputCartaoSus.addEventListener('blur', () => {
+    inputCartaoSus.addEventListener('blur', (e) => {
+        listarPaciente(e.target.value).then(resultado => {
+            if (resultado) {
+                document.getElementById("dadosPaciente").classList.remove("invisible")
 
+                document.getElementById('nomePaciente').textContent = resultado.nome
+                document.getElementById('cpfPaciente').textContent = formatarCPF(resultado.cpf)
+                document.getElementById('nascimentoPaciente').textContent = new Date(resultado.data_nascimento).toLocaleDateString('pt-BR')
+            } else {
+                document.getElementById('nomePaciente').textContent = "Paciente não encontrado"
+            }
+        })
     })
 
     dataInput.addEventListener('change', (e) => {

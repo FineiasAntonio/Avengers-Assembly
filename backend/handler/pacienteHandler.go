@@ -65,6 +65,7 @@ func (handler *PacienteHandler) GetPaciente(w http.ResponseWriter, r *http.Reque
 	}
 
 	if err != nil {
+		fmt.Println(err.Error())
 		http.Error(w, exceptions.ErroInterno.Error(), http.StatusInternalServerError)
 		return
 	}
