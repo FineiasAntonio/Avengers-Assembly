@@ -102,7 +102,7 @@ async function iniciarGraficoPizza(funcao) {
             responsive: true,
             plugins: {
                 legend: {
-                position: 'bottom'
+                position: 'right'
                 }
             }
         }
@@ -115,7 +115,7 @@ async function iniciarGraficoTotal(funcao) {
     if (chartTotal) chartTotal.destroy();
 
     chartTotal = new Chart(graficoTotal, {
-        type: "bar",
+        type: "doughnut",
         data: {
             labels: ["Quantidade de Pacientes"],
             datasets: [{
