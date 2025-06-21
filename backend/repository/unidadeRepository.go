@@ -62,3 +62,48 @@ func (repository *UnidadeRepository) CadastrarUnidade(ctx *context.Context, requ
 
 	return nil
 }
+
+func (repository *UnidadeRepository) ListarLaboratorio(ctx *context.Context, cnes string) (*model.Laboratorio, error) {
+	query := `SELECT * FROM laboratorio JOIN endereco ON laboratorio.endereco = endereco.endereco_id WHERE cnes = $1`
+
+	row := repository.db.DB.QueryRowContext(*ctx, query, cnes)
+
+	laboratorio := &model.Laboratorio{}
+	if err := row.Scan(
+		&laboratorio.CNES,
+		&laboratorio.Nome,
+		&laboratorio.CNPJ,
+		&laboratorio.EnderecoID,
+		&laboratorio.Telefone,
+		&laboratorio.Endereco.EnderecoID,
+		&laboratorio.Endereco.Logradouro,
+		&laboratorio.Endereco.Numero,
+		&laboratorio.Endereco.Complemento,
+		&laboratorio.Endereco.Bairro,
+		&laboratorio.Endereco.CodMunicipio,
+		&laboratorio.Endereco.Municipio,
+		&laboratorio.Endereco.UF,
+		&laboratorio.Endereco.CEP,
+		&laboratorio.Endereco.PontoReferencia,
+	); err != nil {
+		return nil, err
+	}
+
+	return laboratorio, nil
+}
+
+func (repository *UnidadeRepository) CadastrarLaboratorio(ctx *context.Context, requisicao *model.Laboratorio) error {
+	query := `INSERT INTO laboratorio (cnes, nome, cnpj, endereco, telefone) VALUES ($1, $2, $3, $4, $5)`
+
+	_, err := repository.db.DB.ExecContext(
+		*ctx,
+		query,
+		requisicao.CNES, requisicao.Nome, requisicao.CNPJ, requisicao.EnderecoID, requisicao.Telefone,
+	)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

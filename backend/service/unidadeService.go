@@ -41,3 +41,20 @@ func (service *UnidadeService) CadastrarUnidade(ctx *context.Context, requisicao
 
 	return nil
 }
+
+func (service *UnidadeService) ListarLaboratorio(ctx *context.Context, cnes string) (*model.Laboratorio, error) {
+	laboratorio, err := service.unidadeRepository.ListarLaboratorio(ctx, cnes)
+	if err != nil {
+		return nil, errors.New("erro ao listar laboratorio")
+	}
+
+	return laboratorio, nil
+}
+
+func (service *UnidadeService) CadastrarLaboratorio(ctx *context.Context, requisicao *model.Laboratorio) error {
+	if err := service.unidadeRepository.CadastrarLaboratorio(ctx, requisicao); err != nil {
+		return errors.New("erro ao cadastrar laboratorio")
+	}
+
+	return nil
+}
