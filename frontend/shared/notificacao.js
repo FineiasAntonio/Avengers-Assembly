@@ -1,4 +1,4 @@
-export function mostarNotificacao(message, type = 'success', duration = 3000) {
+export function mostarNotificacao(message, type, duration = 3000) {
   const toast = document.createElement('div');
   toast.className = `notificacao ${type}`;
   toast.textContent = message;

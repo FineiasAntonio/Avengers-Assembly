@@ -16,9 +16,10 @@ export async function AlterarInformacaoRequisicao(cpf, campo, novo_valor) {
 
     if (!response.ok) {
         const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status} - ${response.body}` }))
+        mostarNotificacao(`Erro ao alterar ${campo}!\n` + errorData.message, "error", 3000);
         throw new Error(errorData.message)
     }
-    mostarNotificacao(`${campo} alterado com sucesso!`, "sucess", 3000);
+    mostarNotificacao(`${campo} alterado com sucesso!`, "success", 3000);
     setTimeout(() => {
         window.location.replace("../perfilUsuario/perfilUsuario.html?cpf=" + cpf);
     }, 1500);
@@ -36,9 +37,10 @@ export async function AlterarSenhaRequisicao(nova_senha) {
 
     if (!response.ok) {
         const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status} - ${response.body}` }))
+        mostarNotificacao(`Erro ao alterar senha: \n`+errorData.message, "error", 3000)
         throw new Error(errorData.message)
     }
-    mostarNotificacao(`Senha alterada com sucesso!`, "sucess", 3000);
+    mostarNotificacao(`Senha alterada com sucesso!`, "success", 3000);
     setTimeout(() => {
         window.location.replace("../perfilUsuario/perfilUsuario.html");
     }, 1500);

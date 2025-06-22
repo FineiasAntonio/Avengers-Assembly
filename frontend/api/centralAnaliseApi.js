@@ -1,5 +1,6 @@
 import { API_ENDERECO } from "../environment/environment.js";
 import "../shared/interceptor.js";
+import { mostarNotificacao } from "../shared/notificacao.js";
 
 export async function pegarDadosQtdPacientes(funcao) {
     const url = new URL(API_ENDERECO + 'graficos');
@@ -11,7 +12,8 @@ export async function pegarDadosQtdPacientes(funcao) {
     })
 
     if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status} - ${response.body}` }));
+        const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.message} - ${response.body}` }));
+        mostarNotificacao(errorData.message, "error", 3000)
         throw new Error(errorData.message);
     }
 
@@ -28,6 +30,7 @@ export async function pegarDadosQuantidadePacientesPorRegiao() {
 
     if (!response.ok) {
         const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status} - ${response.body}` }));
+        mostarNotificacao(errorData.message, "error", 3000)
         throw new Error(errorData.message);
     }
     return await response.json();

@@ -1,4 +1,5 @@
 import { pegarDadosQuantidadePacientesPorRegiao } from "../../api/centralAnaliseApi.js";
+import { mostarNotificacao } from "../../shared/notificacao.js";
 
 let mapa = null;
 
@@ -42,6 +43,7 @@ async function pegarCoordenadas(cidade) {
             return { coords: [latitude, longitude], raio };
         }
         else {
+            window.alert("Cidade não encontrada!");
             throw new Error("Cidade nao encontrada!");
         }
     }

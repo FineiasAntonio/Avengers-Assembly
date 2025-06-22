@@ -1,4 +1,5 @@
 import { pegarCpfUsuario } from "../../shared/gerenciador-permissoes.js";
+import { mostarNotificacao } from "../../shared/notificacao.js";
 import { AlterarInformacaoRequisicao, AlterarSenhaRequisicao, listarUsuario } from "../../api/usuarioApi.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -7,6 +8,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     alterarInfBtn.onclick = async () => {
         const campo = document.getElementById("select").value.toLowerCase();
         const novoValor = document.getElementById("inputT").value;
+
+        if (campo == 'telefone' && novoValor.length != 11) {
+            mostarNotificacao(`${campo} invalido!\n Siga o padrão (xx) xxxxx-xxxx`, "error", 3000);
+            return
+        }
+        if (campo == 'email' && !validarEmail(novoValor)) {
+            mostarNotificacao(`${campo} invalido!\n`, "error", 3000);
+            return
+        }
+
         const cpf = pegarCpfUsuario();
         await AlterarInformacaoRequisicao(cpf, campo, novoValor);
     };
@@ -83,4 +94,14 @@ function formatarTelefone(telefone) {
     } else {
         return telefone;
     }
+}
+
+function validarEmail(email) {
+    if (!email) return false;
+
+    email = email.trim();
+
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    return regex.test(email);
 }
