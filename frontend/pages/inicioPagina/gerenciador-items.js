@@ -7,80 +7,80 @@ export const items = [
   {
     href: "",
     title: "Buscar Paciente",
-    icon: "",
+    icon: "buscarPac.png",
     permissoesRequeridas: [Permissao.TODOS]
   },
   {
     href: "../cadastroPaciente/CadastroPaciente.html",
     title: "Cadastrar Paciente",
-    icon: "",
+    icon: "cadastroPac.png",
     permissoesRequeridas: [Permissao.ACESSO_ATENDIMENTO, Permissao.GESTAO]
   },
   {
     href: "../agendamentoExame/agendamentoExame.html",
     title: "Agendar Exame",
-    icon: "",
+    icon: "agendarExm.png",
     permissoesRequeridas: [Permissao.ACESSO_ATENDIMENTO, Permissao.ACESSO_EXAMES, Permissao.GESTAO]
   },
   {
     href: "",
     title: "Buscar Exame",
-    icon: "",
+    icon: "exameBus.png",
     event: buscarExame,
     permissoesRequeridas: [Permissao.TODOS]
   },
   {
     href: "../visualizacaoRequisicao/CadastroRequisicao.html",
     title: "Criar Exame",
-    icon: "",
+    icon: "exameCad.png",
     permissoesRequeridas: [Permissao.ACESSO_EXAMES]
   },
   {
     href: "",
     title: "Agenda",
-    icon: "",
+    icon: "agenda.png",
     permissoesRequeridas: [Permissao.ACESSO_EXAMES]
   },
   {
     href: "",
     title: "Cadastrar Profissional",
-    icon: "",
+    icon: "profissionalCad.png",
     permissoesRequeridas: [Permissao.GESTAO]
   },
   {
     href: "",
     title: "Buscar Profissional",
-    icon: "",
+    icon: "profissional.png",
     permissoesRequeridas: [Permissao.GESTAO]
   },
   {
     href: "",
     title: "Cadastrar Laboratório",
-    icon: "",
+    icon: "laboratorioCad.png",
     permissoesRequeridas: [Permissao.GESTAO]
   },
   {
     href: "",
     title: "Buscar Laboratório",
-    icon: "",
+    icon: "laboratorio.png",
     permissoesRequeridas: [Permissao.GESTAO]
   },
   {
     href: "",
     title: "Cadastrar Unidade de Saúde",
-    icon: "",
+    icon: "unidadedesaudeCad.png",
     permissoesRequeridas: [Permissao.GESTAO]
   },
   {
     href: "",
     title: "Buscar Unidade de Saúde",
-    icon: "",
+    icon: "unidadedesaude.png",
     permissoesRequeridas: [Permissao.GESTAO]
   },
   {
     href: "../centralAnalisePagina/centralAnalisePagina.html",
     title: "Dashboard",
-    icon: "",
+    icon: "dashboard.png",
     permissoesRequeridas: [Permissao.GESTAO]
   }
 ];
@@ -97,7 +97,7 @@ function renderMenu() {
       const itemElement = document.createElement('div');
       itemElement.className = 'item';
       itemElement.innerHTML = `
-                <img src="./assets/icons/${item.icon}" alt="${item.title}">
+                <img src="../../assets/icons/${item.icon}" alt="${item.title}">
                 <h2>${item.title}</h2>
             `;
 
