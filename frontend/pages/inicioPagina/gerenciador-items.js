@@ -54,26 +54,14 @@ export const items = [
     permissoesRequeridas: [Permissao.GESTAO]
   },
   {
-    href: "",
-    title: "Cadastrar Laboratório",
-    icon: "laboratorioCad.png",
-    permissoesRequeridas: [Permissao.GESTAO]
-  },
-  {
-    href: "",
-    title: "Buscar Laboratório",
-    icon: "laboratorio.png",
-    permissoesRequeridas: [Permissao.GESTAO]
-  },
-  {
-    href: "",
-    title: "Cadastrar Unidade de Saúde",
+    href: "../cadastroUnidade/CadastroUnidade.html",
+    title: "Cadastrar Unidade",
     icon: "unidadedesaudeCad.png",
     permissoesRequeridas: [Permissao.GESTAO]
   },
   {
     href: "",
-    title: "Buscar Unidade de Saúde",
+    title: "Buscar Unidade",
     icon: "unidadedesaude.png",
     permissoesRequeridas: [Permissao.GESTAO]
   },

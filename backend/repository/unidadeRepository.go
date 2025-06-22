@@ -5,6 +5,7 @@ import (
 	"backend/model"
 	"backend/util"
 	"context"
+	"fmt"
 )
 
 type UnidadeRepository struct {
@@ -93,15 +94,17 @@ func (repository *UnidadeRepository) ListarLaboratorio(ctx *context.Context, cne
 }
 
 func (repository *UnidadeRepository) CadastrarLaboratorio(ctx *context.Context, requisicao *model.Laboratorio) error {
+	cnes := util.GerarId(10)
 	query := `INSERT INTO laboratorio (cnes, nome, cnpj, endereco, telefone) VALUES ($1, $2, $3, $4, $5)`
 
 	_, err := repository.db.DB.ExecContext(
 		*ctx,
 		query,
-		requisicao.CNES, requisicao.Nome, requisicao.CNPJ, requisicao.EnderecoID, requisicao.Telefone,
+		cnes, requisicao.Nome, requisicao.CNPJ, requisicao.EnderecoID, requisicao.Telefone,
 	)
 
 	if err != nil {
+		fmt.Println(err.Error())
 		return err
 	}
 

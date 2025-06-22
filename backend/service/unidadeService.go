@@ -52,6 +52,15 @@ func (service *UnidadeService) ListarLaboratorio(ctx *context.Context, cnes stri
 }
 
 func (service *UnidadeService) CadastrarLaboratorio(ctx *context.Context, requisicao *model.Laboratorio) error {
+
+	enderecoId, err := service.enderecoRepository.CadastrarEndereco(ctx, requisicao.Endereco)
+
+	if err != nil {
+		return errors.New("erro ao cadastrar endereco")
+	}
+
+	requisicao.EnderecoID = enderecoId
+
 	if err := service.unidadeRepository.CadastrarLaboratorio(ctx, requisicao); err != nil {
 		return errors.New("erro ao cadastrar laboratorio")
 	}
