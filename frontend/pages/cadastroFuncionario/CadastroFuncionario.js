@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return
         }
 
-        // Outros usuários não podem cadastrar funcionários
         notificar('Você não tem permissão para cadastrar funcionários', 'error')
         desabilitarFormulario()
     }
@@ -65,7 +64,6 @@ document.addEventListener('DOMContentLoaded', function () {
         tipoUnidadeInput.disabled = true
         cnesUnidadeInput.disabled = true
         
-        // Remover event listeners desnecessários para gestor
         if (cnesUnidadeInput) {
             cnesUnidadeInput.removeEventListener('blur', buscarUnidadePorCNES)
         }
@@ -122,7 +120,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function selecionarTipoUnidadeAutomaticamente() {
         const permissao = permissaoInput.value
         
-        // Se for gestor, não executar esta função pois os campos estão desabilitados
         if (isGestor) {
             return
         }
@@ -147,11 +144,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 tipoUnidadeInput.disabled = true
                 break
             case 'GESTAO':
-                // Para gestão, permitir seleção do tipo de unidade se for administrador
                 if (isAdministrador) {
                     tipoUnidadeInput.disabled = false
                 } else {
-                    // Se não for administrador, usar o tipo da unidade do gestor
                     tipoUnidadeInput.value = tipoUnidadeUsuarioLogado
                     tipoUnidadeInput.disabled = true
                 }
@@ -280,14 +275,12 @@ document.addEventListener('DOMContentLoaded', function () {
             return
         }
 
-        // Se o usuário é gestor, validar se está tentando buscar sua própria unidade
         if (isGestor && cnes !== cnesUsuarioLogado) {
             notificar('Como gestor, você só pode cadastrar funcionários na sua própria unidade', 'error')
             cnesUnidadeInput.value = cnesUsuarioLogado
             return
         }
 
-        // Validar compatibilidade antes de buscar
         if (!validarCompatibilidadePermissao()) {
             return
         }
@@ -332,30 +325,24 @@ document.addEventListener('DOMContentLoaded', function () {
     function filtrarOpcoesPermissao() {
         if (!permissaoInput) return
 
-        // Limpar opções existentes, mantendo apenas a primeira (placeholder)
         const placeholder = permissaoInput.querySelector('option[value=""]')
         permissaoInput.innerHTML = ''
         if (placeholder) {
             permissaoInput.appendChild(placeholder)
         }
 
-        // Definir opções baseadas no tipo de usuário logado
         if (isAdministrador) {
-            // Administrador pode ver todas as opções
             adicionarOpcao('ACESSO_ATENDIMENTO', 'Atendimento')
             adicionarOpcao('ACESSO_EXAMES', 'Exames')
             adicionarOpcao('ACESSO_LABORATORIO', 'Laboratório')
             adicionarOpcao('GESTAO', 'Gestão')
             adicionarOpcao('ADMINISTRADOR', 'Administrador')
         } else if (isGestor) {
-            // Gestor só pode ver opções compatíveis com sua unidade
             if (tipoUnidadeUsuarioLogado === 'unidade') {
-                // Gestor de unidade de saúde: atendimento, exames e gestão
                 adicionarOpcao('ACESSO_ATENDIMENTO', 'Atendimento')
                 adicionarOpcao('ACESSO_EXAMES', 'Exames')
                 adicionarOpcao('GESTAO', 'Gestão')
             } else if (tipoUnidadeUsuarioLogado === 'laboratorio') {
-                // Gestor de laboratório: laboratório e gestão
                 adicionarOpcao('ACESSO_LABORATORIO', 'Laboratório')
                 adicionarOpcao('GESTAO', 'Gestão')
             }
@@ -375,7 +362,6 @@ document.addEventListener('DOMContentLoaded', function () {
         
         if (!registroRow) return
         
-        // Permissões que precisam de registro: ACESSO_EXAMES e ACESSO_LABORATORIO
         const precisaRegistro = permissao === 'ACESSO_EXAMES' || permissao === 'ACESSO_LABORATORIO'
         
         if (precisaRegistro) {
@@ -384,20 +370,18 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             registroRow.style.display = 'none'
             registroInput.required = false
-            registroInput.value = '' // Limpar o valor quando ocultar
+            registroInput.value = ''
         }
     }
 
     cadastroFuncionario.addEventListener('submit', async function (event) {
         event.preventDefault()
 
-        // Validar compatibilidade antes de submeter
         if (!validarCompatibilidadePermissao()) {
             notificar('Existem incompatibilidades entre permissão e tipo de unidade', 'error')
             return
         }
 
-        // Validação adicional para gestor
         if (isGestor) {
             const cnesDigitado = cnesUnidadeInput.value.trim()
             if (cnesDigitado !== cnesUsuarioLogado) {
@@ -409,7 +393,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const dados = new FormData(cadastroFuncionario)
         const valores = Object.fromEntries(dados.entries())
 
-        // Pegar o valor do CNES diretamente do campo, pois pode estar desabilitado
         const cnesUnidade = cnesUnidadeInput.value.trim()
 
         const requisicaoCadastro = {

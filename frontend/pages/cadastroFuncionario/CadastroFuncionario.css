@@ -113,7 +113,6 @@ input, textarea, select {
     color: #495057;
 }
 
-/* Estilos para mensagens de erro de validação */
 .erro-validacao {
     color: #d32f2f;
     background-color: #ffebee;
@@ -133,7 +132,6 @@ input, textarea, select {
     font-size: 16px;
 }
 
-/* Estilo para campos com erro */
 .campo-erro {
     border-color: #d32f2f !important;
     background-color: #fff5f5;
@@ -144,7 +142,6 @@ input, textarea, select {
     box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.2);
 }
 
-/* Estilo para campos desabilitados */
 input:disabled, select:disabled {
     background-color: #f5f5f5;
     color: #666;
@@ -152,7 +149,6 @@ input:disabled, select:disabled {
     opacity: 0.7;
 }
 
-/* Estilo específico para select desabilitado */
 select:disabled {
     background-image: none;
 }
