@@ -17,8 +17,8 @@ func EnviarEmail(destinatario, codigo string) error {
 
 	smtpHost := "smtp.gmail.com"
 	smtpPort := "587"
-	from := "ccts0867@gmail.com"
-	password := os.Getenv("GMAIL_CCTS_SENHA")
+	from := os.Getenv("GMAIL_CCTS_EMAIL")
+	password := os.Getenv("GMAIL_CCTS_SENHA_APP")
 
 	auth := smtp.PlainAuth("", from, password, smtpHost)
 

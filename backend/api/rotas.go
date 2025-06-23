@@ -43,6 +43,7 @@ func NewRotas(
 func (r *Router) SetupRotas() http.Handler {
 	rotasComuns := http.NewServeMux()
 	rotasComuns.HandleFunc("POST /api/auth/login", r.autenticacaoHandler.Login)
+	rotasComuns.HandleFunc("POST /api/usuario/email", r.usuarioHandler.EnviarEmailParaUsuarioRecuperarSenha)
 
 	rotasProtegidas := http.NewServeMux()
 

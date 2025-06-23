@@ -81,9 +81,16 @@ func (r *UsuarioRepository) CadastrarUsuario(ctx *context.Context, usuario *mode
 	return err
 }
 
-func (r *UsuarioRepository) AlterarSenha(ctx *context.Context, cpf string, novaSenha string) error {
-	query := `UPDATE usuario SET senha = $1, primeiroacesso = false WHERE cpf = $2`
-	_, err := r.db.DB.ExecContext(*ctx, query, novaSenha, cpf)
+func (r *UsuarioRepository) AlterarSenha(ctx *context.Context, credencial string, novaSenha string) error {
+	var query string
+
+	if len(credencial) == 11 {
+		query = `UPDATE usuario SET senha = $1, primeiroacesso = false WHERE cpf = $2`
+
+	} else {
+		query = `UPDATE usuario SET senha = $1, primeiroacesso = false WHERE registro = $2`
+	}
+	_, err := r.db.DB.ExecContext(*ctx, query, novaSenha, credencial)
 	return err
 }
 
