@@ -60,8 +60,24 @@ func (r *UsuarioRepository) GetUsuarioByRegistro(ctx *context.Context, registro 
 }
 
 func (r *UsuarioRepository) CadastrarUsuario(ctx *context.Context, usuario *model.Usuario) error {
-	query := `INSERT INTO usuario (nome, cpf, email, telefone, registro, senha, permissao, primeiroacesso) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
-	_, err := r.db.DB.ExecContext(*ctx, query, usuario.Nome, usuario.CPF, usuario.Email, usuario.Telefone, usuario.Registro, usuario.Senha, usuario.Permissao, usuario.PrimeiroAcesso)
+	var query string
+	var args []interface{}
+
+	if usuario.UnidadeSaudeCNES != nil {
+		query = `INSERT INTO usuario (nome, cpf, email, telefone, registro, senha, permissao, primeiroacesso, unidadesaude) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`
+		args = []interface{}{usuario.Nome, usuario.CPF, usuario.Email, usuario.Telefone, usuario.Registro, usuario.Senha, usuario.Permissao, usuario.PrimeiroAcesso, *usuario.UnidadeSaudeCNES}
+	} else if usuario.LaboratorioCNES != nil {
+		query = `INSERT INTO usuario (nome, cpf, email, telefone, registro, senha, permissao, primeiroacesso, laboratorio) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`
+		args = []interface{}{usuario.Nome, usuario.CPF, usuario.Email, usuario.Telefone, usuario.Registro, usuario.Senha, usuario.Permissao, usuario.PrimeiroAcesso, *usuario.LaboratorioCNES}
+	} else {
+		query = `INSERT INTO usuario (nome, cpf, email, telefone, registro, senha, permissao, primeiroacesso) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
+		args = []interface{}{usuario.Nome, usuario.CPF, usuario.Email, usuario.Telefone, usuario.Registro, usuario.Senha, usuario.Permissao, usuario.PrimeiroAcesso}
+	}
+
+	_, err := r.db.DB.ExecContext(*ctx, query, args...)
+	if err != nil {
+		fmt.Println(err)
+	}
 	return err
 }
 

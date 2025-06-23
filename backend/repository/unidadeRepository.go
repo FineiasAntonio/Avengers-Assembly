@@ -5,7 +5,6 @@ import (
 	"backend/model"
 	"backend/util"
 	"context"
-	"fmt"
 )
 
 type UnidadeRepository struct {
@@ -104,7 +103,6 @@ func (repository *UnidadeRepository) CadastrarLaboratorio(ctx *context.Context, 
 	)
 
 	if err != nil {
-		fmt.Println(err.Error())
 		return err
 	}
 

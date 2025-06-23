@@ -5,6 +5,7 @@ import (
 	"backend/dto"
 	"backend/model"
 	"backend/repository"
+	"backend/util"
 	"context"
 	"errors"
 
@@ -30,6 +31,15 @@ func (s *UsuarioService) CadastrarUsuario(ctx *context.Context, requisicao *mode
 	}
 	usuarioRequisicao.Senha = string(senha)
 	usuarioRequisicao.PrimeiroAcesso = true
+
+	if usuarioRequisicao.Registro == "" {
+		precisaRegistro := usuarioRequisicao.Permissao == string(model.ACESSO_EXAMES) || 
+						  usuarioRequisicao.Permissao == string(model.ACESSO_LABORATORIO)
+		
+		if !precisaRegistro {
+			usuarioRequisicao.Registro = util.GerarId(8)
+		}
+	}
 
 	err = s.repository.CadastrarUsuario(ctx, &usuarioRequisicao)
 	if err != nil {

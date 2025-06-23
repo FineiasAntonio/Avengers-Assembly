@@ -1,6 +1,6 @@
 import { API_ENDERECO } from "../environment/environment.js";
 import "../shared/interceptor.js"
-import { mostarNotificacao } from "../shared/notificacao.js";
+import { notificar } from "../shared/notificacao.js";
 
 export async function AlterarInformacaoRequisicao(cpf, campo, novo_valor) {
     const url = new URL(API_ENDERECO + "usuario/alterarInf")
@@ -16,10 +16,10 @@ export async function AlterarInformacaoRequisicao(cpf, campo, novo_valor) {
 
     if (!response.ok) {
         const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status} - ${response.body}` }))
-        mostarNotificacao(`Erro ao alterar ${campo}!\n` + errorData.message, "error", 3000);
+        notificar(`Erro ao alterar ${campo}!\n` + errorData.message, "error", 3000);
         throw new Error(errorData.message)
     }
-    mostarNotificacao(`${campo} alterado com sucesso!`, "success", 3000);
+    notificar(`${campo} alterado com sucesso!`, "success", 3000);
     setTimeout(() => {
         window.location.replace("../perfilUsuario/perfilUsuario.html?cpf=" + cpf);
     }, 1500);
@@ -37,10 +37,10 @@ export async function AlterarSenhaRequisicao(nova_senha) {
 
     if (!response.ok) {
         const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status} - ${response.body}` }))
-        mostarNotificacao(`Erro ao alterar senha: \n`+errorData.message, "error", 3000)
+        notificar(`Erro ao alterar senha: \n`+errorData.message, "error", 3000)
         throw new Error(errorData.message)
     }
-    mostarNotificacao(`Senha alterada com sucesso!`, "success", 3000);
+    notificar(`Senha alterada com sucesso!`, "success", 3000);
     setTimeout(() => {
         window.location.replace("../perfilUsuario/perfilUsuario.html");
     }, 1500);
@@ -61,4 +61,24 @@ export async function listarUsuario(registro) {
     }
 
     return await response.json()
+}
+
+export async function cadastrarFuncionario(funcionario) {
+    const url = new URL(API_ENDERECO + "usuario")
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(funcionario)
+    })
+
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status} - ${response.body}` }))
+        throw new Error(errorData.message)
+    }
+
+    notificar("Funcionário cadastrado com sucesso!", "success")
+    setTimeout(() => {
+        window.location.replace("../inicioPagina/inicioPagina.html")
+    }, 1500)
 }

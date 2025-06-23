@@ -42,7 +42,7 @@ export const items = [
     permissoesRequeridas: [Permissao.ACESSO_EXAMES]
   },
   {
-    href: "",
+    href: "../cadastroFuncionario/CadastroFuncionario.html",
     title: "Cadastrar Profissional",
     icon: "profissionalCad.png",
     permissoesRequeridas: [Permissao.GESTAO]

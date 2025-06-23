@@ -47,6 +47,18 @@ export function pegarUnidadeUsuario() {
   return claims ? claims.cnes : null;
 }
 
+export function pegarTipoUnidadeUsuario() {
+  const token = pegarTokenUsuario()
+  
+  if (!token) {
+    return null;
+  }
+
+  const claims = parseJwt(token);
+
+  return claims ? claims.tipo_unidade : null;
+}
+
 export function pegarCpfUsuario() {
   const token = pegarTokenUsuario();
 
