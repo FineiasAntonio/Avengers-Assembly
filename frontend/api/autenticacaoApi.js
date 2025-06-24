@@ -22,15 +22,15 @@ export async function loginRequisicao(credencial, senha) {
     window.location.replace("../pages/inicioPagina/inicioPagina.html")
 }
 
-export async function trocarSenhaRequisicaoEsqueceuSenha(novaSenha, credencial) {
-    const novaSenhaF = { novaSenha}
-    const url = new URL(API_ENDERECO+"usuario")
+export async function trocarSenhaRequisicaoEsqueceuSenha(nova_senha, credencial) {
+    nova_senha = { nova_senha }
+    const url = new URL(API_ENDERECO+"usuario/esqueceuSenha")
     url.searchParams.append('credencial', credencial)
 
-    const response = await fetch(API_ENDERECO + "auth/login", {
+    const response = await fetch(url, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(novaSenhaF)
+        body: JSON.stringify(nova_senha)
     })
 
     if (!response.ok) {
@@ -41,12 +41,12 @@ export async function trocarSenhaRequisicaoEsqueceuSenha(novaSenha, credencial) 
 
     notificar(`Senha modificada com sucesso!\n`, "success", 3000);
     setTimeout(() => {
-        window.location.replace("../auth/loginPagina.html")
+        window.location.replace("../auth/LoginPagina.html")
     }, 1500)
 }
 
 export async function emailRequisicaoRecuperarSenha(credencial) {
-    const url = new URL(API_ENDERECO + "usuario/email");
+    const url = new URL(API_ENDERECO + "codigo/email");
     url.searchParams.append('credencial', credencial);
 
     const response = await fetch(url, {
@@ -63,21 +63,24 @@ export async function emailRequisicaoRecuperarSenha(credencial) {
     notificar(`Email enviado com sucesso!\n`, "success", 3000);
 }
 
-export async function codigoRecebidoRequisicao(codigo) {
-    const url = new URL(API_ENDERECO+"usuario/codigo");
-    url.searchParams.append('codigo', codigo);
+export async function codigoRecebidoRequisicao(codigo, credencial) {
+    const url = new URL(API_ENDERECO+"codigo");
+
+    const req = {codigo, credencial}
 
     const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(req)
     })
 
     if (!response.ok) {
         const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status}` }));
-        notificar(`Código incorreto!\n`+errorData.message, "error", 3000);
-        throw new Error(errorData.message);
+        notificar(`Código incorreto e/ou expirado!\n`+errorData.message, "error", 3000);
+        return false;
     }
-
-    notificar(`Validação concluida!\n`, "success", 3000);
-    return true;
+    else {
+        notificar(`Validação concluida!\n`, "success", 3000);
+        return true;
+    }
 }

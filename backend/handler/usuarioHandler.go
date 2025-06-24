@@ -5,9 +5,7 @@ import (
 	"backend/exceptions"
 	"backend/model"
 	"backend/service"
-	"backend/util"
 	"encoding/json"
-	"fmt"
 	"net/http"
 )
 
@@ -36,6 +34,31 @@ func (handler *UsuarioHandler) CadastrarUsuario(w http.ResponseWriter, r *http.R
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
+}
+
+func (handler *UsuarioHandler) AlterarSenhaUsuarioEsqueceuSenha(w http.ResponseWriter, r *http.Request) {
+	var novaSenha dto.RequisicaoNovaSenha
+	if err := json.NewDecoder((r.Body)).Decode(&novaSenha); err != nil {
+		http.Error(w, exceptions.ErroRequisicaoInvalida.Error(), http.StatusBadRequest)
+		return
+	}
+
+	credencial := r.URL.Query().Get("credencial")
+	if credencial == "" {
+		http.Error(w, "Credencial não fornecida", http.StatusBadRequest)
+		return
+	}
+
+	ctx := r.Context()
+
+	err := handler.usuarioServico.AlterarSenha(&ctx, novaSenha, credencial)
+	if err != nil {
+		http.Error(w, exceptions.ErroInterno.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusNoContent)
 }
 
 func (handler *UsuarioHandler) AlterarSenhaUsuario(w http.ResponseWriter, r *http.Request) {
@@ -124,51 +147,4 @@ func (handler *UsuarioHandler) GetUsuario(w http.ResponseWriter, r *http.Request
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(usuarioDTO)
-}
-
-func (handler *UsuarioHandler) EnviarEmailParaUsuarioRecuperarSenha(w http.ResponseWriter, r *http.Request) {
-	parametro := r.URL.Query().Get("credencial")
-	if parametro == "" {
-		http.Error(w, "Credencial não fornecido", http.StatusBadRequest)
-		return
-	}
-
-	var usuario *model.Usuario
-	ctx := r.Context()
-	var err error
-
-	if len(parametro) == 11 {
-		var cpf string
-		cpf = parametro
-		usuario, err = handler.usuarioServico.GetUsuarioByCPF(&ctx, cpf)
-
-	} else {
-		var registro string
-		registro = parametro
-		usuario, err = handler.usuarioServico.GetUsuarioByRegistro(&ctx, registro)
-	}
-
-	if err != nil {
-		http.Error(w, exceptions.ErroInterno.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	email := usuario.Email
-	codigo := util.GerarCodigo()
-	if err = util.EnviarEmail(*email, codigo); err != nil {
-		fmt.Print(err)
-		http.Error(w, "Erro ao enviar email: "+err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusAccepted)
-}
-
-func (handler *UsuarioHandler) ConfirmarCodigo(w http.ResponseWriter, r *http.Request) {
-	codigo := r.URL.Query().Get("credencial")
-	if codigo == "" {
-		http.Error(w, "Código não fornecido", http.StatusBadRequest)
-		return
-	}
 }

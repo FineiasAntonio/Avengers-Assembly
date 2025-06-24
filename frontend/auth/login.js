@@ -2,6 +2,7 @@ import {loginRequisicao, emailRequisicaoRecuperarSenha, codigoRecebidoRequisicao
 import { notificar } from "../shared/notificacao.js";
 
 document.addEventListener('DOMContentLoaded', function() {
+    let credencialEmail = null;
     const botaoLogar = document.getElementById("submit")
 
     botaoLogar.addEventListener("click", realizarLogin)
@@ -15,35 +16,38 @@ document.addEventListener('DOMContentLoaded', function() {
         esqueceuSenha.style.display = 'flex';
     });
 
-    fundoPreto.addEventListener("click", () => {
-        fundoPreto.style.display = 'none';
-        esqueceuSenha.style.display = 'none';
+    fundoPreto.addEventListener("click", (e) => {
+        if (e.target.id == "fundoPreto") {
+            fundoPreto.style.display = 'none';
+            esqueceuSenha.style.display = 'none';
+        }
     });
 
     const enviarEmailBtn = document.getElementById("enviarEsqueceuSenha");
-    enviarEmailBtn.addEventListener("click", () => {
-        const credencialEmail = document.getElementById("entradaCredencial").value;
+    enviarEmailBtn.addEventListener("click", async () => {
+        credencialEmail = document.getElementById("entradaCredencial").value;
         
         if (credencialEmail == "") {
             notificar("Credencial inválida!", "warning", 3000);
             return;
         }
 
-        emailRequisicaoRecuperarSenha(credencialEmail);
+        await emailRequisicaoRecuperarSenha(credencialEmail);
     });
 
     const confirmarCodigoBtn = document.getElementById("confirmarCodigo");
 
     if (confirmarCodigoBtn) {
-        confirmarCodigoBtn.addEventListener("click", () => {
+        confirmarCodigoBtn.addEventListener("click", async () => {
         const codigo = document.getElementById("entradaCodigo").value;
 
         if (codigo == "") {
             notificar("Codigo em formato inválido!", "warning", 3000);
             return;
         }
-
-        const ok = codigoRecebidoRequisicao(codigo);
+        credencialEmail = document.getElementById("entradaCredencial").value;
+        
+        const ok = await codigoRecebidoRequisicao(codigo, credencialEmail);
 
         if (ok) {
             esqueceuSenha.style.display = 'none';
@@ -51,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
             injetarDivTrocaSenha();
 
             const trocarSenha = document.getElementById("mudarSenha");
-            trocarSenha.addEventListener("click", () => {
+            trocarSenha.addEventListener("click", async () => {
                 const novaSenhaValor = document.getElementById("novaSenha").value;
 
                 if (novaSenhaValor == "") {
@@ -59,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
 
-                trocarSenhaRequisicaoEsqueceuSenha(novaSenhaValor, credencialEmail);
+                await trocarSenhaRequisicaoEsqueceuSenha(novaSenhaValor, credencialEmail);
             })
         }
     });

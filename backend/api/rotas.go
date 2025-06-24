@@ -16,6 +16,7 @@ type Router struct {
 	requisicaoExameHandler *handler.RequisicaoExameHandler
 	unidadadeHandler       *handler.UnidadeHandler
 	CentralAnaliseHandler  *handler.CentralAnaliseHandler
+	codigoHandler          *handler.CodigoHandler
 }
 
 func NewRotas(
@@ -27,6 +28,7 @@ func NewRotas(
 	requisicaoExameHandler *handler.RequisicaoExameHandler,
 	unidadeHandler *handler.UnidadeHandler,
 	CentralAnaliseHandler *handler.CentralAnaliseHandler,
+	codigoHandler *handler.CodigoHandler,
 ) *Router {
 	return &Router{
 		autenticacaoMiddleware: autenticacaoMiddleware,
@@ -37,14 +39,16 @@ func NewRotas(
 		requisicaoExameHandler: requisicaoExameHandler,
 		unidadadeHandler:       unidadeHandler,
 		CentralAnaliseHandler:  CentralAnaliseHandler,
+		codigoHandler:          codigoHandler,
 	}
 }
 
 func (r *Router) SetupRotas() http.Handler {
 	rotasComuns := http.NewServeMux()
 	rotasComuns.HandleFunc("POST /api/auth/login", r.autenticacaoHandler.Login)
-	rotasComuns.HandleFunc("POST /api/usuario/email", r.usuarioHandler.EnviarEmailParaUsuarioRecuperarSenha)
-	rotasComuns.HandleFunc("POST /api/usuario/codigo", r.usuarioHandler.ConfirmarCodigo)
+	rotasComuns.HandleFunc("POST /api/codigo/email", r.codigoHandler.EnviarEmailParaUsuarioRecuperarSenha)
+	rotasComuns.HandleFunc("POST /api/codigo", r.codigoHandler.ConfirmarCodigo)
+	rotasComuns.HandleFunc("PATCH /api/usuario/esqueceuSenha", r.usuarioHandler.AlterarSenhaUsuarioEsqueceuSenha)
 
 	rotasProtegidas := http.NewServeMux()
 
