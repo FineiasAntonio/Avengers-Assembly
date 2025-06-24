@@ -40,6 +40,9 @@ export async function trocarSenhaRequisicaoEsqueceuSenha(novaSenha, credencial) 
     }
 
     notificar(`Senha modificada com sucesso!\n`, "success", 3000);
+    setTimeout(() => {
+        window.location.replace("../auth/loginPagina.html")
+    }, 1500)
 }
 
 export async function emailRequisicaoRecuperarSenha(credencial) {

@@ -25,8 +25,9 @@ export async function AlterarInformacaoRequisicao(cpf, campo, novo_valor) {
     }, 1500);
 }
 
-export async function AlterarSenhaRequisicao(nova_senha) {
-    const url = new URL(API_ENDERECO + "usuario")
+export async function AlterarSenhaRequisicao(nova_senha, credencial) {
+    const url = new URL(API_ENDERECO + "usuario");
+    url.searchParams.append("credencial", credencial);
     nova_senha = { nova_senha };
 
     const response = await fetch(url, {

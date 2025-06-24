@@ -32,7 +32,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     alterarInfSen.onclick = async () => {
         const novaSenha = document.getElementById("novaSenha").value;
-        await AlterarSenhaRequisicao(novaSenha);
+        const cpf = pegarCpfUsuario();
+        await AlterarSenhaRequisicao(novaSenha, cpf);
     }
 
     const campoNomeH = document.getElementById("nomeh");
