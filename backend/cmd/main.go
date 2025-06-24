@@ -8,6 +8,7 @@ import (
 	"backend/handler"
 	"backend/middleware"
 	"backend/repository"
+	"backend/scheduler"
 	"backend/service"
 	"log"
 	"net/http"
@@ -50,9 +51,12 @@ func main() {
 	agendamentoService := service.NewAgendamentoService(agendamentoRepository)
 	agendamentoHandler := handler.NewAgendamentoHandler(agendamentoService)
 
-	requisicaoExameRepositorio := repository.NewRequisicaoExameRepository(conexaoPostgres)
+	requisicaoExameRepositorio := repository.NewRequisicaoExameRepository(conexaoPostgres, conexaoMongo.Database)
 	requisicaoExameServico := service.NewRequisicaoExameService(requisicaoExameRepositorio)
 	requisicaoExameHandler := handler.NewRequisicaoExameHandler(requisicaoExameServico)
+
+	cron := scheduler.IniciarScheduler(requisicaoExameServico)
+	defer cron.Stop()
 
 	unidadeRpositorio := repository.NewUnidadeRepository(conexaoPostgres)
 	unidadeService := service.NewUnidadeService(unidadeRpositorio, enderecoRepositorio)

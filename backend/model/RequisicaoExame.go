@@ -34,3 +34,9 @@ const (
 	AGUARDANDO    Status = "AGUARDANDO"
 	LAUDO_EMITIDO Status = "LAUDO_EMITIDO"
 )
+
+type MensagensQuandoPassarTempoRetorno struct {
+	Protocolo  string    `bson:"protocolo"`
+	PacienteID string    `bson:"paciente_id"`
+	DataEnvio  time.Time `bson:"data_envio"`
+}
