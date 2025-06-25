@@ -12,7 +12,7 @@ Este projeto foi desenvolvido como trabalho final da disciplina de **Introduçã
 
 O CCTS é resultado do trabalho colaborativo do Grupo 1 (Avengers, Assembly!), composto pelos discentes:
 
-* [Davi Sousa](https://github.com/sfDavi)
+* [Davi de Souza](https://github.com/sfDavi)
 * [Finéias Antônio](https://github.com/FineiasAntonio)
 * [Geovanne Gonçalves](https://github.com/Geovanne015)
 * [Heitor Marx](https://github.com/Heitorvazeg)
