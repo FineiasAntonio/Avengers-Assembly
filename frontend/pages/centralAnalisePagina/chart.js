@@ -2,13 +2,11 @@ import { pegarDadosQtdPacientes } from "../../api/centralAnaliseApi.js";
 
 const graficoPizza = document.getElementById("graficoP");
 const graficoBarra = document.getElementById("graficoB");
-const graficoTotal= document.getElementById("graficoC");
 
 let chartPizza = null;
 let chartBarra = null;
-let chartTotal = null;
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     const funcao = document.getElementById("filtrarGrafico");
 
     funcao.addEventListener("change", () => {
@@ -19,8 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
     iniciarGraficoPizza(funcao.value);
 
     iniciarGraficoBarra("idade");
-    
-    iniciarGraficoTotal("padrao");
+
+    const labelQtdPacientes = document.getElementById("labelQtdPacientes");
+    const qtdPacientes = await iniciarQtdPacientes();
+    labelQtdPacientes.textContent = qtdPacientes;
 });
 
 async function iniciarGraficoBarra(funcao) {
@@ -109,28 +109,9 @@ async function iniciarGraficoPizza(funcao) {
     });
 }
 
-async function iniciarGraficoTotal(funcao) {
-    const response = await pegarDadosQtdPacientes(funcao)
-
-    if (chartTotal) chartTotal.destroy();
-
-    chartTotal = new Chart(graficoTotal, {
-        type: "doughnut",
-        data: {
-            labels: ["Quantidade de Pacientes"],
-            datasets: [{
-                label: "Pacientes",
-                data: [response.quantidade_pacientes],
-                backgroundColor: ["#9b59b6"]
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                position: 'left'
-                }
-            }
-        }
-    });
+async function iniciarQtdPacientes() {
+    const response = await pegarDadosQtdPacientes("padrao");
+    if (response.quantidade_pacientes) {
+        return response.quantidade_pacientes;
+    }
 }

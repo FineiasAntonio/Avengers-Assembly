@@ -1,4 +1,5 @@
 import { API_ENDERECO } from "../environment/environment.js";
+import { notificar } from "../shared/notificacao.js";
 import "../shared/interceptor.js"
 
 export async function listarPaciente(pacienteChave) {
@@ -18,4 +19,20 @@ export async function listarPaciente(pacienteChave) {
     }
 
     return await response.json()
+}
+
+export async function cadastrarPaciente(paciente) {
+    const response = await fetch(API_ENDERECO+"paciente", {
+        method: "POST",
+        headers: { "Content-Type": "application;json"},
+        body: JSON.stringify(paciente)
+    })
+
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status} - ${response.body}` }))
+        notificar(`Erro ao cadastrar paciente\n`+errorData.message, "error", 3000);
+        throw new Error(errorData.message)
+    }
+
+    notificar(`Paciente cadastrado com sucesso!\n`, "success", 3000);
 }

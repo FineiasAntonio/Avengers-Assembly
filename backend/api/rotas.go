@@ -17,6 +17,7 @@ type Router struct {
 	unidadadeHandler       *handler.UnidadeHandler
 	CentralAnaliseHandler  *handler.CentralAnaliseHandler
 	resultadoExameHandler  *handler.ResultadoExameHandler
+	codigoHandler          *handler.CodigoHandler
 }
 
 func NewRotas(
@@ -29,6 +30,7 @@ func NewRotas(
 	unidadeHandler *handler.UnidadeHandler,
 	CentralAnaliseHandler *handler.CentralAnaliseHandler,
 	resultadoExameHandler *handler.ResultadoExameHandler,
+	codigoHandler *handler.CodigoHandler,
 ) *Router {
 	return &Router{
 		autenticacaoMiddleware: autenticacaoMiddleware,
@@ -40,12 +42,16 @@ func NewRotas(
 		unidadadeHandler:       unidadeHandler,
 		CentralAnaliseHandler:  CentralAnaliseHandler,
 		resultadoExameHandler:  resultadoExameHandler,
+		codigoHandler:          codigoHandler,
 	}
 }
 
 func (r *Router) SetupRotas() http.Handler {
 	rotasComuns := http.NewServeMux()
 	rotasComuns.HandleFunc("POST /api/auth/login", r.autenticacaoHandler.Login)
+	rotasComuns.HandleFunc("POST /api/codigo/email", r.codigoHandler.EnviarEmailParaUsuarioRecuperarSenha)
+	rotasComuns.HandleFunc("POST /api/codigo", r.codigoHandler.ConfirmarCodigo)
+	rotasComuns.HandleFunc("PATCH /api/usuario/esqueceuSenha", r.usuarioHandler.AlterarSenhaUsuarioEsqueceuSenha)
 
 	rotasProtegidas := http.NewServeMux()
 

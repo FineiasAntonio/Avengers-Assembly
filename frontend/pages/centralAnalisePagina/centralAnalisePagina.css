@@ -109,9 +109,19 @@ hr {
     border-radius: 15px;
 }
 
-#graficoC {
-    width: 80%;
-    height: 60%;
+.labelQtdPacientes {
+    font-size: 3rem;
+}
+
+.qtdPacientesDiv {
+    margin: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 1px;
+    width: 30%;
+    height: 10rem;
 }
 
 .mapa {
@@ -199,6 +209,9 @@ hr {
         width: 100%;
         height: auto;
     }
+    .qtdPacientesDiv {
+        height: 6rem;
+    }
 }
 
 @media (max-width: 650px) {
@@ -206,5 +219,8 @@ hr {
     .graficoBarra { 
         height: auto;
         width: 50%;
+    }
+    .qtdPacientesDiv {
+        height: 4rem;
     }
 }

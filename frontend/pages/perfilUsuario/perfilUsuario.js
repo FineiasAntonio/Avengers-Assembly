@@ -1,5 +1,6 @@
 import { pegarCpfUsuario } from "../../shared/gerenciador-permissoes.js";
-import { mostarNotificacao } from "../../shared/notificacao.js";
+import { validarEmail } from "../../shared/validador.js";
+import { notificar } from "../../shared/notificacao.js";
 import { AlterarInformacaoRequisicao, AlterarSenhaRequisicao, listarUsuario } from "../../api/usuarioApi.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -9,12 +10,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         const campo = document.getElementById("select").value.toLowerCase();
         const novoValor = document.getElementById("inputT").value;
 
+        if (campo == "") {
+            notificar(`Selecione algum campo!\n`, "warning", 3000);
+            return;
+        }
+
         if (campo == 'telefone' && novoValor.length != 11) {
-            mostarNotificacao(`${campo} invalido!\n Siga o padrão (xx) xxxxx-xxxx`, "error", 3000);
+            notificar(`${campo} invalido!\n Siga o padrão (xx) xxxxx-xxxx`, "warning", 3000);
             return
         }
         if (campo == 'email' && !validarEmail(novoValor)) {
-            mostarNotificacao(`${campo} invalido!\n`, "error", 3000);
+            notificar(`${campo} invalido!\n`, "warning", 3000);
             return
         }
 
@@ -26,7 +32,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     alterarInfSen.onclick = async () => {
         const novaSenha = document.getElementById("novaSenha").value;
-        await AlterarSenhaRequisicao(novaSenha);
+        const cpf = pegarCpfUsuario();
+        await AlterarSenhaRequisicao(novaSenha, cpf);
     }
 
     const campoNomeH = document.getElementById("nomeh");
@@ -94,14 +101,4 @@ function formatarTelefone(telefone) {
     } else {
         return telefone;
     }
-}
-
-function validarEmail(email) {
-    if (!email) return false;
-
-    email = email.trim();
-
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    return regex.test(email);
 }

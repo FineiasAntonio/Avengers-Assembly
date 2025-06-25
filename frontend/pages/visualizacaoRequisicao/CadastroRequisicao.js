@@ -3,7 +3,7 @@ import { listarUnidade } from "../../api/unidadeApi.js";
 import { listarPaciente } from "../../api/pacienteApi.js";
 import { listarUsuario } from "../../api/usuarioApi.js";
 import { CadastroRequisicao } from "../../api/cadastroApi.js";
-import { mostarNotificacao } from "../../shared/notificacao.js";
+import { notificar } from "../../shared/notificacao.js";
 
 window.addEventListener("DOMContentLoaded", () => {
     const unidadeCnes = document.getElementById("unidadeCnes");
@@ -94,11 +94,11 @@ window.addEventListener("DOMContentLoaded", () => {
     submitRequisicao.addEventListener("click", () => {
 
         if (buscaPaciente.value.trim() === "") {
-            mostarNotificacao("Por favor, informe o CPF ou Cartão SUS do paciente.", "warning", 3000);
+            notificar("Por favor, informe o CPF ou Cartão SUS do paciente.", "warning", 3000);
             return;
         }
         if (registroResponsavel.value.trim() === "") {
-            mostarNotificacao("Por favor, informe o registro do profissional responsável.", "warning", 3000);
+            notificar("Por favor, informe o registro do profissional responsável.", "warning", 3000);
             return;
         }
 

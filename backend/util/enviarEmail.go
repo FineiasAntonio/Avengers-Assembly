@@ -8,7 +8,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func EnviarEmail(destinatario, codigo string) error {
+func EnviarEmail(mensagemSubject, mensagem, destinatario string) error {
 	err := godotenv.Load("../../.env")
 
 	if err != nil {
@@ -17,14 +17,14 @@ func EnviarEmail(destinatario, codigo string) error {
 
 	smtpHost := "smtp.gmail.com"
 	smtpPort := "587"
-	from := "ccts0867@gmail.com"
-	password := os.Getenv("GMAIL_CCTS_SENHA")
+	from := os.Getenv("GMAIL_CCTS_EMAIL")
+	password := os.Getenv("GMAIL_CCTS_SENHA_APP")
 
 	auth := smtp.PlainAuth("", from, password, smtpHost)
 
-	message := []byte("Subject: Código de recuperação de senha\r\n" +
+	message := []byte(fmt.Sprintf("Subject: %s\r\n", mensagemSubject) +
 		"\r\n" +
-		fmt.Sprintf("Seu código de recuperação é: %s\r\n", codigo))
+		fmt.Sprintf("Mensagem: %s\r\n", mensagem))
 
 	err = smtp.SendMail(smtpHost+":"+smtpPort, auth, from, []string{destinatario}, message)
 	return err

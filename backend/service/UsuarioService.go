@@ -1,7 +1,6 @@
 package service
 
 import (
-	"backend/auth"
 	"backend/dto"
 	"backend/model"
 	"backend/repository"
@@ -33,9 +32,9 @@ func (s *UsuarioService) CadastrarUsuario(ctx *context.Context, requisicao *mode
 	usuarioRequisicao.PrimeiroAcesso = true
 
 	if usuarioRequisicao.Registro == "" {
-		precisaRegistro := usuarioRequisicao.Permissao == string(model.ACESSO_EXAMES) || 
-						  usuarioRequisicao.Permissao == string(model.ACESSO_LABORATORIO)
-		
+		precisaRegistro := usuarioRequisicao.Permissao == string(model.ACESSO_EXAMES) ||
+			usuarioRequisicao.Permissao == string(model.ACESSO_LABORATORIO)
+
 		if !precisaRegistro {
 			usuarioRequisicao.Registro = util.GerarId(8)
 		}
@@ -49,14 +48,13 @@ func (s *UsuarioService) CadastrarUsuario(ctx *context.Context, requisicao *mode
 	return nil
 }
 
-func (s *UsuarioService) AlterarSenha(ctx *context.Context, requisicaoNovaSenha dto.RequisicaoNovaSenha) error {
-	usuario := (*ctx).Value("usuarioAutenticado").(*auth.Claims)
+func (s *UsuarioService) AlterarSenha(ctx *context.Context, requisicaoNovaSenha dto.RequisicaoNovaSenha, credencial string) error {
 	senhaHash, err := bcrypt.GenerateFromPassword([]byte(requisicaoNovaSenha.NovaSenha), bcrypt.DefaultCost)
 	if err != nil {
 		return errors.New("erro ao gerar hash da senha: " + err.Error())
 	}
 
-	err = s.repository.AlterarSenha(ctx, usuario.CPF, string(senhaHash))
+	err = s.repository.AlterarSenha(ctx, credencial, string(senhaHash))
 	if err != nil {
 		return errors.New("erro ao alterar senha: " + err.Error())
 	}

@@ -1,5 +1,5 @@
 import "../../api/cadastroApi.js"
-import { CadastroRequisicao } from "../../api/cadastroApi.js"
+import { cadastrarPaciente } from "../../api/pacienteApi.js"
 
 document.addEventListener('DOMContentLoaded', function () {
     const cpfInput = document.getElementById('cpf')
@@ -80,8 +80,13 @@ document.addEventListener('DOMContentLoaded', function () {
         valores.cep = valores.cep.replace(/\D/g, '')
 
         const partes = valores.data_nascimento.split('/')
-        const dataObj = new Date(`${partes[2]}-${partes[1]}-${partes[0]}`)
-        valores.data_nascimento = dataObj.toISOString()
+        if (partes.length === 3) {
+            const dataStr = `${partes[2]}-${partes[1]}-${partes[0]}`;
+            const dataObj = new Date(dataStr);
+            if (!isNaN(dataObj.getTime())) {
+                valores.data_nascimento = dataObj.toISOString()
+            } 
+        }
         valores.idade = parseInt(valores.idade)
 
         valores.endereco = {
@@ -94,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
             cep: valores.cep,
         }
         
-        CadastroRequisicao(valores, "paciente")
+        cadastrarPaciente(valores)
     })
 })
 

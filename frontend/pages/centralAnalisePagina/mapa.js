@@ -1,5 +1,4 @@
 import { pegarDadosQuantidadePacientesPorRegiao } from "../../api/centralAnaliseApi.js";
-import { mostarNotificacao } from "../../shared/notificacao.js";
 
 let mapa = null;
 

@@ -36,6 +36,31 @@ func (handler *UsuarioHandler) CadastrarUsuario(w http.ResponseWriter, r *http.R
 	w.WriteHeader(http.StatusCreated)
 }
 
+func (handler *UsuarioHandler) AlterarSenhaUsuarioEsqueceuSenha(w http.ResponseWriter, r *http.Request) {
+	var novaSenha dto.RequisicaoNovaSenha
+	if err := json.NewDecoder((r.Body)).Decode(&novaSenha); err != nil {
+		http.Error(w, exceptions.ErroRequisicaoInvalida.Error(), http.StatusBadRequest)
+		return
+	}
+
+	credencial := r.URL.Query().Get("credencial")
+	if credencial == "" {
+		http.Error(w, "Credencial não fornecida", http.StatusBadRequest)
+		return
+	}
+
+	ctx := r.Context()
+
+	err := handler.usuarioServico.AlterarSenha(&ctx, novaSenha, credencial)
+	if err != nil {
+		http.Error(w, exceptions.ErroInterno.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusNoContent)
+}
+
 func (handler *UsuarioHandler) AlterarSenhaUsuario(w http.ResponseWriter, r *http.Request) {
 	var novaSenha dto.RequisicaoNovaSenha
 	if err := json.NewDecoder((r.Body)).Decode(&novaSenha); err != nil {
@@ -43,9 +68,15 @@ func (handler *UsuarioHandler) AlterarSenhaUsuario(w http.ResponseWriter, r *htt
 		return
 	}
 
+	credencial := r.URL.Query().Get("credencial")
+	if credencial == "" {
+		http.Error(w, "Credencial não fornecida", http.StatusBadRequest)
+		return
+	}
+
 	ctx := r.Context()
 
-	err := handler.usuarioServico.AlterarSenha(&ctx, novaSenha)
+	err := handler.usuarioServico.AlterarSenha(&ctx, novaSenha, credencial)
 	if err != nil {
 		http.Error(w, exceptions.ErroInterno.Error(), http.StatusInternalServerError)
 		return

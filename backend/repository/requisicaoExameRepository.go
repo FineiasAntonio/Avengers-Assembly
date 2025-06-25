@@ -7,6 +7,9 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"time"
+
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 var (
@@ -14,11 +17,12 @@ var (
 )
 
 type RequisicaoExameRepository struct {
-	db *database.PostgresClient
+	db     *database.PostgresClient
+	dbMong *mongo.Collection
 }
 
-func NewRequisicaoExameRepository(db *database.PostgresClient) *RequisicaoExameRepository {
-	RequisicaoExameRepository := RequisicaoExameRepository{db: db}
+func NewRequisicaoExameRepository(db *database.PostgresClient, DBMong *mongo.Database) *RequisicaoExameRepository {
+	RequisicaoExameRepository := RequisicaoExameRepository{db: db, dbMong: DBMong.Collection("lembretes_enviados")}
 	return &RequisicaoExameRepository
 }
 
@@ -126,4 +130,60 @@ func (r *RequisicaoExameRepository) ExisteRequisicaoExame(ctx *context.Context, 
 	}
 
 	return existe, nil
+}
+
+func (r *RequisicaoExameRepository) BuscarRequisicoesComPaciente() ([]model.RequisicaoExame, error) {
+	query := `
+		SELECT 
+			re.protocolo, re.datacoleta,
+			p.nome, p.telefone
+		FROM requisicao_exame re
+		JOIN paciente p ON p.cartaosus = re.paciente
+		WHERE re.status = 'LAUDO_EMITIDO'
+	`
+	rows, err := r.db.DB.Query(query)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var resultados []model.RequisicaoExame
+	for rows.Next() {
+		var r model.RequisicaoExame
+		var p model.Paciente
+		err := rows.Scan(&r.Protocolo, &r.DataColeta, &p.Nome, &p.Telefone)
+		if err != nil {
+			return nil, err
+		}
+		r.Paciente = p
+		resultados = append(resultados, r)
+	}
+	return resultados, nil
+}
+
+func (r *RequisicaoExameRepository) RegistrarEnvioMsg(protocolo, pacienteID string) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	doc := model.MensagensQuandoPassarTempoRetorno{
+		Protocolo:  protocolo,
+		PacienteID: pacienteID,
+		DataEnvio:  time.Now(),
+	}
+	_, err := r.dbMong.InsertOne(ctx, doc)
+	return err
+}
+
+func (r *RequisicaoExameRepository) JaEnviouMsg(protocolo string) (bool, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	filter := map[string]string{"protocolo": protocolo}
+	var result model.MensagensQuandoPassarTempoRetorno
+
+	err := r.dbMong.FindOne(ctx, filter).Decode(&result)
+	if err == mongo.ErrNoDocuments {
+		return false, nil
+	}
+	return err == nil, err
 }

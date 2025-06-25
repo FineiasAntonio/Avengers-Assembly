@@ -8,6 +8,7 @@ import (
 	"backend/handler"
 	"backend/middleware"
 	"backend/repository"
+	"backend/scheduler"
 	"backend/service"
 	"log"
 	"net/http"
@@ -50,13 +51,12 @@ func main() {
 	agendamentoService := service.NewAgendamentoService(agendamentoRepository)
 	agendamentoHandler := handler.NewAgendamentoHandler(agendamentoService)
 
-	requisicaoExameRepositorio := repository.NewRequisicaoExameRepository(conexaoPostgres)
+	requisicaoExameRepositorio := repository.NewRequisicaoExameRepository(conexaoPostgres, conexaoMongo.Database)
 	requisicaoExameServico := service.NewRequisicaoExameService(requisicaoExameRepositorio)
 	requisicaoExameHandler := handler.NewRequisicaoExameHandler(requisicaoExameServico)
 
-	resultadoExameRepositorio := repository.NewResultadoExameRepository(conexaoMongo)
-	resultadoExameServico := service.NewResultadoExameService(resultadoExameRepositorio)
-	resultadoExameHandler := handler.NewResultadoExameHandler(resultadoExameServico)
+	cron := scheduler.IniciarScheduler(requisicaoExameServico)
+	defer cron.Stop()
 
 	unidadeRpositorio := repository.NewUnidadeRepository(conexaoPostgres)
 	unidadeService := service.NewUnidadeService(unidadeRpositorio, enderecoRepositorio)
@@ -70,6 +70,10 @@ func main() {
 	autenticacaoMiddleware := middleware.NewAutenticacaoMiddleware(autenticacaoServico)
 	autenticacaoHandler := auth.NewAutenticacaoHandler(autenticacaoServico)
 
+	codigoRepository := repository.NewCodigoRepository(conexaoMongo.Database)
+	codigoServico := service.NewCodigoService(codigoRepository)
+	codigoHandler := handler.NewCodigoHandler(codigoServico, usuarioServico)
+
 	corsMiddleware := middleware.NewCORSMiddleware()
 
 	rotas := api.NewRotas(
@@ -81,7 +85,7 @@ func main() {
 		requisicaoExameHandler,
 		unidadeHandler,
 		centralAnaliseHandler,
-		resultadoExameHandler,
+		codigoHandler,
 	)
 	handerRotas := corsMiddleware.LiberarCORS(rotas.SetupRotas())
 
