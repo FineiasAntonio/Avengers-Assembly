@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
             cep: valores.cep,
         }
         
-        cadastrarPaciente(valores)
+        await cadastrarPaciente(valores)
     })
 })
 

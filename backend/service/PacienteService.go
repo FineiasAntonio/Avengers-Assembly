@@ -5,6 +5,7 @@ import (
 	"backend/dto"
 	"backend/model"
 	"backend/repository"
+	"backend/util"
 	"context"
 	"errors"
 
@@ -51,6 +52,8 @@ func (s *PacienteService) CadastrarPaciente(ctx *context.Context, paciente *mode
 
 	var enderecoId string
 	enderecoId, err = s.enderecoRepository.CadastrarEndereco(ctx, paciente.Endereco)
+	prontuario := util.GerarProntuario()
+	paciente.Prontuario = prontuario
 
 	if err != nil {
 		return err
@@ -95,4 +98,17 @@ func (s *PacienteService) PacienteToDTO(p *model.Paciente) *dto.PacienteDTO {
 		Endereco:       p.Endereco,
 		Agenda:         p.Agenda,
 	}
+}
+
+func (s *PacienteService) ExistePaciente(ctx *context.Context, cartao_sus string) error {
+	existe, err := s.pacienteRepository.ExistePaciente(ctx, cartao_sus)
+	if err != nil {
+		return err
+	}
+
+	if !existe {
+		return repository.ErroPacienteNaoEncontrado
+	}
+
+	return nil
 }

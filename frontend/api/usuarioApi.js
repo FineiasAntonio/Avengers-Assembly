@@ -83,3 +83,27 @@ export async function cadastrarFuncionario(funcionario) {
         window.location.replace("../inicioPagina/inicioPagina.html")
     }, 1500)
 }
+
+export async function ExisteProfissional(registro) {
+    const url = new URL(API_ENDERECO + "usuario");
+    url.searchParams.append("registro", registro);
+    console.log(registro)
+
+    try {
+        const response = await fetch(url, {
+            method: "HEAD",
+            headers: {"Content-Type": "application/json"},
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({message: `Erro HTTP: ${response.status}`}));
+            throw new Error(errorData.message);
+        }
+        window.location.href = `../cadastroFuncionario/visualizarFuncionario.html?registro=${encodeURIComponent(registro)}`;
+    }
+
+    catch (error) {
+        window.alert("Esse funcionário não existe!");
+        console.log(error);
+    }
+}

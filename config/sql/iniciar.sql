@@ -49,15 +49,15 @@ CREATE TABLE IF NOT EXISTS usuario (
 
 CREATE TABLE IF NOT EXISTS paciente (
     cartaosus VARCHAR(10) PRIMARY KEY,
-    prontuario VARCHAR(15) UNIQUE NOT NULL,
+    prontuario VARCHAR(30) UNIQUE NOT NULL,
     nome VARCHAR(50) NOT NULL,
     nomemae VARCHAR(50),
     cpf VARCHAR(11) UNIQUE NOT NULL,
     datanascimento TIMESTAMP NOT NULL,
     idade INTEGER NOT NULL,
     raca  VARCHAR(10),
-    nacionalidade VARCHAR(10) NOT NULL,
-    escolaridade VARCHAR(20),
+    nacionalidade VARCHAR(20) NOT NULL,
+    escolaridade VARCHAR(30),
     telefone VARCHAR(13) NOT NULL,
     endereco VARCHAR(10) NOT NULL,
     senha VARCHAR(255) NOT NULL,
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS agendamento_exame (
 );
 
 CREATE TABLE IF NOT EXISTS requisicao_exame (
-    protocolo VARCHAR(10) PRIMARY KEY,
+    protocolo VARCHAR(30) PRIMARY KEY,
     paciente VARCHAR(10) NOT NULL,
     motivoexame VARCHAR(255),
     fezexamepreventivo BOOLEAN,

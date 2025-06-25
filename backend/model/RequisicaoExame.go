@@ -25,7 +25,7 @@ type RequisicaoExame struct {
 
 	Paciente       Paciente       `json:"paciente"`
 	Responsavel    Usuario        `json:"responsavel"`
-	ResultadoExame ResultadoExame `json:"ressultado_exame"`
+	ResultadoExame ResultadoExame `json:"resultado_exame"`
 }
 
 type Status string

@@ -3,6 +3,7 @@ package handler
 import (
 	"backend/exceptions"
 	"backend/model"
+	"backend/repository"
 	"backend/service"
 	"encoding/json"
 	"net/http"
@@ -95,4 +96,58 @@ func (handler *UnidadeHandler) CadastrarLaboratorio(w http.ResponseWriter, r *ht
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
+}
+
+func (handler *UnidadeHandler) ExisteUnidade(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "HEAD" {
+		http.Error(w, "Método não permitido", http.StatusBadRequest)
+		return
+	}
+
+	cnes := r.URL.Query().Get("cnes")
+	if cnes == "" {
+		http.Error(w, "CNES não fornecido", http.StatusBadRequest)
+		return
+	}
+
+	ctx := r.Context()
+
+	err := handler.service.ExisteUnidade(&ctx, cnes)
+	if err != nil {
+		if err == repository.ErroUnidadeNaoEncontrada {
+			http.Error(w, "Unidade não encontrado", http.StatusNotFound)
+			return
+		}
+		http.Error(w, "Erro ao buscar unidade", http.StatusInternalServerError)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+}
+
+func (handler *UnidadeHandler) ExisteLaboratorio(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "HEAD" {
+		http.Error(w, "Método não permitido", http.StatusBadRequest)
+		return
+	}
+
+	cnes := r.URL.Query().Get("cnes")
+	if cnes == "" {
+		http.Error(w, "CNES não fornecido", http.StatusBadRequest)
+		return
+	}
+
+	ctx := r.Context()
+
+	err := handler.service.ExisteUnidadeLab(&ctx, cnes)
+	if err != nil {
+		if err == repository.ErroUnidadeNaoEncontrada {
+			http.Error(w, "Unidade não encontrado", http.StatusNotFound)
+			return
+		}
+		http.Error(w, "Erro ao buscar unidade", http.StatusInternalServerError)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 }

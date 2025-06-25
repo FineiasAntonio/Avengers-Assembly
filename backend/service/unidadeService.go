@@ -67,3 +67,29 @@ func (service *UnidadeService) CadastrarLaboratorio(ctx *context.Context, requis
 
 	return nil
 }
+
+func (service *UnidadeService) ExisteUnidade(ctx *context.Context, cnes string) error {
+	existe, err := service.unidadeRepository.ExisteUnidade(ctx, cnes)
+	if err != nil {
+		return err
+	}
+
+	if !existe {
+		return repository.ErroUnidadeNaoEncontrada
+	}
+
+	return nil
+}
+
+func (service *UnidadeService) ExisteUnidadeLab(ctx *context.Context, cnes string) error {
+	existe, err := service.unidadeRepository.ExisteUnidadeLab(ctx, cnes)
+	if err != nil {
+		return err
+	}
+
+	if !existe {
+		return repository.ErroUnidadeNaoEncontrada
+	}
+
+	return nil
+}

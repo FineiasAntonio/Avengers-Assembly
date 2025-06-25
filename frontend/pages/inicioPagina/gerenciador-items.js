@@ -2,12 +2,16 @@ import { pegarPermissaoUsuario, Permissao } from '../../shared/gerenciador-permi
 import '../../shared/interceptor.js'
 import { invocarModal } from '../../shared/modal.js';
 import { ExisteRequisicaoExame } from '../../api/cadastroApi.js';
+import { ExistePaciente } from '../../api/pacienteApi.js';
+import { ExisteProfissional } from '../../api/usuarioApi.js';
+import { ExisteUnidade } from '../../api/unidadeApi.js';
 
 export const items = [
   {
     href: "",
     title: "Buscar Paciente",
     icon: "buscarPac.png",
+    event: buscarPaciente,
     permissoesRequeridas: [Permissao.TODOS]
   },
   {
@@ -36,7 +40,7 @@ export const items = [
     permissoesRequeridas: [Permissao.ACESSO_EXAMES]
   },
   {
-    href: "",
+    href: "../agendamentoExame/agenda.html",
     title: "Agenda",
     icon: "agenda.png",
     permissoesRequeridas: [Permissao.ACESSO_EXAMES]
@@ -51,6 +55,7 @@ export const items = [
     href: "",
     title: "Buscar Profissional",
     icon: "profissional.png",
+    event: buscarProfissional,
     permissoesRequeridas: [Permissao.GESTAO]
   },
   {
@@ -63,6 +68,7 @@ export const items = [
     href: "",
     title: "Buscar Unidade",
     icon: "unidadedesaude.png",
+    event: buscarUnidade,
     permissoesRequeridas: [Permissao.GESTAO]
   },
   {
@@ -116,6 +122,59 @@ function buscarExame() {
       ExisteRequisicaoExame(protocolo)
     } else {
       alert("Por favor, insira um protocolo de exame válido.");
+    }
+  })
+}
+
+function buscarPaciente() {
+  const modal = document.getElementById("modal-container-paciente");
+  invocarModal(modal);
+  document.getElementById("cartaoPaciente").value = ""
+
+  document.getElementById("submitPaciente").addEventListener("click", function(event) {
+    const cartaoSus = document.getElementById("cartaoPaciente").value.trim();
+    
+    if (cartaoSus) {
+      ExistePaciente(cartaoSus)
+    } else {
+      alert("Por favor, insira um cartão SUS válido.");
+    }
+  })
+}
+
+function buscarProfissional() {
+  const modal = document.getElementById("modal-container-profissional");
+  invocarModal(modal);
+  document.getElementById("registroProfissional").value = ""
+
+  document.getElementById("submitProfissional").addEventListener("click", function(event) {
+    const registro = document.getElementById("registroProfissional").value.trim();
+    if (registro) {
+      ExisteProfissional(registro)
+    } else {
+      alert("Por favor, insira um registro válido.");
+    }
+  })
+}
+
+function buscarUnidade() {
+  const modal = document.getElementById("modal-container-unidade");
+  invocarModal(modal);
+  document.getElementById("cnesUnidade").value = ""
+
+  document.getElementById("submitUnidade").addEventListener("click", async function(event) {
+    const cnes = document.getElementById("cnesUnidade").value.trim();
+    const tipo = document.getElementById("tipoUnidade").value;
+    console.log(tipo)
+    if (cnes) {
+      if (tipo == "laboratorio") {
+        ExisteUnidade(cnes, "laboratorio")
+
+      } else {
+        ExisteUnidade(cnes, "unidade")
+      }
+    } else {
+      alert("Por favor, insira um CNES válido.");
     }
   })
 }

@@ -36,3 +36,27 @@ export async function cadastrarPaciente(paciente) {
 
     notificar(`Paciente cadastrado com sucesso!\n`, "success", 3000);
 }
+
+
+export async function ExistePaciente(cartao_sus) {
+    const url = new URL(API_ENDERECO + "paciente");
+    url.searchParams.append("cartao_sus", cartao_sus);
+
+    try {
+        const response = await fetch(url, {
+            method: "HEAD",
+            headers: {"Content-Type": "application/json"},
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({message: `Erro HTTP: ${response.status}`}));
+            throw new Error(errorData.message);
+        }
+        window.location.href = `../cadastroPaciente/visualizacaoPaciente.html?cartao_sus=${encodeURIComponent(cartao_sus)}`;
+    }
+
+    catch (error) {
+        window.alert("Esse paciente não existe!");
+        console.log(error);
+    }
+}

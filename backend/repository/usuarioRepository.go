@@ -4,6 +4,7 @@ import (
 	"backend/database"
 	"backend/model"
 	"context"
+	"errors"
 	"fmt"
 )
 
@@ -16,6 +17,10 @@ func NewUsuarioRepository(db *database.PostgresClient) *UsuarioRepository {
 		db: db,
 	}
 }
+
+var (
+	ErroProfissionalNaoEncontrado = errors.New("Profissional não encontrado")
+)
 
 func (r *UsuarioRepository) GetUsuarioByCPF(ctx *context.Context, cpf string) (*model.Usuario, error) {
 	query := `SELECT * FROM usuario WHERE cpf = $1`
@@ -101,4 +106,16 @@ func (r *UsuarioRepository) AlterarInformacao(ctx *context.Context, cpf, campo, 
 	query := fmt.Sprintf(`UPDATE usuario SET %s = $1 WHERE cpf = $2`, campo)
 	_, err := r.db.DB.ExecContext(*ctx, query, novoValor, cpf)
 	return err
+}
+
+func (r *UsuarioRepository) ExisteUsuario(ctx *context.Context, registro string) (bool, error) {
+	var existe bool
+	query := "SELECT EXISTS(SELECT 1 FROM usuario WHERE registro = $1)"
+	err := r.db.DB.QueryRowContext(*ctx, query, registro).Scan(&existe)
+
+	if err != nil {
+		return false, err
+	}
+
+	return existe, nil
 }

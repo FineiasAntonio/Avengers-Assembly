@@ -4,6 +4,7 @@ import (
 	"backend/dto"
 	"backend/exceptions"
 	"backend/model"
+	"backend/repository"
 	"backend/service"
 	"encoding/json"
 	"net/http"
@@ -130,7 +131,6 @@ func (handler *UsuarioHandler) GetUsuario(w http.ResponseWriter, r *http.Request
 		var cpf string
 		cpf = parametro
 		usuario, err = handler.usuarioServico.GetUsuarioByCPF(&ctx, cpf)
-
 	} else {
 		var registro string
 		registro = parametro
@@ -142,9 +142,35 @@ func (handler *UsuarioHandler) GetUsuario(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	usuarioDTO := handler.usuarioServico.UsuarioToDTO(usuario)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(usuario)
+}
+
+func (handler *UsuarioHandler) ExisteUsuario(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "HEAD" {
+		http.Error(w, "Método não permitido", http.StatusBadRequest)
+		return
+	}
+
+	registro := r.URL.Query().Get("registro")
+	if registro == "" {
+		http.Error(w, "Registro não fornecido", http.StatusBadRequest)
+		return
+	}
+
+	ctx := r.Context()
+
+	err := handler.usuarioServico.ExisteUsuario(&ctx, registro)
+
+	if err != nil {
+		if err == repository.ErroProfissionalNaoEncontrado {
+			http.Error(w, "Profissional não encontrado", http.StatusNotFound)
+			return
+		}
+		http.Error(w, "Erro ao verificar profissional: "+err.Error(), http.StatusInternalServerError)
+	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(usuarioDTO)
 }

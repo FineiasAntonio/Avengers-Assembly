@@ -58,7 +58,7 @@ func (r *CentralAnaliseRepository) PegarQtdPacientesPorRaca(ctx *context.Context
 	var qtdPacRaca dto.GraficoPacientesPorRacaDTO
 	query := `SELECT 
 				SUM(CASE WHEN raca = 'Branca' THEN 1 ELSE 0 END),
-				SUM(CASE WHEN raca = 'Negra' THEN 1 ELSE 0 END),
+				SUM(CASE WHEN raca = 'Preta' THEN 1 ELSE 0 END),
 				SUM(CASE WHEN raca = 'Parda' THEN 1 ELSE 0 END),
 				SUM(CASE WHEN raca = 'Amarela' THEN 1 ELSE 0 END),
 				SUM(CASE WHEN raca = 'Indigena' THEN 1 ELSE 0 END)
@@ -66,7 +66,7 @@ func (r *CentralAnaliseRepository) PegarQtdPacientesPorRaca(ctx *context.Context
 	`
 	err := r.db.DB.QueryRowContext(*ctx, query).Scan(
 		&qtdPacRaca.Branca,
-		&qtdPacRaca.Negra,
+		&qtdPacRaca.Preta,
 		&qtdPacRaca.Parda,
 		&qtdPacRaca.Amarela,
 		&qtdPacRaca.Indigena,

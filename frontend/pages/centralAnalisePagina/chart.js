@@ -56,10 +56,10 @@ async function iniciarGraficoPizza(funcao) {
     let data = [];
 
     if (response.branca !== undefined) {
-        labels = ["Branca", "Negra", "Parda", "Amarela", "Indígena"];
+        labels = ["Branca", "Preta", "Parda", "Amarela", "Indígena"];
         data = [
             response.branca || 0,
-            response.negra || 0,
+            response.preta || 0,
             response.parda || 0,
             response.amarela || 0,
             response.indigena || 0

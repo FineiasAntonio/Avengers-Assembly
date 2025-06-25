@@ -15,7 +15,7 @@ type GraficoPacientesPorIdadeDTO struct {
 
 type GraficoPacientesPorRacaDTO struct {
 	Branca   string `json:"branca"`
-	Negra    string `json:"negra"`
+	Preta    string `json:"preta"`
 	Parda    string `json:"parda"`
 	Amarela  string `json:"amarela"`
 	Indigena string `json:"indigena"`

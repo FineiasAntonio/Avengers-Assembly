@@ -4,7 +4,6 @@ import { notificar } from "../shared/notificacao.js";
 
 export async function CadastroRequisicao(objeto) {
     try {
-        objeto = { objeto };
         const response = await fetch(API_ENDERECO + "requisicaoExame", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -18,7 +17,7 @@ export async function CadastroRequisicao(objeto) {
         const protocolo = await response.json();
         notificar("Requisição cadastrada com sucesso!", "success", 3000);
         setTimeout(() => {
-            window.location.replace("/pages/visualizacaoRequisicao/VisualizacaoRequisicao.html?protocolo=" + protocolo);
+            window.location.replace("../visualizacaoRequisicao/VisualizacaoRequisicao.html?protocolo=" + protocolo);
         }, 1500);
     }
     catch (error) {

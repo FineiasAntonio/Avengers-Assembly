@@ -91,7 +91,7 @@ window.addEventListener("DOMContentLoaded", () => {
             });
     });
 
-    submitRequisicao.addEventListener("click", () => {
+    submitRequisicao.addEventListener("click", async () => {
 
         if (buscaPaciente.value.trim() === "") {
             notificar("Por favor, informe o CPF ou Cartão SUS do paciente.", "warning", 3000);
@@ -121,7 +121,7 @@ window.addEventListener("DOMContentLoaded", () => {
             responsavel_registro: registroResponsavel.value,
         };
 
-        enviarRequisicaoExame(requisicao);
+        await enviarRequisicaoExame(requisicao);
     });
 
     registroResponsavel.addEventListener("blur", (event) => {
@@ -156,6 +156,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
 });
 
-function enviarRequisicaoExame(requisicao) {
-    CadastroRequisicao(requisicao);
+async function enviarRequisicaoExame(requisicao) {
+    await CadastroRequisicao(requisicao);
 }

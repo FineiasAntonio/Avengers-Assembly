@@ -60,9 +60,11 @@ func (r *Router) SetupRotas() http.Handler {
 	rotasProtegidas.HandleFunc("PATCH /api/usuario", r.usuarioHandler.AlterarSenhaUsuario)
 	rotasProtegidas.HandleFunc("PATCH /api/usuario/alterarInf", r.usuarioHandler.AlterarInformacao)
 	rotasProtegidas.HandleFunc("GET /api/usuario", r.usuarioHandler.GetUsuario)
+	rotasProtegidas.HandleFunc("HEAD /api/usuario", r.usuarioHandler.ExisteUsuario)
 
 	rotasProtegidas.HandleFunc("POST /api/paciente", r.pacienteHandler.CadastrarPaciente)
 	rotasProtegidas.HandleFunc("GET /api/paciente", r.pacienteHandler.GetPaciente)
+	rotasProtegidas.HandleFunc("HEAD /api/paciente", r.pacienteHandler.ExisteRequisicaoExame)
 
 	rotasProtegidas.HandleFunc("POST /api/agendamento", r.agendamentoHandler.AgendarExame)
 	rotasProtegidas.HandleFunc("GET /api/agendamento", r.agendamentoHandler.ConsultarHorariosOcupados)
@@ -78,6 +80,8 @@ func (r *Router) SetupRotas() http.Handler {
 	rotasProtegidas.HandleFunc("POST /api/unidade", r.unidadadeHandler.CadastrarUnidade)
 	rotasProtegidas.HandleFunc("GET /api/laboratorio", r.unidadadeHandler.ListarLaboratorio)
 	rotasProtegidas.HandleFunc("POST /api/laboratorio", r.unidadadeHandler.CadastrarLaboratorio)
+	rotasProtegidas.HandleFunc("HEAD /api/unidade", r.unidadadeHandler.ExisteUnidade)
+	rotasProtegidas.HandleFunc("HEAD /api/laboratorio", r.unidadadeHandler.ExisteLaboratorio)
 
 	rotasProtegidas.HandleFunc("GET /api/graficos", r.CentralAnaliseHandler.PegarQuantidadePacientes)
 	rotasProtegidas.HandleFunc("GET /api/mapa", r.CentralAnaliseHandler.PegarQuantidadePacientesPorRegiao)

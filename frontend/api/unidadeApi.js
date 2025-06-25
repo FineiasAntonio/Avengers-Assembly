@@ -54,6 +54,30 @@ export async function cadastrarUnidade(unidade, endpoint) {
 
     notificar("Unidade cadastrada com sucesso", "success")
     setTimeout(() => {
-        window.location.replace("/pages/inicioPagina/inicioPagina.html")
+        window.location.replace("../inicioPagina/inicioPagina.html")
     }, 1500)
+}
+
+
+export async function ExisteUnidade(cnes, endpoint) {
+    const url = new URL(API_ENDERECO + endpoint);
+    url.searchParams.append("cnes", cnes);
+
+    try {
+        const response = await fetch(url, {
+            method: "HEAD",
+            headers: {"Content-Type": "application/json"},
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({message: `Erro HTTP: ${response.status}`}));
+            throw new Error(errorData.message);
+        }
+        window.location.href = `../cadastroUnidade/visualizarUnidade.html?cnes=${encodeURIComponent(cnes)}`;
+    }
+
+    catch (error) {
+        window.alert("Essa unidade não existe!");
+        console.log(error);
+    }
 }

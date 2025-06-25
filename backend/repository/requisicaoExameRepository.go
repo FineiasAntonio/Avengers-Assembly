@@ -99,7 +99,6 @@ func (r *RequisicaoExameRepository) GetRequisicaoExameByProtocolo(ctx *context.C
 }
 
 func (r *RequisicaoExameRepository) CadastrarRequisicaoExame(ctx *context.Context, re *model.RequisicaoExame) error {
-
 	_, err := r.db.DB.ExecContext(*ctx,
 		`INSERT INTO requisicao_exame (
 		protocolo, paciente, motivoexame, fezexamepreventivo, anoultimoexame, usadiu,

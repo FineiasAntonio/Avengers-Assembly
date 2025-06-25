@@ -96,3 +96,16 @@ func (s *UsuarioService) UsuarioToDTO(user *model.Usuario) *dto.UsuarioDTO {
 		LaboratorioCNES:  user.LaboratorioCNES,
 	}
 }
+
+func (s *UsuarioService) ExisteUsuario(ctx *context.Context, registro string) error {
+	existe, err := s.repository.ExisteUsuario(ctx, registro)
+	if err != nil {
+		return err
+	}
+
+	if !existe {
+		return repository.ErroProfissionalNaoEncontrado
+	}
+
+	return nil
+}

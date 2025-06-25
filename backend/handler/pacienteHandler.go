@@ -3,6 +3,7 @@ package handler
 import (
 	"backend/exceptions"
 	"backend/model"
+	"backend/repository"
 	"backend/service"
 	"encoding/json"
 	"fmt"
@@ -75,4 +76,32 @@ func (handler *PacienteHandler) GetPaciente(w http.ResponseWriter, r *http.Reque
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(pacienteDTO)
+}
+
+func (handler *PacienteHandler) ExisteRequisicaoExame(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "HEAD" {
+		http.Error(w, "Método não permitido", http.StatusBadRequest)
+		return
+	}
+
+	cartao_sus := r.URL.Query().Get("cartao_sus")
+	if cartao_sus == "" {
+		http.Error(w, "Cartão SUS não fornecido", http.StatusBadRequest)
+		return
+	}
+
+	ctx := r.Context()
+
+	err := handler.pacienteServico.ExistePaciente(&ctx, cartao_sus)
+
+	if err != nil {
+		if err == repository.ErroPacienteNaoEncontrado {
+			http.Error(w, "Paciente não encontrado", http.StatusNotFound)
+			return
+		}
+		http.Error(w, "Erro ao verificar paciente: "+err.Error(), http.StatusInternalServerError)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 }

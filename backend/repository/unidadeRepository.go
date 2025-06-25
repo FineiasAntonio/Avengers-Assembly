@@ -5,6 +5,7 @@ import (
 	"backend/model"
 	"backend/util"
 	"context"
+	"errors"
 )
 
 type UnidadeRepository struct {
@@ -14,6 +15,10 @@ type UnidadeRepository struct {
 func NewUnidadeRepository(db *database.PostgresClient) *UnidadeRepository {
 	return &UnidadeRepository{db: db}
 }
+
+var (
+	ErroUnidadeNaoEncontrada = errors.New("Unidade não encontrado")
+)
 
 func (respository *UnidadeRepository) ListarUnidade(ctx *context.Context, cnes string) (*model.UnidadeSaude, error) {
 	query := `SELECT * FROM unidade_saude JOIN endereco ON unidade_saude.endereco = endereco.endereco_id WHERE cnes = $1`
@@ -107,4 +112,28 @@ func (repository *UnidadeRepository) CadastrarLaboratorio(ctx *context.Context, 
 	}
 
 	return nil
+}
+
+func (repository *UnidadeRepository) ExisteUnidade(ctx *context.Context, cnes string) (bool, error) {
+	var existe bool
+	query := "SELECT EXISTS(SELECT 1 FROM unidade_saude WHERE cnes = $1)"
+	err := repository.db.DB.QueryRowContext(*ctx, query, cnes).Scan(&existe)
+
+	if err != nil {
+		return false, err
+	}
+
+	return existe, nil
+}
+
+func (repository *UnidadeRepository) ExisteUnidadeLab(ctx *context.Context, cnes string) (bool, error) {
+	var existe bool
+	query := "SELECT EXISTS(SELECT 1 FROM laboratorio WHERE cnes = $1)"
+	err := repository.db.DB.QueryRowContext(*ctx, query, cnes).Scan(&existe)
+
+	if err != nil {
+		return false, err
+	}
+
+	return existe, nil
 }
