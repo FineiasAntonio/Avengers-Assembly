@@ -13,6 +13,7 @@ export async function listarUnidade(cnes) {
     })
 
     if (!response.ok) {
+        console.log(response.body);
         const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status} - ${response.body}` }))
         throw new Error(errorData.message)
     }

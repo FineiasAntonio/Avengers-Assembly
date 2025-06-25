@@ -88,7 +88,7 @@ export async function CadastrarResultadoExame(objeto) {
         
         notificar("Resultado de exame cadastrado com sucesso!", "success", 3000);
         setTimeout(() => {
-            window.location.replace("/pages/visualizacaoRequisicao/VisualizacaoRequisicao.html?protocolo=" + protocolo);
+            window.location.replace("/pages/visualizacaoRequisicao/VisualizacaoRequisicao.html?protocolo=" + objeto.protocolo_exame);
         }, 1500);
         return true;
     }
@@ -96,6 +96,30 @@ export async function CadastrarResultadoExame(objeto) {
         notificar("Erro ao cadastrar resultado de exame: " + error.message, "error", 5000);
         console.log(error);
         return false;
+    }
+}
+
+export async function BuscarResultadoExame(protocolo) {
+    try {
+        const url = new URL(API_ENDERECO + "requisicaoExame/resultado");
+        url.searchParams.append('protocolo', protocolo);
+
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status}` }));
+            throw new Error(errorData.message);
+        }
+        
+        return await response.json();
+    }
+    catch (error) {
+        notificar("Erro ao buscar resultado: " + error.message, "error", 5000);
+        console.log(error);
+        throw error;
     }
 }
 

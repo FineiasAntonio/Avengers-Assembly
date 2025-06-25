@@ -13,9 +13,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="VisualizacaoResultado.css">
+  <link rel="stylesheet" href="CadastroResultado.css">
   <script src="../../components/navbar/navbar.js" type="module"></script>
-  <script src="./VisualizacaoResultado.js" type="module"></script>
+  <script src="./CadastroResultado.js" type="module"></script>
   <title>Informações Exame</title>
 </head>
 
@@ -165,13 +165,12 @@
       <div class="grid">
         <label>Screening Citotécnico <input type="text" id="screeningCitotecnico" data-field="screeningCitotecnico" /></label>
         <label>Responsável pelo Registro <input type="text" id="responsavelRegistro" data-field="responsavelRegistro" /></label>
-        <label>Data do Resultado <input type="date" id="dataResultado" data-field="dataResultado" /></label>
       </div>
     </fieldset>
 
     <div class="buttons">
         <button class="botao1" onclick="history.back()">Cancelar</button>
-        <button class="botao1" id="btnEnviar">Enviar</button>
+        <button class="botao1" id="btnSalvarEmitir">Salvar e Emitir</button>
     </div>
   </div>
 

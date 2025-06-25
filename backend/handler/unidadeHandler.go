@@ -28,6 +28,7 @@ func (handler *UnidadeHandler) ListarUnidade(w http.ResponseWriter, r *http.Requ
 
 	unidade, err := handler.service.ListarUnidade(&ctx, cnesUnidade)
 	if err != nil {
+
 		http.Error(w, exceptions.ErroInterno.Error(), http.StatusInternalServerError)
 		return
 	}

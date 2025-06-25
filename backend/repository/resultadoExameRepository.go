@@ -45,7 +45,7 @@ func (repository *ResultadoExameRepository) EmitirResultadoExame(ctx *context.Co
 	_, err := resultadoExameCollection.UpdateOne(
 		*ctx,
 		bson.M{"protocolo_exame": protocoloExame},
-		bson.M{"$set": bson.M{"status": "emitido", "data_emissao_laudo": time.Now()}},
+		bson.M{"$set": bson.M{"data_emissao_laudo": time.Now()}},
 	)
 
 	if err != nil {

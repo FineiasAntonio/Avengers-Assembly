@@ -45,3 +45,28 @@ func (handler *ResultadoExameHandler) CadastrarResultadoExame(w http.ResponseWri
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 }
+
+func (handler *ResultadoExameHandler) BuscarResultadoExamePorProtocolo(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)
+		return
+	}
+
+	protocoloExame := r.URL.Query().Get("protocolo")
+	if protocoloExame == "" {
+		http.Error(w, "Protocolo do exame é obrigatório", http.StatusBadRequest)
+		return
+	}
+
+	ctx := r.Context()
+
+	resultadoExame, err := handler.service.BuscarResultadoExamePorProtocolo(&ctx, protocoloExame)
+	if err != nil {
+		fmt.Println(err.Error())
+		http.Error(w, "Resultado do exame não encontrado", http.StatusNotFound)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(resultadoExame)
+}

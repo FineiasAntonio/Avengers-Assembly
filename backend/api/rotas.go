@@ -72,6 +72,7 @@ func (r *Router) SetupRotas() http.Handler {
 	rotasProtegidas.HandleFunc("HEAD /api/requisicaoExame", r.requisicaoExameHandler.ExisteRequisicaoExame)
 
 	rotasProtegidas.HandleFunc("POST /api/requisicaoExame/resultado", r.resultadoExameHandler.CadastrarResultadoExame)
+	rotasProtegidas.HandleFunc("GET /api/requisicaoExame/resultado", r.resultadoExameHandler.BuscarResultadoExamePorProtocolo)
 
 	rotasProtegidas.HandleFunc("GET /api/unidade", r.unidadadeHandler.ListarUnidade)
 	rotasProtegidas.HandleFunc("POST /api/unidade", r.unidadadeHandler.CadastrarUnidade)

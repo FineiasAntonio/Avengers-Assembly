@@ -55,6 +55,10 @@ func main() {
 	requisicaoExameServico := service.NewRequisicaoExameService(requisicaoExameRepositorio)
 	requisicaoExameHandler := handler.NewRequisicaoExameHandler(requisicaoExameServico)
 
+	resultadoExameRepository := repository.NewResultadoExameRepository(conexaoMongo)
+	resultadoExameService := service.NewResultadoExameService(resultadoExameRepository, requisicaoExameRepositorio)
+	resultadoExameHandler := handler.NewResultadoExameHandler(resultadoExameService)
+
 	cron := scheduler.IniciarScheduler(requisicaoExameServico)
 	defer cron.Stop()
 
@@ -85,6 +89,7 @@ func main() {
 		requisicaoExameHandler,
 		unidadeHandler,
 		centralAnaliseHandler,
+		resultadoExameHandler,
 		codigoHandler,
 	)
 	handerRotas := corsMiddleware.LiberarCORS(rotas.SetupRotas())
