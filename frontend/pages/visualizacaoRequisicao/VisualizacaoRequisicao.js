@@ -84,17 +84,17 @@ window.addEventListener("DOMContentLoaded", () => {
         nomeResponsavel.textContent = resultado.responsavel.nome;
 
         const botaoResultado = document.getElementById("botaoResultado")
-        if (resultado.ResultadoID) {
+        if (resultado.status === "LAUDO_EMITIDO") {
             botaoResultado.style.cursor = "pointer";
             botaoResultado.textContent = "Ver Resultado";
             botaoResultado.addEventListener("click", () => {
-                window.location.href = `../resultadoExame/ResultadoExame.html?protocolo=${resultado.protocolo}`;
+                window.location.href = `../visualizacaoResultadoExame/VisualizacaoResultado.html?protocolo=${resultado.protocolo}`;
             });
-        } else if (!resultado.ResultadoID && pegarPermissaoUsuario() === "ACESSO_LABORATORIO") {
+        } else if (resultado.status !== "LAUDO_EMITIDO" && pegarPermissaoUsuario() === "ACESSO_LABORATORIO") {
             botaoResultado.style.cursor = "pointer";
             botaoResultado.textContent = "Cadastrar Laudo";
             botaoResultado.addEventListener("click", () => {
-                window.location.href = `../resultadoExame/VisualizacaoResultado.html?protocolo=${resultado.protocolo}`;
+                window.location.href = `../cadastroResultadoExame/CadastroResultado.html?protocolo=${resultado.protocolo}`;
             });
         } else {
             botaoResultado.style.cursor = "not-allowed";
@@ -109,6 +109,3 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-function enviarRequisicaoExame(requisicao) {
-    CadastroRequisicao(requisicao);
-}

@@ -38,7 +38,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./waha_data:/app/data
+      - .config/container_data/waha_data:/app/data
     networks:
       - ccts_network
 

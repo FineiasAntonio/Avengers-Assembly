@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../../shared/navbar.js" defer type="module"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="VisualizacaoResultado.css">
+  <script src="../../components/navbar/navbar.js" type="module"></script>
+  <script src="./VisualizacaoResultado.js" type="module"></script>
+  <title>Visualização do Resultado</title>
+</head>
+
+<body>
+  <custom-navbar></custom-navbar>
+  <div class="container">
+    <div style="display: flex; justify-content: center; ">
+      <h2>Laudo de exame citopatológico</h2>
+    </div>
+
+    <div class="header-info">
+      <div>Laboratório
+        <label id="nomeLaboratorio"></label>
+      </div>
+      <div>Número do Exame
+        <label id="numeroExame"></label>
+      </div>
+      <div>Recebido em
+        <label id="recebidoEm"></label>
+      </div>
+      <div id="dataEmissaoContainer" style="display: none;">
+        Data de Emissão
+        <label id="dataEmissao"></label>
+      </div>
+    </div>
+
+    <fieldset>
+      <legend>Avaliação Pré-Analítica</legend>
+      <div class="grid">
+        <div>Amostra rejeitada por:
+          <div id="amostraRejeitada" class="resultado-lista"></div>
+        </div>
+        <div>Epitélios Representados:
+          <div id="epiteliosRepresentados" class="resultado-lista"></div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Adequação do Material</legend>
+      <div class="grid">
+        <div>
+          <div id="adequacaoSatisfatoria" class="resultado-item"></div>
+          <div id="adequacaoInsatisfatoria" class="resultado-lista"></div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Diagnóstico Descritivo</legend>
+      <div class="grid">
+        <div id="dentroLimitesNormalidade" class="resultado-item"></div>
+        <div>Alterações Celulares Benignas Reativas ou Reparativas:
+          <div id="alteracoesBenignas" class="resultado-lista"></div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Microbiologia</legend>
+      <div class="grid">
+        <div class="subgrid">
+          <div>Microorganismos:
+            <div id="microorganismos" class="resultado-lista"></div>
+          </div>
+        </div>
+        <div class="subgrid">
+          Células atípicas de significado indeterminado
+          <div>
+            <br>
+            Escamosas:
+            <div id="celulasAtipicasEscamosas" class="resultado-item"></div>
+          </div>
+          <div>
+            <br>
+            Glandulares:
+            <div id="celulasAtipicasGlandulares" class="resultado-item"></div>
+          </div>
+          <div>
+            <br>
+            De origem indefinida:
+            <div id="celulasAtipicasOrigemIndefinida" class="resultado-item"></div>
+          </div>
+        </div>
+        <div class="subgrid">
+          Atipias em células escamosas:
+          <div id="atipiasEscamosas" class="resultado-lista"></div>
+        </div>
+        <div class="subgrid">
+          Atipias em células glandulares:
+          <div id="atipiasGlandulares" class="resultado-lista"></div>
+        </div>
+        <div id="outrasNeoplasiasContainer">
+          Outras neoplasias malignas:
+          <div id="outrasNeoplasias" class="resultado-item"></div>
+        </div>
+        <div id="celulasEndometriais" class="resultado-item"></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <div class="grid">
+        <div>Screening Citotécnico: <label id="screeningCitotecnico"></label></div>
+        <div>Responsável pelo Registro: <label id="responsavelRegistro"></label></div>
+        <div id="observacoesContainer">
+          Observações: <label id="observacoes"></label>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="buttons">
+      <button class="botao1" onclick="history.back()">Voltar</button>
+    </div>
+  </div>
+
+</body>
+
+</html> 

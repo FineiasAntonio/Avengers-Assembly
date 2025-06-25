@@ -1,17 +1,14 @@
 import { listarLaboratorio } from '../../api/unidadeApi.js';
 import { pegarUnidadeUsuario } from '../../shared/gerenciador-permissoes.js';
-import { EmitirResultadoExame, BuscarResultadoExame } from '../../api/cadastroApi.js';
-import { ListarRequisicaoExame } from '../../api/cadastroApi.js';
+import { BuscarResultadoExame } from '../../api/cadastroApi.js';
 
 class VisualizacaoResultadoExame {
 
     protocoloExame = '';
     resultadoExame = null;
-    requisicaoExame = null;
     laboratorio = {};
 
     constructor() {
-        this.initializeEventListeners();
         this.carregarDados();
     }
 
@@ -26,7 +23,6 @@ class VisualizacaoResultadoExame {
 
         document.getElementById('numeroExame').textContent = this.protocoloExame;
 
-        // Carregar dados do laboratório
         const cnes = pegarUnidadeUsuario();
         try {
             this.laboratorio = await listarLaboratorio(cnes);
@@ -35,11 +31,7 @@ class VisualizacaoResultadoExame {
             console.error('Erro ao carregar laboratório:', error);
         }
 
-        // Carregar resultado do exame e requisição
-        await Promise.all([
-            this.carregarResultadoExame(),
-            this.carregarRequisicaoExame()
-        ]);
+        await this.carregarResultadoExame();
     }
 
     async carregarResultadoExame() {
@@ -48,51 +40,7 @@ class VisualizacaoResultadoExame {
             this.exibirDados();
         } catch (error) {
             console.error('Erro ao carregar resultado:', error);
-            // Não mostrar alerta aqui, pois pode não ter resultado ainda
-        }
-    }
-
-    async carregarRequisicaoExame() {
-        try {
-            this.requisicaoExame = await ListarRequisicaoExame(this.protocoloExame);
-            this.exibirStatus();
-        } catch (error) {
-            console.error('Erro ao carregar requisição:', error);
-        }
-    }
-
-    initializeEventListeners() {
-        document.getElementById('btnEmitir')?.addEventListener('click', () => {
-            this.emitirLaudo();
-        });
-    }
-
-    async emitirLaudo() {
-        if (confirm('Deseja realmente emitir este laudo?')) {
-            try {
-                await EmitirResultadoExame(this.protocoloExame);
-                alert('Laudo emitido com sucesso!');
-                // Recarregar dados
-                await Promise.all([
-                    this.carregarResultadoExame(),
-                    this.carregarRequisicaoExame()
-                ]);
-            } catch (error) {
-                alert('Erro ao emitir laudo');
-            }
-        }
-    }
-
-    exibirStatus() {
-        if (!this.requisicaoExame) return;
-
-        document.getElementById('statusResultado').textContent = this.requisicaoExame.status || 'N/A';
-
-        // Mostrar botão de emitir apenas se o status for SALVO
-        if (this.requisicaoExame.status === 'SALVO') {
-            document.getElementById('btnEmitir').style.display = 'inline-block';
-        } else {
-            document.getElementById('btnEmitir').style.display = 'none';
+            alert('Erro ao carregar resultado do exame');
         }
     }
 

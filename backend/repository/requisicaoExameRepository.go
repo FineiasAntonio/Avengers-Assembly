@@ -51,7 +51,7 @@ func (r *RequisicaoExameRepository) GetRequisicaoExameByProtocolo(ctx *context.C
 		&re.SinaisDST,
 		&re.DataColeta,
 		&re.ResponsavelRegistro,
-		&re.ResultadoID,
+		&re.ResultadoStatus,
 		&re.Status,
 		&re.Paciente.CartaoSUS,
 		&re.Paciente.Prontuario,
@@ -112,7 +112,7 @@ func (r *RequisicaoExameRepository) CadastrarRequisicaoExame(ctx *context.Contex
 		re.UsaAnticoncepcional, re.UsaHormonioMenopausa,
 		re.FezRadioterapia, re.DataUltimaMenstruacao, re.SangramentoAposRelacoes,
 		re.SangramentoAposMenopausa, re.InspecaoColo, re.SinaisDST, re.DataColeta,
-		re.ResponsavelRegistro, re.ResultadoID, re.Status)
+		re.ResponsavelRegistro, re.ResultadoStatus, re.Status)
 
 	if err != nil {
 		return fmt.Errorf("Erro ao Cadastrar Requisição Exame: %v", err)
@@ -186,4 +186,15 @@ func (r *RequisicaoExameRepository) JaEnviouMsg(protocolo string) (bool, error) 
 		return false, nil
 	}
 	return err == nil, err
+}
+
+func (r *RequisicaoExameRepository) AtualizarStatusRequisicao(ctx *context.Context, protocolo string, status string) error {
+	query := "UPDATE requisicao_exame SET status = $1 WHERE protocolo = $2"
+
+	_, err := r.db.DB.ExecContext(*ctx, query, status, protocolo)
+	if err != nil {
+		return fmt.Errorf("Erro ao atualizar status da requisição: %v", err)
+	}
+
+	return nil
 }

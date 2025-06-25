@@ -18,8 +18,6 @@ type ResultadoExame struct {
 	ScreeningCitotecnico        *string    `json:"screening_citotecnico" bson:"screening_citotecnico"`
 	RegistroResponsavel         string     `json:"registro_responsavel" bson:"registro_responsavel"`
 	DataEmissaoLaudo            *time.Time `json:"data_emissao_laudo" bson:"data_emissao_laudo"`
-
-	Status StatusResultadoExame `json:"status" bson:"status"`
 }
 
 type AvaliacaoPreAnalitica struct {
@@ -45,11 +43,3 @@ type Microbiologia struct {
 	AtipiasEscamosas                []string `json:"atipias_escamosas" bson:"atipias_escamosas"`
 	AtipiasGlandulares              []string `json:"atipias_glandulares" bson:"atipias_glandulares"`
 }
-
-type StatusResultadoExame string
-
-var (
-	StatusPendente Status = "PENDENTE"
-	StatusSalvo    Status = "SALVO"
-	StatusEmitido  Status = "EMITIDO"
-)

@@ -20,7 +20,7 @@ type RequisicaoExame struct {
 	SinaisDST                *bool      `json:"sinais_dst" db:"sinaisdst"`
 	DataColeta               *time.Time `json:"data_coleta" db:"datacoleta"`
 	ResponsavelRegistro      string     `json:"responsavel_registro" db:"responsavel"`
-	ResultadoID              *string    `db:"resultado"`
+	ResultadoStatus          *string    `db:"resultado"`
 	Status                   string     `json:"status" db:"status"`
 
 	Paciente       Paciente       `json:"paciente"`
