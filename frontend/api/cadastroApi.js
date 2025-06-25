@@ -87,7 +87,7 @@ export async function CadastrarResultadoExame(objeto) {
         
         notificar("Resultado de exame cadastrado com sucesso!", "success", 3000);
         setTimeout(() => {
-            window.location.replace("/pages/visualizacaoRequisicao/VisualizacaoRequisicao.html?protocolo=" + objeto.protocolo_exame);
+            window.location.replace("../visualizacaoRequisicao/VisualizacaoRequisicao.html?protocolo=" + objeto.protocolo_exame);
         }, 1500);
         return true;
     }

@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(resultado)
         if (nome) nome.value = resultado.nome || "";
         if (cnpj) cnpj.value = resultado.cnpj || "";
-        if (tipo) tipo.value = resultado.tipo || "";
+        if (tipo) tipo.value = "Unidade Básica de Saúde";
         if (telefone) telefone.value = resultado.telefone || "";
 
         if (cep) cep.value = resultado.endereco.cep || "";
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log(resultado)
                 if (nome) nome.value = resultado.nome || "";
                 if (cnpj) cnpj.value = resultado.cnpj || "";
-                if (tipo) tipo.value = resultado.tipo || "";
+                if (tipo) tipo.value = "Laboratório";
                 if (telefone) telefone.value = resultado.telefone || "";
 
                 if (cep) cep.value = resultado.endereco.cep || "";

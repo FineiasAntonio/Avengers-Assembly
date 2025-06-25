@@ -40,6 +40,12 @@ export const items = [
     permissoesRequeridas: [Permissao.ACESSO_EXAMES]
   },
   {
+    href: "../cadastroResultadoExame/CadastroResultado.html",
+    title: "Cadastrar Resultado Exame",
+    icon: "resultado.png",
+    permissoesRequeridas: [Permissao.ACESSO_EXAMES]
+  },
+  {
     href: "../agendamentoExame/agenda.html",
     title: "Agenda",
     icon: "agenda.png",

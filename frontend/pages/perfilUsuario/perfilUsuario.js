@@ -55,9 +55,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     campoCpf.textContent = formatarCpf(cpf);
     campoEmail.textContent = response.email;
     campoTelefone.textContent = formatarTelefone(response.telefone);
-    
-    campoUSCNES.textContent = response.unidadesaudecnes;
-    campoLCNES.textContent = response.laboratoriocnes;
+    console.log(response)
+    if (response.unidade_saude_cnes) {
+        campoUSCNES.textContent = response.unidade_saude_cnes;
+
+    } else if (response.laboratorio_cnes) {
+        campoLCNES.textContent = response.laboratorio_cnes ;
+    }
 
     const botao1 = document.getElementById("botao1");
     const botao2 = document.getElementById("botao2");
