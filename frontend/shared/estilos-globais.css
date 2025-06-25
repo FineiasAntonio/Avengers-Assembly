@@ -77,22 +77,22 @@ main {
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 input[type="number"] {
-  color: var(--cor-texto);
+    color: var(--cor-texto);
 }
 
 input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  accent-color: var(--cor-quinaria);
+    width: 20px;
+    height: 20px;
+    accent-color: var(--cor-quinaria);
 }
 
 input[type="date"] {
-  color: var(--cor-texto);
+    color: var(--cor-texto);
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -100,14 +100,91 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 20px;
 }
 
-input[type="text"]{
+input[type="text"] {
     color: var(--cor-texto);
 }
 
-select{
+select {
     color: var(--cor-texto);
 }
 
-input[type="time"]{
+input[type="time"] {
     color: var(--cor-texto);
+}
+
+.notificacao {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 4px;
+    color: white;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transform: translateY(-30px);
+    transition: all 0.3s ease;
+    z-index: 9999;
+}
+
+.notificacao.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.notificacao.success {
+    background-color: #28a745;
+}
+
+.notificacao.error {
+    background-color: #dc3545;
+}
+
+.notificacao.warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.notificacao.info {
+    background-color: #17a2b8;
+}
+
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-conteudo {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 5px;
+  animation: animacaoModal 0.3s;
+}
+
+@keyframes animacaoModal {
+  from {opacity: 0; transform: translateY(-50px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+.fechar {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.fechar:hover {
+  color: black;
 }

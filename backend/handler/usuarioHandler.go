@@ -4,6 +4,7 @@ import (
 	"backend/dto"
 	"backend/exceptions"
 	"backend/model"
+	"backend/repository"
 	"backend/service"
 	"encoding/json"
 	"net/http"
@@ -29,10 +30,36 @@ func (handler *UsuarioHandler) CadastrarUsuario(w http.ResponseWriter, r *http.R
 	err := handler.usuarioServico.CadastrarUsuario(&ctx, &requisicaoCadastro)
 	if err != nil {
 		http.Error(w, "Erro ao cadastrar usuário: "+err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
+}
+
+func (handler *UsuarioHandler) AlterarSenhaUsuarioEsqueceuSenha(w http.ResponseWriter, r *http.Request) {
+	var novaSenha dto.RequisicaoNovaSenha
+	if err := json.NewDecoder((r.Body)).Decode(&novaSenha); err != nil {
+		http.Error(w, exceptions.ErroRequisicaoInvalida.Error(), http.StatusBadRequest)
+		return
+	}
+
+	credencial := r.URL.Query().Get("credencial")
+	if credencial == "" {
+		http.Error(w, "Credencial não fornecida", http.StatusBadRequest)
+		return
+	}
+
+	ctx := r.Context()
+
+	err := handler.usuarioServico.AlterarSenha(&ctx, novaSenha, credencial)
+	if err != nil {
+		http.Error(w, exceptions.ErroInterno.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusNoContent)
 }
 
 func (handler *UsuarioHandler) AlterarSenhaUsuario(w http.ResponseWriter, r *http.Request) {
@@ -42,13 +69,108 @@ func (handler *UsuarioHandler) AlterarSenhaUsuario(w http.ResponseWriter, r *htt
 		return
 	}
 
+	credencial := r.URL.Query().Get("credencial")
+	if credencial == "" {
+		http.Error(w, "Credencial não fornecida", http.StatusBadRequest)
+		return
+	}
+
 	ctx := r.Context()
 
-	err := handler.usuarioServico.AlterarSenha(&ctx, novaSenha)
+	err := handler.usuarioServico.AlterarSenha(&ctx, novaSenha, credencial)
 	if err != nil {
 		http.Error(w, exceptions.ErroInterno.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusNoContent)
+}
+
+func (handler *UsuarioHandler) AlterarInformacao(w http.ResponseWriter, r *http.Request) {
+	var dto dto.UsuarioAlterarInformacaoDTO
+
+	if err := json.NewDecoder((r.Body)).Decode(&dto); err != nil {
+		http.Error(w, exceptions.ErroRequisicaoInvalida.Error(), http.StatusBadRequest)
+		return
+	}
+
+	cpf := r.URL.Query().Get("cpf")
+	if cpf == "" {
+		http.Error(w, "CPF não fornecido", http.StatusBadRequest)
+		return
+	}
+
+	ctx := r.Context()
+	if err := handler.usuarioServico.AlterarInformacao(&ctx, cpf, &dto); err != nil {
+		http.Error(w, exceptions.ErroInterno.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusNoContent)
+}
+
+func (handler *UsuarioHandler) GetUsuario(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "GET" {
+		http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)
+		return
+	}
+
+	parametro := r.URL.Query().Get("registro")
+	if parametro == "" {
+		http.Error(w, "Parametro não fornecido", http.StatusBadRequest)
+		return
+	}
+
+	var usuario *model.Usuario
+	ctx := r.Context()
+	var err error
+
+	if len(parametro) == 11 {
+		var cpf string
+		cpf = parametro
+		usuario, err = handler.usuarioServico.GetUsuarioByCPF(&ctx, cpf)
+	} else {
+		var registro string
+		registro = parametro
+		usuario, err = handler.usuarioServico.GetUsuarioByRegistro(&ctx, registro)
+	}
+
+	if err != nil {
+		http.Error(w, exceptions.ErroInterno.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(usuario)
+}
+
+func (handler *UsuarioHandler) ExisteUsuario(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "HEAD" {
+		http.Error(w, "Método não permitido", http.StatusBadRequest)
+		return
+	}
+
+	registro := r.URL.Query().Get("registro")
+	if registro == "" {
+		http.Error(w, "Registro não fornecido", http.StatusBadRequest)
+		return
+	}
+
+	ctx := r.Context()
+
+	err := handler.usuarioServico.ExisteUsuario(&ctx, registro)
+
+	if err != nil {
+		if err == repository.ErroProfissionalNaoEncontrado {
+			http.Error(w, "Profissional não encontrado", http.StatusNotFound)
+			return
+		}
+		http.Error(w, "Erro ao verificar profissional: "+err.Error(), http.StatusInternalServerError)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 }

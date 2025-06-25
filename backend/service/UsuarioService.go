@@ -1,12 +1,13 @@
 package service
 
 import (
-	"backend/auth"
 	"backend/dto"
 	"backend/model"
 	"backend/repository"
+	"backend/util"
 	"context"
 	"errors"
+
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -30,6 +31,15 @@ func (s *UsuarioService) CadastrarUsuario(ctx *context.Context, requisicao *mode
 	usuarioRequisicao.Senha = string(senha)
 	usuarioRequisicao.PrimeiroAcesso = true
 
+	if usuarioRequisicao.Registro == "" {
+		precisaRegistro := usuarioRequisicao.Permissao == string(model.ACESSO_EXAMES) ||
+			usuarioRequisicao.Permissao == string(model.ACESSO_LABORATORIO)
+
+		if !precisaRegistro {
+			usuarioRequisicao.Registro = util.GerarId(8)
+		}
+	}
+
 	err = s.repository.CadastrarUsuario(ctx, &usuarioRequisicao)
 	if err != nil {
 		return errors.New("erro ao cadastrar usuário: " + err.Error())
@@ -38,16 +48,63 @@ func (s *UsuarioService) CadastrarUsuario(ctx *context.Context, requisicao *mode
 	return nil
 }
 
-func (s *UsuarioService) AlterarSenha(ctx *context.Context, requisicaoNovaSenha dto.RequisicaoNovaSenha) error {
-	usuario := (*ctx).Value("usuarioAutenticado").(*auth.Claims)
+func (s *UsuarioService) AlterarSenha(ctx *context.Context, requisicaoNovaSenha dto.RequisicaoNovaSenha, credencial string) error {
 	senhaHash, err := bcrypt.GenerateFromPassword([]byte(requisicaoNovaSenha.NovaSenha), bcrypt.DefaultCost)
 	if err != nil {
 		return errors.New("erro ao gerar hash da senha: " + err.Error())
 	}
 
-	err = s.repository.AlterarSenha(ctx, usuario.CPF, string(senhaHash))
+	err = s.repository.AlterarSenha(ctx, credencial, string(senhaHash))
 	if err != nil {
 		return errors.New("erro ao alterar senha: " + err.Error())
+	}
+
+	return nil
+}
+
+func (s *UsuarioService) AlterarInformacao(ctx *context.Context, cpf string, dto *dto.UsuarioAlterarInformacaoDTO) error {
+	if err := s.repository.AlterarInformacao(ctx, cpf, dto.Campo, dto.NovoValor); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *UsuarioService) GetUsuarioByCPF(ctx *context.Context, cpf string) (*model.Usuario, error) {
+	usuario, err := s.repository.GetUsuarioByCPF(ctx, cpf)
+	if err != nil {
+		return nil, errors.New("erro ao buscar usuario: " + err.Error())
+	}
+	return usuario, nil
+}
+
+func (s *UsuarioService) GetUsuarioByRegistro(ctx *context.Context, registro string) (*model.Usuario, error) {
+	usuario, err := s.repository.GetUsuarioByRegistro(ctx, registro)
+	if err != nil {
+		return nil, errors.New("erro ao buscar usuario: " + err.Error())
+	}
+	return usuario, nil
+}
+
+func (s *UsuarioService) UsuarioToDTO(user *model.Usuario) *dto.UsuarioDTO {
+	return &dto.UsuarioDTO{
+		Registro:         user.Registro,
+		Nome:             user.Nome,
+		CPF:              user.CPF,
+		Email:            user.Email,
+		Telefone:         user.Telefone,
+		UnidadeSaudeCNES: user.UnidadeSaudeCNES,
+		LaboratorioCNES:  user.LaboratorioCNES,
+	}
+}
+
+func (s *UsuarioService) ExisteUsuario(ctx *context.Context, registro string) error {
+	existe, err := s.repository.ExisteUsuario(ctx, registro)
+	if err != nil {
+		return err
+	}
+
+	if !existe {
+		return repository.ErroProfissionalNaoEncontrado
 	}
 
 	return nil

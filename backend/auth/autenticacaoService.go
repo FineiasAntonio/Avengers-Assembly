@@ -7,10 +7,11 @@ import (
 	"backend/repository"
 	"context"
 	"errors"
-	"github.com/golang-jwt/jwt"
-	"golang.org/x/crypto/bcrypt"
 	"strings"
 	"time"
+
+	"github.com/golang-jwt/jwt"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type ServicoAutenticacao struct {
@@ -19,9 +20,11 @@ type ServicoAutenticacao struct {
 }
 
 type Claims struct {
-	Nome      string `json:"nome"`
-	CPF       string `json:"cpf"`
-	Permissao string `json:"permissao"`
+	Nome        string  `json:"nome"`
+	CPF         string  `json:"cpf"`
+	Permissao   string  `json:"permissao"`
+	CNES        *string `json:"cnes"`
+	TipoUnidade *string `json:"tipo_unidade"`
 	jwt.StandardClaims
 }
 
@@ -42,6 +45,16 @@ func (s *ServicoAutenticacao) GerarToken(usuario *model.Usuario) (string, error)
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 		},
+	}
+
+	if usuario.UnidadeSaudeCNES != nil {
+		claims.CNES = usuario.UnidadeSaudeCNES
+		tipoUnidade := "unidade"
+		claims.TipoUnidade = &tipoUnidade
+	} else if usuario.LaboratorioCNES != nil {
+		claims.CNES = usuario.LaboratorioCNES
+		tipoUnidade := "laboratorio"
+		claims.TipoUnidade = &tipoUnidade
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)

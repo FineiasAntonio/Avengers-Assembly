@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CadastroUnidade.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+    <script src="../../components/navbar/navbar.js" type="module"></script>
+    <script src="CadastroUnidade.js" type="module"></script>
+    <title>Cadastro Unidade de Saúde</title>
+</head>
+
+<body>
+    <custom-navbar></custom-navbar>
+    <main class="container">
+        <div class="cabecalho">
+            <h1>CADASTRO DE UNIDADE</h1>
+        </div>
+        <div class="section">
+            <form id="cadastroUnidade">
+                <fieldset>
+                    <legend style="margin-top: 2rem;">Dados da Unidade</legend>
+                    <div class="row">
+                        <div class="col"><label>Nome da Unidade</label><input name="nome" type="text" required></div>
+                        <div class="col">
+                            <label for="tipoUnidade">Tipo de Unidade</label>
+                            <select name="tipo" id="tipoUnidade" required>
+                                <option value="" hidden>Selecione o tipo</option>
+                                <option value="unidade">Unidade Básica de Saúde (UBS)</option>
+                                <option value="laboratorio">Laboratório</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><label>CNPJ</label><input name="cnpj" type="text" id="cnpj" required></div>
+                        <div class="col"><label>Telefone</label><input name="telefone" type="text" id="telefone" required></div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend style="margin-top: 2rem;">Endereço</legend>
+                    <div class="row">
+                        <div class="col"><label for="cepEndereco">CEP</label><input name="cep" type="text" id="cepEndereco"
+                                maxlength="9"></div>
+                        <div class="col"><label for="logradouro">Logradouro</label><input name="logradouro" type="text" id="logradouro">
+                        </div>
+                        <div class="col"><label for="numero">Número</label><input name="numero" type="text" id="numero"></div>
+                        <div class="col"><label for="bairro">Bairro</label><input name="bairro" type="text" id="bairro"></div>
+                        <div class="col"><label for="complemento">Complemento</label><input name="complemento" type="text"
+                                id="complemento"></div>
+                        <div class="col"><label for="municipio">Município</label><input name="municipio" type="text" id="municipio">
+                        </div>
+                        <div class="col"><label>UF
+                                <select name="uf" id="uf">
+                                    <option value="">Selecione</option>
+                                    <option value="AC">AC</option>
+                                    <option value="AL">AL</option>
+                                    <option value="AP">AP</option>
+                                    <option value="AM">AM</option>
+                                    <option value="BA">BA</option>
+                                    <option value="CE">CE</option>
+                                    <option value="DF">DF</option>
+                                    <option value="ES">ES</option>
+                                    <option value="GO">GO</option>
+                                    <option value="MA">MA</option>
+                                    <option value="MT">MT</option>
+                                    <option value="MS">MS</option>
+                                    <option value="MG">MG</option>
+                                    <option value="PA">PA</option>
+                                    <option value="PB">PB</option>
+                                    <option value="PR">PR</option>
+                                    <option value="PE">PE</option>
+                                    <option value="PI">PI</option>
+                                    <option value="RJ">RJ</option>
+                                    <option value="RN">RN</option>
+                                    <option value="RS">RS</option>
+                                    <option value="RO">RO</option>
+                                    <option value="RR">RR</option>
+                                    <option value="SC">SC</option>
+                                    <option value="SP">SP</option>
+                                    <option value="SE">SE</option>
+                                    <option value="TO">TO</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="acoes">
+                    <button class="botao1">Cadastrar Unidade</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

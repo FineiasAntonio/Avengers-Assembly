@@ -5,7 +5,7 @@ type Laboratorio struct {
 	Nome       string `json:"nome" db:"nome"`
 	CNPJ       string `json:"cnpj" db:"cnpj"`
 	EnderecoID string `json:"-" db:"endereco"`
-	Contato    string `json:"contato" db:"contato"`
+	Telefone   string `json:"telefone" db:"telefone"`
 
 	Endereco Endereco `json:"endereco"`
 }

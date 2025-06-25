@@ -1,9 +1,13 @@
+import { deslogar } from "../../shared/gerenciador-login.js";
 
 const template = `
         <style>
-        @import "./estilos-globais.css";
+        @import "../../shared/estilos-globais.css";
 
         .navbar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             position: fixed;
             z-index: 100;
             top: 0;
@@ -26,16 +30,18 @@ const template = `
             }
 
             &:hover .icone {
-                width: 4rem;
+                width: 100%;
                 height: 4rem;
                 padding: 1rem;
                 margin-bottom: 2rem;
-                margin-left: 3rem;
             }
         }
 
         .icone{
-            width: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
             height: 2rem;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
@@ -70,15 +76,15 @@ const template = `
         
         @media (min-width: 1366px) {
             .navbar {
-                width: 6rem;
+                width: 4rem;
 
                 &:hover {
-                    width: 12rem;
+                    width: 10rem;
                 }
             }
 
             .navegacao a {
-                font-size: 1.3rem;
+                font-size: 1rem;
                 height: 4rem;
             }
         }
@@ -99,6 +105,10 @@ const template = `
                     width: 10rem;
                 }
             }
+
+            .icone {
+                display: hidden;
+            }
         }
 
         @media (max-width: 560px) {
@@ -111,19 +121,24 @@ const template = `
     
     <nav class="navbar">
         <div class="icone">
-            <img src="../../assets/barIcon.png" alt="ICONE">
+            <img src="../../assets/barIcon.png" alt="ICONE" class="iconeImg">
         </div>
         <div class="navegacao">
             <a href="../inicioPagina/inicioPagina.html">Início</a>
-            <a href="">Configurações</a>
+            <a href="../perfilUsuario/perfilUsuario.html">Perfil</a>
             <a href="../centralAjuda/centralAjuda.html">Ajuda</a>
-            <a href="">Sair</a>
+            <a id="deslogar-opcao">Sair</a>
         </div>        
     </nav>
     `
 class Navbar extends HTMLElement {
-  connectedCallback() {
+  async connectedCallback() {
     this.innerHTML = template;
+
+    document.getElementById("deslogar-opcao").addEventListener('click', (e) => {
+        e.preventDefault()
+        deslogar()
+    })
   }
 }
 

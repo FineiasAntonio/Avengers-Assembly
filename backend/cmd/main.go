@@ -8,6 +8,7 @@ import (
 	"backend/handler"
 	"backend/middleware"
 	"backend/repository"
+	"backend/scheduler"
 	"backend/service"
 	"log"
 	"net/http"
@@ -46,13 +47,36 @@ func main() {
 	pacienteServico := service.NewPacienteService(pacienteRepositorio, enderecoRepositorio)
 	pacienteHandler := handler.NewPacienteHandler(pacienteServico)
 
-	requisicaoExameRepositorio := repository.NewRequisicaoExameRepository(conexaoPostgres)
+	agendamentoRepository := repository.NewAgendamentoRepository(conexaoPostgres)
+	agendamentoService := service.NewAgendamentoService(agendamentoRepository)
+	agendamentoHandler := handler.NewAgendamentoHandler(agendamentoService)
+
+	requisicaoExameRepositorio := repository.NewRequisicaoExameRepository(conexaoPostgres, conexaoMongo.Database)
 	requisicaoExameServico := service.NewRequisicaoExameService(requisicaoExameRepositorio)
 	requisicaoExameHandler := handler.NewRequisicaoExameHandler(requisicaoExameServico)
+
+	resultadoExameRepository := repository.NewResultadoExameRepository(conexaoMongo)
+	resultadoExameService := service.NewResultadoExameService(resultadoExameRepository, requisicaoExameRepositorio)
+	resultadoExameHandler := handler.NewResultadoExameHandler(resultadoExameService)
+
+	cron := scheduler.IniciarScheduler(requisicaoExameServico)
+	defer cron.Stop()
+
+	unidadeRpositorio := repository.NewUnidadeRepository(conexaoPostgres)
+	unidadeService := service.NewUnidadeService(unidadeRpositorio, enderecoRepositorio)
+	unidadeHandler := handler.NewUnidadeHandler(unidadeService)
+
+	centralAnaliseRepositorio := repository.NewCentralAnaliseRepository(conexaoPostgres)
+	centralAnaliseServico := service.NewCentralAnaliseService(centralAnaliseRepositorio)
+	centralAnaliseHandler := handler.NewCentralAnaliseHandler(centralAnaliseServico)
 
 	autenticacaoServico := auth.NewAutenticacaoService(usuarioRepositorio, []byte(chaveJwt))
 	autenticacaoMiddleware := middleware.NewAutenticacaoMiddleware(autenticacaoServico)
 	autenticacaoHandler := auth.NewAutenticacaoHandler(autenticacaoServico)
+
+	codigoRepository := repository.NewCodigoRepository(conexaoMongo.Database)
+	codigoServico := service.NewCodigoService(codigoRepository)
+	codigoHandler := handler.NewCodigoHandler(codigoServico, usuarioServico)
 
 	corsMiddleware := middleware.NewCORSMiddleware()
 
@@ -61,7 +85,12 @@ func main() {
 		autenticacaoHandler,
 		usuarioHandler,
 		pacienteHandler,
+		agendamentoHandler,
 		requisicaoExameHandler,
+		unidadeHandler,
+		centralAnaliseHandler,
+		resultadoExameHandler,
+		codigoHandler,
 	)
 	handerRotas := corsMiddleware.LiberarCORS(rotas.SetupRotas())
 
@@ -70,7 +99,7 @@ func main() {
 		porta = "8080"
 	}
 
-	log.Printf("Servidor rodando na porta %s...", porta)
+	log.Printf("Servidor rodando na porta %s", porta)
 	if err := http.ListenAndServe(":"+porta, handerRotas); err != nil {
 		log.Fatalf("Erro ao iniciar o servidor HTTP: %v", err)
 	}

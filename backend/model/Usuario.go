@@ -7,8 +7,8 @@ type Usuario struct {
 	Email            *string `json:"email" db:"email"`
 	Telefone         string  `json:"telefone" db:"telefone"`
 	Senha            string  `json:"-" db:"senha"`
-	UnidadeSaudeCNES *string `json:"-" db:"unidadesaude"`
-	LaboratorioCNES  *string `json:"-" db:"laboratorio"`
+	UnidadeSaudeCNES *string `json:"unidade_saude_cnes" db:"unidadesaude"`
+	LaboratorioCNES  *string `json:"laboratorio_cnes" db:"laboratorio"`
 	Permissao        string  `json:"permissao" db:"permissao"`
 	PrimeiroAcesso   bool    `json:"primeiro_acesso" db:"primeiroacesso"`
 

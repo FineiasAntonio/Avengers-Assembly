@@ -35,6 +35,42 @@ export function pegarNomeUsuario() {
   return claims ? claims.nome : null;
 }
 
+export function pegarUnidadeUsuario() {
+  const token = pegarTokenUsuario()
+
+  if (!token) {
+    return null;
+  }
+
+  const claims = parseJwt(token);
+
+  return claims ? claims.cnes : null;
+}
+
+export function pegarTipoUnidadeUsuario() {
+  const token = pegarTokenUsuario()
+  
+  if (!token) {
+    return null;
+  }
+
+  const claims = parseJwt(token);
+
+  return claims ? claims.tipo_unidade : null;
+}
+
+export function pegarCpfUsuario() {
+  const token = pegarTokenUsuario();
+
+  if (!token) {
+    return null
+  }
+
+  const claims = parseJwt(token);
+
+  return claims ? claims.cpf : null;
+}
+
 function parseJwt(token) {
   try {
     const base64Url = token.split('.')[1];

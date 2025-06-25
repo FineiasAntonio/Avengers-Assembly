@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CadastroFuncionario.css">
+    <link rel="icon" type="img/jpeg" href="../../assets/favicon.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+    <script src="../../components/navbar/navbar.js" type="module"></script>
+    <title>Cadastro Funcionário</title>
+</head>
+
+<body>
+    <custom-navbar></custom-navbar>
+    <main class="container">
+        <div class="cabecalho">
+            <h1>VISUALIZAÇÃO DO FUNCIONÁRIO</h1>
+        </div>
+        <div class="section">
+            <form id="cadastroFuncionario">
+                <fieldset>
+                    <legend style="margin-top: 2rem;">Dados Pessoais</legend>
+                    <div class="row">
+                        <div class="col"><label>Nome</label><input name="nome" type="text" id="nome" style="border: none;"></div>
+                        <div class="col"><label>CPF</label><input name="cpf" type="text" id="cpf" readonly style="border: none;"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><label>Email</label><input name="email" type="email" id="email" readonly style="border: none;"></div>
+                        <div class="col"><label>Telefone</label><input name="telefone" type="text" id="telefone" readonly style="border: none;"></div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend style="margin-top: 2rem;">Dados Profissionais</legend>
+                    <div class="row" id="registroRow">
+                        <div class="col"><label for="registro">Registro</label><input name="registro" type="text" id="registro" readonly style="border: none;"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="permissao">Permissão
+                                <input name="permissao" id="permissao" readonly style="border: none;">
+                            </label>
+                        </div>
+                    </div>
+                   
+                </fieldset>
+
+                <fieldset>
+                    <legend style="margin-top: 2rem;">Unidade de Trabalho</legend>
+                    <div class="row">
+                        <div class="col">
+                            <label for="cnesUnidade">CNES da Unidade</label>
+                            <input name="cnesUnidade" type="text" id="cnesUnidade" readonly style="border: none;">
+                        </div>
+                        <div class="col">
+                            <label for="tipoUnidade">Tipo da Unidade</label>
+                            <input name="tipoUnidade" id="tipoUnidade" readonly style="border: none;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div id="dadosUnidade" class="dados-unidade">
+                                <h4>Dados da Unidade:</h4>
+                                <div class="info-unidade">
+                                    <p><strong>Nome:</strong> <span id="nomeUnidade">-</span></p>
+                                    <p><strong>CNPJ:</strong> <span id="cnpjUnidade">-</span></p>
+                                    <p><strong>Telefone:</strong> <span id="telefoneUnidade">-</span></p>
+                                    <p><strong>Bairro:</strong> <span id="enderecoUnidade">-</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </main>
+    <script type="module" src="./visualizarFuncionario.js"></script>
+</body>
+
+</html>

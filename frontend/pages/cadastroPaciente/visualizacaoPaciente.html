@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CadastroPaciente.css">
+    <link rel="icon" type="img/jpeg" href="../../assets/favicon.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+    <script src="../../components/navbar/navbar.js" type="module"></script>
+    <title>Cadastro Paciente</title>
+</head>
+
+<body>
+    <custom-navbar></custom-navbar>
+    <main class="container">
+        <div class="cabecalho">
+            <h1>VISUALIZAÇÃO DO PACIENTE</h1>
+        </div>
+        <div class="section">
+            <form id="cadastroPaciente">
+                <h3>Dados do paciente</h3>
+                <fieldset>
+                    <legend style="margin-top: 2rem;">Dados Pessoais</legend>
+                    <div class="row">
+                        <div class="col"><label>Nome</label><input name="nome" type="text" id="nome" readonly style="border: none;"></div>
+                        <div class="col"><label>Apelido</label><input name="apelido" type="text" id="apelido" readonly style="border: none;"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><label>Data de nascimento</label><input name="data_nascimento" type="text" id="dataNascimento"readonly style="border: none;"></div>
+                        <div class="col"><label>Idade</label><input name="idade" type="number" id="idade" readonly style="border: none;"></div>
+                        <div class="col"><label>CPF</label><input name="cpf" type="text" id="cpf" readonly style="border: none;"></div>
+                        <div class="col"><label>Cartão do SUS</label><input name="cartao_sus" type="number" id="cartaoSus" readonly style="border: none;"></div>
+                        <div class="col"><label>Telefone</label><input name="telefone" type="text" id="telefone" readonly style="border: none;"></div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend style="margin-top: 2rem;">Endereço</legend>
+                    <div class="row">
+                        <div class="col"><label for="cepEndereco">CEP</label><input name="cep" type="text" id="cepEndereco"
+                                maxlength="9" readonly style="border: none;"></div>
+                        <div class="col"><label for="logradouro">Logradouro</label><input name="logradouro" type="text" id="logradouro" readonly style="border: none;">
+                        </div>
+                        <div class="col"><label for="numero">Número</label><input name="numero" type="text" id="numero" readonly style="border: none;"></div>
+                        <div class="col"><label for="bairro">Bairro</label><input name="bairro" type="text" id="bairro" readonly style="border: none;"></div>
+                        <div class="col"><label for="complemento">Complemento</label><input name="complemento" type="text"
+                                id="complemento" readonly style="border: none;"></div>
+                        <div class="col"><label for="municipio">Município</label><input name="municipio" type="text" id="municipio" readonly style="border: none;"> 
+                        </div>
+                        <div class="col"><label>UF
+                                <input name="uf" id="uf" readonly style="border: none;">
+
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+
+
+                <fieldset>
+                    <legend style="margin-top: 2rem;">Outros</legend>
+                    <div class="row">
+                        <div class="col"><label>Nome da Mãe</label><input name="nome_mae" type="text" id="nomeMae" readonly style="border: none;"></div>
+                        <div class="col"><label>Nacionalidade</label><input name="nacionalidade" type="text" id="nacionalidade" readonly style="border: none;"></div>
+                        <div class="col">
+                            <label for="raca_cor">Raça/Cor</label>
+                            <input name="raca" id="raca_cor" readonly style="border: none;">
+                        </div>
+                        <div class="col">
+                            <label for="escolaridade">Escolaridade</label>
+                            <input name="escolaridade" id="escolaridade" readonly style="border: none;">
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </main>
+    <script type="module" src="./visualizarPaciente.js"></script>
+</body>
+
+</html>

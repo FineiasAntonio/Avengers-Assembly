@@ -1,6 +1,7 @@
 @import "../../shared/estilos-globais.css";
 
 body {
+  height: 100%;
   background: var(--cor-fundo);
   margin: 0;
   padding: 2rem;
@@ -11,7 +12,7 @@ body {
   padding: 1.5rem;
   border-radius: 10px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -28,6 +29,10 @@ h2 {
   justify-content: space-between;
   margin-bottom: 1rem;
 }
+.header-info div {
+  display: flex;
+  flex-direction: column;
+}
 
 fieldset {
   border: 2px solid var(--cor-quinaria);
@@ -43,11 +48,27 @@ legend {
   color: #2b1a1a;
 }
 
+.unidade-info {
+  display: grid;
+  grid-template-columns: 50% 50%;
+
+  gap: 10px;
+}
+
+.unidade-info label:last-child {
+  grid-column: 1 / -1;
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  
+  grid-template-columns: 50% 50%;
+
   gap: 10px;
+}
+
+.grid div {
+    display: flex;
+    flex-direction: column;
 }
 
 .subgrid {
@@ -59,10 +80,18 @@ legend {
 }
 
 label {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   font-size: 0.9rem;
   color: var(--cor-texto);
+}
+
+.label-input {
+  display: inline-flex;
+  flex-direction: row;
+}
+.label-input input {
+  margin-right: 10px;
 }
 
 input {
@@ -93,3 +122,4 @@ option {
   justify-content: flex-end;
   gap: 1rem;
 }
+

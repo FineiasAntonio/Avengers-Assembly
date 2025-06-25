@@ -5,6 +5,7 @@ import (
 	"backend/model"
 	"context"
 	"database/sql"
+	"errors"
 	"fmt"
 )
 
@@ -16,8 +17,12 @@ func NewPacienteRepository(db *database.PostgresClient) *PacienteRepository {
 	return &PacienteRepository{db: db}
 }
 
+var (
+	ErroPacienteNaoEncontrado = errors.New("Paciente não encontrado")
+)
+
 func (p *PacienteRepository) GetPacienteByCartaoSUS(ctx *context.Context, cartaoSUS string) (*model.Paciente, error) {
-	row := p.db.DB.QueryRowContext(*ctx, "SELECT * FROM paciente WHERE cartao_sus = $1", cartaoSUS)
+	row := p.db.DB.QueryRowContext(*ctx, "SELECT * FROM paciente JOIN endereco ON paciente.endereco = endereco.endereco_id WHERE cartaosus = $1", cartaoSUS)
 
 	var paciente model.Paciente
 
@@ -33,9 +38,19 @@ func (p *PacienteRepository) GetPacienteByCartaoSUS(ctx *context.Context, cartao
 		&paciente.Nacionalidade,
 		&paciente.Escolaridade,
 		&paciente.Telefone,
-		&paciente.Endereco,
+		&paciente.EnderecoID,
 		&paciente.Senha,
 		&paciente.PrimeiroAcesso,
+		&paciente.Endereco.EnderecoID,
+		&paciente.Endereco.Logradouro,
+		&paciente.Endereco.Numero,
+		&paciente.Endereco.Complemento,
+		&paciente.Endereco.Bairro,
+		&paciente.Endereco.CodMunicipio,
+		&paciente.Endereco.Municipio,
+		&paciente.Endereco.UF,
+		&paciente.Endereco.CEP,
+		&paciente.Endereco.PontoReferencia,
 	)
 
 	if err != nil {
@@ -44,11 +59,10 @@ func (p *PacienteRepository) GetPacienteByCartaoSUS(ctx *context.Context, cartao
 		}
 		return nil, fmt.Errorf("Erro ao buscar paciente: %v", err)
 	}
-
 	return &paciente, nil
 }
 func (p *PacienteRepository) GetPacienteByCartaoCPF(ctx *context.Context, cpf string) (*model.Paciente, error) {
-	row := p.db.DB.QueryRowContext(*ctx, "SELECT * FROM paciente WHERE cpf = $1", cpf)
+	row := p.db.DB.QueryRowContext(*ctx, "SELECT * FROM paciente JOIN endereco ON paciente.endereco = endereco.endereco_id WHERE cpf = $1", cpf)
 
 	var paciente model.Paciente
 
@@ -64,9 +78,19 @@ func (p *PacienteRepository) GetPacienteByCartaoCPF(ctx *context.Context, cpf st
 		&paciente.Nacionalidade,
 		&paciente.Escolaridade,
 		&paciente.Telefone,
-		&paciente.Endereco,
+		&paciente.EnderecoID,
 		&paciente.Senha,
 		&paciente.PrimeiroAcesso,
+		&paciente.Endereco.EnderecoID,
+		&paciente.Endereco.Logradouro,
+		&paciente.Endereco.Numero,
+		&paciente.Endereco.Complemento,
+		&paciente.Endereco.Bairro,
+		&paciente.Endereco.CodMunicipio,
+		&paciente.Endereco.Municipio,
+		&paciente.Endereco.UF,
+		&paciente.Endereco.CEP,
+		&paciente.Endereco.PontoReferencia,
 	)
 
 	if err != nil {
@@ -104,4 +128,16 @@ func (p *PacienteRepository) AlterarSenha(ctx *context.Context, cpf string, nova
 	query := `UPDATE paciente SET senha = $1, primeiroacesso = false WHERE cpf = $2`
 	_, err := p.db.DB.ExecContext(*ctx, query, novaSenha, cpf)
 	return err
+}
+
+func (p *PacienteRepository) ExistePaciente(ctx *context.Context, cartao_sus string) (bool, error) {
+	var existe bool
+	query := "SELECT EXISTS(SELECT 1 FROM paciente WHERE cartaosus = $1)"
+	err := p.db.DB.QueryRowContext(*ctx, query, cartao_sus).Scan(&existe)
+
+	if err != nil {
+		return false, err
+	}
+
+	return existe, nil
 }

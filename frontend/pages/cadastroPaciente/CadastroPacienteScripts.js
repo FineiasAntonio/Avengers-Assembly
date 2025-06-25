@@ -1,5 +1,5 @@
-import { API_ENDERECO } from "../../environment/environment.js"
-import "../../shared/interceptor.js"
+import "../../api/cadastroApi.js"
+import { cadastrarPaciente } from "../../api/pacienteApi.js"
 
 document.addEventListener('DOMContentLoaded', function () {
     const cpfInput = document.getElementById('cpf')
@@ -80,8 +80,13 @@ document.addEventListener('DOMContentLoaded', function () {
         valores.cep = valores.cep.replace(/\D/g, '')
 
         const partes = valores.data_nascimento.split('/')
-        const dataObj = new Date(`${partes[2]}-${partes[1]}-${partes[0]}`)
-        valores.data_nascimento = dataObj.toISOString()
+        if (partes.length === 3) {
+            const dataStr = `${partes[2]}-${partes[1]}-${partes[0]}`;
+            const dataObj = new Date(dataStr);
+            if (!isNaN(dataObj.getTime())) {
+                valores.data_nascimento = dataObj.toISOString()
+            } 
+        }
         valores.idade = parseInt(valores.idade)
 
         valores.endereco = {
@@ -94,17 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
             cep: valores.cep,
         }
         
-
-        const response = await fetch(API_ENDERECO + "paciente", {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(valores)
-        })
-
-        if (!response.ok) {
-            const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status}` }));
-            throw new Error(errorData.message);
-        }
+        await cadastrarPaciente(valores)
     })
 })
 

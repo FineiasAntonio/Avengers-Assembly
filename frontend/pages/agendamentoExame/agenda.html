@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../components/navbar/navbar.js" type="module"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="agendamentoExame.css" />
+    <link rel="icon" type="img/jpeg" href="../../assets/favicon.jpeg">
+  <script src="agendamentoExame.js" type="module"></script>
+  <title>Agenda de Exames</title>
+</head>
+
+<body>
+  <custom-navbar></custom-navbar>
+  <div class="container">
+    <h2>AGENDA DE EXAMES</h2>
+
+    <fieldset>
+      <label for="data">Selecione a data</label>
+      <input type="date" id="data" />
+    </fieldset>
+
+
+    <fieldset>
+    <h3>Horários do Dia</h3>
+    <div class="agenda-lista" id="agendaHorarios"></div>
+
+    <!-- container extra para mostrar só os disponíveis -->
+    <div id="horariosDisponiveis" class="horarios-disponiveis invisible">
+        <h4>Horários Disponíveis</h4>
+        <ul id="listaDisponiveis"></ul>
+    </div>
+    </fieldset>
+  </div>
+  <script type="module" src="./agenda.js"></script>
+</body>
+
+</html>

@@ -1,130 +1,142 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../../shared/navbar.js" defer type="module"></script>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="VisualizacaoRequisicao.css">
-    <title>Informações Exame</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../../shared/navbar.js" defer type="module"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="CadastroRequisicao.css">
+  <script src="../../components/navbar/navbar.js" type="module"></script>
+  <script src="./VisualizacaoRequisicao.js" type="module"></script>
+  <title>Informações Exame</title>
 </head>
+
 <body>
-     <custom-navbar></custom-navbar>
-     <div class="container">
-        <h2>REQUISIÇÃO DE EXAME CITOPATOLÓGICO</h2>
-        <div class="header-info">
-        <label>Protocolo <input type="number" value="" /></label>
-        <label>Prontuário <input type="number" value="" /></label>
+  <custom-navbar></custom-navbar>
+  <div class="container">
+    <div style="display: flex; justify-content: space-between; ">
+      <h2>REQUISIÇÃO DE EXAME CITOPATOLÓGICO</h2>
+      <button id="botaoResultado" style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;" class="botao1">
+        
+      </button>
+    </div>
+    <fieldset>
+      <legend>Local de realização do exame</legend>
+      <div class="unidade-info">
+        <label>CNES <p id="unidadeCnes"></p></label>
+        <label>Unidade de saúde <p id="unidadeNome"></p></label>
+        <label>Endereço <p id="unidadeEndereco"></p></label>
       </div>
+    </fieldset>
 
-      <fieldset>
-        <legend>Local de realização do exame</legend>
-        <div class="grid">
-          <label>Unidade de saúde <input type="text" value="" /></label>
-          <label>CNES <input type="text" value="" /></label>
-          <label>Endereço <input type="text" value="" /></label>
-          <label>Município <input type="text" value="" /></label>
-          <label>UF 
-            <select>
-              <option value="">Selecione</option>
-              <option value="AC">AC</option>
-              <option value="AL">AL</option>
-              <option value="AP">AP</option>
-              <option value="AM">AM</option>
-              <option value="BA">BA</option>
-              <option value="CE">CE</option>
-              <option value="DF">DF</option>
-              <option value="ES">ES</option>
-              <option value="GO">GO</option>
-              <option value="MA">MA</option>
-              <option value="MT">MT</option>
-              <option value="MS">MS</option>
-              <option value="MG">MG</option>
-              <option value="PA">PA</option>
-              <option value="PB">PB</option>
-              <option value="PR">PR</option>
-              <option value="PE">PE</option>
-              <option value="PI">PI</option>
-              <option value="RJ">RJ</option>
-              <option value="RN">RN</option>
-              <option value="RS">RS</option>
-              <option value="RO">RO</option>
-              <option value="RR">RR</option>
-              <option value="SC">SC</option>
-              <option value="SP">SP</option>
-              <option value="SE">SE</option>
-              <option value="TO">TO</option>
-            </select>
-          </label>
-        </div>
-      </fieldset>
+    <fieldset>
+      <legend>Dados do paciente</legend>
+      <div class="grid">
+        <label style="grid-column: 1 / -1;">
+          Buscar por CPF ou Cartão do SUS
+          <p id="buscaPaciente"></p>
+        </label>
 
-      <fieldset>
-        <legend>Dados do paciente</legend>
-        <div class="grid">
-          <label>Nome <input type="text" value="" /></label>
-          <label>Idade <input type="number" value="" /></label>
-          <label>Data de nascimento <input type="date" value="" /></label>
-          <label>CPF <input type="number" value="" /></label>
-          <label>Cartão do SUS <input type="number" value="" /></label>
-          <label>Nome da mãe <input type="text" value="" /></label>
-          <label>Endereço <input type="text" value="" /></label>
-          <label>Município <input type="text" value="" /></label>
-          <label>UF 
-            <select>
-              <option value="">Selecione</option>
-              <option value="AC">AC</option>
-              <option value="AL">AL</option>
-              <option value="AP">AP</option>
-              <option value="AM">AM</option>
-              <option value="BA">BA</option>
-              <option value="CE">CE</option>
-              <option value="DF">DF</option>
-              <option value="ES">ES</option>
-              <option value="GO">GO</option>
-              <option value="MA">MA</option>
-              <option value="MT">MT</option>
-              <option value="MS">MS</option>
-              <option value="MG">MG</option>
-              <option value="PA">PA</option>
-              <option value="PB">PB</option>
-              <option value="PR">PR</option>
-              <option value="PE">PE</option>
-              <option value="PI">PI</option>
-              <option value="RJ">RJ</option>
-              <option value="RN">RN</option>
-              <option value="RS">RS</option>
-              <option value="RO">RO</option>
-              <option value="RR">RR</option>
-              <option value="SC">SC</option>
-              <option value="SP">SP</option>
-              <option value="SE">SE</option>
-              <option value="TO">TO</option>
-            </select>
-          </label>
-          <label>Telefone <input type="number" value="" /></label>
-          <label>Nacionalidade <input type="text" value="" /></label>
-          <label>Raça/Cor <input type="text" value="" /></label>
-          <label>Escolaridade
-            <select>
-              <option value="">Selecione</option>
-              <option value="Analfabeta">Analfabeta</option>
-              <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
-              <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
-              <option value="Ensino Médio Completo">Ensino Médio Completo</option>
-              <option value="Superior Completo">Superior Completo</option>
-            <select>
-          </label>
-        </div>
-      </fieldset>
+        <label class="dado-paciente" id="cpfPaciente">CPF: </label>
 
-      <div class="buttons">
-        <button class="botao1" onclick="history.back()">Cancelar</button>
-        <button class="botao1" onclick="window.location.href='VisualizacaoRequisicaopt2.html'">Próximo</button>
+        <label id="cartaoSus">Cartão do SUS: </label>
+        <label style="grid-column: 1 / -1;" id="nomePaciente">Nome: </label>
+        <label id="idadePaciente">Idade: </label>
+        <label id="dataNascimento">Data de nascimento: </label>
+        <label style="grid-column: 1 / -1;" id="nomeMae">Nome da mãe: </label>
+
+        <label style="grid-column: 1 / -1;" id="enderecoPaciente">Endereço: </label>
+
+        <label id="telefonePaciente">Telefone: </label>
+        <label id="nacionalidadePaciente">Nacionalidade: </label>
+        <label id="racaCorPaciente">Raça/Cor: </label>
+        <label id="escolaridadePaciente">Escolaridade: </label>
       </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Dados da Anamnese</legend>
+      <div class="grid">
+        <label>Motivo do exame
+          <p id="motivoExame"></p>
+        </label>
+
+        <label style="grid-column: 1 / -1;">Fez o exame preventivo (Papanicolaou)
+          <p id="fezExame"></p>
+        </label>
+        <label>Ano do último exame
+          <p id="anoUltimoExame"></p>
+        </label>
+
+        <label>Usa DIU?
+          <p id="usaDIU"></p>
+        </label>
+
+        <label>Está grávida?
+          <p id="estaGravida"></p>
+        </label>
+
+        <label>Usa pílula anticoncepcional?
+          <p id="usaAnticoncepcional"></p>
+        </label>
+
+        <label>Usa hormônio/remédio para tratar a menopausa?
+          <p id="usaHormonio"></p>
+        </label>
+
+        <label>Já fez tratamento por radioterapia?
+          <p id="fezRadioterapia"></p>
+        </label>
+
+        <label>Tem ou teve algum sangramento após relações sexuais?
+          <p id="teveSangramentoRelacoes"></p>
+        </label>
+
+        <label>Tem ou teve algum sangramento após a menopausa?
+          <p id="teveSangramentoMenopausa"></p>
+        </label>
+        <label>Data da última menstruação
+          <p id="ultimaMenstruação"></p>
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Exame Clínico</legend>
+      <div class="grid">
+        <label>Inspeção do colo
+          <p id="inspecaoColo"></p>
+        </label>
+        <label>Sinais sugestivos de DSTs
+          <p id="sinaisDST"></p>
+        </label>
+        <label>Data da Coleta
+          <p id="dataColeta"></p>
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Profissional Responsável</legend>
+      <div class="grid">
+        <label>Registro Responsável
+          <p id="registroResponsavel"></p>
+        </label>
+        <label>Nome Responsável
+          <p id="nomeResponsavel"></p>
+        </label>
+      </div>
+    </fieldset>
   </div>
+
 </body>
+
 </html>

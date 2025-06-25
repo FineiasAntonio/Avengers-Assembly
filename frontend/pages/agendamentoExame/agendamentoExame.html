@@ -1,54 +1,68 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../../shared/navbar.js" defer type="module"></script>
+    <script src="../../components/navbar/navbar.js" type="module"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link rel="icon" type="img/jpeg" href="../../assets/favicon.jpeg">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="agendamentoExame.css">
     <script src="../../shared/navbar.js"></script>
+    <script src="agendamentoExame.js" type="module"></script>
     <title>Agendamento Exame</title>
 </head>
 
 <body>
     <custom-navbar></custom-navbar>
-     <div class="container">
-        <h2>AGENDAMENTO DE EXAMES</h2>
-        
-        <fieldset>
-            <label for="cartaoSUS">Seu Cartão SUS</label>
-        <input type="text" id="cartaoSUS" placeholder="">
-        
-        <br><br>
-        <label>Local, data e horário de realização do exame</label>
-        <div class="row">
-            <div>
-                <label for="ubs">Unidade de saúde</label>
-                <input type="text" id="ubs" placeholder="">
-            </div>
-            <div>
-                <label for="municipio">Município</label>
-                <input type="text" id="municipio" placeholder="">
-            </div>
-            <div>
-                <label for="uf">UF</label>
-                <input type="text" id="uf" placeholder="" maxlength="2">
-            </div>
+    <div style="display: flex; flex-direction: column;">
+        <div class="container">
+            <h2>AGENDAMENTO DE EXAMES</h2>
+            <fieldset>
+                <div class="info-paciente">
+                    <label>Unidade de Saúde</label>
+                    <span id="ubsPaciente"></span>
+                </div>
+                <div class="info-paciente">
+                    <label>Endereço</label>
+                    <span id="municipioPaciente"></span>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <label for="cartaoSUS">Digite seu Cartão SUS</label>
+                <input type="text" id="cartaoSUS" placeholder="Número do Cartão SUS">
+
+                <div id="dadosPaciente" class="dados-paciente invisible">
+                    <h3>Dados do Paciente</h3>
+                    <div class="info-paciente">
+                        <label>Nome</label>
+                        <span id="nomePaciente"></span>
+                    </div>
+                    <div class="info-paciente">
+                        <label>CPF</label>
+                        <span id="cpfPaciente"></span>
+                    </div>
+                    <div class="info-paciente">
+                        <label>Data de Nascimento</label>
+                        <span id="nascimentoPaciente"></span>
+                    </div>
+
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <label for="data">Selecione a data</label>
+                <input type="date" id="data">
+            </fieldset>
         </div>
-
-        <label for="data">Selecione a data</label>
-        <input type="date" id="data">
-
-        <label for="hora">Selecione o horário</label>
-        <input type="time" id="hora">
-        </fieldset>
-
-        <div class="actions">
-            <button class="botao1" onclick="history.back()">Cancelar</button>
-            <button class="botao1">Agendar</button>
+        <div class="container invisible" id="root" style="margin-top: 1rem;">
         </div>
     </div>
 </body>
+
 </html>

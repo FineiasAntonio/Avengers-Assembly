@@ -3,16 +3,19 @@ package database
 import (
 	"backend/config"
 	"backend/model"
+	_ "backend/model"
 	"context"
 	"database/sql"
 	"fmt"
-	"golang.org/x/crypto/bcrypt"
 	"log"
 	"os"
 	"strings"
 	"time"
 
-	_ "github.com/lib/pq" // Driver PostgreSQL
+	"golang.org/x/crypto/bcrypt"
+	_ "golang.org/x/crypto/bcrypt"
+
+	_ "github.com/lib/pq"
 )
 
 type PostgresClient struct {
@@ -37,12 +40,10 @@ func ConectarPostgres(cfg config.PostgresConfig) (*PostgresClient, error) {
 		return nil, fmt.Errorf("Erro ao tentar conectar com o PostgreSQL: %w", err)
 	}
 
-	// Configurações da pool de conexões
 	db.SetMaxOpenConns(10)
 	db.SetMaxIdleConns(2)
 	db.SetConnMaxLifetime(time.Minute * 5)
 
-	// Verifica a conexão
 	if err := db.PingContext(ctx); err != nil {
 		return nil, fmt.Errorf("Erro ao tentar se comunicar com o PostgreSQL: %w", err)
 	}
@@ -63,7 +64,7 @@ func ConectarPostgres(cfg config.PostgresConfig) (*PostgresClient, error) {
 	if !adminExiste {
 		query := `
 		INSERT INTO usuario (
-			registro, nome, cpf, email, telefone, senha, 
+			registro, nome, cpf, email, telefone, senha,
 			permissao, primeiroacesso
 		) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
 	`
@@ -103,6 +104,9 @@ func (c *PostgresClient) FecharConexaoPostgres() {
 
 func IniciarTabelas(db *sql.DB) error {
 	caminhoConfiguracaoSQL := os.Getenv("CAMINHO_CONFIGURACAO_SQL")
+	if caminhoConfiguracaoSQL == "" {
+		caminhoConfiguracaoSQL = "../../config/sql/iniciar.sql"
+	}
 	content, err := os.ReadFile(caminhoConfiguracaoSQL)
 	if err != nil {
 		return fmt.Errorf("erro ao ler arquivo SQL: %w", err)

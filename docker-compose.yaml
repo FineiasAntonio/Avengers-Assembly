@@ -24,12 +24,23 @@ services:
     networks:
       - ccts_network
 
-  apache:
-    image: httpd:alpine
+  nginx:
+    image: nginx:latest
     ports:
       - "80:80"
     volumes:
-      - ./frontend:/usr/local/apache2/htdocs/
+      - ./frontend:/usr/share/nginx/html
+    networks:
+      - ccts_network
+  waha:
+    image: wppconnectteam/waha:latest
+    container_name: waha
+    ports:
+      - "3000:3000"
+    volumes:
+      - .config/container_data/waha_data:/app/data
+    networks:
+      - ccts_network
 
 networks:
     ccts_network:

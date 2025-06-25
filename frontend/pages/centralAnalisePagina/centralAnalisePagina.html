@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../../shared/navbar.js" defer type="module"></script>
+    <script src="../../components/navbar/navbar.js" type="module"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <link rel="stylesheet" href="./centralAnalisePagina.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,26 +37,28 @@
                             <h2>Gráfico</h2>
                             <div class="divFiltrar">
                                 <label for="filtrarGrafico">Filtrar</label>
-                                <button class="filtrarGrafico"><i class="fa-solid fa-filter"></i></button>
+                                <select class="filtrarGrafico" id="filtrarGrafico">
+                                    <option value="raca" hidden>Selecione</option>
+                                    <option value="raca">Raça</option>
+                                    <option value="escolaridade">Escolaridade</option>
+                                </select>
                             </div>
                         </div>
                         <canvas id="graficoP"></canvas>
                     </div>
                     <div class="graficoBarra">
                         <div class="tituloGrafico">
-                            <h2>Gráfico</h2>
-                            <div class="divFiltrar">
-                                <label for="filtrarGrafico">Filtrar</label>
-                                <button class="filtrarGrafico"><i class="fa-solid fa-filter"></i></button>
-                            </div>
+                            <h2>Idade</h2>
                         </div>
                         <canvas id="graficoB"></canvas>
                     </div>
                 </div>
                 <div class="dadosMapa">
                     <div class="dados">
-                        <h1>Dados</h1>
-                        <canvas id="graficoC"></canvas>
+                        <h2>Pacientes</h2>
+                        <div class="qtdPacientesDiv">
+                            <label id="labelQtdPacientes" class="labelQtdPacientes"></label>
+                        </div>
                     </div>
                     <div class="mapa">
                         <div class="tituloMapa">
@@ -73,6 +76,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./chart.js" type="module"></script>
     <script src="./mapa.js" type="module"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </body>
-
 </html>
