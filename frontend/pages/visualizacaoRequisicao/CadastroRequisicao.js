@@ -153,6 +153,7 @@ window.addEventListener("DOMContentLoaded", () => {
         unidadeNome.textContent = resultado.nome;
         unidadeEndereco.textContent = `${resultado.endereco.logradouro}, ${resultado.endereco.numero} - ${resultado.endereco.bairro}, ${resultado.endereco.municipio} - ${resultado.endereco.uf}, ${resultado.endereco.cep}`;
     });
+
 });
 
 function enviarRequisicaoExame(requisicao) {

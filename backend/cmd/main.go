@@ -22,13 +22,13 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	/*conexaoMongo, err := database.ConectarMongo(cfg.Mongo)*/
+	conexaoMongo, err := database.ConectarMongo(cfg.Mongo)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
 	defer conexaoPostgres.FecharConexaoPostgres()
-	/*defer conexaoMongo.FecharConexaoMongo()*/
+	defer conexaoMongo.FecharConexaoMongo()
 
 	chaveJwt := os.Getenv("SECRET_JWT_KEY")
 	if chaveJwt == "" {
@@ -54,6 +54,10 @@ func main() {
 	requisicaoExameServico := service.NewRequisicaoExameService(requisicaoExameRepositorio)
 	requisicaoExameHandler := handler.NewRequisicaoExameHandler(requisicaoExameServico)
 
+	resultadoExameRepositorio := repository.NewResultadoExameRepository(conexaoMongo)
+	resultadoExameServico := service.NewResultadoExameService(resultadoExameRepositorio)
+	resultadoExameHandler := handler.NewResultadoExameHandler(resultadoExameServico)
+
 	unidadeRpositorio := repository.NewUnidadeRepository(conexaoPostgres)
 	unidadeService := service.NewUnidadeService(unidadeRpositorio, enderecoRepositorio)
 	unidadeHandler := handler.NewUnidadeHandler(unidadeService)
@@ -77,6 +81,7 @@ func main() {
 		requisicaoExameHandler,
 		unidadeHandler,
 		centralAnaliseHandler,
+		resultadoExameHandler,
 	)
 	handerRotas := corsMiddleware.LiberarCORS(rotas.SetupRotas())
 

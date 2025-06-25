@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../../shared/navbar.js" defer type="module"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="VisualizacaoResultado.css">
+  <script src="../../components/navbar/navbar.js" type="module"></script>
+  <script src="./VisualizacaoResultado.js" type="module"></script>
+  <title>Informações Exame</title>
+</head>
+
+<body>
+  <custom-navbar></custom-navbar>
+  <div class="container">
+    <div style="display: flex; justify-content: center; ">
+      <h2>Laudo de exame citopatológico</h2>
+    </div>
+
+     <div class="header-info">
+      <div>Laboratório
+        <label id="nomeLaboratorio"></label>
+      </div>
+      <div>Número do Exame
+        <label id="numeroExame"></label>
+      </div>
+      <label>Recebido em <input type="date" id="recebidoEm" data-field="recebidoEm" /></label>
+    </div>
+
+    <fieldset>
+      <legend>Avaliação Pré-Analítica</legend>
+      <div class="grid">
+        <div>Amostra rejeitada por:
+            <br>
+            <label class="label-input"><input type="checkbox" data-group="amostraRejeitada" data-value="ausenciaErroIdentificacao" />Ausência ou erro na identificação da lâmina, frasco ou formulário</label>
+            <label class="label-input"><input type="checkbox" data-group="amostraRejeitada" data-value="laminaDanificada" />Lâmina danificada ou ausente</label>
+            <label class="label-input"><input type="checkbox" data-group="amostraRejeitada" data-value="erroIdentificacao" />Erro na identificação</label>
+            <label class="label-input"><input type="checkbox" data-group="amostraRejeitada" data-value="outrasCausas" />Outras causas</label>
+        </div>
+        <div>Epitélios Representados:
+            <label class="label-input"><input type="checkbox" data-group="epiteliosRepresentados" data-value="escamoso" />Escamoso</label>
+            <label class="label-input"><input type="checkbox" data-group="epiteliosRepresentados" data-value="glandular" />Glandular</label>
+            <label class="label-input"><input type="checkbox" data-group="epiteliosRepresentados" data-value="metaplasico" />Metaplásico</label>
+        </div>
+        
+      </div>
+    </fieldset>
+    <fieldset>
+    <legend>Adequação do Material</legend>
+        <div class="grid">
+            <div>
+                Satisfatória
+                <input type="checkbox" id="adequacaoMaterialSatisfatoria" data-field="adequacaoSatisfatoria" style="margin-bottom: 10px;"/>
+     
+                <span id="insatisfatoria-content">
+                    Insatisfatória para avaliação oncótica devido a:
+                    <label class="label-input"><input type="checkbox" data-group="adequacaoInsatisfatoria" data-value="materialAcelular" />Material acelular ou hipocelular em menos de 10% do esfregaço</label>
+                    <label class="label-input"><input type="checkbox" data-group="adequacaoInsatisfatoria" data-value="sangue75Porcento" />Sangue em mais de 75% do esfregaço</label>
+                    <label class="label-input"><input type="checkbox" data-group="adequacaoInsatisfatoria" data-value="piocitos75Porcento" />Piócitos em mais de 75% do estregaço</label>
+                    <label class="label-input"><input type="checkbox" data-group="adequacaoInsatisfatoria" data-value="artefatosDessecamento" />Artefatos de dessecamento em mais de 75% do esfregaço</label>
+                    <label class="label-input"><input type="checkbox" data-group="adequacaoInsatisfatoria" data-value="contaminantesExternos" />Contaminantes externos em mais de 75% do esfregaço</label>
+                    <label class="label-input"><input type="checkbox" data-group="adequacaoInsatisfatoria" data-value="superposicaoCelular" />Intensa superposição celular em mais de 75% do esfregaço</label>
+                    <label class="label-input"><input type="text" data-field="adequacaoInsatisfatoriaOutros" placeholder="Outros, especificar" /></label>
+                </span>
+            </label>
+        </div>
+    </fieldset>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const satisfatoria = document.getElementById('adequacaoMaterialSatisfatoria');
+        const insatisfatoriaContent = document.getElementById('insatisfatoria-content');
+        function toggleInsatisfatoria() {
+        insatisfatoriaContent.style.display = satisfatoria.checked ? 'none' : 'inline';
+        }
+        satisfatoria.addEventListener('change', toggleInsatisfatoria);
+        toggleInsatisfatoria();
+    });
+    </script>
+    <fieldset>
+      <legend>Diagnóstico Descritivo</legend>
+      <div class="grid">
+        <label>Dentro dos Limites da Normalidade no material examinado?<input type="checkbox" data-field="dentroLimitesNormalidade" /></label>
+        <label>Alterações Celulares Benignas Reativas ou Reparativas
+            <label class="label-input"><input type="checkbox" data-group="alteracoesBenignas" data-value="inflamacao" />Inflamação</label>
+            <label class="label-input"><input type="checkbox" data-group="alteracoesBenignas" data-value="metaplasiaEscamosa" />Metaplasia Escamosa Imatura</label>
+            <label class="label-input"><input type="checkbox" data-group="alteracoesBenignas" data-value="reparacao" />Reparação</label>
+            <label class="label-input"><input type="checkbox" data-group="alteracoesBenignas" data-value="atrofiaInflamacao" />Atrofia com Inflamação</label>
+            <label class="label-input"><input type="checkbox" data-group="alteracoesBenignas" data-value="radiacao" />Radiação</label>
+            <label class="label-input"><input type="text" data-field="alteracoesBenignasOutras" placeholder="Outras" /></label>
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Microbiologia</legend>
+      <div class="grid">
+        <div class="subgrid">
+            <label class="label-input"><input type="checkbox" data-group="microorganismos" data-value="lactobacillus" />Lactobacillus sp</label>
+            <label class="label-input"><input type="checkbox" data-group="microorganismos" data-value="cocos" />Cocos</label>
+            <label class="label-input"><input type="checkbox" data-group="microorganismos" data-value="chlamydia" />Sugestivo de Chlamydia sp</label>
+            <label class="label-input"><input type="checkbox" data-group="microorganismos" data-value="actinomyces" />Actinomyces sp</label>
+            <label class="label-input"><input type="checkbox" data-group="microorganismos" data-value="candida" />Candida sp</label>
+            <label class="label-input"><input type="checkbox" data-group="microorganismos" data-value="trichomonas" />Trichomonas vaginalis</label>
+            <label class="label-input"><input type="checkbox" data-group="microorganismos" data-value="herpes" />Efeito citopático compatível com vírus do grupo Herpes</label>
+            <label class="label-input"><input type="checkbox" data-group="microorganismos" data-value="gardnerella" />Bacilos supracitoplasmáticos (sugestivos de Gardnerella/Mobiluncus)</label>
+            <label class="label-input"><input type="checkbox" data-group="microorganismos" data-value="outrosBacilos" />Outros bacilos</label>
+            <label class="label-input"><input type="text" data-field="microorganismosOutros" placeholder="Outros" /></label>
+        </div>
+        <div class="subgrid">
+            Células atípicas de significado indeterminado
+            <label>
+                <br>
+                Escamosas:
+                <label class="label-input"><input type="checkbox" data-group="celulasAtipicasEscamosas" data-value="naoNeoplasicas" />Possivelmente não neoplásicas</label>
+                <label class="label-input"><input type="checkbox" data-group="celulasAtipicasEscamosas" data-value="lesaoAltoGrau" />Não se pode afastar lesão de alto grau</label>
+            </label>
+            <label>
+                <br>
+                Glandulares:
+                <label class="label-input"><input type="checkbox" data-group="celulasAtipicasGlandulares" data-value="naoNeoplasicas" />Possivelmente não neoplásicas</label>
+                <label class="label-input"><input type="checkbox" data-group="celulasAtipicasGlandulares" data-value="lesaoAltoGrau" />Não se pode afastar lesão de alto grau</label>
+            </label>
+            <label>
+                <br>
+                De origem indefinida:
+                <label class="label-input"><input type="checkbox" data-group="celulasAtipicasOrigemIndefinida" data-value="naoNeoplasicas" />Possivelmente não neoplásicas</label>
+                <label class="label-input"><input type="checkbox" data-group="celulasAtipicasOrigemIndefinida" data-value="lesaoAltoGrau" />Não se pode afastar lesão de alto grau</label>
+            </label>
+        </div>
+        <div class="subgrid">
+                Atipias em células escamosas
+                <label class="label-input"><input type="checkbox" data-group="atipiasEscamosas" data-value="lesaoBaixoGrau" />Lesão intra-epitelial de baixo grau</label>
+                <label class="label-input"><input type="checkbox" data-group="atipiasEscamosas" data-value="lesaoAltoGrau" />Lesão intra-epitelial de alto grau</label>
+                <label class="label-input"><input type="checkbox" data-group="atipiasEscamosas" data-value="lesaoAltoGrauMicroInvasao" />Lesão intra-epitelial de alto grau,não podendo excluir micro-invasão</label>
+                <label class="label-input"><input type="checkbox" data-group="atipiasEscamosas" data-value="carcinomaEpidermoide" />Carcinoma epidermóide invasor</label>
+        </div>
+        <div class="subgrid">
+                Atipias em células glandulares
+                <label class="label-input"><input type="checkbox" data-group="atipiasGlandulares" data-value="adenocarcinomaInSitu" />Adenocarcinoma "in situ"</label>
+                <br>Adenocarcinoma invasor:
+                <label class="label-input"><input type="checkbox" data-group="atipiasGlandulares" data-value="adenocarcinomaCervical" />Cervical</label>
+                <label class="label-input"><input type="checkbox" data-group="atipiasGlandulares" data-value="adenocarcinomaEndometrial" />Endometrial</label>
+                <label class="label-input"><input type="checkbox" data-group="atipiasGlandulares" data-value="adenocarcinomaSemEspecificacao" />Sem outras especificações</label>
+        </div>
+        <div>Outras neoplasias malignas
+          <input type="checkbox" id="outras-neoplasias-checkbox" />
+          <span id="outras-neoplasias-input" style="display:none;">
+            Especificar: <input type="text" data-field="outrasNeoplasias" />
+          </span>
+        </div>
+        <label class="label-input"><input type="checkbox" data-field="celulasEndometriais" />Presença de células endometriais (na pós-menopausa ou acima de 40 anos, fora do período menstrual)</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <div class="grid">
+        <label>Screening Citotécnico <input type="text" id="screeningCitotecnico" data-field="screeningCitotecnico" /></label>
+        <label>Responsável pelo Registro <input type="text" id="responsavelRegistro" data-field="responsavelRegistro" /></label>
+        <label>Data do Resultado <input type="date" id="dataResultado" data-field="dataResultado" /></label>
+      </div>
+    </fieldset>
+
+    <div class="buttons">
+        <button class="botao1" onclick="history.back()">Cancelar</button>
+        <button class="botao1" id="btnEnviar">Enviar</button>
+    </div>
+  </div>
+
+</body>
+
+</html>

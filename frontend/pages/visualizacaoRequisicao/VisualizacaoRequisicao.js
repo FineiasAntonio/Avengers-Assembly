@@ -1,4 +1,4 @@
-import { pegarUnidadeUsuario } from "../../shared/gerenciador-permissoes.js";
+import { pegarPermissaoUsuario, pegarUnidadeUsuario } from "../../shared/gerenciador-permissoes.js";
 import { listarUnidade } from "../../api/unidadeApi.js";
 import { ListarRequisicaoExame } from "../../api/cadastroApi.js";
 
@@ -82,6 +82,24 @@ window.addEventListener("DOMContentLoaded", () => {
         dataColeta.textContent = new Date(resultado.data_coleta).toLocaleDateString();
         registroResponsavel.textContent = resultado.responsavel_registro;
         nomeResponsavel.textContent = resultado.responsavel.nome;
+
+        const botaoResultado = document.getElementById("botaoResultado")
+        if (resultado.ResultadoID) {
+            botaoResultado.style.cursor = "pointer";
+            botaoResultado.textContent = "Ver Resultado";
+            botaoResultado.addEventListener("click", () => {
+                window.location.href = `../resultadoExame/ResultadoExame.html?protocolo=${resultado.protocolo}`;
+            });
+        } else if (!resultado.ResultadoID && pegarPermissaoUsuario() === "ACESSO_LABORATORIO") {
+            botaoResultado.style.cursor = "pointer";
+            botaoResultado.textContent = "Cadastrar Laudo";
+            botaoResultado.addEventListener("click", () => {
+                window.location.href = `../resultadoExame/VisualizacaoResultado.html?protocolo=${resultado.protocolo}`;
+            });
+        } else {
+            botaoResultado.style.cursor = "not-allowed";
+            botaoResultado.textContent = "Exame em análise";
+        }
     });
 
     listarUnidade(pegarUnidadeUsuario()).then((resultado) => {

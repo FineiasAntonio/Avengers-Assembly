@@ -22,8 +22,12 @@
 <body>
   <custom-navbar></custom-navbar>
   <div class="container">
-    <h2>REQUISIÇÃO DE EXAME CITOPATOLÓGICO</h2>
-
+    <div style="display: flex; justify-content: space-between; ">
+      <h2>REQUISIÇÃO DE EXAME CITOPATOLÓGICO</h2>
+      <button id="botaoResultado" style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;" class="botao1">
+        
+      </button>
+    </div>
     <fieldset>
       <legend>Local de realização do exame</legend>
       <div class="unidade-info">
@@ -65,10 +69,10 @@
           <p id="motivoExame"></p>
         </label>
 
-        <label style="grid-column: 1 / -1;">Fez o exame preventivo (Papanicolaou) 
+        <label style="grid-column: 1 / -1;">Fez o exame preventivo (Papanicolaou)
           <p id="fezExame"></p>
         </label>
-        <label>Ano do último exame 
+        <label>Ano do último exame
           <p id="anoUltimoExame"></p>
         </label>
 
@@ -99,7 +103,7 @@
         <label>Tem ou teve algum sangramento após a menopausa?
           <p id="teveSangramentoMenopausa"></p>
         </label>
-        <label>Data da última menstruação 
+        <label>Data da última menstruação
           <p id="ultimaMenstruação"></p>
         </label>
       </div>
@@ -111,10 +115,10 @@
         <label>Inspeção do colo
           <p id="inspecaoColo"></p>
         </label>
-        <label>Sinais sugestivos de DSTs 
+        <label>Sinais sugestivos de DSTs
           <p id="sinaisDST"></p>
         </label>
-        <label>Data da Coleta 
+        <label>Data da Coleta
           <p id="dataColeta"></p>
         </label>
       </div>
@@ -123,17 +127,16 @@
     <fieldset>
       <legend>Profissional Responsável</legend>
       <div class="grid">
-        <label>Registro Responsável 
+        <label>Registro Responsável
           <p id="registroResponsavel"></p>
         </label>
-        <label>Nome Responsável 
+        <label>Nome Responsável
           <p id="nomeResponsavel"></p>
         </label>
       </div>
     </fieldset>
-
   </div>
-  
+
 </body>
 
 </html>

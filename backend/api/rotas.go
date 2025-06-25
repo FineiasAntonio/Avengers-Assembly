@@ -16,6 +16,7 @@ type Router struct {
 	requisicaoExameHandler *handler.RequisicaoExameHandler
 	unidadadeHandler       *handler.UnidadeHandler
 	CentralAnaliseHandler  *handler.CentralAnaliseHandler
+	resultadoExameHandler  *handler.ResultadoExameHandler
 }
 
 func NewRotas(
@@ -27,6 +28,7 @@ func NewRotas(
 	requisicaoExameHandler *handler.RequisicaoExameHandler,
 	unidadeHandler *handler.UnidadeHandler,
 	CentralAnaliseHandler *handler.CentralAnaliseHandler,
+	resultadoExameHandler *handler.ResultadoExameHandler,
 ) *Router {
 	return &Router{
 		autenticacaoMiddleware: autenticacaoMiddleware,
@@ -37,6 +39,7 @@ func NewRotas(
 		requisicaoExameHandler: requisicaoExameHandler,
 		unidadadeHandler:       unidadeHandler,
 		CentralAnaliseHandler:  CentralAnaliseHandler,
+		resultadoExameHandler:  resultadoExameHandler,
 	}
 }
 
@@ -61,6 +64,8 @@ func (r *Router) SetupRotas() http.Handler {
 	rotasProtegidas.HandleFunc("POST /api/requisicaoExame", r.requisicaoExameHandler.CadastrarRequisicaoExame)
 	rotasProtegidas.HandleFunc("GET /api/requisicaoExame", r.requisicaoExameHandler.GetRequisicaoExameByProtocolo)
 	rotasProtegidas.HandleFunc("HEAD /api/requisicaoExame", r.requisicaoExameHandler.ExisteRequisicaoExame)
+
+	rotasProtegidas.HandleFunc("POST /api/requisicaoExame/resultado", r.resultadoExameHandler.CadastrarResultadoExame)
 
 	rotasProtegidas.HandleFunc("GET /api/unidade", r.unidadadeHandler.ListarUnidade)
 	rotasProtegidas.HandleFunc("POST /api/unidade", r.unidadadeHandler.CadastrarUnidade)

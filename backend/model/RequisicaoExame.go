@@ -23,8 +23,9 @@ type RequisicaoExame struct {
 	ResultadoID              *string    `db:"resultado"`
 	Status                   string     `json:"status" db:"status"`
 
-	Paciente    Paciente `json:"paciente"`
-	Responsavel Usuario  `json:"responsavel"`
+	Paciente       Paciente       `json:"paciente"`
+	Responsavel    Usuario        `json:"responsavel"`
+	ResultadoExame ResultadoExame `json:"ressultado_exame"`
 }
 
 type Status string

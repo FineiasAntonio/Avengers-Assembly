@@ -1,0 +1,125 @@
+@import "../../shared/estilos-globais.css";
+
+body {
+  height: 100%;
+  background: var(--cor-fundo);
+  margin: 0;
+  padding: 2rem;
+}
+
+.container {
+  background-color: var(--cor-terciaria);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h2 {
+  margin-bottom: 0.5rem;
+}
+
+.header-info {
+  border: 2px solid var(--cor-quinaria);
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #f4eaed;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.header-info div {
+  display: flex;
+  flex-direction: column;
+}
+
+fieldset {
+  border: 2px solid var(--cor-quinaria);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: var(--cor-sextiaria);
+}
+
+legend {
+  padding: 0 10px;
+  font-weight: bold;
+  color: #2b1a1a;
+}
+
+.unidade-info {
+  display: grid;
+  grid-template-columns: 50% 50%;
+
+  gap: 10px;
+}
+
+.unidade-info label:last-child {
+  grid-column: 1 / -1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 50% 50%;
+
+  gap: 10px;
+}
+
+.grid div {
+    display: flex;
+    flex-direction: column;
+}
+
+.subgrid {
+  color: var(--cor-texto);
+  border: 2px solid var(--cor-primaria);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+}
+
+label {
+  display: inline-flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: var(--cor-texto);
+}
+
+.label-input {
+  display: inline-flex;
+  flex-direction: row;
+}
+.label-input input {
+  margin-right: 10px;
+}
+
+input {
+  padding: 6px;
+  border: 1px solid var(--cor-quaternaria);
+  border-radius: 5px;
+  margin-top: 2px;
+}
+
+select {
+  background-color: white;
+  border: 1px solid var(--cor-quaternaria);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+select:focus {
+  border-color: var(--cor-quaternaria);
+}
+
+option {
+  background: var(--cor-secundaria);
+  color: var(cor-texto);
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
